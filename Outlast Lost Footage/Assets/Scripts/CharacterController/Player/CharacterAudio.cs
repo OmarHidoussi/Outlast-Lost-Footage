@@ -10,6 +10,8 @@ public class CharacterAudio : MonoBehaviour
     public AudioSource source;
 
     [Header("FootSteps")]
+    public float WalkVolume;
+    public float RunVolume;
     public AudioClip[] WalkFootStepsClips;
     public AudioClip[] RunFootStepsClips;
 
@@ -46,14 +48,14 @@ public class CharacterAudio : MonoBehaviour
     public void Step()
     {
         source.pitch = GetRandomPitch();
-        source.volume = 0.03f;
+        source.volume = WalkVolume;
         source.PlayOneShot(Walkclip());
     }
 
     public void RunStep()
     {
         source.pitch = GetRandomPitch();
-        source.volume = 0.1f;
+        source.volume = RunVolume;
         source.PlayOneShot(Runclip());
     }
 
