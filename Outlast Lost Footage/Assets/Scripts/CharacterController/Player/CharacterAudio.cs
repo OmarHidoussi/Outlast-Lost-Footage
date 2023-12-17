@@ -42,9 +42,15 @@ public class CharacterAudio : MonoBehaviour
 
     public void Step()
     {
+        source.pitch = GetRandomPitch();
         source.PlayOneShot(clip());
     }
-    
+
+    private float GetRandomPitch() 
+    {
+        return UnityEngine.Random.Range(0.8f, 1.2f);
+    }
+
     private AudioClip clip()
     {
         return FootStepsClips[UnityEngine.Random.Range(0, FootStepsClips.Length)];
