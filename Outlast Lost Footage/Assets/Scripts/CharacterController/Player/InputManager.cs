@@ -99,7 +99,7 @@ public class InputManager : MonoBehaviour
 
     void HandleTransitionLogic()
     {
-        if (Mathf.Abs(anim.CharacterAnim.GetFloat("VelocityX")) != 0 || anim.CharacterAnim.GetFloat("VelocityY") != 0)
+        if (anim.CharacterAnim.GetFloat("VelocityY") != 0)
         {
             CanSprint = true;
         }
