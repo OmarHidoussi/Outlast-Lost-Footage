@@ -26,7 +26,8 @@ public class InputManager : MonoBehaviour
 
     [Header("Logic")]
     public TwoBoneIKConstraint constraint;
-
+    public CameraFunctionalities cameraFunc;
+    public CharacterInteraction interaction;
 
     #endregion
 
@@ -80,9 +81,16 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyUp(KeyCode.R))
         {
-            Reload = true;
+            if (cameraFunc.BatterySlider.value <= cameraFunc.BatterySlider.maxValue / 2)
+            {
+                Reload = true;
+            }
+            else
+            {
+                interaction.DisplayHelpText("Battery is full", true);
+            }
         }
     }
 

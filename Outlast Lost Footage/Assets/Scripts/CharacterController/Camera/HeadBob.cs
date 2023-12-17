@@ -76,7 +76,9 @@ public class HeadBob : MonoBehaviour
     {
         float ValueMultiplier = 1f;
         float FrequencyMultiplier = 1f;
-        if (movement.Speed > movement.WalkSpeed + 1)
+        float SpeedMultiplier = movement.Speed / 5;
+
+        /*if (movement.Speed > movement.WalkSpeed + 1)
         {
             ValueMultiplier = ValueMultiplier + (movement.Speed - movement.WalkSpeed - 1) / 3;
             FrequencyMultiplier = FrequencyMultiplier + (movement.Speed - movement.WalkSpeed - 1) / 3;
@@ -85,7 +87,7 @@ public class HeadBob : MonoBehaviour
         {
             ValueMultiplier = Mathf.Lerp(ValueMultiplier, 1, 2f * Time.deltaTime);
             FrequencyMultiplier = Mathf.Lerp(ValueMultiplier, 1, 2f * Time.deltaTime);
-        }
+        }*/
 
         if (!input.CameraOn)
         {
@@ -96,11 +98,11 @@ public class HeadBob : MonoBehaviour
         Vector3 pos = Vector3.zero;
         if (input.Mov_Axis.x == 0)
         {
-            pos.y += Mathf.Sin(Time.time * Breathfrequency * ValueMultiplier) * BreathAmplitude * ValueMultiplier;
+            pos.y += Mathf.Sin(Time.time * Breathfrequency * ValueMultiplier * SpeedMultiplier) * BreathAmplitude * ValueMultiplier * SpeedMultiplier;
         }
 
-        pos.y += Mathf.Sin(Time.time * frequency * FrequencyMultiplier) * Yamplitude * ValueMultiplier * input.Mov_Axis.x;
-        pos.x -= Mathf.Cos(Time.time * frequency * FrequencyMultiplier / 2) * Xamplitude * ValueMultiplier * 2 * input.Mov_Axis.x;
+        pos.y += Mathf.Sin(Time.time * frequency * FrequencyMultiplier * SpeedMultiplier) * Yamplitude * ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x;
+        pos.x -= Mathf.Cos(Time.time * frequency * FrequencyMultiplier * SpeedMultiplier / 2) * Xamplitude * ValueMultiplier * SpeedMultiplier * 2 * input.Mov_Axis.x;
 
         return pos;
 

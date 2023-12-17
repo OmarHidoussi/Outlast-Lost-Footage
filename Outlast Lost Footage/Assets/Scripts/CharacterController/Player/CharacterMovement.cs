@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public float CrouchSpeed;
     public float CrouchHeight;
     public float LerpSpeed;
+    public Transform RayDirection;
 
     float NormalHeight;
     InputManager input;
@@ -35,6 +36,7 @@ public class CharacterMovement : MonoBehaviour
     {
         HandleMove();
         HandleCrouch();
+        HandleWallDetection();
     }
 
     #endregion
@@ -49,12 +51,30 @@ public class CharacterMovement : MonoBehaviour
             Speed = Mathf.Lerp(Speed, WalkSpeed, 5.0F * Time.deltaTime);
 
         if(input.IsSprinting)
-            Speed = Mathf.Lerp(Speed, RunSpeed, 5.0F * Time.deltaTime);
+            Speed = Mathf.Lerp(Speed, RunSpeed, RunSpeed * Time.deltaTime);
         else
             Speed = Mathf.Lerp(Speed, WalkSpeed, 5.0F * Time.deltaTime);
 
         transform.Translate(input.Mov_Axis.y * Speed * Time.deltaTime, 0,  
             input.Mov_Axis.x * Speed * Time.deltaTime);
+
+    }
+
+    void HandleWallDetection()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(RayDirection.transform.position, RayDirection.transform.forward);
+
+        if(Physics.Raycast(ray, out hit,1f))
+        {
+            if(hit.transform.tag == "Wall")
+            {
+                if(input.Mov_Axis.x > 0)
+                {
+                    Speed = 0;
+                }
+            }
+        }
     }
 
     void HandleCrouch()

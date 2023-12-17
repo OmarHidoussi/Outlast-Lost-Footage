@@ -9,6 +9,7 @@ public class CharacterAnimator : MonoBehaviour
     #region Variables
 
     private InputManager input;
+    private CharacterMovement movement;
 
     [Header("Camera Animation")]
     [SerializeField] private Animator anim;
@@ -31,6 +32,7 @@ public class CharacterAnimator : MonoBehaviour
     void Start()
     {
         input = GetComponent<InputManager>();
+        movement = GetComponent<CharacterMovement>();
     }
 
     // Update is called once per frame
@@ -77,9 +79,12 @@ public class CharacterAnimator : MonoBehaviour
 
     void HandeMovement()
     {
-        CharacterAnim.SetFloat("VelocityX", input.Mov_Axis.y);
-        CharacterAnim.SetFloat("VelocityY", input.Mov_Axis.x);
-        CharacterAnim.SetBool("Sprinting", input.IsSprinting);
+        if(movement.Speed != 0)
+        {
+            CharacterAnim.SetFloat("VelocityX", input.Mov_Axis.y);
+            CharacterAnim.SetFloat("VelocityY", input.Mov_Axis.x);
+            CharacterAnim.SetBool("Sprinting", input.IsSprinting);
+        }
     }
 
     void HandleCrouch()

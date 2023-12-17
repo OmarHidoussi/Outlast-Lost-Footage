@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour
     public float Sensetivity;
     public float TransitionSpeed;
     public Transform PlayerBody;
-    public float X_Max;
+    public float X_Max, X_Min;
 
     public InputManager input;
     public CapsuleCollider col;
@@ -53,7 +53,7 @@ public class CameraMovement : MonoBehaviour
 
 
         xRotation -= MouseY;
-        xRotation = Mathf.Clamp(xRotation, -X_Max, X_Max);
+        xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);
 
         transform.localRotation = Quaternion.Euler(xRotation,0,0);
 
