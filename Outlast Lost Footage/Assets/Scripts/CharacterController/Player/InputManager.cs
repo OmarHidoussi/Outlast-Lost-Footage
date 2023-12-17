@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
 
     [Header("Movement")]
     public bool CanMove;
+    public bool CanStand;
     public bool IsSprinting;
     public bool IsCrouching;
 
@@ -96,7 +97,10 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                IsCrouching = !IsCrouching;
+                if (CanStand)
+                {
+                    IsCrouching = !IsCrouching;
+                }
             }
         }
     }
