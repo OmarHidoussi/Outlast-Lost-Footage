@@ -46,12 +46,14 @@ public class CharacterAudio : MonoBehaviour
     public void Step()
     {
         source.pitch = GetRandomPitch();
+        source.volume = 0.03f;
         source.PlayOneShot(Walkclip());
     }
 
     public void RunStep()
     {
         source.pitch = GetRandomPitch();
+        source.volume = 0.1f;
         source.PlayOneShot(Runclip());
     }
 
