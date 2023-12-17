@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     public TwoBoneIKConstraint constraint;
     public CameraFunctionalities cameraFunc;
     public CharacterInteraction interaction;
+    public CharacterMovement movement;
 
     #endregion
 

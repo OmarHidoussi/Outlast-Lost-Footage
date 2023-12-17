@@ -10,7 +10,8 @@ public class CharacterAudio : MonoBehaviour
     public AudioSource source;
 
     [Header("FootSteps")]
-    public AudioClip[] FootStepsClips;
+    public AudioClip[] WalkFootStepsClips;
+    public AudioClip[] RunFootStepsClips;
 
     [Header("Battery")]
     public AudioClip Battery_Collect;
@@ -45,7 +46,13 @@ public class CharacterAudio : MonoBehaviour
     public void Step()
     {
         source.pitch = GetRandomPitch();
-        source.PlayOneShot(clip());
+        source.PlayOneShot(Walkclip());
+    }
+
+    public void RunStep()
+    {
+        source.pitch = GetRandomPitch();
+        source.PlayOneShot(Runclip());
     }
 
     private float GetRandomPitch() 
@@ -53,9 +60,14 @@ public class CharacterAudio : MonoBehaviour
         return UnityEngine.Random.Range(0.8f, 1.2f);
     }
 
-    private AudioClip clip()
+    private AudioClip Walkclip()
     {
-        return FootStepsClips[UnityEngine.Random.Range(0, FootStepsClips.Length)];
+        return WalkFootStepsClips[UnityEngine.Random.Range(0, WalkFootStepsClips.Length)];
+    }
+
+    private AudioClip Runclip()
+    {
+        return RunFootStepsClips[UnityEngine.Random.Range(0, RunFootStepsClips.Length)];
     }
 
     #endregion

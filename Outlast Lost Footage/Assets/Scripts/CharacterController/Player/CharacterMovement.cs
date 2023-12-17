@@ -55,6 +55,9 @@ public class CharacterMovement : MonoBehaviour
         else
             Speed = Mathf.Lerp(Speed, WalkSpeed, 5.0F * Time.deltaTime);
 
+        if(input.Mov_Axis.y == 0 && input.Mov_Axis.y == 0)
+            Speed = Mathf.Lerp(Speed, 0, 5.0F * Time.deltaTime);
+
         transform.Translate(input.Mov_Axis.y * Speed * Time.deltaTime, 0,  
             input.Mov_Axis.x * Speed * Time.deltaTime);
 
