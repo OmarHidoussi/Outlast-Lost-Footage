@@ -47,7 +47,7 @@ public class CharacterAudio : MonoBehaviour
     
     private AudioClip clip()
     {
-        return FootStepsClips[UnityEngine.Random.Range(0, FootStepsClips.Length - 1)];
+        return FootStepsClips[UnityEngine.Random.Range(0, FootStepsClips.Length)];
     }
 
     #endregion
