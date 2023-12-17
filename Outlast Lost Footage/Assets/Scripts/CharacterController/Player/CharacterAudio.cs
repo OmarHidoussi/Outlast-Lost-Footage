@@ -6,6 +6,7 @@ public class CharacterAudio : MonoBehaviour
 {
 
     #region Variables
+
     public AudioSource source;
 
     [Header("FootSteps")]
@@ -26,6 +27,7 @@ public class CharacterAudio : MonoBehaviour
     public void CollectBattery()
     {
         source.clip = Battery_Collect;
+        source.pitch = 1f;
         source.volume = BC_Volume;
         source.PlayOneShot(Battery_Collect);
     }
