@@ -17,7 +17,6 @@ public class InputManager : MonoBehaviour
     [Header("Movement")]
     public bool CanMove;
     public bool CanStand;
-    public bool CanSprint;
     public bool IsSprinting;
     public bool IsCrouching;
 
@@ -99,19 +98,17 @@ public class InputManager : MonoBehaviour
 
     void HandleTransitionLogic()
     {
-        if (anim.CharacterAnim.GetFloat("VelocityY") != 0)
-        {
-            CanSprint = true;
-        }
-        else
-            CanSprint = false;
-
-        if (!IsCrouching && CanSprint)
+        if (!IsCrouching)
         {
             IsSprinting = Input.GetKey(KeyCode.LeftShift);
         }
 
-        if(!IsSprinting)
+        if (anim.CharacterAnim.GetFloat("VelocityY") == 0 && IsSprinting)
+        {
+            IsSprinting = false;
+        }
+
+        if (!IsSprinting)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
