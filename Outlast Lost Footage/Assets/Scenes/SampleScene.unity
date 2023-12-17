@@ -1759,6 +1759,22 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 247
+--- !u!114 &629286818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629286813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32b88f9891a137428fa4e63cd0aa5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 1593086278}
+  FootStepsClips: []
+  Battery_Collect: {fileID: 8300000, guid: 5e7fff2890c3c5247aefb6f7e17e5486, type: 3}
+  BC_Volume: 0.1
 --- !u!4 &632066867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 565703446992856329, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -4873,7 +4889,6 @@ GameObject:
   - component: {fileID: 1593086271}
   - component: {fileID: 1593086277}
   - component: {fileID: 1593086275}
-  - component: {fileID: 1593086279}
   - component: {fileID: 1593086274}
   - component: {fileID: 1593086276}
   - component: {fileID: 1593086280}
@@ -5141,21 +5156,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1593086279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593086266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a32b88f9891a137428fa4e63cd0aa5b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 1593086278}
-  Battery_Collect: {fileID: 8300000, guid: 5e7fff2890c3c5247aefb6f7e17e5486, type: 3}
-  BC_Volume: 0.1
 --- !u!114 &1593086280
 MonoBehaviour:
   m_ObjectHideFlags: 0

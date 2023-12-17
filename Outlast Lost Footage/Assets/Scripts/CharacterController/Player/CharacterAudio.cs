@@ -8,6 +8,9 @@ public class CharacterAudio : MonoBehaviour
     #region Variables
     public AudioSource source;
 
+    [Header("FootSteps")]
+    public AudioClip[] FootStepsClips;
+
     [Header("Battery")]
     public AudioClip Battery_Collect;
     public float BC_Volume;
@@ -35,6 +38,11 @@ public class CharacterAudio : MonoBehaviour
     public void Door_Locked()
     {
 
+    }
+
+    public void Step()
+    {
+        source.PlayOneShot(FootStepsClips[1]);
     }
     
     #endregion
