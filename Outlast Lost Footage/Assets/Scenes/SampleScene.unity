@@ -4762,6 +4762,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3356848222693697760, guid: 1d261e381de5fe843b7a02f9b42ea5c8, type: 3}
   m_PrefabInstance: {fileID: 3356848222457578950}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1512045712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512045713}
+  m_Layer: 8
+  m_Name: Lookback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1512045713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512045712}
+  m_LocalRotation: {x: -0, y: 0.92387867, z: -0, w: 0.38268563}
+  m_LocalPosition: {x: 0.000095151365, y: 1.6318998, z: -0.34470016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 629286814}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
 --- !u!4 &1553245787 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3406844985816988975, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -5843,6 +5874,9 @@ MonoBehaviour:
   Sensetivity: 400
   TransitionSpeed: 2
   PlayerBody: {fileID: 1593086270}
+  LookBackDirection: {fileID: 1512045713}
+  Lookback: 0
+  LookbackTransitionSpeed: 50
   X_Max: 75
   X_Min: -70
   input: {fileID: 1593086272}
