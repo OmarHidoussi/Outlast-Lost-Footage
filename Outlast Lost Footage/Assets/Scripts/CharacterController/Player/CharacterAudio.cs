@@ -42,9 +42,14 @@ public class CharacterAudio : MonoBehaviour
 
     public void Step()
     {
-        source.PlayOneShot(FootStepsClips[1]);
+        source.PlayOneShot(clip());
     }
     
+    private AudioClip clip()
+    {
+        return FootStepsClips[UnityEngine.Random.Range(0, FootStepsClips.Length - 1)];
+    }
+
     #endregion
 
 }
