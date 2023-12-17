@@ -4998,6 +4998,7 @@ MonoBehaviour:
   Reload: 0
   CanMove: 1
   CanStand: 1
+  CanSprint: 0
   IsSprinting: 0
   IsCrouching: 0
   CameraOn: 0
@@ -5006,6 +5007,7 @@ MonoBehaviour:
   cameraFunc: {fileID: 1281390253}
   interaction: {fileID: 1285584349}
   movement: {fileID: 1593086271}
+  anim: {fileID: 1593086275}
 --- !u!54 &1593086273
 Rigidbody:
   m_ObjectHideFlags: 0
