@@ -11,6 +11,8 @@ public class CameraMovement : MonoBehaviour
     public float TransitionSpeed;
     public Transform PlayerBody;
     public Transform LookBackDirection;
+    public Transform RotationCenter;
+    public float RotationSpeed;
     public bool Lookback;
     public float LookbackTransitionSpeed;
     public float X_Max, X_Min;
@@ -120,8 +122,11 @@ public class CameraMovement : MonoBehaviour
     {
         isTransitioning = true;
 
+        // Get the position of the point you want to rotate around
+        Vector3 rotateAroundPoint = RotationCenter.transform.position;
+
         // Calculate the target rotation for looking back
-        Quaternion lookBackRotation = Quaternion.LookRotation(LookBackDirection.forward, transform.up);
+        Quaternion lookBackRotation = Quaternion.LookRotation(rotateAroundPoint - transform.position, transform.up);
 
         // Smoothly interpolate between the current rotation and the target rotation
         float elapsedTime = 0f;
@@ -130,7 +135,8 @@ public class CameraMovement : MonoBehaviour
         while (elapsedTime < 1f)
         {
             transform.rotation = Quaternion.Slerp(startRotation, lookBackRotation, elapsedTime);
-            elapsedTime += Time.deltaTime * LookbackTransitionSpeed;
+            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed); // Rotate the camera around the point
+            elapsedTime += Time.deltaTime * TransitionSpeed;
             yield return null;
         }
 
@@ -141,21 +147,27 @@ public class CameraMovement : MonoBehaviour
     {
         isTransitioning = true;
 
+        // Get the position of the point you want to rotate around
+        Vector3 rotateAroundPoint = RotationCenter.transform.position;
+
+        // Calculate the target rotation for returning to the forward position
+        Quaternion originalRotation = Quaternion.LookRotation(rotateAroundPoint - transform.position, transform.up);
+
         // Smoothly interpolate back to the original rotation
         float elapsedTime = 0f;
         Quaternion startRotation = transform.rotation;
-        Quaternion originalRotation = Quaternion.Euler(xRotation, 0, 0);
 
         while (elapsedTime < 1f)
         {
             transform.rotation = Quaternion.Slerp(startRotation, originalRotation, elapsedTime);
-            elapsedTime += Time.deltaTime * LookbackTransitionSpeed;
+            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed); // Rotate the camera around the point
+            elapsedTime += Time.deltaTime * TransitionSpeed;
             yield return null;
         }
 
+        transform.rotation = originalRotation; // Ensure the final rotation is set to the exact target
         isTransitioning = false;
     }
-
     #endregion
 
 }

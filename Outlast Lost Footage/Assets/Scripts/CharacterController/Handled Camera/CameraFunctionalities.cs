@@ -36,7 +36,7 @@ public class CameraFunctionalities : MonoBehaviour
 
     [Header("CameraAudio")]
     public AudioSource source;
-    public AudioClip Clip;
+    public AudioClip NV_On_Clip, NV_OFF_Clip;
 
     [Header("BatteryCounter")]
     public CharacterStats stats;
@@ -114,17 +114,21 @@ public class CameraFunctionalities : MonoBehaviour
             FillAreaanimator.SetBool("LowBattery", false);
         }
     }
-    
+
+    private bool soundPlayed = false;
     void HandleNightVision()
     {
-        if (input.InfraredOn)
+        if (input.InfraredOn && !soundPlayed)
         {
-            source.PlayOneShot(Clip);
+            source.PlayOneShot(NV_On_Clip);
+            soundPlayed = true;
             NightVision.sprite = NV_ON;
             NightVisionLights.sprite = NVL_ON;
         }
-        else
+        else if(!input.InfraredOn && soundPlayed)
         {
+            source.PlayOneShot(NV_OFF_Clip);
+            soundPlayed = false;
             NightVision.sprite = NV_OFF;
             NightVisionLights.sprite = NVL_OFF;
         }
