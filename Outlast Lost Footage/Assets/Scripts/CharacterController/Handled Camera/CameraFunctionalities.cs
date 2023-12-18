@@ -34,6 +34,10 @@ public class CameraFunctionalities : MonoBehaviour
     public Sprite NV_ON, NV_OFF, NVL_ON, NVL_OFF;
     public InputManager input;
 
+    [Header("CameraAudio")]
+    public AudioSource source;
+    public AudioClip Clip;
+
     [Header("BatteryCounter")]
     public CharacterStats stats;
     public TextMeshProUGUI BatteryCounter;
@@ -115,6 +119,7 @@ public class CameraFunctionalities : MonoBehaviour
     {
         if (input.InfraredOn)
         {
+            source.PlayOneShot(Clip);
             NightVision.sprite = NV_ON;
             NightVisionLights.sprite = NVL_ON;
         }
