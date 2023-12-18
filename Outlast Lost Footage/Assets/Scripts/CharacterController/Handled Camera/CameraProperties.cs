@@ -23,6 +23,12 @@ public class CameraProperties : MonoBehaviour
     public Slider ZoomSlider;
     public TextMeshProUGUI ApertureText;
 
+    [Header("ZoomSFX")]
+    public AudioSource source;
+    public AudioClip ZoomLoop;
+    public float Offset;
+    public float ZoomInPitch, ZoomOutPitch;
+
     #endregion
 
     #region BuiltInMethods
@@ -57,12 +63,32 @@ public class CameraProperties : MonoBehaviour
 
     #region CustomMethods
 
+    private float PreviousFOV;
     void HandleZoom()
     {
+        PreviousFOV = cam.fieldOfView;
         float Zoom = cam.fieldOfView;
         Zoom -= Input.GetAxis("Mouse ScrollWheel") * mouseScrollSpeed * Time.deltaTime;
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, Zoom, LerpSpeed * Time.deltaTime);
         cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, MinFOV, MaxFOV);
+
+        HandleZoomSFX();
+    }
+
+    void HandleZoomSFX()
+    {
+        if (cam.fieldOfView < PreviousFOV - Offset)
+        {
+            source.pitch = ZoomOutPitch;
+            source.PlayOneShot(ZoomLoop);
+        }
+        else if (cam.fieldOfView > PreviousFOV + Offset)
+        {
+            source.pitch = ZoomInPitch;
+            source.PlayOneShot(ZoomLoop);
+        }
+        else
+            source.pitch = 1f;
     }
 
     void ApertureAdjustment()

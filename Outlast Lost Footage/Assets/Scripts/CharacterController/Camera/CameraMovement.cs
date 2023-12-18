@@ -91,7 +91,7 @@ public class CameraMovement : MonoBehaviour
 
     void HandleLookback()
     {
-        Lookback = Input.GetKey(KeyCode.LeftAlt);
+        Lookback = Input.GetMouseButton(2);
 
         if (Lookback && !isTransitioning)
         {
