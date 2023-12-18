@@ -86,22 +86,7 @@ public class CameraMovement : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50f);
     }
 
-    /*void HandleLookback()
-    {
-        Lookback = Input.GetKey(KeyCode.LeftAlt);
-
-        if (Lookback)
-        {
-            Quaternion lookBackRotation = Quaternion.LookRotation(LookBackDirection.forward, transform.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookBackRotation, Time.deltaTime * LookbackTransitionSpeed);
-        }
-        else
-        {
-            // If not looking back, smoothly interpolate back to the original rotation
-            Quaternion originalRotation = Quaternion.Euler(xRotation, 0, 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, Time.deltaTime * LookbackTransitionSpeed);
-        }
-    }*/
+    
     bool isTransitioning = false;
 
     void HandleLookback()
@@ -125,8 +110,8 @@ public class CameraMovement : MonoBehaviour
         // Get the position of the point you want to rotate around
         Vector3 rotateAroundPoint = RotationCenter.transform.position;
 
-        // Calculate the target rotation for looking back
-        Quaternion lookBackRotation = Quaternion.LookRotation(rotateAroundPoint - transform.position, Vector3.up);
+        // Get the target rotation for looking back
+        Quaternion targetRotation = Quaternion.LookRotation(LookBackDirection.forward, Vector3.up);
 
         // Smoothly interpolate between the current rotation and the target rotation
         float elapsedTime = 0f;
@@ -134,21 +119,18 @@ public class CameraMovement : MonoBehaviour
 
         while (elapsedTime < 1f)
         {
-            transform.rotation = Quaternion.Slerp(startRotation, lookBackRotation, elapsedTime);
-
-            // Orbit the camera around the RotationCenter
-            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed);
+            // Interpolate the rotation
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime);
 
             elapsedTime += Time.deltaTime * TransitionSpeed;
             yield return null;
         }
 
         // Ensure the final rotation is set to the exact target
-        transform.rotation = lookBackRotation;
+        transform.rotation = targetRotation;
 
         isTransitioning = false;
     }
-
 
     IEnumerator ReturnToForwardSmoothly()
     {
@@ -157,24 +139,28 @@ public class CameraMovement : MonoBehaviour
         // Get the position of the point you want to rotate around
         Vector3 rotateAroundPoint = RotationCenter.transform.position;
 
-        // Calculate the target rotation for returning to the forward position
-        Quaternion originalRotation = Quaternion.LookRotation(rotateAroundPoint - transform.position, transform.up);
+        // Get the target rotation for returning to the forward position
+        Quaternion targetRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
 
-        // Smoothly interpolate back to the original rotation
-        float elapsedTime = 0f;
-        Quaternion startRotation = transform.rotation;
+        float maxDegreesDelta = 5f; // Adjust this value as needed
 
-        while (elapsedTime < 1f)
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
         {
-            transform.rotation = Quaternion.Slerp(startRotation, originalRotation, elapsedTime);
-            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed); // Rotate the camera around the point
-            elapsedTime += Time.deltaTime * TransitionSpeed;
+            // Rotate towards the target rotation
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegreesDelta);
+
+            // Orbit the camera around the RotationCenter
+            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed);
+
             yield return null;
         }
 
-        transform.rotation = originalRotation; // Ensure the final rotation is set to the exact target
+        // Ensure the final rotation is set to the exact target
+        transform.rotation = targetRotation;
+
         isTransitioning = false;
     }
+    
     #endregion
 
 }
