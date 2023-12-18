@@ -126,7 +126,7 @@ public class CameraMovement : MonoBehaviour
         Vector3 rotateAroundPoint = RotationCenter.transform.position;
 
         // Calculate the target rotation for looking back
-        Quaternion lookBackRotation = Quaternion.LookRotation(rotateAroundPoint - transform.position, transform.up);
+        Quaternion lookBackRotation = Quaternion.LookRotation(rotateAroundPoint - transform.position, Vector3.up);
 
         // Smoothly interpolate between the current rotation and the target rotation
         float elapsedTime = 0f;
@@ -135,13 +135,20 @@ public class CameraMovement : MonoBehaviour
         while (elapsedTime < 1f)
         {
             transform.rotation = Quaternion.Slerp(startRotation, lookBackRotation, elapsedTime);
-            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed); // Rotate the camera around the point
+
+            // Orbit the camera around the RotationCenter
+            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed);
+
             elapsedTime += Time.deltaTime * TransitionSpeed;
             yield return null;
         }
 
+        // Ensure the final rotation is set to the exact target
+        transform.rotation = lookBackRotation;
+
         isTransitioning = false;
     }
+
 
     IEnumerator ReturnToForwardSmoothly()
     {
