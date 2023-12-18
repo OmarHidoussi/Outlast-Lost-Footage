@@ -7379,10 +7379,10 @@ MonoBehaviour:
   ZoomSlider: {fileID: 663524036}
   ApertureText: {fileID: 150217737}
   source: {fileID: 3356848222457578956}
-  ZoomLoop: {fileID: 8300000, guid: 7546c2d5e96830e4f912d24b6cc8a2be, type: 3}
-  Offset: 1.2
-  ZoomInPitch: 0.9
-  ZoomOutPitch: 1.2
+  ZoomLoop: {fileID: 8300000, guid: 0dc94face1a5b474d905a79b23e6bfdf, type: 3}
+  ZoomInPitch: 1.02
+  ZoomOutPitch: 1
+  zoomDelay: 0.2
 --- !u!82 &3356848222457578956
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7393,7 +7393,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7546c2d5e96830e4f912d24b6cc8a2be, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0dc94face1a5b474d905a79b23e6bfdf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
