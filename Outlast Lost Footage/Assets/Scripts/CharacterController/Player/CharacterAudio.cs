@@ -15,7 +15,8 @@ public class CharacterAudio : MonoBehaviour
     public float RunVolume;
     public AudioClip[] WalkFootStepsClips;
     public AudioClip[] RunFootStepsClips;
-
+    public AudioMixerGroup InteractionGrp;
+    public AudioMixerGroup FootStepsGrp;
 
     [Header("Battery")]
     public AudioClip Battery_Collect;
@@ -25,13 +26,17 @@ public class CharacterAudio : MonoBehaviour
     #endregion
 
     #region BuiltInMethods
-
+    private void Update()
+    {
+        Debug.Log(source.outputAudioMixerGroup);
+    }
     #endregion
 
     #region CustomMethods
     public void CollectBattery()
     {
         source.clip = Battery_Collect;
+        source.outputAudioMixerGroup = InteractionGrp;
         source.pitch = 1f;
         source.volume = BC_Volume;
         source.PlayOneShot(Battery_Collect);
@@ -49,6 +54,7 @@ public class CharacterAudio : MonoBehaviour
 
     public void Step()
     {
+        source.outputAudioMixerGroup = FootStepsGrp;
         source.pitch = GetRandomPitch();
         source.volume = WalkVolume;
         source.PlayOneShot(Walkclip());
@@ -56,6 +62,7 @@ public class CharacterAudio : MonoBehaviour
 
     public void RunStep()
     {
+        source.outputAudioMixerGroup = FootStepsGrp;
         source.pitch = GetRandomPitch();
         source.volume = RunVolume;
         source.PlayOneShot(Runclip());
