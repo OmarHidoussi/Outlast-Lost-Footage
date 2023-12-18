@@ -68,7 +68,7 @@ public class CameraProperties : MonoBehaviour
     #region CustomMethods
 
     private float PreviousFOV;
-    private float zoomVelocity = 0.0f;
+    //private float zoomVelocity = 0.0f;
     private bool isZooming = false;
     private float zoomTimer = 0f;
     public float zoomDelay = 0.1f;

@@ -68,7 +68,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         HandleHeight();
-        HandleLookback();
+        //HandleLookback();
     }
 
     #endregion
@@ -86,7 +86,7 @@ public class CameraMovement : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50f);
     }
 
-    
+  /*  
     bool isTransitioning = false;
 
     void HandleLookback()
@@ -160,7 +160,7 @@ public class CameraMovement : MonoBehaviour
 
         isTransitioning = false;
     }
-    
+    */
     #endregion
 
 }
