@@ -68,7 +68,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         HandleHeight();
-        //HandleLookback();
+        HandleLookback();
     }
 
     #endregion
@@ -86,9 +86,8 @@ public class CameraMovement : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50f);
     }
 
-  /*  
+  
     bool isTransitioning = false;
-
     void HandleLookback()
     {
         Lookback = Input.GetMouseButton(2);
@@ -107,60 +106,51 @@ public class CameraMovement : MonoBehaviour
     {
         isTransitioning = true;
 
-        // Get the position of the point you want to rotate around
-        Vector3 rotateAroundPoint = RotationCenter.transform.position;
-
-        // Get the target rotation for looking back
         Quaternion targetRotation = Quaternion.LookRotation(LookBackDirection.forward, Vector3.up);
 
-        // Smoothly interpolate between the current rotation and the target rotation
         float elapsedTime = 0f;
         Quaternion startRotation = transform.rotation;
 
         while (elapsedTime < 1f)
         {
-            // Interpolate the rotation
             transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime);
 
             elapsedTime += Time.deltaTime * TransitionSpeed;
             yield return null;
         }
 
-        // Ensure the final rotation is set to the exact target
         transform.rotation = targetRotation;
 
         isTransitioning = false;
     }
 
+    public float maxDegreesDelta = 5f;
     IEnumerator ReturnToForwardSmoothly()
     {
         isTransitioning = true;
 
-        // Get the position of the point you want to rotate around
         Vector3 rotateAroundPoint = RotationCenter.transform.position;
-
-        // Get the target rotation for returning to the forward position
         Quaternion targetRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
 
-        float maxDegreesDelta = 5f; // Adjust this value as needed
+        // Adjust this value as needed
 
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
         {
             // Rotate towards the target rotation
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegreesDelta);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegreesDelta);
 
             // Orbit the camera around the RotationCenter
-            transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed);
+            //transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed);
 
             yield return null;
         }
 
         // Ensure the final rotation is set to the exact target
-        transform.rotation = targetRotation;
+        //transform.rotation = targetRotation;
 
         isTransitioning = false;
     }
-    */
+    
     #endregion
 
 }
