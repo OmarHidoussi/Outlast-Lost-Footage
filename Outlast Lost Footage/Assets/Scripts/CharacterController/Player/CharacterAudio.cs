@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CharacterAudio : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CharacterAudio : MonoBehaviour
     public float RunVolume;
     public AudioClip[] WalkFootStepsClips;
     public AudioClip[] RunFootStepsClips;
+
 
     [Header("Battery")]
     public AudioClip Battery_Collect;

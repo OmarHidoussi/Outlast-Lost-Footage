@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.Rendering.PostProcessing;
 
 public class CameraFunctionalities : MonoBehaviour
@@ -37,6 +38,9 @@ public class CameraFunctionalities : MonoBehaviour
     [Header("CameraAudio")]
     public AudioSource source;
     public AudioClip NV_On_Clip, NV_OFF_Clip;
+    public float TransitionSpeed;
+    public AudioMixerSnapshot NightVisionOn;
+    public AudioMixerSnapshot NightVisionOff;
 
     [Header("BatteryCounter")]
     public CharacterStats stats;
@@ -120,6 +124,7 @@ public class CameraFunctionalities : MonoBehaviour
     {
         if (input.InfraredOn && !soundPlayed)
         {
+            NightVisionOn.TransitionTo(TransitionSpeed);
             source.PlayOneShot(NV_On_Clip);
             soundPlayed = true;
             NightVision.sprite = NV_ON;
@@ -127,6 +132,7 @@ public class CameraFunctionalities : MonoBehaviour
         }
         else if(!input.InfraredOn && soundPlayed)
         {
+            NightVisionOff.TransitionTo(TransitionSpeed);
             source.PlayOneShot(NV_OFF_Clip);
             soundPlayed = false;
             NightVision.sprite = NV_OFF;
