@@ -131,6 +131,12 @@ public class CharacterMovement : MonoBehaviour
                 RunDuration = 1;
             }
         }
+        else
+        {
+            RunDuration -= Time.deltaTime;
+            if (RunDuration <= 1)
+                RunDuration = 1;
+        }
     }
 
     #endregion

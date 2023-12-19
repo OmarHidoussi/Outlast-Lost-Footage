@@ -70,19 +70,29 @@ public class CameraEffects : MonoBehaviour
             vignette.intensity.value = (movement.StaminaRegainTimer / movement.StaminaTimer) * MaxIntensity;
             distortion.intensity.value = Mathf.Sin(Time.time * movement.StaminaRegainTimer);
 
-            distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.StaminaRegainTimer;
+            if(distortion.intensity.value >= 0.1f)
+            {
+                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.StaminaRegainTimer;
 
-            aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.StaminaRegainTimer / movement.StaminaTimer) * MaxIntensity;
+            }
+
+            if (aberration.intensity.value >= 0.05f)
+            {
+                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.StaminaRegainTimer / movement.StaminaTimer) * MaxIntensity;
+            }
         }
         else
         {
-            float targetIntensity = (movement.RunDuration / movement.RunRestartTimer) * MaxIntensity;
-            targetIntensity = Mathf.Clamp(targetIntensity, 0f, MaxIntensity);
-            vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetIntensity, TransitionSpeed * Time.deltaTime);
+            if(movement.RunRestartTimer / movement.RunDuration > 0.4f)
+            {
+                float targetIntensity = (movement.RunDuration / movement.RunRestartTimer) * MaxIntensity;
+                targetIntensity = Mathf.Clamp(targetIntensity, 0f, MaxIntensity);
+                vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetIntensity, TransitionSpeed * Time.deltaTime);
 
-            distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.RunDuration;
+                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.RunDuration;
 
-            aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.RunDuration / movement.RunRestartTimer) * MaxIntensity;
+                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.RunDuration / movement.RunRestartTimer) * MaxIntensity;
+            }
         }
     }
     
