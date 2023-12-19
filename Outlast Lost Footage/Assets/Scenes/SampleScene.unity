@@ -1772,6 +1772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1593086278}
+  Characteranim: {fileID: 1593086275}
   WalkVolume: 0.04
   RunVolume: 0.05
   WalkFootStepsClips:
@@ -1783,7 +1784,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3e2e8ab49127f6346a09be4dfa382499, type: 3}
   - {fileID: 8300000, guid: 78a2d1e208fe8a743aa5a9caa3ff2f2b, type: 3}
   - {fileID: 8300000, guid: 57008af9c746d3947b65bb4bbc8f1797, type: 3}
+  Master: {fileID: 24300002, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
+  InteractionGrp: {fileID: 7739049579006509234, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
+  FootStepsGrp: {fileID: 8798359630617345982, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
   Battery_Collect: {fileID: 8300000, guid: 5e7fff2890c3c5247aefb6f7e17e5486, type: 3}
+  Door_Unlocked: {fileID: 8300000, guid: cef0c94b86ecf1743898f8636c157bbc, type: 3}
+  Door_Locked: {fileID: 8300000, guid: a7f8a882e5489c542a3e1bf6c6609756, type: 3}
   BC_Volume: 0.1
 --- !u!4 &632066867 stripped
 Transform:
@@ -4342,7 +4348,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6376828741973518161, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
       propertyPath: unlocked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6376828741973518166, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
       propertyPath: m_RootOrder
@@ -5091,7 +5097,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593086266}
   m_LocalRotation: {x: 0, y: 0.7071685, z: 0, w: 0.7070451}
-  m_LocalPosition: {x: -3.6627, y: 0, z: 7.8988}
+  m_LocalPosition: {x: 0.31, y: 0, z: -2.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5348,7 +5354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593086266}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -5358,7 +5364,7 @@ MonoBehaviour:
   drawTripods: 0
   boneSize: 1
   tripodSize: 1
-  boneColor: {r: 0.36234283, g: 0, b: 1, a: 0.5}
+  boneColor: {r: 0.14413494, g: 0.38679248, b: 0.20396882, a: 0.5}
   m_Transforms:
   - {fileID: 1761955875}
   - {fileID: 1436887362}
@@ -6723,14 +6729,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994415869}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.00036700003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1746887574}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1994415871
 Light:
   m_ObjectHideFlags: 0
@@ -7632,7 +7638,7 @@ AudioSource:
   m_GameObject: {fileID: 3356848222457578952}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
   m_audioClip: {fileID: 8300000, guid: 0dc94face1a5b474d905a79b23e6bfdf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1

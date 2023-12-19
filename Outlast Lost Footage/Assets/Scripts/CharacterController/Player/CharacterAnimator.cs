@@ -21,7 +21,7 @@ public class CharacterAnimator : MonoBehaviour
     public float LeftHandWeight;
     public TwoBoneIKConstraint LeftHandConstraint;
     public MultiRotationConstraint SpineConstraint;
-    [Range(0,5f)]public float DistanceToGround;
+    [Range(0,5f)] public float DistanceToGround;
     public LayerMask layerMask;
 
 
@@ -45,29 +45,6 @@ public class CharacterAnimator : MonoBehaviour
 
         LeftHandConstraint.weight = LeftHandWeight;
     }
-
-   /* private void OnAnimatorIK(int layerIndex)
-    {
-        if(CharacterAnim)
-        {
-            CharacterAnim.SetIKPositionWeight(AvatarIKGoal.LeftFoot,1f);
-            CharacterAnim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
-
-            RaycastHit hit;
-            Ray ray = new Ray(CharacterAnim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
-
-            if (Physics.Raycast(ray, out hit, DistanceToGround + 1f,layerMask))
-            {
-                if(hit.transform.tag == "walkable")
-                {
-                    Vector3 footPosition = hit.point;
-                    footPosition.y += DistanceToGround;
-                    CharacterAnim.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
-                }
-            }
-
-        }
-    }*/
 
     #endregion
 
@@ -95,8 +72,6 @@ public class CharacterAnimator : MonoBehaviour
 
     void HandleInteraction()
     {
-        CharacterAnim.SetBool("PickUp", input.Interact);
-
         if(input.Interact)
         {
             LeftHandWeight = 1;
@@ -108,6 +83,11 @@ public class CharacterAnimator : MonoBehaviour
             SpineConstraint.weight = Mathf.Lerp(SpineConstraint.weight, 0, 5f * Time.deltaTime);
         }
 
+    }
+
+    public void InteractionType(string Type)
+    {
+        CharacterAnim.SetBool(Type, input.Interact);
     }
 
     #endregion

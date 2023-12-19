@@ -10,9 +10,9 @@ public class Battery : MonoBehaviour, IInteractable
 
     [HideInInspector] public InputManager input;
     [HideInInspector] public CharacterStats stats;
+    [HideInInspector] public CharacterAnimator anim;
     //[HideInInspector] public CharacterAudio _audio;
     [HideInInspector] public CharacterInteraction Ch_interaction;
-
     public Transform HandAim;
 
     Interaction interaction;
@@ -27,6 +27,7 @@ public class Battery : MonoBehaviour, IInteractable
     {
         input = FindObjectOfType<InputManager>();
         stats = input.gameObject.GetComponent<CharacterStats>();
+        anim = input.gameObject.GetComponent<CharacterAnimator>();
         //_audio = input.gameObject.GetComponentInChildren<CharacterAudio>();
         interaction = GetComponent<Interaction>();
         Ch_interaction = input.gameObject.GetComponentInChildren<CharacterInteraction>();
@@ -53,6 +54,7 @@ public class Battery : MonoBehaviour, IInteractable
 
     void Collect()
     {
+        anim.InteractionType("PickUp");
         HandAim.position = transform.position;
         input.CanInteract = false;
         input.Interact = false;
