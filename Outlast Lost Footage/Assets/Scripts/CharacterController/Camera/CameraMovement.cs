@@ -94,6 +94,7 @@ public class CameraMovement : MonoBehaviour
 
   
     bool isTransitioning = false;
+
     void HandleLookback()
     {
         Lookback = Input.GetMouseButton(2);
@@ -130,33 +131,32 @@ public class CameraMovement : MonoBehaviour
         isTransitioning = false;
     }
 
-    public float maxDegreesDelta = 5f;
     IEnumerator ReturnToForwardSmoothly()
     {
         isTransitioning = true;
 
-        Vector3 rotateAroundPoint = RotationCenter.transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+        Vector3 targetForward = PlayerBody.forward;
+        float maxAngle = Vector3.Angle(transform.forward, targetForward);
 
-        // Adjust this value as needed
-
-        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        while (maxAngle > 0.1f)
         {
-            // Rotate towards the target rotation
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegreesDelta);
+            // Calculate the rotation step
+            float step = RotationSpeed * Time.deltaTime;
 
-            // Orbit the camera around the RotationCenter
-            //transform.RotateAround(rotateAroundPoint, Vector3.up, Time.deltaTime * RotationSpeed);
+            // Rotate towards the target forward direction
+            transform.forward = Vector3.RotateTowards(transform.forward, targetForward, step, 0.0f);
+
+            // Update the maximum angle
+            maxAngle = Vector3.Angle(transform.forward, targetForward);
 
             yield return null;
         }
 
-        // Ensure the final rotation is set to the exact target
-        //transform.rotation = targetRotation;
-
         isTransitioning = false;
     }
-    
+
+
+
     #endregion
 
 }

@@ -103,10 +103,13 @@ public class InputManager : MonoBehaviour
 
     void HandleTransitionLogic()
     {
-        if (!IsCrouching)
+        if (!IsCrouching && !movement.isExhausted)
         {
             IsSprinting = Input.GetKey(KeyCode.LeftShift);
         }
+
+        if (movement.isExhausted)
+            IsSprinting = false;
 
         if (anim.CharacterAnim.GetFloat("VelocityY") == 0 && IsSprinting)
         {

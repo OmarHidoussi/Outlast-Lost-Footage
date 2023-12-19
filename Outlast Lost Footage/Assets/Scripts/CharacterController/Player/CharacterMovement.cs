@@ -15,6 +15,14 @@ public class CharacterMovement : MonoBehaviour
     public float LerpSpeed;
     public Transform RayDirection;
 
+    [Header("Fatigue")]
+    public bool isExhausted;
+    public float RunDuration;
+    public float StaminaRegainTimer;
+
+    [HideInInspector] public float StaminaTimer;
+    [HideInInspector] public float RunRestartTimer;
+
     float NormalHeight;
     InputManager input;
     CapsuleCollider col;
@@ -28,7 +36,12 @@ public class CharacterMovement : MonoBehaviour
     {
         input = GetComponent<InputManager>();
         col = GetComponentInChildren<CapsuleCollider>();
+
         NormalHeight = col.height;
+
+        RunRestartTimer = RunDuration;
+        RunDuration = 1;
+        StaminaTimer = StaminaRegainTimer;
     }
 
     // Update is called once per frame
@@ -37,6 +50,7 @@ public class CharacterMovement : MonoBehaviour
         HandleMove();
         HandleCrouch();
         HandleWallDetection();
+        HandleFatigue();
     }
 
     #endregion
@@ -49,7 +63,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (input.IsCrouching)
             targetSpeed = CrouchSpeed;
-        else if (input.IsSprinting)
+        else if (input.IsSprinting && !isExhausted)
             targetSpeed = RunSpeed;
         else
             targetSpeed = WalkSpeed;
@@ -73,11 +87,11 @@ public class CharacterMovement : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(RayDirection.transform.position, RayDirection.transform.forward);
 
-        if(Physics.Raycast(ray, out hit,1f))
+        if (Physics.Raycast(ray, out hit, 1f))
         {
-            if(hit.transform.tag == "Wall")
+            if (hit.transform.tag == "Wall")
             {
-                if(input.Mov_Axis.x > 0)
+                if (input.Mov_Axis.x > 0)
                 {
                     Speed = 0;
                 }
@@ -93,6 +107,33 @@ public class CharacterMovement : MonoBehaviour
             col.height = Mathf.Lerp(col.height, NormalHeight, LerpSpeed * Time.deltaTime);
     }
 
+    void HandleFatigue()
+    {
+        if(isExhausted)
+        {
+            StaminaRegainTimer -= Time.deltaTime;
+
+            if(StaminaRegainTimer <= 1)
+            {
+                isExhausted = false;
+                StaminaRegainTimer = StaminaTimer + 1;
+            }
+            
+        }
+
+        if(input.IsSprinting)
+        {
+            RunDuration += Time.deltaTime;
+
+            if(RunDuration >= RunRestartTimer + 1)
+            {
+                isExhausted = true;
+                RunDuration = 1;
+            }
+        }
+    }
+
     #endregion
 
 }
+

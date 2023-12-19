@@ -38,7 +38,6 @@ public class CharacterCollision : MonoBehaviour
         // Cast the ray and check the number of hits
         if (Physics.Raycast(ray, out hit, raycastDistance))
         {
-            Debug.Log(hit.collider.tag);
             if (hit.collider && hit.collider.CompareTag("Walkable") && hit.collider.gameObject != gameObject)
             {
                 return true;
