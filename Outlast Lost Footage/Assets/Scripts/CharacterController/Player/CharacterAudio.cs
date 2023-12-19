@@ -104,6 +104,21 @@ public class CharacterAudio : MonoBehaviour
     {
         return RunFootStepsClips[UnityEngine.Random.Range(0, RunFootStepsClips.Length)];
     }
+    /*
+    public Transform cam;
+    public Transform PlayerHead;
+    public Transform RoationCenter;*/
+
+    public void Land()
+    {
+        //cam.transform.parent = PlayerHead;
+    }
+
+
+    public void RestoreCamera()
+    {
+        //cam.transform.parent = RoationCenter;
+    }
 
     #endregion
 

@@ -82,7 +82,6 @@ public class CharacterAnimator : MonoBehaviour
             LeftHandWeight = Mathf.Lerp(LeftHandWeight, 0, 5f * Time.deltaTime);
             SpineConstraint.weight = Mathf.Lerp(SpineConstraint.weight, 0, 5f * Time.deltaTime);
         }
-
     }
 
     public void InteractionType(string Type)

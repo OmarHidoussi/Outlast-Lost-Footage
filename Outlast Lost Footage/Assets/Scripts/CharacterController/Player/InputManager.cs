@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     [Header("Movement")]
     public bool CanMove;
     public bool CanStand;
+    public bool MidAir;
     public bool IsSprinting;
     public bool IsCrouching;
 
@@ -38,14 +39,18 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        MidAir = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleInputs();
-        HandleTransitionLogic();
+        if (!MidAir)
+        {
+            HandleInputs();
+            HandleTransitionLogic();
+        }
+
     }
 
     #endregion
