@@ -18,6 +18,7 @@ public class CameraMovement : MonoBehaviour
     public float X_Max, X_Min;
 
     public InputManager input;
+    public CharacterAnimator Characteranim;
     public CapsuleCollider col;
     public Vector3 offset;
     public Vector3 Crouchingoffset;
@@ -58,6 +59,11 @@ public class CameraMovement : MonoBehaviour
             float MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
             float MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
 
+            /*if(!input.IsSprinting)
+            {
+                if(Mathf.Abs(Input.GetAxis("Mouse X")) > 1f)
+                    Characteranim.CharacterAnim.SetFloat("MouseX", Input.GetAxis("Mouse X"));
+            }*/
 
             xRotation -= MouseY;
             xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);
