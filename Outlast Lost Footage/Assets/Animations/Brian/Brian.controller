@@ -81,8 +81,24 @@ BlendTree:
     m_DirectBlendParameter: WalkVelocityX
     m_Mirror: 1
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 5cd132998dc544a4f9535c6016e961c8, type: 3}
+    m_Motion: {fileID: -203655887218126122, guid: 1b442c7e7eb899d4cab61a21be1bd2e1, type: 3}
     m_Threshold: 1
+    m_Position: {x: -0.707, y: 0.707}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: VelocityX
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 1b442c7e7eb899d4cab61a21be1bd2e1, type: 3}
+    m_Threshold: 2
+    m_Position: {x: 0.707, y: 0.707}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocityX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 5cd132998dc544a4f9535c6016e961c8, type: 3}
+    m_Threshold: 3
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -90,16 +106,32 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 371bd9859cb261d4188ad8a979fedea5, type: 3}
-    m_Threshold: 2
+    m_Threshold: 4
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocityX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 5cd132998dc544a4f9535c6016e961c8, type: 3}
+    m_Threshold: 5
+    m_Position: {x: 0.707, y: -0.707}
+    m_TimeScale: -1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: VelocityX
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 5cd132998dc544a4f9535c6016e961c8, type: 3}
+    m_Threshold: 6
+    m_Position: {x: -0.707, y: -0.707}
+    m_TimeScale: -1
     m_CycleOffset: 0
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   m_BlendParameter: VelocityX
   m_BlendParameterY: VelocityY
   m_MinThreshold: -1
-  m_MaxThreshold: 2
+  m_MaxThreshold: 6
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 1

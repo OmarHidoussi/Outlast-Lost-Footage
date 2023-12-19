@@ -143,9 +143,14 @@ public class CameraFunctionalities : MonoBehaviour
         if (input.CameraOn)
         {
             NV_Lights.SetActive(input.InfraredOn);
+            if(input.InfraredOn)
+                NightVisionOn.TransitionTo(TransitionSpeed);
         }
         else
+        {
             NV_Lights.SetActive(false);
+            NightVisionOff.TransitionTo(TransitionSpeed);
+        }
     }
 
     void HandleCameraState()

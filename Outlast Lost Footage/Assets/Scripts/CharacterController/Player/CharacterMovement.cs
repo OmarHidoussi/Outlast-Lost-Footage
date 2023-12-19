@@ -45,22 +45,27 @@ public class CharacterMovement : MonoBehaviour
 
     void HandleMove()
     {
+        float targetSpeed;
+
         if (input.IsCrouching)
-            Speed = Mathf.Lerp(Speed, CrouchSpeed, 5.0F * Time.deltaTime);
+            targetSpeed = CrouchSpeed;
+        else if (input.IsSprinting)
+            targetSpeed = RunSpeed;
         else
-            Speed = Mathf.Lerp(Speed, WalkSpeed, 5.0F * Time.deltaTime);
+            targetSpeed = WalkSpeed;
 
-        if(input.IsSprinting)
-            Speed = Mathf.Lerp(Speed, RunSpeed, RunSpeed * Time.deltaTime);
-        else
-            Speed = Mathf.Lerp(Speed, WalkSpeed, 5.0F * Time.deltaTime);
+        if (input.Mov_Axis.y != 0 && input.Mov_Axis.x != 0)
+            targetSpeed *= 0.75f;
 
-        if(input.Mov_Axis.y == 0 && input.Mov_Axis.y == 0)
+        Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
+
+
+
+        if (input.Mov_Axis.y == 0 && input.Mov_Axis.x == 0)
             Speed = Mathf.Lerp(Speed, 0, 5.0F * Time.deltaTime);
 
-        transform.Translate(input.Mov_Axis.y * Speed * Time.deltaTime, 0,  
+        transform.Translate(input.Mov_Axis.y * Speed * Time.deltaTime, 0,
             input.Mov_Axis.x * Speed * Time.deltaTime);
-
     }
 
     void HandleWallDetection()
