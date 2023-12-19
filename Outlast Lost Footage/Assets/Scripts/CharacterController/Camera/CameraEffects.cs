@@ -15,7 +15,7 @@ public class CameraEffects : MonoBehaviour
     Vignette vignette;
     LensDistortion distortion;
     ChromaticAberration aberration;
-    public float MaxIntensity;
+    public float vignetteMaxIntensity, distortionMaxIntensity, aberrationMaxIntensity;
     public float frequency;
 
     #endregion
@@ -67,31 +67,24 @@ public class CameraEffects : MonoBehaviour
     {   
         if(movement.isExhausted)
         {
-            vignette.intensity.value = (movement.StaminaRegainTimer / movement.StaminaTimer) * MaxIntensity;
+            vignette.intensity.value = (movement.StaminaRegainTimer / movement.StaminaTimer) * vignetteMaxIntensity;
             distortion.intensity.value = Mathf.Sin(Time.time * movement.StaminaRegainTimer);
 
-            if(distortion.intensity.value >= 0.1f)
-            {
-                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.StaminaRegainTimer;
+            distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.StaminaRegainTimer;
 
-            }
-
-            if (aberration.intensity.value >= 0.05f)
-            {
-                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.StaminaRegainTimer / movement.StaminaTimer) * MaxIntensity;
-            }
+            aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.StaminaRegainTimer / movement.StaminaTimer);
         }
         else
         {
-            if(movement.RunRestartTimer / movement.RunDuration > 0.4f)
+            if(movement.RunDuration > movement.StaminaRegainTimer)
             {
-                float targetIntensity = (movement.RunDuration / movement.RunRestartTimer) * MaxIntensity;
-                targetIntensity = Mathf.Clamp(targetIntensity, 0f, MaxIntensity);
+                float targetIntensity = (movement.RunDuration / movement.RunRestartTimer) * vignetteMaxIntensity;
+                targetIntensity = Mathf.Clamp(targetIntensity, 0f, vignetteMaxIntensity);
                 vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetIntensity, TransitionSpeed * Time.deltaTime);
 
-                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.RunDuration;
+                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.RunDuration - movement.StaminaRegainTimer * distortionMaxIntensity;
 
-                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.RunDuration / movement.RunRestartTimer) * MaxIntensity;
+                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.RunDuration - movement.StaminaRegainTimer / movement.RunRestartTimer - movement.StaminaTimer) * aberrationMaxIntensity;
             }
         }
     }
