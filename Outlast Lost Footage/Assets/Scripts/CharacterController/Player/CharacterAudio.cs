@@ -21,6 +21,7 @@ public class CharacterAudio : MonoBehaviour
 
     [Header("Exhausted")]
     public float HeartBeatingMaxVolume = 0.1f;
+    public float HeartBeatingMaxpitch = 0.05f;
     public CameraEffects effects;
     public AudioClip HeartBeating;
 
@@ -120,6 +121,7 @@ public class CharacterAudio : MonoBehaviour
     }
 
     float targetvolume;
+    float targetpitch;
     public void Exhusted()
     {
         if (!MetaSource.isPlaying)
@@ -131,13 +133,15 @@ public class CharacterAudio : MonoBehaviour
         if (movement.isExhausted)
         {
             targetvolume = Mathf.Lerp(targetvolume, (movement.StaminaRegainTimer / movement.StaminaTimer) * HeartBeatingMaxVolume, 2f * Time.deltaTime);
+            targetpitch = Mathf.Lerp(targetpitch, (movement.StaminaRegainTimer / movement.StaminaTimer) + 1 + HeartBeatingMaxVolume, 2f * Time.deltaTime);
         }
         else
         {
-            targetvolume = Mathf.Lerp(targetvolume, 
-                (movement.RunDuration / movement.RunRestartTimer) * HeartBeatingMaxVolume, 2f * Time.deltaTime);
+            targetvolume = Mathf.Lerp(targetvolume, (movement.RunDuration / movement.RunRestartTimer) * HeartBeatingMaxVolume, 2f * Time.deltaTime);
+            targetpitch = Mathf.Lerp(targetpitch, (movement.RunDuration / movement.RunRestartTimer) + HeartBeatingMaxVolume, 2f * Time.deltaTime);
         }
 
+        MetaSource.pitch = targetpitch;
         MetaSource.volume = targetvolume;
     }
 
