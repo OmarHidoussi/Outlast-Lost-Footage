@@ -23,6 +23,10 @@ public class CameraMovement : MonoBehaviour
     public Vector3 offset;
     public Vector3 Crouchingoffset;
 
+    public Transform CameraHolder;
+    public Vector3 LeftTilt;
+    public Vector3 RightTilt;
+
     float xRotation;
     int Factor;
 
@@ -154,8 +158,7 @@ public class CameraMovement : MonoBehaviour
 
         isTransitioning = false;
     }
-
-
+    
 
     #endregion
 

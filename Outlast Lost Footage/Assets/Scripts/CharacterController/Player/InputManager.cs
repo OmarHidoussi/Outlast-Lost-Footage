@@ -99,6 +99,7 @@ public class InputManager : MonoBehaviour
                 interaction.DisplayHelpText("Battery is full", true);
             }
         }
+
     }
 
     void HandleTransitionLogic()

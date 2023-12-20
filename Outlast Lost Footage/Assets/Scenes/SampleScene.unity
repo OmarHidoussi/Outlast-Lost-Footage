@@ -4505,9 +4505,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6376828741973518161, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
+      propertyPath: HandAim
+      value: 
+      objectReference: {fileID: 1182340469}
+    - target: {fileID: 6376828741973518161, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
       propertyPath: unlocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6376828741973518161, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
+      propertyPath: HandAimPosition
+      value: 
+      objectReference: {fileID: 1849171175}
     - target: {fileID: 6376828741973518166, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5059,6 +5067,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400766958}
   m_CullTransparentMesh: 1
+--- !u!4 &1436159129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6914629105179891587, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
+  m_PrefabInstance: {fileID: 1197002693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1436887362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4500503122639284733, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -5619,7 +5632,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615768728}
-  m_LocalRotation: {x: -0.000000010931789, y: -0, z: 2.4256153e-11, w: 1}
+  m_LocalRotation: {x: -0.000000010984507, y: -0, z: 2.4373127e-11, w: 1}
   m_LocalPosition: {x: 0.000058233738, y: 1.6, z: -0.3334999}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
@@ -5645,7 +5658,7 @@ MonoBehaviour:
   PlayerBody: {fileID: 1593086270}
   LookBackDirection: {fileID: 1512045713}
   RotationCenter: {fileID: 1615768729}
-  RotationSpeed: 0.1
+  RotationSpeed: 15
   Lookback: 0
   LookbackTransitionSpeed: 12
   X_Max: 75
@@ -5655,6 +5668,9 @@ MonoBehaviour:
   col: {fileID: 1984083078}
   offset: {x: 0, y: 0.6, z: -0.2}
   Crouchingoffset: {x: 0, y: 0.75, z: -0.1}
+  CameraHolder: {fileID: 1615768729}
+  LeftRotation: {x: 0, y: 0, z: 15}
+  RightRotation: {x: 0, y: 0, z: -15}
 --- !u!4 &1618082143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8420387674632359471, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -5778,7 +5794,7 @@ GameObject:
   - component: {fileID: 1681361177}
   - component: {fileID: 1681361176}
   m_Layer: 0
-  m_Name: AmbinceHorror
+  m_Name: AmbianceHorror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6345,6 +6361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1828544718}
   - component: {fileID: 1828544720}
+  - component: {fileID: 1828544721}
   m_Layer: 0
   m_Name: CamHolder
   m_TagString: Untagged
@@ -6360,7 +6377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828544717}
   m_LocalRotation: {x: -1.7763568e-15, y: 1.4604908e-23, z: -1.3322676e-15, w: 1}
-  m_LocalPosition: {x: -0.00008319106, y: 0, z: 0.47642845}
+  m_LocalPosition: {x: -0.00008319106, y: 0, z: 0.4764284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -6465,6 +6482,57 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1828544721
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828544717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da322f91136d9de4c86c894dfc721ef9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1849171174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849171175}
+  m_Layer: 0
+  m_Name: HandAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1849171175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849171174}
+  m_LocalRotation: {x: 0.49999925, y: -0.499999, z: -0.50000244, w: -0.49999937}
+  m_LocalPosition: {x: -0.018166944, y: 0.008816665, z: 0.009983339}
+  m_LocalScale: {x: 0.1666666, y: 0.008333331, z: 0.016666662}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1436159129}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -270}
 --- !u!4 &1888448519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8571622929516985951, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}

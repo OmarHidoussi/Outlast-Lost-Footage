@@ -121,8 +121,6 @@ public class CameraProperties : MonoBehaviour
         zoomTimer = zoomDelay;
     }
 
-    // Rest of the code remains unchanged
-
     void HandleZoomSFX()
     {
         if (!source.isPlaying)

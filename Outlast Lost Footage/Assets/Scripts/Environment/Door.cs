@@ -15,6 +15,8 @@ public class Door : MonoBehaviour, IInteractable
     [HideInInspector] public CharacterInteraction Ch_interaction;
 
     public bool unlocked;
+    public Transform HandAim;
+    public Transform HandAimPosition;
 
     private Animator anim;
 
@@ -46,6 +48,8 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (canInteract)
         {
+            HandAim.position = HandAimPosition.transform.position;
+
             if (unlocked)
             {
                 OpenDoor();
