@@ -9,6 +9,7 @@ public class Activation : MonoBehaviour
     
     public InputManager input;
     public GameObject cameraGFX;
+    public GameObject cameraOffObject;
 
     #endregion
 
@@ -33,6 +34,7 @@ public class Activation : MonoBehaviour
     public void ActivationState()
     {
         cameraGFX.SetActive(input.CameraOn);
+        cameraOffObject.SetActive(!input.CameraOn);
     }
 
     #endregion
