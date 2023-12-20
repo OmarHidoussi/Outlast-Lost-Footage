@@ -9,7 +9,9 @@ public class CharacterAudio : MonoBehaviour
     #region Variables
 
     public AudioSource source;
+    public AudioSource MetaSource;
     public CharacterAnimator Characteranim;
+    public CharacterMovement movement;
 
     [Header("FootSteps")]
     public float WalkVolume;
@@ -17,15 +19,20 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip[] WalkFootStepsClips;
     public AudioClip[] RunFootStepsClips;
 
+    [Header("Exhausted")]
+    public float HeartBeatingMaxVolume = 0.1f;
+    public CameraEffects effects;
+    public AudioClip HeartBeating;
+
     [Header("AudioMixer")]
     public AudioMixerGroup Master;
     public AudioMixerGroup InteractionGrp;
     public AudioMixerGroup FootStepsGrp;
 
     [Header("Interactions")]
+    public float BC_Volume;
     public AudioClip Battery_Collect;
     public AudioClip Door_Unlocked, Door_Locked;
-    public float BC_Volume;
 
 
     #endregion
@@ -33,7 +40,14 @@ public class CharacterAudio : MonoBehaviour
     #region BuiltInMethods
     private void Update()
     {
-
+        if (movement.isExhausted || movement.RunDuration > movement.StaminaRegainTimer)
+        {
+            Exhusted();
+        }
+        else 
+        {
+            MetaSource.Stop();
+        }
     }
     #endregion
 
@@ -104,20 +118,38 @@ public class CharacterAudio : MonoBehaviour
     {
         return RunFootStepsClips[UnityEngine.Random.Range(0, RunFootStepsClips.Length)];
     }
-    /*
-    public Transform cam;
-    public Transform PlayerHead;
-    public Transform RoationCenter;*/
+
+    float targetvolume;
+    public void Exhusted()
+    {
+        if (!MetaSource.isPlaying)
+        {
+            MetaSource.clip = HeartBeating;
+            MetaSource.Play();
+        }
+
+        if (movement.isExhausted)
+        {
+            targetvolume = Mathf.Lerp(targetvolume, (movement.StaminaRegainTimer / movement.StaminaTimer) * HeartBeatingMaxVolume, 2f * Time.deltaTime);
+        }
+        else
+        {
+            targetvolume = Mathf.Lerp(targetvolume, 
+                (movement.RunDuration / movement.RunRestartTimer) * HeartBeatingMaxVolume, 2f * Time.deltaTime);
+        }
+
+        MetaSource.volume = targetvolume;
+    }
 
     public void Land()
     {
-        //cam.transform.parent = PlayerHead;
+
     }
 
 
     public void RestoreCamera()
     {
-        //cam.transform.parent = RoationCenter;
+
     }
 
     #endregion
