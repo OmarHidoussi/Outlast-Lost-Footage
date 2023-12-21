@@ -54,11 +54,16 @@ public class InputManager : MonoBehaviour
         input.Player.Interact.performed += OnInteractPerformed;
         input.Player.Interact.canceled += OnInteractCanceled;
 
-        input.Player.Crouch.performed += OnCrouchPerformed;
-        input.Player.Crouch.canceled += OnCrouchCanceled;
-
-        input.Player.CrouchOff.performed += OnCrouchOffPerformed;
-        input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+        if(!IsCrouching)
+        {
+            input.Player.Crouch.performed += OnCrouchPerformed;
+            input.Player.Crouch.canceled += OnCrouchCanceled;
+        }
+        if(!CrouchOff)
+        {
+            input.Player.CrouchOff.performed += OnCrouchOffPerformed;
+            input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+        }
 
         input.Player.Sprint.performed += OnSprintPerformed;
         input.Player.Sprint.canceled += OnSprintCanceled;
@@ -100,11 +105,16 @@ public class InputManager : MonoBehaviour
         input.Player.Interact.performed -= OnInteractPerformed;
         input.Player.Interact.canceled -= OnInteractCanceled;
 
-        input.Player.Crouch.performed -= OnCrouchPerformed;
-        input.Player.Crouch.canceled -= OnCrouchCanceled;
-
-        input.Player.CrouchOff.performed -= OnCrouchOffPerformed;
-        input.Player.CrouchOff.canceled -= OnCrouchOffCanceled;
+        if (!IsCrouching)
+        {
+            input.Player.Crouch.performed += OnCrouchPerformed;
+            input.Player.Crouch.canceled += OnCrouchCanceled;
+        }
+        if (!CrouchOff)
+        {
+            input.Player.CrouchOff.performed += OnCrouchOffPerformed;
+            input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+        }
 
         input.Player.Sprint.performed -= OnSprintPerformed;
         input.Player.Sprint.canceled -= OnSprintCanceled;
@@ -177,24 +187,28 @@ public class InputManager : MonoBehaviour
     {
         if (!IsSprinting)
         {
-            if (CanStand)
+            if (Button.ReadValueAsButton())
+                IsCrouching = !IsCrouching;
+            CrouchOff = false;
+        }
+    }
+
+    bool CrouchOff = true;
+    private void OnCrouchOffPerformed(InputAction.CallbackContext Button)
+    {
+        if (Button.ReadValueAsButton())
+        {
+            if(CanStand)
             {
-                IsCrouching = Button.ReadValueAsButton();
+                CrouchOff = !CrouchOff;
+                IsCrouching = false;
             }
         }
     }
 
-    private void OnCrouchOffPerformed(InputAction.CallbackContext Button)
-    {
-
-    }
-
     private void OnCrouchOffCanceled(InputAction.CallbackContext Button){ }
 
-    private void OnCrouchCanceled(InputAction.CallbackContext Button)
-    {
-
-    }
+    private void OnCrouchCanceled(InputAction.CallbackContext Button){ }
 
     private void OnSprintPerformed(InputAction.CallbackContext Button)
     {
