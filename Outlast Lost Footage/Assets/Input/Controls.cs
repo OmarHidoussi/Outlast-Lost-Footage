@@ -55,6 +55,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CrouchOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""16b2d8b0-9e30-456e-b72c-dfe1938fe93d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""54d5c49c-4b97-424a-9909-79d69c40504f"",
@@ -73,9 +82,27 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CameraOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1a86def-c5ed-4735-9c5d-e10a6e6bdde7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""InfraredOn"",
                     ""type"": ""Button"",
                     ""id"": ""8b751da9-59c7-463c-9fe0-1ab4839abd56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InfraredOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""25d3d5c5-3678-4c82-8f81-619454370969"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -184,7 +211,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""5f587657-f33f-4665-85a4-b89f11a9a8f8"",
                     ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CameraOn"",
@@ -234,6 +261,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""CameraZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""389e443c-be1a-4c76-ac49-5f00048d3074"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af3b35ba-de84-4b66-8c56-6c0ee4c5e6f9"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InfraredOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63f1c35a-dc3a-4c8d-9054-b7caf654fdbd"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrouchOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -273,9 +333,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_CrouchOff = m_Player.FindAction("CrouchOff", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CameraOn = m_Player.FindAction("CameraOn", throwIfNotFound: true);
+        m_Player_CameraOff = m_Player.FindAction("CameraOff", throwIfNotFound: true);
         m_Player_InfraredOn = m_Player.FindAction("InfraredOn", throwIfNotFound: true);
+        m_Player_InfraredOff = m_Player.FindAction("InfraredOff", throwIfNotFound: true);
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -342,9 +405,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_CrouchOff;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CameraOn;
+    private readonly InputAction m_Player_CameraOff;
     private readonly InputAction m_Player_InfraredOn;
+    private readonly InputAction m_Player_InfraredOff;
     private readonly InputAction m_Player_CameraZoom;
     public struct PlayerActions
     {
@@ -353,9 +419,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @CrouchOff => m_Wrapper.m_Player_CrouchOff;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CameraOn => m_Wrapper.m_Player_CameraOn;
+        public InputAction @CameraOff => m_Wrapper.m_Player_CameraOff;
         public InputAction @InfraredOn => m_Wrapper.m_Player_InfraredOn;
+        public InputAction @InfraredOff => m_Wrapper.m_Player_InfraredOff;
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -375,15 +444,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @CrouchOff.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchOff;
+                @CrouchOff.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchOff;
+                @CrouchOff.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchOff;
                 @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @CameraOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraOn;
                 @CameraOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraOn;
                 @CameraOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraOn;
+                @CameraOff.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraOff;
+                @CameraOff.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraOff;
+                @CameraOff.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraOff;
                 @InfraredOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfraredOn;
                 @InfraredOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfraredOn;
                 @InfraredOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfraredOn;
+                @InfraredOff.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfraredOff;
+                @InfraredOff.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfraredOff;
+                @InfraredOff.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfraredOff;
                 @CameraZoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraZoom;
                 @CameraZoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraZoom;
                 @CameraZoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraZoom;
@@ -400,15 +478,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @CrouchOff.started += instance.OnCrouchOff;
+                @CrouchOff.performed += instance.OnCrouchOff;
+                @CrouchOff.canceled += instance.OnCrouchOff;
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
                 @CameraOn.started += instance.OnCameraOn;
                 @CameraOn.performed += instance.OnCameraOn;
                 @CameraOn.canceled += instance.OnCameraOn;
+                @CameraOff.started += instance.OnCameraOff;
+                @CameraOff.performed += instance.OnCameraOff;
+                @CameraOff.canceled += instance.OnCameraOff;
                 @InfraredOn.started += instance.OnInfraredOn;
                 @InfraredOn.performed += instance.OnInfraredOn;
                 @InfraredOn.canceled += instance.OnInfraredOn;
+                @InfraredOff.started += instance.OnInfraredOff;
+                @InfraredOff.performed += instance.OnInfraredOff;
+                @InfraredOff.canceled += instance.OnInfraredOff;
                 @CameraZoom.started += instance.OnCameraZoom;
                 @CameraZoom.performed += instance.OnCameraZoom;
                 @CameraZoom.canceled += instance.OnCameraZoom;
@@ -454,9 +541,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnCrouchOff(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCameraOn(InputAction.CallbackContext context);
+        void OnCameraOff(InputAction.CallbackContext context);
         void OnInfraredOn(InputAction.CallbackContext context);
+        void OnInfraredOff(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
     }
     public interface ICameraActions

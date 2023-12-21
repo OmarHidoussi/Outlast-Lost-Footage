@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CrouchOff",
+                    "type": "Button",
+                    "id": "16b2d8b0-9e30-456e-b72c-dfe1938fe93d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Sprint",
                     "type": "Button",
                     "id": "54d5c49c-4b97-424a-9909-79d69c40504f",
@@ -51,9 +60,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CameraOff",
+                    "type": "Button",
+                    "id": "e1a86def-c5ed-4735-9c5d-e10a6e6bdde7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "InfraredOn",
                     "type": "Button",
                     "id": "8b751da9-59c7-463c-9fe0-1ab4839abd56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InfraredOff",
+                    "type": "Button",
+                    "id": "25d3d5c5-3678-4c82-8f81-619454370969",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -162,7 +189,7 @@
                     "name": "",
                     "id": "5f587657-f33f-4665-85a4-b89f11a9a8f8",
                     "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "CameraOn",
@@ -212,6 +239,39 @@
                     "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "389e443c-be1a-4c76-ac49-5f00048d3074",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraOff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af3b35ba-de84-4b66-8c56-6c0ee4c5e6f9",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InfraredOff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63f1c35a-dc3a-4c8d-9054-b7caf654fdbd",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CrouchOff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

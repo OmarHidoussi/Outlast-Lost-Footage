@@ -88,17 +88,22 @@ public class CameraMovement : MonoBehaviour
         Mouse_Axis = Vector2.zero;
     }
 
-    
+    float MouseX;
+    float MouseY;
     // Update is called once per frame
     void LateUpdate()
     {
         if (!Lookback)
         {
-            float MouseX = Mouse_Axis.x * Time.deltaTime * Sensetivity;
-            float MouseY = Mouse_Axis.y * Time.deltaTime * Sensetivity * Factor;
             
             MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
             MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
+
+            if(Mouse_Axis != Vector2.zero)
+            {
+                MouseX = Mouse_Axis.x * Time.deltaTime * Sensetivity;
+                MouseY = Mouse_Axis.y * Time.deltaTime * Sensetivity * Factor;
+            }
 
             xRotation -= MouseY;
             xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);

@@ -57,14 +57,37 @@ public class InputManager : MonoBehaviour
         input.Player.Crouch.performed += OnCrouchPerformed;
         input.Player.Crouch.canceled += OnCrouchCanceled;
 
+        input.Player.CrouchOff.performed += OnCrouchOffPerformed;
+        input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+
         input.Player.Sprint.performed += OnSprintPerformed;
         input.Player.Sprint.canceled += OnSprintCanceled;
 
-        input.Player.CameraOn.performed += OnCameraOnPerformed;
-        input.Player.CameraOn.canceled += OnCameraOnCanceled;
+        if(!CameraOn)
+        {
+            input.Player.CameraOn.performed += OnCameraOnPerformed;
+            input.Player.CameraOn.canceled += OnCameraOnCanceled;
+        }
+        if (!CameraOff)
+        {
+            input.Player.CameraOff.performed += OnCameraOffPerformed;
+            input.Player.CameraOff.canceled += OnCameraOffCanceled;
+        }
 
-        input.Player.InfraredOn.performed += OnInfraredOnPerformed;
-        input.Player.InfraredOn.canceled += OnInfraredOnCanceled;
+        if (!CameraOn)
+        {
+            if (!InfraredOn)
+            {
+                input.Player.InfraredOn.performed += OnInfraredOnPerformed;
+                input.Player.InfraredOn.performed += OnInfraredOnCanceled;
+            }
+            if (!InfraredOff)
+            {
+                input.Player.InfraredOff.performed += OnInfraredOffPerformed;
+                input.Player.InfraredOff.canceled += OnInfraredOffCanceled;
+            }
+        }
+
     }
 
     private void OnDisable()
@@ -80,14 +103,33 @@ public class InputManager : MonoBehaviour
         input.Player.Crouch.performed -= OnCrouchPerformed;
         input.Player.Crouch.canceled -= OnCrouchCanceled;
 
+        input.Player.CrouchOff.performed -= OnCrouchOffPerformed;
+        input.Player.CrouchOff.canceled -= OnCrouchOffCanceled;
+
         input.Player.Sprint.performed -= OnSprintPerformed;
         input.Player.Sprint.canceled -= OnSprintCanceled;
 
-        input.Player.CameraOn.performed -= OnCameraOnPerformed;
-        input.Player.CameraOn.canceled -= OnCameraOnCanceled;
+        if (!CameraOn)
+        {
+            input.Player.CameraOn.performed -= OnCameraOnPerformed;
+            input.Player.CameraOn.canceled -= OnCameraOnCanceled;
+        }
+        if(!CameraOff)
+        {
+            input.Player.CameraOff.performed -= OnCameraOffPerformed;
+            input.Player.CameraOff.canceled -= OnCameraOffCanceled;
+        }
 
-        input.Player.InfraredOn.performed -= OnInfraredOnPerformed;
-        input.Player.InfraredOn.canceled -= OnInfraredOnCanceled;
+        if (!InfraredOn)
+        {
+            input.Player.InfraredOn.performed -= OnInfraredOnPerformed;
+            input.Player.InfraredOn.performed -= OnInfraredOnCanceled;
+        }
+        if (!InfraredOff)
+        {
+            input.Player.InfraredOff.performed -= OnInfraredOffPerformed;
+            input.Player.InfraredOff.canceled -= OnInfraredOffCanceled;
+        }
     }
 
     // Start is called before the first frame update
@@ -105,6 +147,9 @@ public class InputManager : MonoBehaviour
             HandleTransitionLogic();
         }
     }
+    #endregion
+
+    #region CustomMethods_GamepadSupport
 
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
@@ -119,7 +164,7 @@ public class InputManager : MonoBehaviour
 
     private void OnInteractPerformed(InputAction.CallbackContext Button)
     {
-        if(CanInteract)
+        if (CanInteract)
             Interact = Button.ReadValueAsButton();
     }
 
@@ -132,16 +177,23 @@ public class InputManager : MonoBehaviour
     {
         if (!IsSprinting)
         {
-             if (CanStand)
-             {
-                 IsCrouching = !Button.ReadValueAsButton();
-             }
+            if (CanStand)
+            {
+                IsCrouching = Button.ReadValueAsButton();
+            }
         }
     }
 
+    private void OnCrouchOffPerformed(InputAction.CallbackContext Button)
+    {
+
+    }
+
+    private void OnCrouchOffCanceled(InputAction.CallbackContext Button){ }
+
     private void OnCrouchCanceled(InputAction.CallbackContext Button)
     {
-        IsCrouching = false;
+
     }
 
     private void OnSprintPerformed(InputAction.CallbackContext Button)
@@ -168,30 +220,45 @@ public class InputManager : MonoBehaviour
 
     private void OnCameraOnPerformed(InputAction.CallbackContext Button)
     {
-        CameraOn = Button.ReadValueAsButton();
+        if (Button.ReadValueAsButton())
+            CameraOn = !CameraOn;
+        CameraOff = false;
     }
 
-    private void OnCameraOnCanceled(InputAction.CallbackContext Button)
+    bool CameraOff = true;
+    private void OnCameraOffPerformed(InputAction.CallbackContext Button)
     {
+        CameraOff = Button.ReadValueAsButton();
         CameraOn = false;
     }
 
+    private void OnCameraOnCanceled(InputAction.CallbackContext Button) { }
+
+    private void OnCameraOffCanceled(InputAction.CallbackContext Button) { }
+
+    bool InfraredOff = true;
     private void OnInfraredOnPerformed(InputAction.CallbackContext Button)
     {
-        InfraredOn = Button.ReadValueAsButton();
+        if (Button.ReadValueAsButton())
+            InfraredOn = !InfraredOn;
+        InfraredOff = false;
     }
 
-    private void OnInfraredOnCanceled(InputAction.CallbackContext Button)
+    private void OnInfraredOffPerformed(InputAction.CallbackContext Button) 
     {
+        InfraredOff = Button.ReadValueAsButton();
         InfraredOn = false;
     }
 
+    private void OnInfraredOffCanceled(InputAction.CallbackContext Button) { }
+
+    private void OnInfraredOnCanceled(InputAction.CallbackContext Button) { }
+
     #endregion
 
-    #region CustomMethods
+    #region CustomMethods_KeyboardSupport
 
-    
-        void HandleInputs()
+    void HandleInputs()
         {
             if (CanInteract)
             {
@@ -235,8 +302,8 @@ public class InputManager : MonoBehaviour
 
         }
 
-        void HandleTransitionLogic()
-        {
+    void HandleTransitionLogic()
+    {
 
         if (!IsCrouching && !movement.isExhausted)
         {
@@ -263,6 +330,6 @@ public class InputManager : MonoBehaviour
         }
     }
     
-    #endregion
+    #endregion 
 
 }
