@@ -133,7 +133,7 @@ public class CharacterAudio : MonoBehaviour
         if (movement.isExhausted)
         {
             targetvolume = Mathf.Lerp(targetvolume, (movement.StaminaRegainTimer / movement.StaminaTimer) * HeartBeatingMaxVolume, 2f * Time.deltaTime);
-            targetpitch = Mathf.Lerp(targetpitch, (movement.StaminaRegainTimer / movement.StaminaTimer) + 1 + HeartBeatingMaxVolume, 2f * Time.deltaTime);
+            targetpitch = Mathf.Lerp(targetpitch, (movement.StaminaRegainTimer / movement.StaminaTimer) + HeartBeatingMaxVolume, 2f * Time.deltaTime);
         }
         else
         {

@@ -16,7 +16,7 @@ public class OptionsMenu : MonoBehaviour
     Resolution[] resolutions;
 
     [Header("General")]
-    public Button NewGame;
+    public Button Options;
     public Button General;
     public Toggle Subtitles_Toggle;
     public Toggle Tutorial_Toggle;
@@ -58,7 +58,7 @@ public class OptionsMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        NewGame.Select();
+        Options.Select();
     }
     #endregion
 

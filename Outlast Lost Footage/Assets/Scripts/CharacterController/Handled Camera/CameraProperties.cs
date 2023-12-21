@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
 
 public class CameraProperties : MonoBehaviour
@@ -28,9 +29,31 @@ public class CameraProperties : MonoBehaviour
     public AudioClip ZoomLoop;
     public float ZoomInPitch, ZoomOutPitch;
 
+    private Controls input = null;
     #endregion
 
     #region BuiltInMethods
+    private void Awake()
+    {
+        input = new Controls();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+
+        input.Player.CameraZoom.performed += CameraZoomPerformed;
+        input.Player.CameraZoom.canceled += CameraZoomCanceled;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+
+        input.Player.CameraZoom.performed -= CameraZoomPerformed;
+        input.Player.CameraZoom.canceled -= CameraZoomCanceled;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +79,7 @@ public class CameraProperties : MonoBehaviour
 
         if (cam.fieldOfView == PreviousFOV)
         {
-            StopZoomSFX();
+          //  StopZoomSFX();
         }
 
         HandleZoom();
@@ -67,105 +90,93 @@ public class CameraProperties : MonoBehaviour
 
     #region CustomMethods
 
+    private void CameraZoomPerformed(InputAction.CallbackContext value)
+    {
+        zoomInput = value.ReadValue<float>() * 0.015f;
+    }
+
+    private void CameraZoomCanceled(InputAction.CallbackContext value)
+    {
+        zoomInput = 0;
+    }
+
     private float PreviousFOV;
     //private float zoomVelocity = 0.0f;
     private bool isZooming = false;
     private float zoomTimer = 0f;
-    public float zoomDelay = 0.1f;
+    public float zoomDelay = 0.01f;
+    float zoomInput;
 
-    void HandleZoom()
-    {
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-
-        if (Mathf.Abs(zoomInput) > 0.01f)
-        {
-            float zoomChange = zoomInput * mouseScrollSpeed * Time.deltaTime;
-            float newZoom = Mathf.Clamp(cam.fieldOfView - zoomChange, MinFOV, MaxFOV);
-
-            if (Mathf.Abs(newZoom - cam.fieldOfView) > 0.01f)
-            {
-                cam.fieldOfView = newZoom;
-                HandleZoomSFX();
-                ResetZoomTimer(); // Reset the timer since zooming is happening
-            }
-        }
-        else
-        {
-            if (!isZooming)
-            {
-                StartZoomTimer(); // Start the timer when zooming stops
-            }
-        }
-
-        // Update the timer
-        if (isZooming)
-        {
-            zoomTimer -= Time.deltaTime;
-            if (zoomTimer <= 0f)
-            {
-                StopZoomSFX();
-            }
-        }
-    }
-
-
-    void StartZoomTimer()
-    {
-        isZooming = true;
-        zoomTimer = zoomDelay;
-    }
-
-    void ResetZoomTimer()
-    {
-        isZooming = false;
-        zoomTimer = zoomDelay;
-    }
-
-    void HandleZoomSFX()
-    {
-        if (!source.isPlaying)
-        {
-            source.pitch = Input.GetAxis("Mouse ScrollWheel") > 0 ? ZoomInPitch : ZoomOutPitch;
-            source.clip = ZoomLoop;
-            source.loop = true;
-            source.Play();
-        }
-    }
-
-    void StopZoomSFX()
-    {
-        source.loop = false;
-        source.Stop();
-    }
-    
-
-    /* void HandleZoom()
+     void HandleZoom()
      {
-         PreviousFOV = cam.fieldOfView;
-         float Zoom = cam.fieldOfView;
-         Zoom -= Input.GetAxis("Mouse ScrollWheel") * mouseScrollSpeed * Time.deltaTime;
-         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, Zoom, LerpSpeed * Time.deltaTime);
-         cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, MinFOV, MaxFOV);
+         zoomInput = Input.GetAxis("Mouse ScrollWheel");
 
-         HandleZoomSFX();
+         if (Mathf.Abs(zoomInput) > 0.01f)
+         {
+             float zoomChange = zoomInput * mouseScrollSpeed * Time.deltaTime;
+             float newZoom = Mathf.Clamp(cam.fieldOfView - zoomChange, MinFOV, MaxFOV);
+
+             if (Mathf.Abs(newZoom - cam.fieldOfView) > 0.01f)
+             {
+                 cam.fieldOfView = newZoom;
+                 HandleZoomSFX();
+                 ResetZoomTimer(); // Reset the timer since zooming is happening
+             }
+         }
+         else
+         {
+             if (!isZooming)
+             {
+                 StartZoomTimer(); // Start the timer when zooming stops
+             }
+         }
+
+         // Update the timer
+         if (isZooming)
+         {
+             zoomTimer -= Time.deltaTime;
+             if (zoomTimer <= 0f)
+             {
+                 StopZoomSFX();
+             }
+         }
+
+         if(cam.fieldOfView == MinFOV || cam.fieldOfView == MaxFOV)
+         {
+            StopZoomSFX();
+         }
+    }
+
+
+     void StartZoomTimer()
+     {
+         isZooming = true;
+         zoomTimer = zoomDelay;
+     }
+
+     void ResetZoomTimer()
+     {
+         isZooming = false;
+         zoomTimer = zoomDelay;
      }
 
      void HandleZoomSFX()
      {
-         if (cam.fieldOfView < PreviousFOV - Offset)
+         if (!source.isPlaying)
          {
-             source.pitch = ZoomOutPitch;
-             source.PlayOneShot(ZoomLoop);
+             source.pitch = zoomInput > 0 ? ZoomInPitch : ZoomOutPitch;
+             source.clip = ZoomLoop;
+             source.loop = true;
+             source.Play();
          }
-         else if (cam.fieldOfView > PreviousFOV + Offset)
-         {
-             source.pitch = ZoomInPitch;
-             source.PlayOneShot(ZoomLoop);
-         }
-         else
-             source.pitch = 1f;
-     }*/
+     }
 
+     void StopZoomSFX()
+     {
+         source.loop = false;
+         source.Stop();
+     }
+     
     void ApertureAdjustment()
     {
         float Aperture = depthOfField.aperture.value;

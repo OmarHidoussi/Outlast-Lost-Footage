@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class CameraMovement : MonoBehaviour
     public Vector3 LeftTilt;
     public Vector3 RightTilt;
 
+    private Controls MouseControls = null;
+    private Vector2 Mouse_Axis;
+
     float xRotation;
     int Factor;
 
@@ -37,6 +41,8 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        MouseControls = new Controls();
+
         Cursor.lockState = CursorLockMode.Locked;
 
         GameSettings GameData = FindObjectOfType<GameSettings>();
@@ -55,19 +61,44 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        MouseControls.Enable();
+
+        MouseControls.Camera.RightStick.performed += OnMovementPerformed;
+        MouseControls.Camera.RightStick.canceled += OnMovementCanceled;
+
+    }
+
+    private void OnDisable()
+    {
+        MouseControls.Disable();
+
+        MouseControls.Camera.RightStick.performed -= OnMovementPerformed;
+        MouseControls.Camera.RightStick.canceled -= OnMovementCanceled;
+    }
+
+    private void OnMovementPerformed(InputAction.CallbackContext value)
+    {
+        Mouse_Axis = value.ReadValue<Vector2>();
+    }
+
+    private void OnMovementCanceled(InputAction.CallbackContext value)
+    {
+        Mouse_Axis = Vector2.zero;
+    }
+
+    
     // Update is called once per frame
     void LateUpdate()
     {
         if (!Lookback)
         {
-            float MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
-            float MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
-
-            /*if(!input.IsSprinting)
-            {
-                if(Mathf.Abs(Input.GetAxis("Mouse X")) > 1f)
-                    Characteranim.CharacterAnim.SetFloat("MouseX", Input.GetAxis("Mouse X"));
-            }*/
+            float MouseX = Mouse_Axis.x * Time.deltaTime * Sensetivity;
+            float MouseY = Mouse_Axis.y * Time.deltaTime * Sensetivity * Factor;
+            
+            MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
+            MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
 
             xRotation -= MouseY;
             xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);
@@ -78,7 +109,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         HandleHeight();
-        HandleLookback();
+        //HandleLookback();
     }
 
     #endregion
@@ -96,7 +127,7 @@ public class CameraMovement : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50f);
     }
 
-  
+  /*
     bool isTransitioning = false;
 
     void HandleLookback()
@@ -158,8 +189,8 @@ public class CameraMovement : MonoBehaviour
 
         isTransitioning = false;
     }
-    
+    */
 
     #endregion
-
+  
 }
