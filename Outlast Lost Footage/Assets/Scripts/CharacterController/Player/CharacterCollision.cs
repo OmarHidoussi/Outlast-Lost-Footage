@@ -10,6 +10,7 @@ public class CharacterCollision : MonoBehaviour
     public Animator anim;
     public float raycastDistance = 0.1f;
     public Vector3 Offset;
+    public float HitDistance;
 
     #endregion
 
