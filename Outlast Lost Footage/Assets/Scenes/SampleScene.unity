@@ -6100,11 +6100,14 @@ MonoBehaviour:
   LookbackTransitionSpeed: 12
   X_Max: 75
   X_Min: -70
+  SprintX_Min: -65
+  SprintX_Max: 65
   input: {fileID: 1593086272}
   Characteranim: {fileID: 1593086275}
   col: {fileID: 1984083078}
   offset: {x: 0, y: 0.6, z: -0.2}
   Crouchingoffset: {x: 0, y: 0.6, z: -0.1}
+  Sprintingoffset: {x: 0, y: 0.6, z: 0}
   CameraHolder: {fileID: 1615768729}
   LeftTilt: {x: 15, y: 0, z: 0}
   RightTilt: {x: -15, y: 0, z: 0}
