@@ -29,7 +29,7 @@ public class CameraMovement : MonoBehaviour
     public Vector3 RightTilt;
 
     private Controls MouseControls = null;
-    private Vector2 Mouse_Axis;
+    [HideInInspector] public Vector2 Mouse_Axis = Vector2.zero;
 
     float xRotation;
     int Factor;

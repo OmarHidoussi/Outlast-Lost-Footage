@@ -15,10 +15,32 @@ public class CharacterInteraction : MonoBehaviour
     public TextMeshProUGUI interactionText;
     public Image interactionButton;
 
+    private Sprite interactionType;
     #endregion
 
     #region BuiltInMethods
 
+    private void OnTriggerEnter(Collider other)
+    {
+        var Interactable = other.gameObject.GetComponent<IInteractable>();
+        if (Interactable == null)
+            return;
+        else
+        {
+            Interaction interaction = other.gameObject.GetComponent<Interaction>();
+
+            if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || 
+                Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || 
+                Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            {
+                interactionType = interaction.KeyboardInteractionButton;
+            }
+            else
+            {
+                interactionType = interaction.GamepadInteractionButton;
+            }
+        }
+    }
     void OnTriggerStay(Collider other)
     {
         var Interactable = other.gameObject.GetComponent<IInteractable>();
@@ -28,20 +50,19 @@ public class CharacterInteraction : MonoBehaviour
         {
             input.CanInteract = true;
             Interaction interaction = other.gameObject.GetComponent<Interaction>();
-            //input.Interact = Input.GetKeyDown(interaction.InteractionKey);
-
 
             if (input.Interact)
             {
                 interaction.Interacted = true;
-                DisplayInteractText(interaction.InteractionButton, interaction.InteractionText, false);
-                
+
+                DisplayInteractText(interactionType, interaction.InteractionText, false);
+
                 Interactable.Interact();
             }
 
             if (!interaction.Interacted)
             {
-                DisplayInteractText(interaction.InteractionButton,interaction.InteractionText,true);
+                DisplayInteractText(interactionType, interaction.InteractionText,true);
             }
         }
     }
@@ -55,8 +76,8 @@ public class CharacterInteraction : MonoBehaviour
         {
             input.CanInteract = false;
             Interaction interaction = other.gameObject.GetComponent<Interaction>();
-            
-            DisplayInteractText(interaction.InteractionButton, interaction.InteractionText, false);
+
+            DisplayInteractText(interactionType, interaction.InteractionText, false);
             DisplayHelpText("",false);
         }
 

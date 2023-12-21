@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
     public CharacterMovement movement;
     public CharacterAnimator anim;
 
-    private Controls input = null;
+    [HideInInspector] public Controls input = null;
 
     #endregion
 
@@ -53,16 +53,23 @@ public class InputManager : MonoBehaviour
 
         input.Player.Interact.performed += OnInteractPerformed;
         input.Player.Interact.canceled += OnInteractCanceled;
+        
+        
+        input.Player.Reload.performed += OnReloadPerformed;
+        input.Player.Reload.canceled += OnReloadCanceled;
 
         if(!IsCrouching)
         {
             input.Player.Crouch.performed += OnCrouchPerformed;
             input.Player.Crouch.canceled += OnCrouchCanceled;
         }
-        if(!CrouchOff)
+        if (CanStand)
         {
-            input.Player.CrouchOff.performed += OnCrouchOffPerformed;
-            input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+            if (!CrouchOff)
+            {
+                input.Player.CrouchOff.performed += OnCrouchOffPerformed;
+                input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+            }
         }
 
         input.Player.Sprint.performed += OnSprintPerformed;
@@ -92,7 +99,7 @@ public class InputManager : MonoBehaviour
                 input.Player.InfraredOff.canceled += OnInfraredOffCanceled;
             }
         }
-
+        
     }
 
     private void OnDisable()
@@ -105,15 +112,21 @@ public class InputManager : MonoBehaviour
         input.Player.Interact.performed -= OnInteractPerformed;
         input.Player.Interact.canceled -= OnInteractCanceled;
 
+        input.Player.Reload.performed -= OnReloadPerformed;
+        input.Player.Reload.canceled -= OnReloadCanceled;
+
         if (!IsCrouching)
         {
             input.Player.Crouch.performed += OnCrouchPerformed;
             input.Player.Crouch.canceled += OnCrouchCanceled;
         }
-        if (!CrouchOff)
+        if(CanStand)
         {
-            input.Player.CrouchOff.performed += OnCrouchOffPerformed;
-            input.Player.CrouchOff.canceled += OnCrouchOffCanceled;
+            if (!CrouchOff)
+            {
+                input.Player.CrouchOff.performed -= OnCrouchOffPerformed;
+                input.Player.CrouchOff.canceled -= OnCrouchOffCanceled;
+            }
         }
 
         input.Player.Sprint.performed -= OnSprintPerformed;
@@ -154,9 +167,76 @@ public class InputManager : MonoBehaviour
         if (!MidAir)
         {
             HandleInputs();
-            HandleTransitionLogic();
+        }
+
+        if (movement.isExhausted)
+            IsSprinting = false;
+    }
+    #endregion
+
+    #region CustomMethods_KeyboardSupport
+
+    void HandleInputs()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            CameraOn = !CameraOn;
+        }
+
+        if (CameraOn)
+            constraint.weight = Mathf.Lerp(constraint.weight, 1, 3f * Time.deltaTime);
+        else
+            constraint.weight = Mathf.Lerp(constraint.weight, 0, 3f * Time.deltaTime);
+
+        if (CanMove)
+        {
+            Mov_Axis = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")).normalized;
+        }
+
+        if (CameraOn)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                InfraredOn = !InfraredOn;
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            if (cameraFunc.BatterySlider.value <= cameraFunc.BatterySlider.maxValue / 2)
+            {
+                Reload = true;
+            }
+            else
+            {
+                interaction.DisplayHelpText("Battery is full", true);
+            }
+        }
+
+        Sprint();
+    }
+
+    void Sprint()
+    {
+        if (movement.isExhausted)
+            return;
+
+        if (anim.CharacterAnim.GetFloat("VelocityY") == 0 && IsSprinting)
+            return;
+
+        if (IsCrouching)
+            return;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            IsSprinting = true;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            IsSprinting = false;
         }
     }
+
     #endregion
 
     #region CustomMethods_GamepadSupport
@@ -170,12 +250,13 @@ public class InputManager : MonoBehaviour
     private void OnMovementCanceled(InputAction.CallbackContext value)
     {
         Mov_Axis = Vector2.zero;
+        IsSprinting = false;
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext Button)
     {
         if (CanInteract)
-            Interact = Button.ReadValueAsButton();
+            Interact = true;
     }
 
     private void OnInteractCanceled(InputAction.CallbackContext Button)
@@ -183,8 +264,25 @@ public class InputManager : MonoBehaviour
         Interact = false;
     }
 
+    private void OnReloadPerformed(InputAction.CallbackContext Button)
+    {
+        if (cameraFunc.BatterySlider.value <= cameraFunc.BatterySlider.maxValue / 2)
+        {
+            Reload = Button.ReadValueAsButton();
+        }
+        else
+        {
+            interaction.DisplayHelpText("Battery is full", true);
+        }
+    }
+
+    private void OnReloadCanceled(InputAction.CallbackContext Button) { }
+
     private void OnCrouchPerformed(InputAction.CallbackContext Button)
     {
+        if (!CanStand)
+            return;
+
         if (!IsSprinting)
         {
             if (Button.ReadValueAsButton())
@@ -196,9 +294,12 @@ public class InputManager : MonoBehaviour
     bool CrouchOff = true;
     private void OnCrouchOffPerformed(InputAction.CallbackContext Button)
     {
+        if (!CanStand)
+            return;
+
         if (Button.ReadValueAsButton())
         {
-            if(CanStand)
+            if (CanStand)
             {
                 CrouchOff = !CrouchOff;
                 IsCrouching = false;
@@ -206,31 +307,25 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void OnCrouchOffCanceled(InputAction.CallbackContext Button){ }
+    private void OnCrouchOffCanceled(InputAction.CallbackContext Button) { }
 
-    private void OnCrouchCanceled(InputAction.CallbackContext Button){ }
+    private void OnCrouchCanceled(InputAction.CallbackContext Button) { }
 
     private void OnSprintPerformed(InputAction.CallbackContext Button)
     {
-        //HandleTransitionLogic();
-        if (!IsCrouching && !movement.isExhausted)
-        {
-            IsSprinting = Button.ReadValueAsButton();
-        }
-
         if (movement.isExhausted)
-            IsSprinting = false;
-
+            return;
+        
         if (anim.CharacterAnim.GetFloat("VelocityY") == 0 && IsSprinting)
-        {
-            IsSprinting = false;
-        }
+            return;
+
+        if(IsCrouching)
+            return;
+
+        IsSprinting = true;
     }
 
-    private void OnSprintCanceled(InputAction.CallbackContext Button)
-    {
-        IsSprinting = false;
-    }
+    private void OnSprintCanceled(InputAction.CallbackContext Button) { }
 
     private void OnCameraOnPerformed(InputAction.CallbackContext Button)
     {
@@ -258,7 +353,7 @@ public class InputManager : MonoBehaviour
         InfraredOff = false;
     }
 
-    private void OnInfraredOffPerformed(InputAction.CallbackContext Button) 
+    private void OnInfraredOffPerformed(InputAction.CallbackContext Button)
     {
         InfraredOff = Button.ReadValueAsButton();
         InfraredOn = false;
@@ -269,81 +364,4 @@ public class InputManager : MonoBehaviour
     private void OnInfraredOnCanceled(InputAction.CallbackContext Button) { }
 
     #endregion
-
-    #region CustomMethods_KeyboardSupport
-
-    void HandleInputs()
-        {
-            if (CanInteract)
-            {
-                Interact = Input.GetMouseButton(0);
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                CameraOn = !CameraOn;
-            }
-
-            if (CameraOn)
-                constraint.weight = Mathf.Lerp(constraint.weight, 1, 3f * Time.deltaTime);
-            else
-                constraint.weight = Mathf.Lerp(constraint.weight, 0, 3f * Time.deltaTime);
-
-            if (CanMove)
-            {
-                Mov_Axis = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")).normalized;
-            }
-
-            if (CameraOn)
-            {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    InfraredOn = !InfraredOn;
-                }
-            }
-
-            if(Input.GetKeyUp(KeyCode.R))
-            {
-                if (cameraFunc.BatterySlider.value <= cameraFunc.BatterySlider.maxValue / 2)
-                {
-                    Reload = true;
-                }
-                else
-                {
-                    interaction.DisplayHelpText("Battery is full", true);
-                }
-            }
-
-        }
-
-    void HandleTransitionLogic()
-    {
-
-        if (!IsCrouching && !movement.isExhausted)
-        {
-            IsSprinting = Input.GetKey(KeyCode.LeftShift);
-        }
-
-        if (movement.isExhausted)
-            IsSprinting = false;
-
-        if (anim.CharacterAnim.GetFloat("VelocityY") == 0 && IsSprinting)
-        {
-            IsSprinting = false;
-        }
-        
-        if (!IsSprinting)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                if (CanStand)
-                {
-                    IsCrouching = !IsCrouching;
-                }
-            }
-        }
-    }
-    
-    #endregion 
-
 }

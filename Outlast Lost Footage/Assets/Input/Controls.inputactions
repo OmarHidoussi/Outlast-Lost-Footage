@@ -21,7 +21,16 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "65afb956-bf2f-4056-ad2b-a610b534f6b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Crouch",
@@ -165,6 +174,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8a7dbf73-1b0d-4e45-9b05-b32b3151f06a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "318738d9-78bb-4f7c-8c2c-20c64470b759",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -176,8 +196,19 @@
                 },
                 {
                     "name": "",
+                    "id": "4c7cb641-8d57-4f38-88c9-334954871ce8",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9577bd47-de85-482a-8978-d26e46fad3d1",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -241,6 +272,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Mouse Wheel",
+                    "id": "542ddfe5-23c9-4ff7-9599-a825b511b489",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "83c13809-f007-4dd3-a544-97e350555cf3",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "Scale(factor=0.035)",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "2ba17cdc-08f9-4986-bc6e-19092dc63994",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "Scale(factor=0.035)",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "389e443c-be1a-4c76-ac49-5f00048d3074",
                     "path": "<Gamepad>/rightShoulder",
@@ -270,6 +334,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CrouchOff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d337b1ea-6b56-4405-95c7-21dd1136c49b",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

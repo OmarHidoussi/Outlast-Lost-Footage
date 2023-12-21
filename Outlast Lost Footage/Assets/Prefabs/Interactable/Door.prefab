@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1849171174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849171175}
+  m_Layer: 0
+  m_Name: HandAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1849171175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849171174}
+  m_LocalRotation: {x: 0.49999925, y: -0.499999, z: -0.50000244, w: -0.49999937}
+  m_LocalPosition: {x: -0.018166944, y: 0.008816665, z: 0.009983339}
+  m_LocalScale: {x: 0.1666666, y: 0.008333331, z: 0.016666662}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6914629105179891587}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -270}
 --- !u!1 &6376828740400393917
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +245,7 @@ GameObject:
   - component: {fileID: 6376828741973518162}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,7 +257,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6376828741973518167}
-  m_LocalRotation: {x: -0, y: 0.7071056, z: -0, w: 0.707108}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -249,9 +280,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   stats: {fileID: 0}
+  Characteranim: {fileID: 0}
   _audio: {fileID: 0}
   Ch_interaction: {fileID: 0}
-  unlocked: 0
+  unlocked: 1
+  HandAim: {fileID: 0}
+  HandAimPosition: {fileID: 1849171175}
 --- !u!114 &6376828741973518189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 6376828740645213385}
   InteractionKey: 304
-  InteractionButton: {fileID: 21300000, guid: 27c51a49f3fc87149b83695711316812, type: 3}
+  KeyboardInteractionButton: {fileID: 21300000, guid: 27c51a49f3fc87149b83695711316812, type: 3}
+  GamepadInteractionButton: {fileID: 21300000, guid: 1fe81fa3fa896a843949281aac226c8d, type: 3}
   InteractionText: Open Door
   Helptext: Locked
   Interacted: 0

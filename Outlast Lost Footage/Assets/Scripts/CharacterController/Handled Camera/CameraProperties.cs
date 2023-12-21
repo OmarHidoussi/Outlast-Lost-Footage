@@ -109,7 +109,7 @@ public class CameraProperties : MonoBehaviour
 
      void HandleZoom()
      {
-         zoomInput = Input.GetAxis("Mouse ScrollWheel");
+         //zoomInput = Input.GetAxis("Mouse ScrollWheel");
 
          if (Mathf.Abs(zoomInput) > 0.01f)
          {
