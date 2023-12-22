@@ -23,6 +23,7 @@ public class CameraMovement : MonoBehaviour
     public CapsuleCollider col;
     public Vector3 offset;
     public Vector3 Crouchingoffset;
+    public Vector3 Jumpoffset;
 
     public Transform CameraHolder;
     public Vector3 LeftTilt;
@@ -131,10 +132,15 @@ public class CameraMovement : MonoBehaviour
 
         if (input.IsCrouching)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, 50f);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, 50 *Time.deltaTime);
         }
         else
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50f);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50 *Time.deltaTime);
+
+        if (!input.m_rigidbody.useGravity)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y/2, 0) + Jumpoffset, 50f * Time.deltaTime);
+        }
     }
 
   /*

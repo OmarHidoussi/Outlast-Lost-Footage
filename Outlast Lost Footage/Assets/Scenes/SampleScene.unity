@@ -2397,7 +2397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684546605}
   m_LocalRotation: {x: -0, y: -0.7071062, z: -0, w: 0.7071075}
-  m_LocalPosition: {x: 10.94, y: 0.347, z: 20.59}
+  m_LocalPosition: {x: 10.94, y: 0.09, z: 20.59}
   m_LocalScale: {x: 0.61299, y: 0.77799, z: 2.3593}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5872,6 +5872,7 @@ MonoBehaviour:
   interaction: {fileID: 1285584349}
   movement: {fileID: 1593086271}
   anim: {fileID: 1593086275}
+  m_rigidbody: {fileID: 0}
 --- !u!54 &1593086273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6241,6 +6242,7 @@ MonoBehaviour:
   col: {fileID: 1984083078}
   offset: {x: 0, y: 0.6, z: -0.2}
   Crouchingoffset: {x: 0, y: 0.6, z: -0.1}
+  Jumpoffset: {x: 0, y: 1, z: -0.5}
   CameraHolder: {fileID: 1615768729}
   LeftTilt: {x: 15, y: 0, z: 0}
   RightTilt: {x: -15, y: 0, z: 0}
