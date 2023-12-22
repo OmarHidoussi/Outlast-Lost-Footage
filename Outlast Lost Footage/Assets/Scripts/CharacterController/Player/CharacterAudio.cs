@@ -39,7 +39,7 @@ public class CharacterAudio : MonoBehaviour
 
     [Header("PlayerSFX")]
     public float SlideVolume;
-    public AudioClip RunningSlide;
+    public AudioClip[] RunningSlide;
 
     #endregion
 
@@ -144,6 +144,10 @@ public class CharacterAudio : MonoBehaviour
     {
         return RunFootStepsClips[UnityEngine.Random.Range(0, RunFootStepsClips.Length)];
     }
+    private AudioClip Slideclip()
+    {
+        return RunningSlide[UnityEngine.Random.Range(0, RunningSlide.Length)];
+    }
 
     float targetvolume;
     float targetpitch;
@@ -184,7 +188,7 @@ public class CharacterAudio : MonoBehaviour
     {
         source.volume = SlideVolume;
         source.outputAudioMixerGroup = FootStepsGrp;
-        source.PlayOneShot(RunningSlide);
+        source.PlayOneShot(Slideclip());
     }
 
     public void SlideEnded()
