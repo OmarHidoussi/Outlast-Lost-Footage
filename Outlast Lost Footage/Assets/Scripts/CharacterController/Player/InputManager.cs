@@ -307,12 +307,12 @@ public class InputManager : MonoBehaviour
         if (!CanStand)
             return;
 
-        if (!IsSprinting)
-        {
+        /*if (!IsSprinting)
+        {*/
             if (Button.ReadValueAsButton())
                 IsCrouching = !IsCrouching;
             CrouchOff = false;
-        }
+        //}
     }
 
     bool CrouchOff = true;

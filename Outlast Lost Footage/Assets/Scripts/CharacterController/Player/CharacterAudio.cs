@@ -122,8 +122,9 @@ public class CharacterAudio : MonoBehaviour
 
     public void JumpLand()
     {
-        m_rigidbody.useGravity = true;
         CamMovement.Sensetivity = RestoreCameraMovement;
+        m_rigidbody.useGravity = true;
+        movement.GetComponent<InputManager>().Jump = false;
     }
 
     private float GetRandomPitch() 
@@ -174,6 +175,16 @@ public class CharacterAudio : MonoBehaviour
     public void RestoreCamera()
     {
 
+    }
+
+    public void Slide() 
+    {
+        
+    }
+
+    public void SlideEnded()
+    {
+        movement.GetComponent<InputManager>().IsSprinting = false;
     }
 
     #endregion
