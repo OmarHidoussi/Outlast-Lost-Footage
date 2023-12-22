@@ -144,10 +144,18 @@ public class CharacterAudio : MonoBehaviour
     {
         return RunFootStepsClips[UnityEngine.Random.Range(0, RunFootStepsClips.Length)];
     }
+
     private AudioClip Slideclip()
     {
         return RunningSlide[UnityEngine.Random.Range(0, RunningSlide.Length)];
     }
+    
+    /*
+    private AudioClip PickRandomClip()
+    {
+        return list[UnityEngine.Random.Range(0, list.Length)];
+    }
+    */
 
     float targetvolume;
     float targetpitch;
