@@ -40,6 +40,7 @@ public class CharacterMovement : MonoBehaviour
         input = GetComponent<InputManager>();
         anim = GetComponent<CharacterAnimator>();
         col = GetComponentInChildren<CapsuleCollider>();
+        m_rigidbody = GetComponent<Rigidbody>();
 
 
         NormalHeight = col.height;
@@ -78,13 +79,20 @@ public class CharacterMovement : MonoBehaviour
 
         Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
 
+        if (!m_rigidbody.useGravity)
+        {
+            transform.Translate(0, 0, RunSpeed * Time.deltaTime);
+            m_rigidbody.drag = 10f;
+        }
+        else
+        {
+            if (input.Mov_Axis.y == 0 && input.Mov_Axis.x == 0)
+                Speed = Mathf.Lerp(Speed, 0, 5.0F * Time.deltaTime);
 
-
-        if (input.Mov_Axis.y == 0 && input.Mov_Axis.x == 0)
-            Speed = Mathf.Lerp(Speed, 0, 5.0F * Time.deltaTime);
-
-        transform.Translate(input.Mov_Axis.y * Speed * Time.deltaTime, 0,
-            input.Mov_Axis.x * Speed * Time.deltaTime);
+            transform.Translate(input.Mov_Axis.y * Speed * Time.deltaTime, 0,
+                input.Mov_Axis.x * Speed * Time.deltaTime);
+            m_rigidbody.drag = 0f;
+        }
     }
 
     void HandleWallDetection()

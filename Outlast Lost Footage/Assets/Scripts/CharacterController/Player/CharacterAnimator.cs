@@ -25,7 +25,6 @@ public class CharacterAnimator : MonoBehaviour
     [Range(0,5f)] public float DistanceToGround;
     public LayerMask layerMask;
 
-
     #endregion
 
     #region BuiltInMethods
@@ -66,7 +65,7 @@ public class CharacterAnimator : MonoBehaviour
             CharacterAnim.SetBool("Sprinting", input.IsSprinting);
         }
 
-        if(input.IsSprinting)
+        if(input.IsSprinting && !input.CanInteract)
         {
             CharacterAnim.SetBool("Jump", input.Jump);
             ColliderAnim.SetBool("Jump", input.Jump);

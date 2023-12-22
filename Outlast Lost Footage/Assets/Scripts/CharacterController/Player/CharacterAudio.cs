@@ -12,6 +12,7 @@ public class CharacterAudio : MonoBehaviour
     public AudioSource MetaSource;
     public CharacterAnimator Characteranim;
     public CharacterMovement movement;
+    public CameraMovement CamMovement;
     public Rigidbody m_rigidbody;
 
     [Header("FootSteps")]
@@ -111,14 +112,18 @@ public class CharacterAudio : MonoBehaviour
         source.PlayOneShot(Runclip());
     }
 
+    private float RestoreCameraMovement;
     public void Jumped()
     {
+        RestoreCameraMovement = CamMovement.Sensetivity;
         m_rigidbody.useGravity = false;
+        CamMovement.Sensetivity = 0;
     }
 
     public void JumpLand()
     {
         m_rigidbody.useGravity = true;
+        CamMovement.Sensetivity = RestoreCameraMovement;
     }
 
     private float GetRandomPitch() 
@@ -165,7 +170,6 @@ public class CharacterAudio : MonoBehaviour
     {
 
     }
-
 
     public void RestoreCamera()
     {

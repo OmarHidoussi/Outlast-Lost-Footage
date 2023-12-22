@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
     public CharacterInteraction interaction;
     public CharacterMovement movement;
     public CharacterAnimator anim;
+    public Rigidbody m_rigidbody;
 
     [HideInInspector] public Controls input = null;
 
@@ -165,6 +166,7 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         MidAir = false;
+        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -288,7 +290,10 @@ public class InputManager : MonoBehaviour
     {
         if(IsSprinting && !CanInteract)
         {
-            Jump = Button.ReadValueAsButton();
+            if(Mov_Axis.x > 0.85f)
+            {
+                Jump = Button.ReadValueAsButton();
+            }
         }
     }
 
