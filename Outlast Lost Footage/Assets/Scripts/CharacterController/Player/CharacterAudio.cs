@@ -37,6 +37,9 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip Battery_Collect;
     public AudioClip Door_Unlocked, Door_Locked;
 
+    [Header("PlayerSFX")]
+    public float SlideVolume;
+    public AudioClip RunningSlide;
 
     #endregion
 
@@ -179,7 +182,9 @@ public class CharacterAudio : MonoBehaviour
 
     public void Slide() 
     {
-        
+        source.volume = SlideVolume;
+        source.outputAudioMixerGroup = FootStepsGrp;
+        source.PlayOneShot(RunningSlide);
     }
 
     public void SlideEnded()
