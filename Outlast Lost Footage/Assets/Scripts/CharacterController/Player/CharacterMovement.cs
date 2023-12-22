@@ -13,7 +13,9 @@ public class CharacterMovement : MonoBehaviour
     public float CrouchSpeed;
     public float CrouchHeight;
     public float LerpSpeed;
+
     public Transform RayDirection;
+    public Rigidbody m_rigidbody;
 
     [Header("Fatigue")]
     public bool isExhausted;
@@ -26,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
     float NormalHeight;
     InputManager input;
     CapsuleCollider col;
+    CharacterAnimator anim;
 
     #endregion
 
@@ -35,7 +38,9 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         input = GetComponent<InputManager>();
+        anim = GetComponent<CharacterAnimator>();
         col = GetComponentInChildren<CapsuleCollider>();
+
 
         NormalHeight = col.height;
 
@@ -105,6 +110,7 @@ public class CharacterMovement : MonoBehaviour
             col.height = Mathf.Lerp(col.height, CrouchHeight, LerpSpeed * Time.deltaTime);
         else
             col.height = Mathf.Lerp(col.height, NormalHeight, LerpSpeed * Time.deltaTime);
+
     }
 
     void HandleFatigue()

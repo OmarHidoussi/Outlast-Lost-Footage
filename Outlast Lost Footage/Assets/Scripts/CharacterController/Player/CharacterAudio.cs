@@ -12,6 +12,7 @@ public class CharacterAudio : MonoBehaviour
     public AudioSource MetaSource;
     public CharacterAnimator Characteranim;
     public CharacterMovement movement;
+    public Rigidbody m_rigidbody;
 
     [Header("FootSteps")]
     public float WalkVolume;
@@ -53,13 +54,18 @@ public class CharacterAudio : MonoBehaviour
     #endregion
 
     #region CustomMethods
+    public void LockHand()
+    {
+
+    }
+    
     public void CollectBattery()
     {
+        Characteranim.CharacterAnim.SetBool("PickUp", false);
         source.outputAudioMixerGroup = Master;
         source.pitch = 1f;
         source.volume = BC_Volume;
         source.PlayOneShot(Battery_Collect);
-        Characteranim.CharacterAnim.SetBool("PickUp", false);
     }
 
     public void DoorState(bool State)
@@ -103,6 +109,16 @@ public class CharacterAudio : MonoBehaviour
         source.pitch = GetRandomPitch();
         source.volume = RunVolume;
         source.PlayOneShot(Runclip());
+    }
+
+    public void Jumped()
+    {
+        m_rigidbody.useGravity = false;
+    }
+
+    public void JumpLand()
+    {
+        m_rigidbody.useGravity = true;
     }
 
     private float GetRandomPitch() 

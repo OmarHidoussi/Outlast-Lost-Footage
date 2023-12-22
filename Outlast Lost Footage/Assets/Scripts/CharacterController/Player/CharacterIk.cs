@@ -8,17 +8,16 @@ public class CharacterIk : MonoBehaviour
     [Range(0, 1f)] public float DistanceToGround;
     public LayerMask layerMask;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnAnimatorIK(int layerIndex)

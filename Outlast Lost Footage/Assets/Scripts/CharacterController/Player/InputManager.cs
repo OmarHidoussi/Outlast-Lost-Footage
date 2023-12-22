@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
     public bool MidAir;
     public bool IsSprinting;
     public bool IsCrouching;
+    public bool Jump;
 
     [Header("CameraState")]
     public bool CameraOn;
@@ -54,10 +55,12 @@ public class InputManager : MonoBehaviour
         input.Player.Interact.performed += OnInteractPerformed;
         input.Player.Interact.canceled += OnInteractCanceled;
         
-        
         input.Player.Reload.performed += OnReloadPerformed;
         input.Player.Reload.canceled += OnReloadCanceled;
-
+        
+        input.Player.Jump.performed += OnJumpPerformed;
+        input.Player.Jump.canceled += OnJumpCanceled;
+        
         if(!IsCrouching)
         {
             input.Player.Crouch.performed += OnCrouchPerformed;
@@ -114,7 +117,10 @@ public class InputManager : MonoBehaviour
 
         input.Player.Reload.performed -= OnReloadPerformed;
         input.Player.Reload.canceled -= OnReloadCanceled;
-
+        
+        input.Player.Jump.performed -= OnJumpPerformed;
+        input.Player.Jump.canceled -= OnJumpCanceled;
+        
         if (!IsCrouching)
         {
             input.Player.Crouch.performed += OnCrouchPerformed;
@@ -277,6 +283,19 @@ public class InputManager : MonoBehaviour
     }
 
     private void OnReloadCanceled(InputAction.CallbackContext Button) { }
+    
+    private void OnJumpPerformed(InputAction.CallbackContext Button) 
+    {
+        if(IsSprinting && !CanInteract)
+        {
+            Jump = Button.ReadValueAsButton();
+        }
+    }
+
+    private void OnJumpCanceled(InputAction.CallbackContext Button)
+    {
+        Jump = false;
+    }
 
     private void OnCrouchPerformed(InputAction.CallbackContext Button)
     {

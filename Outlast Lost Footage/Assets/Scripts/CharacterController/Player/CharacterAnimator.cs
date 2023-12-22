@@ -10,6 +10,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private InputManager input;
     private CharacterMovement movement;
+    private CharacterStats stats;
 
     [Header("Camera Animation")]
     [SerializeField] private Animator anim;
@@ -33,6 +34,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         input = GetComponent<InputManager>();
         movement = GetComponent<CharacterMovement>();
+        stats = GetComponent<CharacterStats>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class CharacterAnimator : MonoBehaviour
         HandeMovement();
         HandleCrouch();
         HandleInteraction();
+        HandleHealth();
 
         LeftHandConstraint.weight = LeftHandWeight;
     }
@@ -62,6 +65,12 @@ public class CharacterAnimator : MonoBehaviour
             CharacterAnim.SetFloat("VelocityY", input.Mov_Axis.x);
             CharacterAnim.SetBool("Sprinting", input.IsSprinting);
         }
+
+        if(input.IsSprinting)
+        {
+            CharacterAnim.SetBool("Jump", input.Jump);
+            ColliderAnim.SetBool("Jump", input.Jump);
+        }
     }
 
     void HandleCrouch()
@@ -70,18 +79,28 @@ public class CharacterAnimator : MonoBehaviour
         ColliderAnim.SetBool("Crouch", input.IsCrouching);
     }
 
-    void HandleInteraction()
+    void HandleHealth()
     {
-        if(input.Interact)
+        if (stats.Health <= 0)
+        {
+            CharacterAnim.SetBool("Dead", true);
+        }
+    }
+
+    public bool lockHand;
+    public void HandleInteraction()
+    {
+        if(CharacterAnim.GetBool("PickUp"))
         {
             LeftHandWeight = 1;
             SpineConstraint.weight = 0.22f;
         }
         else
         {
-            LeftHandWeight = Mathf.Lerp(LeftHandWeight, 0, 5f * Time.deltaTime);
-            SpineConstraint.weight = Mathf.Lerp(SpineConstraint.weight, 0, 5f * Time.deltaTime);
+            LeftHandWeight = 0;
+            SpineConstraint.weight = 0;
         }
+
     }
 
     public void InteractionType(string Type)

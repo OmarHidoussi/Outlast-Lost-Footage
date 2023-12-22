@@ -10,7 +10,7 @@ public class CharacterCollision : MonoBehaviour
     public Animator anim;
     public float raycastDistance = 0.1f;
     public Vector3 Offset;
-    public float HitDistance;
+    public float DeathForce;
 
     #endregion
 
@@ -22,6 +22,7 @@ public class CharacterCollision : MonoBehaviour
 
         // Update the animator parameter based on the grounded state
         anim.SetBool("MidAir", !isGrounded);
+
     }
 
     private void OnDrawGizmos()
@@ -52,8 +53,9 @@ public class CharacterCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Walkable"))
+        if (collision.gameObject.tag == "Walkable")
         {
+            Debug.Log("Impact");
             input.MidAir = false;
             anim.SetBool("MidAir", false);
         }
