@@ -9,6 +9,7 @@ public class CharacterCollision : MonoBehaviour
     public InputManager input;
     public Animator anim;
     public float raycastDistance = 0.1f;
+    public float DieDistance = 3f;
     public Vector3 Offset;
     public float DeathForce;
 
@@ -23,6 +24,20 @@ public class CharacterCollision : MonoBehaviour
         // Update the animator parameter based on the grounded state
         anim.SetBool("MidAir", !isGrounded);
 
+        Ray ray = new Ray(transform.position + Offset, Vector3.down);
+        RaycastHit hit;
+
+        // Cast the ray and check the number of hits
+        if (Physics.Raycast(ray, out hit, DieDistance))
+        {
+            if (hit.collider && hit.collider.CompareTag("Walkable") && hit.collider.gameObject != gameObject)
+            {
+                if(hit.distance > DieDistance)
+                {
+                    anim.SetBool("Dead", true);
+                }
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -55,7 +70,6 @@ public class CharacterCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Walkable")
         {
-            Debug.Log("Impact");
             input.MidAir = false;
             anim.SetBool("MidAir", false);
         }

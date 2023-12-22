@@ -41,9 +41,17 @@ public class CharacterAudio : MonoBehaviour
     public float SlideVolume;
     public AudioClip[] RunningSlide;
 
+    [Header("PlayerDie")]
+    public float ScoreVolume;
+    public AudioClip DieScore_SFX;
+
     #endregion
 
     #region BuiltInMethods
+    private void Start()
+    {
+        RestoreCameraMovement = CamMovement.Sensetivity;
+    }
     private void Update()
     {
         if (movement.isExhausted || movement.RunDuration > movement.StaminaRegainTimer)
@@ -118,7 +126,6 @@ public class CharacterAudio : MonoBehaviour
     private float RestoreCameraMovement;
     public void Jumped()
     {
-        RestoreCameraMovement = CamMovement.Sensetivity;
         m_rigidbody.useGravity = false;
         CamMovement.Sensetivity = 0;
     }
@@ -149,13 +156,6 @@ public class CharacterAudio : MonoBehaviour
     {
         return RunningSlide[UnityEngine.Random.Range(0, RunningSlide.Length)];
     }
-    
-    /*
-    private AudioClip PickRandomClip()
-    {
-        return list[UnityEngine.Random.Range(0, list.Length)];
-    }
-    */
 
     float targetvolume;
     float targetpitch;
@@ -202,6 +202,18 @@ public class CharacterAudio : MonoBehaviour
     public void SlideEnded()
     {
         movement.GetComponent<InputManager>().IsSprinting = false;
+    }
+
+    public void Die()
+    {
+        Characteranim.CharacterAnim.SetBool("Dead", false);
+    }
+
+    public void DieScore()
+    {
+        MetaSource.volume = ScoreVolume;
+        MetaSource.loop = false;
+        MetaSource.PlayOneShot(DieScore_SFX);
     }
 
     #endregion

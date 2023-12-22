@@ -80,10 +80,7 @@ public class CharacterAnimator : MonoBehaviour
 
     void HandleHealth()
     {
-        if (stats.Health <= 0)
-        {
-            CharacterAnim.SetBool("Dead", true);
-        }
+
     }
 
     public bool lockHand;

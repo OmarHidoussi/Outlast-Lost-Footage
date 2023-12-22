@@ -16,7 +16,7 @@ public class CameraMovement : MonoBehaviour
     public float RotationSpeed;
     public bool Lookback;
     public float LookbackTransitionSpeed;
-    public float X_Max, X_Min, SprintX_Max, SprintX_Min;
+    public float X_Max, X_Min, SprintX_Max, SprintX_Min, CrouchX_Max, CrouchX_Min;
 
     public InputManager input;
     public CharacterAnimator Characteranim;
@@ -106,12 +106,15 @@ public class CameraMovement : MonoBehaviour
                 MouseY = Mouse_Axis.y * Time.deltaTime * Sensetivity * Factor;
             }
 
-            if(input.IsSprinting)
+            if (input.IsSprinting)
                 xRotation = Mathf.Clamp(xRotation, SprintX_Min, SprintX_Max);
+            else if (input.IsCrouching)
+                xRotation = Mathf.Clamp(xRotation, CrouchX_Min, CrouchX_Max);
             else
             {
                 xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);
             }
+
             xRotation -= MouseY;
 
             transform.localRotation = Quaternion.Euler(xRotation, 0, 0);

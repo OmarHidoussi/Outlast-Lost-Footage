@@ -948,7 +948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2047,6 +2047,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8330f5dde1d04974595d5f1d193a8e06, type: 3}
   - {fileID: 8300000, guid: 0cc13040243e2aa46b343c658dc33f38, type: 3}
   - {fileID: 8300000, guid: a1f741a9c7e87524f889e060810ecc27, type: 3}
+  ScoreVolume: 0.1
+  DieScore_SFX: {fileID: 8300000, guid: 20de781247752f94b8f1f0231e38607b, type: 3}
 --- !u!4 &632066867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 565703446992856329, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -3059,11 +3061,11 @@ AudioSource:
   m_GameObject: {fileID: 906181745}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
+  OutputAudioMixerGroup: {fileID: -1313777002569833091, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
   m_audioClip: {fileID: 8300000, guid: 19443c97aaf5a7c4db225b62cc2766cc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.04
+  m_Pitch: 1.14
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -6355,6 +6357,8 @@ MonoBehaviour:
   X_Min: -70
   SprintX_Max: 65
   SprintX_Min: -65
+  CrouchX_Max: 30
+  CrouchX_Min: -30
   input: {fileID: 1593086272}
   Characteranim: {fileID: 1593086275}
   col: {fileID: 1984083078}
