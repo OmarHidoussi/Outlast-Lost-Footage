@@ -139,7 +139,7 @@ public class CameraMovement : MonoBehaviour
 
         if (!input.m_rigidbody.useGravity)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y/2, 0) + Jumpoffset, 50f * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Jumpoffset, 50f);
         }
     }
 
