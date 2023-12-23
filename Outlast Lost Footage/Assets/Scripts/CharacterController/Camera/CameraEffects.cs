@@ -8,6 +8,7 @@ public class CameraEffects : MonoBehaviour
     #region Variables
 
     public CharacterMovement movement;
+    public CharacterAudio info;
     public PostProcessVolume Player_Volume;
     public float TransitionSpeed;
 
@@ -15,6 +16,7 @@ public class CameraEffects : MonoBehaviour
     Vignette vignette;
     LensDistortion distortion;
     ChromaticAberration aberration;
+    MotionBlur motionBlur;
     public float vignetteMaxIntensity, distortionMaxIntensity, aberrationMaxIntensity;
     public float frequency;
 
@@ -24,6 +26,8 @@ public class CameraEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        info = GetComponentInChildren<CharacterAudio>();
+
         if (Player_Volume.profile.TryGetSettings(out vignette))
         {
             vignette.intensity.value = Mathf.Clamp((movement.RunDuration / movement.RunRestartTimer) * 0.3f, 0f, 0.3f);
@@ -44,11 +48,20 @@ public class CameraEffects : MonoBehaviour
 
         if (Player_Volume.profile.TryGetSettings(out aberration))
         {
-            distortion.intensity.value = 0f;
+            aberration.intensity.value = 0f;
         }
         else
         {
-            Debug.LogError("Failed to get ChromaticAberration settings from the PostProcessVolume.");
+            Debug.LogError("Failed to get Chromatic Aberration settings from the PostProcessVolume.");
+        }
+
+        if(Player_Volume.profile.TryGetSettings(out motionBlur))
+        {
+            motionBlur.shutterAngle.value = 120f;
+        }
+        else
+        {
+            Debug.LogError("Failed to get Motion Blur settings from the PostProcessVolume.");
         }
 
         vignette.intensity.value = 0f;
@@ -58,6 +71,7 @@ public class CameraEffects : MonoBehaviour
     void LateUpdate()
     {
         PlayerStamina();
+        PlayerSlide();
     }
     #endregion
 
@@ -89,5 +103,22 @@ public class CameraEffects : MonoBehaviour
         }
     }
     
+    void PlayerSlide()
+    {
+        if(info.IsSliding)
+        {
+            motionBlur.shutterAngle.value = Mathf.Lerp(motionBlur.shutterAngle.value, 360, TransitionSpeed * 10 * Time.deltaTime);
+            distortion.intensity.value = Mathf.Lerp(distortion.intensity.value, -30, TransitionSpeed * 10 * Time.deltaTime);
+        }
+        else
+        {
+            motionBlur.shutterAngle.value = Mathf.Lerp(motionBlur.shutterAngle.value, 120, TransitionSpeed * Time.deltaTime);
+            distortion.intensity.value = Mathf.Lerp(distortion.intensity.value, 0, TransitionSpeed * Time.deltaTime);
+        }
+
+        Debug.Log(motionBlur.shutterAngle.value);
+    
+    }
+
     #endregion
 }

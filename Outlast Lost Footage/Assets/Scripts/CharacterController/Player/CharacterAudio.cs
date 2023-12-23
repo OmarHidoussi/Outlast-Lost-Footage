@@ -16,6 +16,8 @@ public class CharacterAudio : MonoBehaviour
     public CameraMovement CamMovement;
     public Rigidbody m_rigidbody;
 
+    [HideInInspector] public bool IsSliding = false;
+
     [Header("FootSteps")]
     public float WalkVolume;
     public float RunVolume;
@@ -200,7 +202,6 @@ public class CharacterAudio : MonoBehaviour
 
     }
 
-    bool IsSliding = false;
     public void Slide() 
     {
         IsSliding = true;
