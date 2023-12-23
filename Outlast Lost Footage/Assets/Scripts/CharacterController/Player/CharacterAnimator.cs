@@ -65,7 +65,7 @@ public class CharacterAnimator : MonoBehaviour
             CharacterAnim.SetBool("Sprinting", input.IsSprinting);
         }
 
-        if (input.IsSprinting && !input.CanInteract)
+        if (input.IsSprinting || !input.CanInteract || !input.IsCrouching)
         {
             CharacterAnim.SetBool("Jump", input.Jump);
             ColliderAnim.SetBool("Jump", input.Jump);

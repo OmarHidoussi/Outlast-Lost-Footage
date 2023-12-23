@@ -93,6 +93,9 @@ public class CharacterMovement : MonoBehaviour
                 input.Mov_Axis.x * Speed * Time.deltaTime);
             m_rigidbody.drag = 0f;
         }
+
+        Speed = Mathf.Clamp(Speed,0, RunSpeed);
+        m_rigidbody.velocity = new Vector3(0, m_rigidbody.velocity.y, 0);
     }
 
     void HandleWallDetection()
@@ -115,7 +118,9 @@ public class CharacterMovement : MonoBehaviour
     void HandleCrouch()
     {
         if (input.IsCrouching)
+        {
             col.height = Mathf.Lerp(col.height, CrouchHeight, LerpSpeed * Time.deltaTime);
+        }
         else
             col.height = Mathf.Lerp(col.height, NormalHeight, LerpSpeed * Time.deltaTime);
 

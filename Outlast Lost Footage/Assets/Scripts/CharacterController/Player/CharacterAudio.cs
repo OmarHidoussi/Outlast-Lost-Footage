@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class CharacterAudio : MonoBehaviour
 {
@@ -48,10 +49,12 @@ public class CharacterAudio : MonoBehaviour
     #endregion
 
     #region BuiltInMethods
+    
     private void Start()
     {
         RestoreCameraMovement = CamMovement.Sensetivity;
     }
+    
     private void Update()
     {
         if (movement.isExhausted || movement.RunDuration > movement.StaminaRegainTimer)
@@ -61,6 +64,11 @@ public class CharacterAudio : MonoBehaviour
         else 
         {
             MetaSource.Stop();
+        }
+
+        if(IsSliding)
+        {
+            movement.transform.Translate(0, 0, movement.Speed * Time.deltaTime);
         }
     }
     #endregion
@@ -192,8 +200,10 @@ public class CharacterAudio : MonoBehaviour
 
     }
 
+    bool IsSliding = false;
     public void Slide() 
     {
+        IsSliding = true;
         source.volume = SlideVolume;
         source.outputAudioMixerGroup = FootStepsGrp;
         source.PlayOneShot(Slideclip());
@@ -201,19 +211,29 @@ public class CharacterAudio : MonoBehaviour
 
     public void SlideEnded()
     {
+        IsSliding = false;
         movement.GetComponent<InputManager>().IsSprinting = false;
     }
 
     public void Die()
     {
         Characteranim.CharacterAnim.SetBool("Dead", false);
+        movement.GetComponent<InputManager>().CanMove = false;
+        CamMovement.Sensetivity = 0;
+        source.volume = ScoreVolume;
+        source.PlayOneShot(DieScore_SFX);
+        StartCoroutine(BackToMainMenu());
+    }
+
+    IEnumerator BackToMainMenu()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void DieScore()
     {
-        MetaSource.volume = ScoreVolume;
-        MetaSource.loop = false;
-        MetaSource.PlayOneShot(DieScore_SFX);
+
     }
 
     #endregion

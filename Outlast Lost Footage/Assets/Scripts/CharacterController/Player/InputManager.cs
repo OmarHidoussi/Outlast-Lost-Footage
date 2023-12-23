@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
 {
 
     #region Variables
+
     [HideInInspector] public Vector2 Mov_Axis = Vector2.zero;         
     
     [Header("Interaction")]
@@ -18,6 +19,8 @@ public class InputManager : MonoBehaviour
     [Header("Movement")]
     public bool CanMove;
     public bool CanStand;
+    public bool CanCrouch;
+    public bool CanJump;
     public bool MidAir;
     public bool IsSprinting;
     public bool IsCrouching;
@@ -288,11 +291,14 @@ public class InputManager : MonoBehaviour
     
     private void OnJumpPerformed(InputAction.CallbackContext Button) 
     {
-        if(IsSprinting && !CanInteract)
+        if(CanJump)
         {
-            if(Mov_Axis.x > 0.85f)
+            if (IsSprinting && !CanInteract)
             {
-                Jump = Button.ReadValueAsButton();
+                if (Mov_Axis.x > 0.85f)
+                {
+                    Jump = Button.ReadValueAsButton();
+                }
             }
         }
     }
@@ -307,13 +313,21 @@ public class InputManager : MonoBehaviour
         if (!CanStand)
             return;
 
-        /*if (!IsSprinting)
-        {*/
+        if(CanCrouch)
+        {
             if (Button.ReadValueAsButton())
                 IsCrouching = !IsCrouching;
             CrouchOff = false;
-        //}
+            StartCoroutine(CrouchCountdown());
+        }
     }
+    IEnumerator CrouchCountdown()
+    {
+        CanCrouch = false;
+        yield return new WaitForSeconds(0.6f);
+        CanCrouch = true;
+    }
+
 
     bool CrouchOff = true;
     private void OnCrouchOffPerformed(InputAction.CallbackContext Button)
@@ -388,4 +402,5 @@ public class InputManager : MonoBehaviour
     private void OnInfraredOnCanceled(InputAction.CallbackContext Button) { }
 
     #endregion
+
 }

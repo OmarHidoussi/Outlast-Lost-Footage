@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterCollision : MonoBehaviour
 {
+
     #region Variables
 
     public InputManager input;
@@ -16,6 +17,7 @@ public class CharacterCollision : MonoBehaviour
     #endregion
 
     #region BuiltIn Methods
+
     void Update()
     {
         // Perform raycast downward to check if the player is grounded
@@ -28,7 +30,7 @@ public class CharacterCollision : MonoBehaviour
         RaycastHit hit;
 
         // Cast the ray and check the number of hits
-        if (Physics.Raycast(ray, out hit, DieDistance))
+        if (Physics.Raycast(ray, out hit, 100))
         {
             if (hit.collider && hit.collider.CompareTag("Walkable") && hit.collider.gameObject != gameObject)
             {
@@ -74,5 +76,7 @@ public class CharacterCollision : MonoBehaviour
             anim.SetBool("MidAir", false);
         }
     }
+
     #endregion
+
 }
