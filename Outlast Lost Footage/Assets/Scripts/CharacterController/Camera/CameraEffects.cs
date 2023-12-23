@@ -19,6 +19,7 @@ public class CameraEffects : MonoBehaviour
     MotionBlur motionBlur;
     public float vignetteMaxIntensity, distortionMaxIntensity, aberrationMaxIntensity;
     public float frequency;
+    public Color RedVignette;
 
     #endregion
 
@@ -72,6 +73,7 @@ public class CameraEffects : MonoBehaviour
     {
         PlayerStamina();
         PlayerSlide();
+        PlayerDead();
     }
     #endregion
 
@@ -118,6 +120,15 @@ public class CameraEffects : MonoBehaviour
 
         Debug.Log(motionBlur.shutterAngle.value);
     
+    }
+
+    void PlayerDead()
+    {
+        if(info.Characteranim.CharacterAnim.GetBool("Dead"))
+        {
+            vignette.color.value = RedVignette;
+            vignette.intensity.value = 0.45f;
+        }
     }
 
     #endregion
