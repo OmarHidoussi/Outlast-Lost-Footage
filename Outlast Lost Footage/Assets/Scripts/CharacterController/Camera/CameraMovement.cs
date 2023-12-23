@@ -131,18 +131,26 @@ public class CameraMovement : MonoBehaviour
     #region CustomMethods
     void HandleHeight()
     {
-        transform.localPosition = new Vector3(0, col.center.y, 0) + offset;
+        //transform.localPosition = new Vector3(0, col.center.y, 0) + offset;
 
         if (input.IsCrouching)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, TransitionSpeed * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, TransitionSpeed * 15 * Time.deltaTime);
         }
-        else if (!input.m_rigidbody.useGravity)
+        else if (input.Jump || Characteranim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, Jumpoffset, TransitionSpeed / 5 * TransitionSpeed);
+            /*transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Jumpoffset.x, 
+                Characteranim.CharacterAnim.GetFloat("CameraCurve") + Jumpoffset.y ,Jumpoffset.z), 10 * Time.deltaTime);*/
+            float HeightDifference = col.center.y - (col.center.y - 1);
+            if(HeightDifference >= Jumpoffset.y)
+            {
+                HeightDifference = Jumpoffset.y;
+            }
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, HeightDifference, 0) + offset, TransitionSpeed * Time.deltaTime);
+            xRotation = Mathf.Lerp(xRotation, 0, TransitionSpeed * 5 * Time.deltaTime);
         }
         else
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, TransitionSpeed / 105 * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 15 * Time.deltaTime);
 
 
     }

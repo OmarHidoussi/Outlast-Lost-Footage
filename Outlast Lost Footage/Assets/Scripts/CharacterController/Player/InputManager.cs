@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
     public bool CanStand;
     public bool CanCrouch;
     public bool CanJump;
+    public bool CanDeskSlide;
     public bool MidAir;
     public bool IsSprinting;
     public bool IsCrouching;

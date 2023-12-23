@@ -43,22 +43,74 @@ ModelImporter:
       lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: -0.5
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000000000000000000001000000010000000100000000000000010000000000000001000000010000000100000000000000
-      curves: []
+      curves:
+      - name: CameraCurve
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: -0.008231584
+            value: 0.0012033768
+            inSlope: 0.0068655433
+            outSlope: 0.0068655433
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.8021651
+          - serializedVersion: 3
+            time: 0.25463724
+            value: 0.29891968
+            inSlope: 0.7820426
+            outSlope: 0.7820426
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.386581
+            outWeight: 0.47449937
+          - serializedVersion: 3
+            time: 0.44066983
+            value: 0.36623213
+            inSlope: -0.015238691
+            outSlope: -0.015238691
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.904161
+            outWeight: 0.92704004
+          - serializedVersion: 3
+            time: 0.6154728
+            value: 0.2746775
+            inSlope: -1.4709102
+            outSlope: -1.4709102
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.3827427
+            outWeight: 0.08585133
+          - serializedVersion: 3
+            time: 1.0015646
+            value: 0.0010584872
+            inSlope: -0.0017162508
+            outSlope: -0.0017162508
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.23891921
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
       events:
       - time: 0
         functionName: Jumped

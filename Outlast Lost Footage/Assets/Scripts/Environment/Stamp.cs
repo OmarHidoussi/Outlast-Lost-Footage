@@ -20,7 +20,7 @@ public class Stamp : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            FindObjectOfType<InputManager>().CanJump = true;
+            FindObjectOfType<InputManager>().CanDeskSlide = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class Stamp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            FindObjectOfType<InputManager>().CanJump = false;
+            FindObjectOfType<InputManager>().CanDeskSlide = false;
         }
     }
 }

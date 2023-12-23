@@ -42,24 +42,90 @@ ModelImporter:
       firstFrame: 0
       lastFrame: 27
       wrapMode: 0
-      orientationOffsetY: -32
+      orientationOffsetY: -2.55
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 1
       loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000000000000000000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
+      curves:
+      - name: CameraCurve
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: -0.008231584
+            value: 0.0012033768
+            inSlope: 0.0068655433
+            outSlope: 0.0068655433
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.8021651
+          - serializedVersion: 3
+            time: 0.22450024
+            value: 0.014768024
+            inSlope: 0.05867374
+            outSlope: 0.05867374
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.386581
+            outWeight: 0.6834831
+          - serializedVersion: 3
+            time: 0.4302368
+            value: 0.017616775
+            inSlope: -0.015238691
+            outSlope: -0.015238691
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.904161
+            outWeight: 0.92704004
+          - serializedVersion: 3
+            time: 0.64391685
+            value: 0.0046806037
+            inSlope: -0.04481952
+            outSlope: -0.04481952
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.18422973
+            outWeight: 0.4594986
+          - serializedVersion: 3
+            time: 1.0015646
+            value: 0.0010584872
+            inSlope: -0.0017162508
+            outSlope: -0.0017162508
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.23891921
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
+      events:
+      - time: 0
+        functionName: Jumped
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.78368765
+        functionName: JumpLand
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

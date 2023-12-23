@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.35
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6e124636113c7b64d9e16526f32a5b75, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45127195, g: 0.50095683, b: 0.57335466, a: 1}
+  m_IndirectSpecularColor: {r: 0.056927375, g: 0.06268068, b: 0.070496686, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2602,7 +2602,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2641,7 +2641,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2659,14 +2659,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.33542907, y: 0.1725838, z: 0.22271243, w: 0.8989446}
+  m_LocalRotation: {x: 0.23444423, y: 0.9024994, z: -0.29649505, w: -0.20644994}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 148.251, y: -147.27701, z: -142.625}
+  m_LocalEulerAnglesHint: {x: 154, y: 34.7, z: -142.625}
 --- !u!4 &718064084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3182538596634900420, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -6134,7 +6134,7 @@ MonoBehaviour:
   CanMove: 1
   CanStand: 1
   CanCrouch: 1
-  CanJump: 0
+  CanJump: 1
   MidAir: 0
   IsSprinting: 0
   IsCrouching: 0
@@ -6518,7 +6518,7 @@ MonoBehaviour:
   col: {fileID: 1984083078}
   offset: {x: 0, y: 0.6, z: -0.2}
   Crouchingoffset: {x: 0, y: 0.6, z: -0.1}
-  Jumpoffset: {x: 0, y: 1.4, z: -0.4}
+  Jumpoffset: {x: 0, y: 1, z: -0.2}
   CameraHolder: {fileID: 1615768729}
   LeftTilt: {x: 15, y: 0, z: 0}
   RightTilt: {x: -15, y: 0, z: 0}

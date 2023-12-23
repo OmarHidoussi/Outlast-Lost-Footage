@@ -46,6 +46,7 @@ public class CharacterAnimator : MonoBehaviour
         HandleHealth();
 
         LeftHandConstraint.weight = LeftHandWeight;
+        CharacterAnim.SetBool("DeskSlide", input.CanDeskSlide);
     }
 
     #endregion
