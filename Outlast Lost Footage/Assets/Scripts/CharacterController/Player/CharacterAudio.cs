@@ -194,7 +194,7 @@ public class CharacterAudio : MonoBehaviour
 
     public void Land()
     {
-
+        movement.Speed = 0;
     }
 
     public void RestoreCamera()

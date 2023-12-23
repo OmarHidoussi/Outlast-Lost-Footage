@@ -116,10 +116,7 @@ public class CameraEffects : MonoBehaviour
         {
             motionBlur.shutterAngle.value = Mathf.Lerp(motionBlur.shutterAngle.value, 120, TransitionSpeed * Time.deltaTime);
             distortion.intensity.value = Mathf.Lerp(distortion.intensity.value, 0, TransitionSpeed * Time.deltaTime);
-        }
-
-        Debug.Log(motionBlur.shutterAngle.value);
-    
+        }    
     }
 
     void PlayerDead()
