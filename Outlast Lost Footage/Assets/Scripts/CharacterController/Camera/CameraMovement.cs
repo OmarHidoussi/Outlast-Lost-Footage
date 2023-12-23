@@ -135,15 +135,16 @@ public class CameraMovement : MonoBehaviour
 
         if (input.IsCrouching)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, 50 *Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, TransitionSpeed * Time.deltaTime);
+        }
+        else if (!input.m_rigidbody.useGravity)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Jumpoffset, TransitionSpeed / 5 * TransitionSpeed);
         }
         else
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 50 *Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, TransitionSpeed / 105 * Time.deltaTime);
 
-        if (!input.m_rigidbody.useGravity)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Jumpoffset, 50f);
-        }
+
     }
 
   /*

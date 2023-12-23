@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 7db8fd7041065974f84e7a3b57eb9b40
+guid: 901babf6240998049aa88edafe3b3329
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Falling Back Death
+    second: DeskSlideJumping_02
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,13 +36,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Falling Back Death
+      name: DeskSlideJumping_02
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 66
+      firstFrame: 6
+      lastFrame: 35
       wrapMode: 0
-      orientationOffsetY: 56.78
+      orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
@@ -52,23 +52,23 @@ ModelImporter:
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
-      heightFromFeet: 1
+      heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000000000000000000001000000010000000100000000000000010000000000000001000000010000000100000000000000
       curves: []
       events:
       - time: 0
-        functionName: Die
+        functionName: Jumped
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.30066958
-        functionName: DieScore
+      - time: 0.69179094
+        functionName: JumpLand
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
