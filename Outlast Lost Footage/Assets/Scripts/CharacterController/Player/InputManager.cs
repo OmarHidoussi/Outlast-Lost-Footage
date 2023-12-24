@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
     public bool SideWalk;
 
     [Header("CameraState")]
+    public bool IsTitling;
     public bool CameraOn;
     public bool InfraredOn;
 
@@ -108,7 +109,7 @@ public class InputManager : MonoBehaviour
                 input.Player.InfraredOff.canceled += OnInfraredOffCanceled;
             }
         }
-        
+
     }
 
     private void OnDisable()
@@ -218,6 +219,9 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.R))
         {
+            if (!CameraOn)
+                return;
+
             if (cameraFunc.BatterySlider.value <= cameraFunc.BatterySlider.maxValue / 2)
             {
                 Reload = true;
@@ -240,6 +244,9 @@ public class InputManager : MonoBehaviour
             return;
 
         if (IsCrouching)
+            return;
+
+        if (SideWalk)
             return;
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -283,6 +290,9 @@ public class InputManager : MonoBehaviour
 
     private void OnReloadPerformed(InputAction.CallbackContext Button)
     {
+        if (!CameraOn)
+            return;
+
         if (cameraFunc.BatterySlider.value <= cameraFunc.BatterySlider.maxValue / 2)
         {
             Reload = Button.ReadValueAsButton();
@@ -290,7 +300,7 @@ public class InputManager : MonoBehaviour
         else
         {
             interaction.DisplayHelpText("Battery is full", true);
-        }
+        } 
     }
 
     private void OnReloadCanceled(InputAction.CallbackContext Button) { }
@@ -330,6 +340,7 @@ public class InputManager : MonoBehaviour
             StartCoroutine(CrouchCountdown());
         }
     }
+    
     IEnumerator CrouchCountdown()
     {
         CanCrouch = false;

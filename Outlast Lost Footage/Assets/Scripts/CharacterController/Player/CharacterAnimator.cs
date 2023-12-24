@@ -47,6 +47,7 @@ public class CharacterAnimator : MonoBehaviour
 
         LeftHandConstraint.weight = LeftHandWeight;
         CharacterAnim.SetBool("DeskSlide", input.CanDeskSlide);
+        CharacterAnim.SetBool("Reload", input.Reload);
     }
 
     #endregion
@@ -55,6 +56,7 @@ public class CharacterAnimator : MonoBehaviour
     void HandleCameraAnimation()
     {
         anim.SetBool("CameraOn",input.CameraOn);
+        anim.SetBool("Reload", input.Reload);
     }
 
     void HandeMovement()
@@ -87,7 +89,7 @@ public class CharacterAnimator : MonoBehaviour
     public bool lockHand;
     public void HandleInteraction()
     {
-        if(CharacterAnim.GetBool("PickUp"))
+        if(CharacterAnim.GetBool("PickUp") || input.Reload)
         {
             LeftHandWeight = 1;
             SpineConstraint.weight = 0.22f;

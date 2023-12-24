@@ -134,6 +134,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TiltLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7015196-0ce8-45fe-a74c-63d5c1c39a8c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TiltRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f73a8f2-fd41-4584-98df-cfc000b13b7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -356,6 +374,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""232aefec-2b40-4a7e-a1b6-13dda856e584"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TiltLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9baf2e45-2875-467d-b89c-0f521cb6f2c1"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TiltRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -404,6 +444,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_InfraredOn = m_Player.FindAction("InfraredOn", throwIfNotFound: true);
         m_Player_InfraredOff = m_Player.FindAction("InfraredOff", throwIfNotFound: true);
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
+        m_Player_TiltLeft = m_Player.FindAction("TiltLeft", throwIfNotFound: true);
+        m_Player_TiltRight = m_Player.FindAction("TiltRight", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_RightStick = m_Camera.FindAction("RightStick", throwIfNotFound: true);
@@ -478,6 +520,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InfraredOn;
     private readonly InputAction m_Player_InfraredOff;
     private readonly InputAction m_Player_CameraZoom;
+    private readonly InputAction m_Player_TiltLeft;
+    private readonly InputAction m_Player_TiltRight;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -494,6 +538,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @InfraredOn => m_Wrapper.m_Player_InfraredOn;
         public InputAction @InfraredOff => m_Wrapper.m_Player_InfraredOff;
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
+        public InputAction @TiltLeft => m_Wrapper.m_Player_TiltLeft;
+        public InputAction @TiltRight => m_Wrapper.m_Player_TiltRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -539,6 +585,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @CameraZoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraZoom;
                 @CameraZoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraZoom;
                 @CameraZoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraZoom;
+                @TiltLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltLeft;
+                @TiltLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltLeft;
+                @TiltLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltLeft;
+                @TiltRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltRight;
+                @TiltRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltRight;
+                @TiltRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -579,6 +631,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @CameraZoom.started += instance.OnCameraZoom;
                 @CameraZoom.performed += instance.OnCameraZoom;
                 @CameraZoom.canceled += instance.OnCameraZoom;
+                @TiltLeft.started += instance.OnTiltLeft;
+                @TiltLeft.performed += instance.OnTiltLeft;
+                @TiltLeft.canceled += instance.OnTiltLeft;
+                @TiltRight.started += instance.OnTiltRight;
+                @TiltRight.performed += instance.OnTiltRight;
+                @TiltRight.canceled += instance.OnTiltRight;
             }
         }
     }
@@ -630,6 +688,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnInfraredOn(InputAction.CallbackContext context);
         void OnInfraredOff(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
+        void OnTiltLeft(InputAction.CallbackContext context);
+        void OnTiltRight(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

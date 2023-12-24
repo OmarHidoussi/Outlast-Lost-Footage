@@ -28,6 +28,7 @@ public class CameraMovement : MonoBehaviour
     public Vector3 Jumpoffset;
 
     public Transform CameraHolder;
+    public Animator CamHolderAnim;
     public Vector3 LeftTilt;
     public Vector3 RightTilt;
 
@@ -142,8 +143,9 @@ public class CameraMovement : MonoBehaviour
                 {
                     //float t = Mathf.Clamp01(RotationSpeed * Time.deltaTime);
                     PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
-
-                    /*if (angleDifference < 0)
+                    //RotateBody(PlayerGFX, true, PlayerBody.rotation);
+                    /*
+                    if (angleDifference < 0)
                     {
                         Characteranim.CharacterAnim.SetBool("TurnLeft", true);
                         PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
@@ -151,6 +153,12 @@ public class CameraMovement : MonoBehaviour
                     else if (angleDifference > 0)
                     {
                         Characteranim.CharacterAnim.SetBool("TurnRight", true);
+                    }
+
+                    else
+                    {
+                        Characteranim.CharacterAnim.SetBool("TurnRight", false);
+                        Characteranim.CharacterAnim.SetBool("TurnLeft", false);
                     }*/
                 }
             }
@@ -158,6 +166,7 @@ public class CameraMovement : MonoBehaviour
             {
                 //float t = Mathf.Clamp01(RotationSpeed * 5 * Time.deltaTime);
                 PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed);
+                RotateBody(PlayerGFX, false, PlayerBody.rotation);
                 Characteranim.CharacterAnim.SetBool("TurnRight", false);
                 Characteranim.CharacterAnim.SetBool("TurnLeft", false);
             }
@@ -170,13 +179,15 @@ public class CameraMovement : MonoBehaviour
     #endregion
 
     #region CustomMethods
+
     void HandleHeight()
     {
         if (input.IsCrouching)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, TransitionSpeed * 15 * Time.deltaTime);
         }
-        else if (input.Jump || Characteranim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
+        else if (input.Jump || Characteranim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02")
+            || Characteranim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Running Jump"))
         {
             float HeightDifference = col.center.y - (col.center.y - 1);
             if(HeightDifference >= Jumpoffset.y)
@@ -190,17 +201,16 @@ public class CameraMovement : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 15 * Time.deltaTime);
     }
 
-    public void RotatePlayerBody(bool lockPkayer, Quaternion targetRotation)
+    public void RotateBody(Transform Body,bool lockPkayer, Quaternion targetRotation)
     {
         if(lockPkayer)
         {
-            PlayerBody.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * 100 * Time.deltaTime);
+            Body.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * 100 * Time.deltaTime);
             //PlayerBody.LookAt(direction.forward);
             //PlayerBody.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * Time.deltaTime);
-
         }
     }
 
     #endregion
-  
+
 }

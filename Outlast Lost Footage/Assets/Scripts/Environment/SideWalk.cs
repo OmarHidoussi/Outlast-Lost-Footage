@@ -25,8 +25,9 @@ public class SideWalk : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.GetComponentInParent<InputManager>().SideWalk = true;
-            other.GetComponentInParent<InputManager>().IsSprinting = true;
-            cam.RotatePlayerBody(true, direction.rotation);
+            other.GetComponentInParent<InputManager>().IsSprinting = false;
+            other.GetComponentInParent<InputManager>().IsCrouching = false;
+            cam.RotateBody(cam.PlayerBody,true, direction.rotation);
         }
     }
 
@@ -35,7 +36,9 @@ public class SideWalk : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponentInParent<InputManager>().SideWalk = true;
-            cam.RotatePlayerBody(true, direction.rotation);
+            other.GetComponentInParent<InputManager>().IsSprinting = false;
+            other.GetComponentInParent<InputManager>().IsCrouching = false;
+            cam.RotateBody(cam.PlayerBody,true, direction.rotation);
         }
     }
 
@@ -44,7 +47,7 @@ public class SideWalk : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponentInParent<InputManager>().SideWalk = false;
-            cam.RotatePlayerBody(false, transform.rotation);
+            cam.RotateBody(cam.PlayerBody, false, transform.rotation);
         }
     }
 }
