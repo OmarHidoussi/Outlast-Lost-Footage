@@ -54,11 +54,13 @@ public class CharacterAudio : MonoBehaviour
     [Header("PlayerDie")]
     public float ScoreVolume;
     public AudioClip DieScore_SFX;
+    public float PlayerDieVolume;
+    public AudioClip[] PlayerDieClip;
 
     #endregion
 
     #region BuiltInMethods
-    
+
     private void Start()
     {
         RestoreCameraMovement = CamMovement.Sensetivity;
@@ -136,7 +138,7 @@ public class CharacterAudio : MonoBehaviour
         source.outputAudioMixerGroup = FootStepsGrp;
         source.pitch = GetRandomPitch();
         source.volume = WalkVolume;
-        source.PlayOneShot(Walkclip());
+        source.PlayOneShot(GetRandomClip(WalkFootStepsClips));
 
     }
 
@@ -147,7 +149,7 @@ public class CharacterAudio : MonoBehaviour
             source.outputAudioMixerGroup = FootStepsGrp;
             source.pitch = GetRandomPitch();
             source.volume = RunVolume;
-            source.PlayOneShot(Runclip());
+            source.PlayOneShot(GetRandomClip(RunFootStepsClips));
         }
     }
 
@@ -159,7 +161,7 @@ public class CharacterAudio : MonoBehaviour
         source.volume = JumpVolume;
         source.outputAudioMixerGroup = Dialogue;
         source.pitch = 1;
-        source.PlayOneShot(JumpClip());
+        source.PlayOneShot(GetRandomClip(Jumping));
     }
 
     public void JumpLand()
@@ -174,24 +176,9 @@ public class CharacterAudio : MonoBehaviour
         return UnityEngine.Random.Range(0.8f, 1.2f);
     }
 
-    private AudioClip Walkclip()
+    private AudioClip GetRandomClip(AudioClip[] array)
     {
-        return WalkFootStepsClips[UnityEngine.Random.Range(0, WalkFootStepsClips.Length)];
-    }
-
-    private AudioClip Runclip()
-    {
-        return RunFootStepsClips[UnityEngine.Random.Range(0, RunFootStepsClips.Length)];
-    }
-
-    private AudioClip Slideclip()
-    {
-        return RunningSlide[UnityEngine.Random.Range(0, RunningSlide.Length)];
-    }
-
-    private AudioClip JumpClip()
-    {
-        return Jumping[UnityEngine.Random.Range(0, Jumping.Length)];
+        return array[UnityEngine.Random.Range(0, array.Length)];
     }
 
     float targetvolume;
@@ -234,7 +221,7 @@ public class CharacterAudio : MonoBehaviour
         IsSliding = true;
         source.volume = SlideVolume;
         source.outputAudioMixerGroup = FootStepsGrp;
-        source.PlayOneShot(Slideclip());
+        source.PlayOneShot(GetRandomClip(RunningSlide));
     }
 
     public void SlideEnded()
@@ -248,6 +235,8 @@ public class CharacterAudio : MonoBehaviour
         Characteranim.CharacterAnim.SetBool("Dead", false);
         movement.GetComponent<InputManager>().CanMove = false;
         CamMovement.Sensetivity = 0;
+        DialogueSource.volume = PlayerDieVolume;
+        DialogueSource.PlayOneShot(GetRandomClip(PlayerDieClip));
         source.volume = ScoreVolume;
         source.PlayOneShot(DieScore_SFX);
         StartCoroutine(BackToMainMenu());
