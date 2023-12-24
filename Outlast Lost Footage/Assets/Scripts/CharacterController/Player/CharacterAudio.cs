@@ -53,6 +53,7 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip NormalBreath;
 
     [Header("PlayerDie")]
+    public bool Died;
     public float TransitionDelay;
     public AudioMixerSnapshot DeathSoundOn;
     public float ScoreVolume;
@@ -68,6 +69,7 @@ public class CharacterAudio : MonoBehaviour
     private void Start()
     {
         RestoreCameraMovement = CamMovement.Sensetivity;
+        Died = false;
     }
     
     private void Update()
@@ -92,6 +94,11 @@ public class CharacterAudio : MonoBehaviour
         }
         else
             DialogueSource.volume = Mathf.Lerp(DialogueSource.volume, 0, 2 * Time.deltaTime);
+
+        if (Died)
+        {
+            DeathSoundOn.TransitionTo(TransitionDelay);
+        }
     }
     #endregion
 
@@ -236,12 +243,12 @@ public class CharacterAudio : MonoBehaviour
 
     public void Die()
     {
+        Died = true;
         Characteranim.CharacterAnim.SetBool("Dead", false);
         movement.GetComponent<InputManager>().CanMove = false;
         CamMovement.Sensetivity = 0;
         DialogueSource.volume = PlayerDieVolume;
         DialogueSource.outputAudioMixerGroup = DeathSound;
-        DeathSoundOn.TransitionTo(TransitionDelay);
         DialogueSource.PlayOneShot(GetRandomClip(PlayerDieClip));
         source.volume = ScoreVolume;
         source.PlayOneShot(DieScore_SFX);

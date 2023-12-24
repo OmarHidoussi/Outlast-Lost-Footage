@@ -11,6 +11,8 @@ public class Activation : MonoBehaviour
     public GameObject cameraGFX;
     public GameObject cameraOffObject;
 
+    public AudioSource Source;
+
     #endregion
 
     #region BuiltIn Methods
@@ -35,6 +37,11 @@ public class Activation : MonoBehaviour
     {
         cameraGFX.SetActive(input.CameraOn);
         cameraOffObject.SetActive(!input.CameraOn);
+    }
+
+    public void Reload()
+    {
+        Source.Play();
     }
 
     #endregion
