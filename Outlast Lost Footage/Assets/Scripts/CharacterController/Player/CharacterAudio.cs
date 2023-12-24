@@ -35,6 +35,7 @@ public class CharacterAudio : MonoBehaviour
     public AudioMixerGroup Master;
     public AudioMixerGroup InteractionGrp;
     public AudioMixerGroup Dialogue;
+    public AudioMixerGroup DeathSound;
     public AudioMixerGroup FootStepsGrp;
 
     [Header("Interactions")]
@@ -236,6 +237,7 @@ public class CharacterAudio : MonoBehaviour
         movement.GetComponent<InputManager>().CanMove = false;
         CamMovement.Sensetivity = 0;
         DialogueSource.volume = PlayerDieVolume;
+        DialogueSource.outputAudioMixerGroup = DeathSound;
         DialogueSource.PlayOneShot(GetRandomClip(PlayerDieClip));
         source.volume = ScoreVolume;
         source.PlayOneShot(DieScore_SFX);
