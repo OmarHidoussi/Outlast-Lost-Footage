@@ -53,10 +53,13 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip NormalBreath;
 
     [Header("PlayerDie")]
+    public float TransitionDelay;
+    public AudioMixerSnapshot DeathSoundOn;
     public float ScoreVolume;
     public AudioClip DieScore_SFX;
     public float PlayerDieVolume;
     public AudioClip[] PlayerDieClip;
+
 
     #endregion
 
@@ -238,6 +241,7 @@ public class CharacterAudio : MonoBehaviour
         CamMovement.Sensetivity = 0;
         DialogueSource.volume = PlayerDieVolume;
         DialogueSource.outputAudioMixerGroup = DeathSound;
+        DeathSoundOn.TransitionTo(TransitionDelay);
         DialogueSource.PlayOneShot(GetRandomClip(PlayerDieClip));
         source.volume = ScoreVolume;
         source.PlayOneShot(DieScore_SFX);
