@@ -141,6 +141,7 @@ public class CharacterAudio : MonoBehaviour
         m_rigidbody.useGravity = false;
         CamMovement.Sensetivity = 0;
         source.volume = JumpVolume;
+        source.pitch = 1;
         source.PlayOneShot(JumpClip());
     }
 
