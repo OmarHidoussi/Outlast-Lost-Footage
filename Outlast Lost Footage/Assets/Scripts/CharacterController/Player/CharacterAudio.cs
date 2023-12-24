@@ -237,6 +237,12 @@ public class CharacterAudio : MonoBehaviour
 
     }
 
+    public void Turn()
+    {
+        Characteranim.CharacterAnim.SetBool("TurnLeft",false);
+        Characteranim.CharacterAnim.SetBool("TurnRight", false);
+    }
+
     #endregion
 
 }

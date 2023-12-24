@@ -54,6 +54,7 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         HandleMove();
+        HandleSideWalk();
         HandleCrouch();
         HandleWallDetection();
         HandleFatigue();
@@ -71,6 +72,8 @@ public class CharacterMovement : MonoBehaviour
             targetSpeed = CrouchSpeed;
         else if (input.IsSprinting && !isExhausted)
             targetSpeed = RunSpeed;
+        else if (input.SideWalk)
+            targetSpeed = CrouchSpeed - 1f;
         else
             targetSpeed = WalkSpeed;
 
@@ -156,6 +159,17 @@ public class CharacterMovement : MonoBehaviour
             if (RunDuration <= 1)
                 RunDuration = 1;
         }
+    }
+
+    void HandleSideWalk()
+    {
+        if(input.SideWalk)
+        {
+            anim.CharacterAnim.SetBool("SideWalk", true);
+        }
+        else
+            anim.CharacterAnim.SetBool("SideWalk", false);
+
     }
 
     #endregion

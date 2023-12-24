@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
     public bool IsSprinting;
     public bool IsCrouching;
     public bool Jump;
+    public bool SideWalk;
 
     [Header("CameraState")]
     public bool CameraOn;
@@ -203,6 +204,8 @@ public class InputManager : MonoBehaviour
         if (CanMove)
         {
             Mov_Axis = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")).normalized;
+            if (SideWalk)
+                Mov_Axis.x = 0;
         }
 
         if (CameraOn)
@@ -255,7 +258,9 @@ public class InputManager : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
-        Mov_Axis.x = value.ReadValue<Vector2>().y;
+        if (!SideWalk)
+            Mov_Axis.x = value.ReadValue<Vector2>().y;
+
         Mov_Axis.y = value.ReadValue<Vector2>().x;
     }
 
@@ -314,6 +319,9 @@ public class InputManager : MonoBehaviour
         if (!CanStand)
             return;
 
+        if (SideWalk)
+            return;
+
         if(CanCrouch)
         {
             if (Button.ReadValueAsButton())
@@ -358,7 +366,10 @@ public class InputManager : MonoBehaviour
         if (anim.CharacterAnim.GetFloat("VelocityY") == 0 && IsSprinting)
             return;
 
-        if(IsCrouching)
+        if (IsCrouching)
+            return;
+
+        if (SideWalk)
             return;
 
         IsSprinting = true;

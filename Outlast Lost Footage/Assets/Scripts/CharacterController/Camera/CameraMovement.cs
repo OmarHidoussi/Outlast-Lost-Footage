@@ -11,8 +11,10 @@ public class CameraMovement : MonoBehaviour
     public float Sensetivity;
     public float TransitionSpeed;
     public Transform PlayerBody;
+    public Transform PlayerGFX;
     public Transform LookBackDirection;
     public Transform RotationCenter;
+    public float RotationThreshold;
     public float RotationSpeed;
     public bool Lookback;
     public float LookbackTransitionSpeed;
@@ -117,9 +119,48 @@ public class CameraMovement : MonoBehaviour
 
             xRotation -= MouseY;
 
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-            PlayerBody.Rotate(Vector3.up * MouseX);
+            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            if (!input.SideWalk)
+                PlayerBody.Rotate(Vector3.up * MouseX);
+
+            if (input.Mov_Axis == Vector2.zero)
+            {
+                if (!input.SideWalk)
+                    PlayerGFX.Rotate(Vector3.up * -MouseX);
+
+                float angleDifference = Quaternion.Angle(PlayerGFX.transform.rotation, PlayerBody.transform.rotation);
+
+                Vector3 cross = Vector3.Cross(PlayerGFX.transform.forward, PlayerBody.transform.forward);
+                
+                if (cross.y < 0)
+                {
+                    angleDifference = -angleDifference;
+                }
+
+                if (Mathf.Abs(angleDifference) > RotationThreshold)
+                {
+                    //float t = Mathf.Clamp01(RotationSpeed * Time.deltaTime);
+                    PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
+
+                    /*if (angleDifference < 0)
+                    {
+                        Characteranim.CharacterAnim.SetBool("TurnLeft", true);
+                        PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
+                    }
+                    else if (angleDifference > 0)
+                    {
+                        Characteranim.CharacterAnim.SetBool("TurnRight", true);
+                    }*/
+                }
+            }
+            else
+            {
+                //float t = Mathf.Clamp01(RotationSpeed * 5 * Time.deltaTime);
+                PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed);
+                Characteranim.CharacterAnim.SetBool("TurnRight", false);
+                Characteranim.CharacterAnim.SetBool("TurnLeft", false);
+            }
         }
 
         HandleHeight();
@@ -131,16 +172,12 @@ public class CameraMovement : MonoBehaviour
     #region CustomMethods
     void HandleHeight()
     {
-        //transform.localPosition = new Vector3(0, col.center.y, 0) + offset;
-
         if (input.IsCrouching)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + Crouchingoffset, TransitionSpeed * 15 * Time.deltaTime);
         }
         else if (input.Jump || Characteranim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
         {
-            /*transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Jumpoffset.x, 
-                Characteranim.CharacterAnim.GetFloat("CameraCurve") + Jumpoffset.y ,Jumpoffset.z), 10 * Time.deltaTime);*/
             float HeightDifference = col.center.y - (col.center.y - 1);
             if(HeightDifference >= Jumpoffset.y)
             {
@@ -151,73 +188,18 @@ public class CameraMovement : MonoBehaviour
         }
         else
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 15 * Time.deltaTime);
-
-
     }
 
-  /*
-    bool isTransitioning = false;
-
-    void HandleLookback()
+    public void RotatePlayerBody(bool lockPkayer, Quaternion targetRotation)
     {
-        Lookback = Input.GetMouseButton(2);
+        if(lockPkayer)
+        {
+            PlayerBody.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * 100 * Time.deltaTime);
+            //PlayerBody.LookAt(direction.forward);
+            //PlayerBody.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * Time.deltaTime);
 
-        if (Lookback && !isTransitioning)
-        {
-            StartCoroutine(LookBackSmoothly());
-        }
-        else if (!Lookback && isTransitioning)
-        {
-            StartCoroutine(ReturnToForwardSmoothly());
         }
     }
-
-    IEnumerator LookBackSmoothly()
-    {
-        isTransitioning = true;
-
-        Quaternion targetRotation = Quaternion.LookRotation(LookBackDirection.forward, Vector3.up);
-
-        float elapsedTime = 0f;
-        Quaternion startRotation = transform.rotation;
-
-        while (elapsedTime < 1f)
-        {
-            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime);
-
-            elapsedTime += Time.deltaTime * TransitionSpeed;
-            yield return null;
-        }
-
-        transform.rotation = targetRotation;
-
-        isTransitioning = false;
-    }
-
-    IEnumerator ReturnToForwardSmoothly()
-    {
-        isTransitioning = true;
-
-        Vector3 targetForward = PlayerBody.forward;
-        float maxAngle = Vector3.Angle(transform.forward, targetForward);
-
-        while (maxAngle > 0.1f)
-        {
-            // Calculate the rotation step
-            float step = RotationSpeed * Time.deltaTime;
-
-            // Rotate towards the target forward direction
-            transform.forward = Vector3.RotateTowards(transform.forward, targetForward, step, 0.0f);
-
-            // Update the maximum angle
-            maxAngle = Vector3.Angle(transform.forward, targetForward);
-
-            yield return null;
-        }
-
-        isTransitioning = false;
-    }
-    */
 
     #endregion
   
