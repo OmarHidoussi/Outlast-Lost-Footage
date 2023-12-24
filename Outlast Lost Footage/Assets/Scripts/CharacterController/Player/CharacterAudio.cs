@@ -10,6 +10,7 @@ public class CharacterAudio : MonoBehaviour
     #region Variables
 
     public AudioSource source;
+    public AudioSource DialogueSource;
     public AudioSource MetaSource;
     public CharacterAnimator Characteranim;
     public CharacterMovement movement;
@@ -46,6 +47,9 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip[] RunningSlide;
     public float JumpVolume;
     public AudioClip[] Jumping;
+    public bool CanBreath;
+    public float BreathingVolume;
+    public AudioClip NormalBreath;
 
     [Header("PlayerDie")]
     public float ScoreVolume;
@@ -75,6 +79,13 @@ public class CharacterAudio : MonoBehaviour
         {
             movement.transform.Translate(0, 0, movement.Speed * Time.deltaTime);
         }
+
+        if(CanBreath)
+        {
+            Breath();
+        }
+        else
+            DialogueSource.volume = Mathf.Lerp(DialogueSource.volume, 0, 2 * Time.deltaTime);
     }
     #endregion
 
@@ -257,6 +268,17 @@ public class CharacterAudio : MonoBehaviour
     {
         Characteranim.CharacterAnim.SetBool("TurnLeft",false);
         Characteranim.CharacterAnim.SetBool("TurnRight", false);
+    }
+
+    void Breath()
+    {
+        if(!DialogueSource.isPlaying)
+        {
+            DialogueSource.outputAudioMixerGroup = Dialogue;
+            DialogueSource.PlayOneShot(NormalBreath);
+        }
+        DialogueSource.volume = Mathf.Lerp(DialogueSource.volume, BreathingVolume, 2 * Time.deltaTime);
+
     }
 
     #endregion
