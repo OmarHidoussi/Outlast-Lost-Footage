@@ -126,14 +126,18 @@ public class CharacterAudio : MonoBehaviour
         source.pitch = GetRandomPitch();
         source.volume = WalkVolume;
         source.PlayOneShot(Walkclip());
+
     }
 
     public void RunStep()
     {
-        source.outputAudioMixerGroup = FootStepsGrp;
-        source.pitch = GetRandomPitch();
-        source.volume = RunVolume;
-        source.PlayOneShot(Runclip());
+        if (m_rigidbody.useGravity)
+        {
+            source.outputAudioMixerGroup = FootStepsGrp;
+            source.pitch = GetRandomPitch();
+            source.volume = RunVolume;
+            source.PlayOneShot(Runclip());
+        }
     }
 
     private float RestoreCameraMovement;
