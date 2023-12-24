@@ -89,7 +89,7 @@ public class CharacterAnimator : MonoBehaviour
     public bool lockHand;
     public void HandleInteraction()
     {
-        if(CharacterAnim.GetBool("PickUp") || input.Reload)
+        if(CharacterAnim.GetBool("PickUp") || CharacterAnim.GetBool("OpenDoor") || input.Reload)
         {
             LeftHandWeight = 1;
             SpineConstraint.weight = 0.22f;

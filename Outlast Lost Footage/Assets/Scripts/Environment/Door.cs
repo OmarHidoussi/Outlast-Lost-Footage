@@ -42,7 +42,7 @@ public class Door : MonoBehaviour, IInteractable
 
     #region CustomMethods
     private bool canInteract = true;
-    private float interactCooldown = 1f;
+    private float interactCooldown = 0.2f;
 
     public void Interact()
     {
@@ -54,12 +54,14 @@ public class Door : MonoBehaviour, IInteractable
             {
                 OpenDoor();
                 Characteranim.InteractionType("OpenDoor");
+                Characteranim.CharacterAnim.SetBool("OpenDoor", true);
             }
             else
             {
+                Characteranim.InteractionType("OpenDoor");
+                Characteranim.CharacterAnim.SetBool("OpenDoor", true);
                 Ch_interaction.DisplayHelpText(interaction.Helptext, true);
                 _audio.DoorState(false);
-                Characteranim.InteractionType("OpenDoor");
             }
 
             StartCoroutine(InteractCooldown());
@@ -70,6 +72,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         canInteract = false;
         yield return new WaitForSeconds(interactCooldown);
+        Characteranim.CharacterAnim.SetBool("OpenDoor", false);
         canInteract = true;
     }
 
