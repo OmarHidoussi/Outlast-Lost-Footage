@@ -33,6 +33,7 @@ public class CharacterAudio : MonoBehaviour
     [Header("AudioMixer")]
     public AudioMixerGroup Master;
     public AudioMixerGroup InteractionGrp;
+    public AudioMixerGroup Dialogue;
     public AudioMixerGroup FootStepsGrp;
 
     [Header("Interactions")]
@@ -141,6 +142,7 @@ public class CharacterAudio : MonoBehaviour
         m_rigidbody.useGravity = false;
         CamMovement.Sensetivity = 0;
         source.volume = JumpVolume;
+        source.outputAudioMixerGroup = Dialogue;
         source.pitch = 1;
         source.PlayOneShot(JumpClip());
     }
