@@ -7,8 +7,8 @@ public class DisableCrouch : MonoBehaviour
 
     #region Variables
 
-    public InputManager input;
-    public Animator anim;
+    InputManager input;
+    Animator anim;
 
     #endregion
 
@@ -17,7 +17,8 @@ public class DisableCrouch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        input = FindObjectOfType<InputManager>();
+        anim = input.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
