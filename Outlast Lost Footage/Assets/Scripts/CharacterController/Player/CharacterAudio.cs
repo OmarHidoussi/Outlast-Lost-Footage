@@ -43,6 +43,8 @@ public class CharacterAudio : MonoBehaviour
     [Header("PlayerSFX")]
     public float SlideVolume;
     public AudioClip[] RunningSlide;
+    public float JumpVolume;
+    public AudioClip[] Jumping;
 
     [Header("PlayerDie")]
     public float ScoreVolume;
@@ -138,6 +140,8 @@ public class CharacterAudio : MonoBehaviour
     {
         m_rigidbody.useGravity = false;
         CamMovement.Sensetivity = 0;
+        source.volume = JumpVolume;
+        source.PlayOneShot(JumpClip());
     }
 
     public void JumpLand()
@@ -165,6 +169,11 @@ public class CharacterAudio : MonoBehaviour
     private AudioClip Slideclip()
     {
         return RunningSlide[UnityEngine.Random.Range(0, RunningSlide.Length)];
+    }
+
+    private AudioClip JumpClip()
+    {
+        return Jumping[UnityEngine.Random.Range(0, Jumping.Length)];
     }
 
     float targetvolume;
