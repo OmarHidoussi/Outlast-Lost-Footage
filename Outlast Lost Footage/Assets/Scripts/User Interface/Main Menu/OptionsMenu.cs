@@ -77,7 +77,20 @@ public class OptionsMenu : MonoBehaviour
     
     public void SetTextureQuality(int QualityIndex)
     {
-        QualitySettings.SetQualityLevel(QualityIndex, true);
+        if(QualityIndex == 0)
+        {
+            QualitySettings.SetQualityLevel(QualityIndex, true);
+        }
+        else if(QualityIndex == 1)
+        {
+            QualitySettings.SetQualityLevel(QualityIndex + 2, true);
+        }
+        else if(QualityIndex == 2)
+        {
+            QualitySettings.SetQualityLevel(QualityIndex + 4, true);
+        }
+
+
     }
 
     public void SetFullscreen(bool isFullscreen)
