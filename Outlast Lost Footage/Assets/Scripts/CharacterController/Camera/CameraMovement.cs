@@ -95,7 +95,7 @@ public class CameraMovement : MonoBehaviour
     float MouseX;
     float MouseY;
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         if (!Lookback)
         {
@@ -142,7 +142,8 @@ public class CameraMovement : MonoBehaviour
                 if (Mathf.Abs(angleDifference) > RotationThreshold)
                 {
                     //float t = Mathf.Clamp01(RotationSpeed * Time.deltaTime);
-                    PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
+                    PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation,
+                        RotationSpeed * Time.deltaTime);
                     //RotateBody(PlayerGFX, true, PlayerBody.rotation);
                     /*
                     if (angleDifference < 0)
@@ -165,7 +166,7 @@ public class CameraMovement : MonoBehaviour
             else
             {
                 //float t = Mathf.Clamp01(RotationSpeed * 5 * Time.deltaTime);
-                PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed);
+                PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed * Time.deltaTime);
                 RotateBody(PlayerGFX, false, PlayerBody.rotation);
                 Characteranim.CharacterAnim.SetBool("TurnRight", false);
                 Characteranim.CharacterAnim.SetBool("TurnLeft", false);

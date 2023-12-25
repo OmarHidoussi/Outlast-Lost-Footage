@@ -31,6 +31,7 @@ public class EnemySight : MonoBehaviour
         col.enabled = true;
 
         player = FindObjectOfType<InputManager>().transform;
+        LastPlayerPosition = new Vector3(1000, 1000, 1000);
     }
 
     private void OnDrawGizmosSelected()
@@ -40,10 +41,11 @@ public class EnemySight : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if(!PlayerInSight)
-            LastPlayerPosition = new Vector3(1000, 1000, 1000);
+        /*if(!PlayerInSight)
+        {
+        }*/
     }
 
     private void OnTriggerStay(Collider other)
@@ -89,6 +91,7 @@ public class EnemySight : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            LastSightPosition = LastPlayerPosition;
             PlayerInSight = false;
         }
     }

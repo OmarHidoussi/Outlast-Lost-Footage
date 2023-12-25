@@ -26,6 +26,7 @@ public class GameSettings : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate + 30;
         DontDestroyOnLoad(this.gameObject);
     }
 
