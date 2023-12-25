@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Stamp : MonoBehaviour
 {
+
+    #region Variables
+
+
+    #endregion
+
+    #region BuiltIn Methods
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,4 +39,11 @@ public class Stamp : MonoBehaviour
             FindObjectOfType<InputManager>().CanDeskSlide = false;
         }
     }
+
+    #endregion
+
+    #region CustomMethods
+
+    #endregion
+
 }

@@ -17,8 +17,6 @@ public class Battery : MonoBehaviour, IInteractable
 
     Interaction interaction;
 
-
-
     #endregion
 
     #region BuiltInMethods

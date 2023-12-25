@@ -12,7 +12,7 @@ public class DisableCrouch : MonoBehaviour
 
     #endregion
 
-    #region Variables
+    #region BuiltIn Methods
 
     // Start is called before the first frame update
     void Start()

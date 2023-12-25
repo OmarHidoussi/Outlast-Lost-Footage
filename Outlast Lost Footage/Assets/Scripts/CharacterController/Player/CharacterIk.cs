@@ -24,7 +24,6 @@ public class CharacterIk : MonoBehaviour
     {
         if(CharacterAnim)
         {
-
             CharacterAnim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, CharacterAnim.GetFloat("IKLeftFootWeight"));
             CharacterAnim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, CharacterAnim.GetFloat("IKLeftFootWeight"));
 
