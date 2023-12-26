@@ -97,7 +97,7 @@ public class EnemySight : MonoBehaviour
                         LastPlayerPosition = other.transform.position;
                     }
 
-                    // Attacking the player if too near to the enemy
+                    // Attacking the player when near the enemy
                     float distance = (LastPlayerPosition - transform.position).magnitude;
                     if (distance <= AttackRange && PlayerInSight)
                     {

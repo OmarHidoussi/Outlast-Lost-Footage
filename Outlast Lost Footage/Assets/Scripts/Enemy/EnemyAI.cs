@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour
     NavMeshAgent nav;
 
     public CharacterStats Stats;
+    public float SearchRadius;
 
     #endregion
 
@@ -68,23 +69,72 @@ public class EnemyAI : MonoBehaviour
 
     void Chase()
     {
-        Debug.Log("Chasing");
+        //Debug.Log("Chasing");
         nav.speed = chaseSpeed;
         investigateTimer = investigateDuration;
         nav.SetDestination(Sight.LastPlayerPosition);
     }
 
+    private bool isSearching = false;
+    private float searchCooldown = 5f; 
+    private float currentCooldown = 5f;
+    Vector3 SearchPoint = new Vector3(1000,1000,1000);
     void Investigate()
     {
-        Debug.Log("Investigating");
+        //Debug.Log("Investigating");
         investigateTimer -= Time.deltaTime;
-        nav.SetDestination(Sight.LastSightPosition);
 
-        if (investigateTimer <= 0)
+        if (SearchPoint == Sight.resetPosition && !isSearching)
         {
-            Debug.Log("Investigation Complete");
-            Patrol();
+            nav.SetDestination(Sight.LastSightPosition);
         }
+        else
+            nav.SetDestination(SearchPoint);
+
+        if (nav.remainingDistance <= nav.stoppingDistance)
+        {
+            currentCooldown -= Time.deltaTime;
+
+            if (currentCooldown <= 0f)
+            {
+                // Investigate the area around the player
+                SearchPoint = GetRandomPosition(Stats.transform.position);
+
+                NavMeshHit navMeshHit;
+                if (NavMesh.SamplePosition(SearchPoint, out navMeshHit, SearchRadius, NavMesh.AllAreas))
+                {
+                    // If a valid random point is found, set it as the next waypoint
+                    SearchPoint = navMeshHit.position;
+
+                    Debug.Log("IsSearching");
+                    Debug.Log(SearchPoint);
+                    
+                    nav.SetDestination(SearchPoint);
+
+                    currentCooldown = searchCooldown;
+                    isSearching = true;
+                }
+            }
+            else
+            {
+                // Reset the isSearching flag after the cooldown period
+                SearchPoint = Sight.resetPosition;
+                isSearching = false;
+            }
+            if (investigateTimer <= 0)
+            {
+                Debug.Log("Investigation Complete");
+                Patrol();
+            }
+        }
+    }
+
+    Vector3 GetRandomPosition(Vector3 SearchArea)
+    {
+        SearchArea = Random.insideUnitSphere * SearchRadius;
+        SearchArea += Stats.transform.position;
+
+        return SearchArea;
     }
 
     void Patrol()
