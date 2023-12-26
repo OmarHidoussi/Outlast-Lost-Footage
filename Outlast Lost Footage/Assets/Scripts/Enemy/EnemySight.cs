@@ -71,25 +71,29 @@ public class EnemySight : MonoBehaviour
             PlayerInSight = false;
             PlayerInAttackRange = false;
 
-            Ray ray = new Ray(transform.position + transform.up, direction.normalized);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, ViewDistance))
+            if (angle < FieldOfView * 0.5f)
             {
-                if (hit.collider.tag == "Player")
+                Ray ray = new Ray(transform.position + transform.up, direction.normalized);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, ViewDistance))
                 {
-                    PlayerInSight = true;
-
-                    LastPlayerPosition = other.transform.position;
-                    LastSightPosition = LastPlayerPosition;
-
-                    float distance = (LastPlayerPosition - transform.position).magnitude;
-                    if (distance <= AttackRange)
+                    if (hit.collider.tag == "Player")
                     {
-                        PlayerInAttackRange = true;
+                        PlayerInSight = true;
+
+                        LastPlayerPosition = other.transform.position;
+                        LastSightPosition = LastPlayerPosition;
+
+                        float distance = (LastPlayerPosition - transform.position).magnitude;
+                        if (distance <= AttackRange)
+                        {
+                            PlayerInAttackRange = true;
+                        }
                     }
                 }
             }
+
         }
     }
 
