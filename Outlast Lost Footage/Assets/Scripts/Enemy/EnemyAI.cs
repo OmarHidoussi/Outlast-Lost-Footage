@@ -42,16 +42,19 @@ public class EnemyAI : MonoBehaviour
         if (Stats.Health <= 0)
             return;
 
-        /*if (Sight.PlayerInAttackRange)
+        if(Sight.PlayerInSight)
+            Chase();
+/*
+        if (Sight.PlayerInAttackRange)
             Attack();
         else if (Sight.PlayerInSight)
             Chase();
         else if (Sight.LastSightPosition == Sight.LastPlayerPosition)
             Investigate();
         else
-            Patrol();*/
-
-        nav.SetDestination(Stats.gameObject.transform.position);
+            Patrol();
+*/
+       // nav.SetDestination(Stats.gameObject.transform.position);
     }
 
     #endregion

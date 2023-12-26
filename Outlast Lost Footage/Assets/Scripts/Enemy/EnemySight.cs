@@ -19,6 +19,7 @@ public class EnemySight : MonoBehaviour
 
     public Vector3 LastSightPosition;
     public Vector3 LastPlayerPosition;
+
     #endregion
 
     #region BuiltIn Methods
@@ -36,8 +37,20 @@ public class EnemySight : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // Draw the view distance wire sphere
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, ViewDistance);
+
+        // Draw the lines connecting the arc to the sphere
+        Vector3 leftRayDirection = Quaternion.AngleAxis(-FieldOfView * 0.5f, transform.up) * transform.forward;
+        Vector3 rightRayDirection = Quaternion.AngleAxis(FieldOfView * 0.5f, transform.up) * transform.forward;
+
+        Gizmos.DrawLine(transform.position, transform.position + leftRayDirection * ViewDistance);
+        Gizmos.DrawLine(transform.position, transform.position + rightRayDirection * ViewDistance);
+
+        Gizmos.color = Color.red;
+        Vector3 direction = player.transform.position - transform.position;
+        Gizmos.DrawLine(transform.position + transform.up, direction.normalized * ViewDistance);
     }
 
     // Update is called once per frame
@@ -58,34 +71,28 @@ public class EnemySight : MonoBehaviour
             PlayerInSight = false;
             PlayerInAttackRange = false;
 
-            if (angle < FieldOfView * 0.5f)
+            Ray ray = new Ray(transform.position + transform.up, direction.normalized);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, ViewDistance))
             {
-                Ray ray = new Ray(transform.position, other.transform.position + transform.up);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, ViewDistance))
+                if (hit.collider.tag == "Player")
                 {
-                    if(hit.collider.tag == "Player")
+                    PlayerInSight = true;
+
+                    LastPlayerPosition = other.transform.position;
+                    LastSightPosition = LastPlayerPosition;
+
+                    float distance = (LastPlayerPosition - transform.position).magnitude;
+                    if (distance <= AttackRange)
                     {
-                        PlayerInSight = true;
-
-                        LastPlayerPosition = other.transform.position;
-                        LastSightPosition = LastPlayerPosition;
-
-                        float distance = (LastPlayerPosition - transform.position).magnitude;
-                        if (distance <= AttackRange)
-                        {
-                            PlayerInAttackRange = true;
-                        }
-                        else
-                        {
-                            PlayerInAttackRange = false;
-                        }
+                        PlayerInAttackRange = true;
                     }
                 }
             }
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {
