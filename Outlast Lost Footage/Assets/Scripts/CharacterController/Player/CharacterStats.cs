@@ -28,6 +28,7 @@ public class CharacterStats : MonoBehaviour
     void Update()
     {
         if (input.Reload) UpdateStats();
+        if (Health <= 0) this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
     }
     #endregion
 
