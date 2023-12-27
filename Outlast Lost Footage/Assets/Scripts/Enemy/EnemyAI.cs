@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
     }
 
-    public float investigateTimer = 0f;
+    private float investigateTimer = 0f;
     public float investigateDuration = 10f; // Adjust this duration as needed
 
     // Update is called once per frame
@@ -78,7 +78,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     private bool isSearching = false;
-    private float searchCooldown = 5f; 
+    public float searchCooldown = 5f; 
     private float currentCooldown = 5f;
     Vector3 SearchPoint = new Vector3(1000,1000,1000);
     void Investigate()
@@ -194,13 +194,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Set the destination to the patrolWayPoint.
-        Vector3 NextPosition = patrolWayPoints[wayPointIndex].position;
-        NextWayPoint(NextPosition);
-    }
-
-    void NextWayPoint(Vector3 Waypoint)
-    {
-        nav.destination = Waypoint;
+        nav.destination = patrolWayPoints[wayPointIndex].position;
     }
 
     #endregion
