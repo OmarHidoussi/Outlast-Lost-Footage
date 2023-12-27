@@ -26,10 +26,13 @@ public class EnemyAI : MonoBehaviour
     float patrolWaitTime;
 
     EnemySight Sight;
+    EnemyAnimation anim;
     NavMeshAgent nav;
 
     public CharacterStats Stats;
     public float SearchRadius;
+
+    public bool IsChasing;
 
     #endregion
 
@@ -39,7 +42,10 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         Sight = GetComponent<EnemySight>();
+        anim = GetComponent<EnemyAnimation>();
         nav = GetComponent<NavMeshAgent>();
+
+        IsChasing = false;
     }
 
     private float investigateTimer = 0f;
@@ -72,6 +78,8 @@ public class EnemyAI : MonoBehaviour
 
     void Chase()
     {
+        IsChasing = true;
+
         nav.speed = chaseSpeed;
         investigateTimer = investigateDuration;
         nav.SetDestination(Sight.LastPlayerPosition);
@@ -85,6 +93,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (Sight.PlayerInSight)
             return;
+
+        IsChasing = false;
 
         investigateTimer -= Time.deltaTime;
 
@@ -149,6 +159,8 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
+        IsChasing = false;
+
         Sight.LastSightPosition = Sight.resetPosition;
         Sight.LastPlayerPosition = Sight.resetPosition;
 
@@ -164,6 +176,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (patrolTimer == 0)
             {
+                anim.Anim.SetFloat("Speed", 0);
                 patrolWaitTime = Random.Range(patrolMinWaitTime, patrolMaxWaitTime);
             }
 
@@ -195,6 +208,7 @@ public class EnemyAI : MonoBehaviour
 
         // Set the destination to the patrolWayPoint.
         nav.destination = patrolWayPoints[wayPointIndex].position;
+        anim.Anim.SetFloat("Speed", 1);
     }
 
     #endregion
