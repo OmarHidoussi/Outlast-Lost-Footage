@@ -11,6 +11,7 @@ public class EnemyAnimation : MonoBehaviour
     public Animator Anim;
     private NavMeshAgent nav;
     private EnemyAI Behavior;
+    private EnemySight Sight;
 
     private Vector2 Velocity;
     private Vector2 SmoothDeltaPosition;
@@ -24,6 +25,7 @@ public class EnemyAnimation : MonoBehaviour
         Anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         Behavior = GetComponent<EnemyAI>();
+        Sight = GetComponent<EnemySight>();
 
         Anim.applyRootMotion = true;
 
@@ -44,7 +46,14 @@ public class EnemyAnimation : MonoBehaviour
     void Update()
     {
         SynchronizeAnimatoraAndAgent();
+
+        if (Sight.PlayerInAttackRange)
+            Anim.SetBool("Attack", true);
     }
+
+    #endregion
+
+    #region Custom Methods
 
     void SynchronizeAnimatoraAndAgent()
     {
@@ -55,32 +64,33 @@ public class EnemyAnimation : MonoBehaviour
         float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
         Vector2 deltaPosition = new Vector2(dx, dy);
 
-        float smooth = Mathf.Min(1, Time.deltaTime / 0.1f);
+        float smooth = Mathf.Min(1, Time.deltaTime / 0.5f);
         SmoothDeltaPosition = Vector2.Lerp(SmoothDeltaPosition, deltaPosition, smooth);
 
         Velocity = SmoothDeltaPosition / Time.deltaTime;
 
-        if(nav.remainingDistance <= nav.stoppingDistance)
+        if (nav.remainingDistance <= nav.stoppingDistance)
         {
             Velocity = Vector2.Lerp(Vector2.zero, Velocity, nav.remainingDistance / nav.stoppingDistance);
         }
 
-        bool souldMove = Velocity.magnitude > 0.5f && nav.remainingDistance > nav.stoppingDistance; 
+        bool souldMove = Velocity.magnitude > 0.5f && nav.remainingDistance > nav.stoppingDistance;
 
         Anim.SetBool("Move", souldMove);
         Anim.SetFloat("Speed", Velocity.magnitude);
         Anim.SetBool("Chase", Behavior.IsChasing);
-        //Anim.SetFloat("VelocityX", Velocity.y);
 
         float deltaMagnitude = worldDeltaPosition.magnitude;
-        if(deltaMagnitude > nav.radius / 2f)
+        if (deltaMagnitude > nav.radius / 2f)
         {
             transform.position = Vector3.Lerp(Anim.rootPosition, nav.nextPosition, smooth);
         }
     }
-    #endregion
 
-    #region Custom Methods
+    public void Attack()
+    {
+        Anim.SetBool("Attack", false);
+    }
 
     #endregion
 

@@ -802,6 +802,7 @@ MonoBehaviour:
   - {fileID: 1699664806}
   Stats: {fileID: 1626934422}
   SearchRadius: 5
+  IsChasing: 0
   investigateDuration: 15
   searchCooldown: 8
 --- !u!114 &983296468
@@ -819,7 +820,7 @@ MonoBehaviour:
   player: {fileID: 2114872901}
   FieldOfView: 140
   ViewDistance: 15
-  AttackRange: 3
+  AttackRange: 1.5
   PlayerInSight: 0
   PlayerInAttackRange: 0
   LastSightPosition: {x: 0, y: 0, z: 0}
@@ -1093,6 +1094,7 @@ MonoBehaviour:
   - {fileID: 1699664806}
   Stats: {fileID: 1626934422}
   SearchRadius: 5
+  IsChasing: 0
   investigateDuration: 15
   searchCooldown: 8
 --- !u!135 &1224180298
