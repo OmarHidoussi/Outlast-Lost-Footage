@@ -54,7 +54,12 @@ public class EnemySight : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + rightRayDirection * ViewDistance);
 
         Gizmos.color = Color.red;
-        Vector3 direction = player.transform.position + transform.up - transform.position;
+        CapsuleCollider collider;
+        collider = player.GetComponentInChildren<CapsuleCollider>();
+        //Vector3 direction = new Vector3(player.transform.position.x, player.transform.position.y + 0.2f, player.transform.position.z)/* + transform.up */- transform.position;
+        Vector3 direction = player.transform.position - transform.position;
+        //if (player.GetComponentInParent<InputManager>().IsCrouching)
+          //  direction = new Vector3(player.transform.position.x, player.transform.position.y + 0.35f, player.transform.position.z)/* + transform.up */- transform.position;
         Gizmos.DrawLine(transform.position + transform.up, direction.normalized * ViewDistance);
     }
 
@@ -70,28 +75,42 @@ public class EnemySight : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Vector3 direction = player.transform.position - transform.position;
+            CapsuleCollider collider = other.GetComponent<CapsuleCollider>();
+
+            // Separate variable to store effective height
+            float effectiveHeight = collider.height;
+
+            if (other.GetComponentInParent<InputManager>().IsCrouching)
+            {
+                // Use crouch height if the player is crouching
+                effectiveHeight = collider.height;
+            }
+
+            Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(transform.forward, direction);
 
             PlayerInSight = false;
             PlayerInAttackRange = false;
 
             // continue to chase the player
-            if (player.GetComponent<CharacterMovement>().Speed > 4f)
+            if (other.GetComponentInParent<CharacterMovement>().Speed > 4f)
             {
-                LastPlayerPosition = player.transform.position;
+                LastPlayerPosition = other.transform.position;
                 PlayerInSight = true;
             }
 
             if (angle < FieldOfView * 0.5f)
             {
-                Ray ray = new Ray(transform.position + transform.up, direction.normalized);
+                // Update the ray origin based on effective height
+                Ray ray = new Ray(transform.position + new Vector3(0, effectiveHeight * 0.5f, 0), direction.normalized);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit, ViewDistance))
                 {
                     if (hit.collider.tag == "Player")
                     {
+                        Debug.Log("Player Seen");
+
                         PlayerInSight = true;
 
                         LastPlayerPosition = other.transform.position;

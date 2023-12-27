@@ -8,8 +8,7 @@ public class Chase : MonoBehaviour
 
     public AudioSource source;
     public AudioSource PlayerSource;
-    public AudioClip Breathing;
-    public AudioClip Soundtrack;
+
     public EnemySight Behavior;
 
 

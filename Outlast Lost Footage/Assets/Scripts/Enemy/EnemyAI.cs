@@ -51,14 +51,12 @@ public class EnemyAI : MonoBehaviour
         if (Stats.Health <= 0)
             return;
 
-        if (Sight.PlayerInSight)
-        {
+        if (Sight.PlayerInAttackRange)
+            Attack();
+        else if (Sight.PlayerInSight)
             Chase();
-        }
         else if (Sight.LastSightPosition != Sight.resetPosition)
-        {
             Investigate();
-        }
         else
             Patrol();
     }
@@ -67,9 +65,13 @@ public class EnemyAI : MonoBehaviour
 
     #region Custom Methods
 
+    void Attack()
+    {
+
+    }
+
     void Chase()
     {
-        //Debug.Log("Chasing");
         nav.speed = chaseSpeed;
         investigateTimer = investigateDuration;
         nav.SetDestination(Sight.LastPlayerPosition);
@@ -81,7 +83,9 @@ public class EnemyAI : MonoBehaviour
     Vector3 SearchPoint = new Vector3(1000,1000,1000);
     void Investigate()
     {
-        //Debug.Log("Investigating");
+        if (Sight.PlayerInSight)
+            return;
+
         investigateTimer -= Time.deltaTime;
 
         if (SearchPoint == Sight.resetPosition && !isSearching)
@@ -190,7 +194,13 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Set the destination to the patrolWayPoint.
-        nav.destination = patrolWayPoints[wayPointIndex].position;
+        Vector3 NextPosition = patrolWayPoints[wayPointIndex].position;
+        NextWayPoint(NextPosition);
+    }
+
+    void NextWayPoint(Vector3 Waypoint)
+    {
+        nav.destination = Waypoint;
     }
 
     #endregion
