@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [System.Serializable]
 public class PatrolLocation
 {
-    public string locationName; // Optional: Name for the location
+    public string locationName; // Name for the location
     public List<Transform> waypoints = new List<Transform>();
 }
 
