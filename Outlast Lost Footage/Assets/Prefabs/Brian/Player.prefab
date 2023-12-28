@@ -2998,6 +2998,7 @@ GameObject:
   - component: {fileID: 2022162151616927511}
   - component: {fileID: 2022162151616927504}
   - component: {fileID: 1065057894}
+  - component: {fileID: 325379512}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3150,6 +3151,19 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!65 &325379512
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022162151616927508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2022162151635468797
 GameObject:
   m_ObjectHideFlags: 0
@@ -6094,6 +6108,19 @@ MonoBehaviour:
   ZoomInPitch: 1.02
   ZoomOutPitch: 1
   zoomDelay: 0.2
+--- !u!65 &1012371178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022162150582490862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.5}
+  m_Center: {x: 0, y: 0, z: -0.06}
 --- !u!4 &2022162150892027727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3356848221482647788, guid: 1d261e381de5fe843b7a02f9b42ea5c8, type: 3}

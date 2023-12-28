@@ -7,6 +7,8 @@ public class EnemyAttack : MonoBehaviour
 
     #region Variables
 
+    public CharacterStats Player;
+
     #endregion
 
     #region BuiltIn Methods
@@ -26,6 +28,12 @@ public class EnemyAttack : MonoBehaviour
     #endregion
 
     #region Custom Methods
+
+    public void Hit()
+    {
+        Player = FindObjectOfType<CharacterStats>();
+        Player.Health -= 50;
+    }
 
     #endregion
 
