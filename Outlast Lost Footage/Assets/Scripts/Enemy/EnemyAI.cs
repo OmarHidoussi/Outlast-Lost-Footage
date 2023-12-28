@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class PatrolLocation
+{
+    public string locationName; // Optional: Name for the location
+    public List<Transform> waypoints = new List<Transform>();
+}
+
 public class EnemyAI : MonoBehaviour
 {
 
     #region Variables
 
-    // The nav mesh agent's speed when patrolling.
-    public float patrolSpeed = 2f;
-    // The nav mesh agent's speed when chasing.			
-    public float chaseSpeed = 5f;
-    // The amount of time to wait when the last sighting is reached.			
-    public float chaseWaitTime = 5f;
-    // The amount of time to wait when the patrol way point is reached.			
-    public float patrolMinWaitTime = 1f;
-    public float patrolMaxWaitTime = 5f;
-    // An array of transforms for the patrol route.			
-    public Transform[] patrolWayPoints;
-    // A timer for the patrolWaitTime.				
-    float patrolTimer;
-    // A counter for the way point array.				
-    int wayPointIndex;
-    float patrolWaitTime;
+    public List<PatrolLocation> locations = new List<PatrolLocation>();
 
     EnemySight Sight;
     EnemyAnimation anim;
     NavMeshAgent nav;
 
     public CharacterStats Stats;
-    public float SearchRadius;
 
-    public bool IsChasing;
+    [Header("Patrol")]
+    public int LocationIndex = 0;
+    public float patrolMinWaitTime = 1f;    // The amount of time to wait when the patrol way point is reached.			
+    public float patrolMaxWaitTime = 5f;    // An array of transforms for the patrol route.			
+    float patrolTimer;    // A timer for the patrolWaitTime.				
+    int wayPointIndex;    // A counter for the way point array.				
+    float patrolWaitTime;
+
+    [Header("Chase & Investigation")]
+    public float SearchRadius;
+    public bool IsChasing, IsInvestigating;
+
 
     #endregion
 
@@ -64,7 +66,7 @@ public class EnemyAI : MonoBehaviour
         else if (Sight.LastSightPosition != Sight.resetPosition)
             Investigate();
         else
-            Patrol();
+            Patrol(locations[LocationIndex].waypoints.ToArray());
     }
 
     #endregion
@@ -79,8 +81,8 @@ public class EnemyAI : MonoBehaviour
     void Chase()
     {
         IsChasing = true;
+        IsInvestigating = false;
 
-        nav.speed = chaseSpeed;
         investigateTimer = investigateDuration;
         nav.SetDestination(Sight.LastPlayerPosition);
     }
@@ -95,6 +97,7 @@ public class EnemyAI : MonoBehaviour
             return;
 
         IsChasing = false;
+        IsInvestigating = true;
 
         investigateTimer -= Time.deltaTime;
 
@@ -138,7 +141,7 @@ public class EnemyAI : MonoBehaviour
             if (investigateTimer <= 0)
             {
                 Debug.Log("Investigation Complete");
-                Patrol();
+                Patrol(locations[LocationIndex].waypoints.ToArray());
             }
         }
     }
@@ -151,10 +154,11 @@ public class EnemyAI : MonoBehaviour
         return SearchArea;
     }
 
-    void Patrol()
+    void Patrol(Transform[] waypoints)
     {
         Debug.Log("Patrol");
-        if (patrolWayPoints.Length == 0)
+
+        if (waypoints.Length == 0)
         {
             return;
         }
@@ -167,9 +171,6 @@ public class EnemyAI : MonoBehaviour
         investigateTimer = investigateDuration;
 
         nav.isStopped = false;
-
-        // Set an appropriate speed for the NavMeshAgent.
-        nav.speed = patrolSpeed;
 
         // If near the next waypoint or there is no destination...
         if (nav.destination == Sight.resetPosition || nav.remainingDistance < nav.stoppingDistance)
@@ -187,7 +188,7 @@ public class EnemyAI : MonoBehaviour
             if (patrolTimer >= patrolWaitTime)
             {
                 // ... increment the wayPointIndex.
-                if (wayPointIndex == patrolWayPoints.Length - 1)
+                if (wayPointIndex == waypoints.Length - 1)
                 {
                     wayPointIndex = 0;
                 }
@@ -206,9 +207,8 @@ public class EnemyAI : MonoBehaviour
             patrolTimer = 0;
         }
 
-        // Set the destination to the patrolWayPoint.
-        nav.destination = patrolWayPoints[wayPointIndex].position;
-        anim.Anim.SetFloat("Speed", 1);
+        // Set the destination to the current waypoint.
+        nav.destination = waypoints[wayPointIndex].position;
     }
 
     #endregion

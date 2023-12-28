@@ -13,6 +13,7 @@ public class EnemySight : MonoBehaviour
     public Transform player;
 
     public float FieldOfView;
+    private float resetFieldOfView;
     public float ViewDistance;
     public float AttackRange;
     public bool PlayerInSight;
@@ -29,6 +30,7 @@ public class EnemySight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Behavior = GetComponent<EnemyAI>();
 
         col = GetComponentInChildren<SphereCollider>();
@@ -37,6 +39,9 @@ public class EnemySight : MonoBehaviour
 
         player = FindObjectOfType<InputManager>().transform;
         LastPlayerPosition = resetPosition;
+
+        resetFieldOfView = FieldOfView;
+
     }
 
     private void OnDrawGizmosSelected()
@@ -66,9 +71,13 @@ public class EnemySight : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        /*if(!PlayerInSight)
+
+        if (PlayerInSight || Behavior.IsInvestigating)
         {
-        }*/
+            FieldOfView = 280f;
+        }
+        else
+            FieldOfView = resetFieldOfView;
     }
 
     private void OnTriggerStay(Collider other)

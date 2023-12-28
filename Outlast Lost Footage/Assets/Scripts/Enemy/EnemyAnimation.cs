@@ -64,7 +64,7 @@ public class EnemyAnimation : MonoBehaviour
         float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
         Vector2 deltaPosition = new Vector2(dx, dy);
 
-        float smooth = Mathf.Min(1, Time.deltaTime / 0.5f);
+        float smooth = Mathf.Min(1, Time.deltaTime / 0.005f);
         SmoothDeltaPosition = Vector2.Lerp(SmoothDeltaPosition, deltaPosition, smooth);
 
         Velocity = SmoothDeltaPosition / Time.deltaTime;
@@ -78,7 +78,8 @@ public class EnemyAnimation : MonoBehaviour
 
         Anim.SetBool("Move", souldMove);
         Anim.SetFloat("Speed", Velocity.magnitude);
-        Anim.SetBool("Chase", Behavior.IsChasing);
+        if(!Sight.PlayerInAttackRange)
+            Anim.SetBool("Chase", Behavior.IsChasing);
 
         float deltaMagnitude = worldDeltaPosition.magnitude;
         if (deltaMagnitude > nav.radius / 2f)
