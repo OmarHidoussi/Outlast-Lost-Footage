@@ -13,6 +13,8 @@ public class EnemyAnimation : MonoBehaviour
     private EnemyAI Behavior;
     private EnemySight Sight;
 
+    public float Speed;
+
     private Vector2 Velocity;
     private Vector2 SmoothDeltaPosition;
     #endregion
@@ -71,7 +73,9 @@ public class EnemyAnimation : MonoBehaviour
 
         if (nav.remainingDistance <= nav.stoppingDistance)
         {
-            Velocity = Vector2.Lerp(Vector2.zero, Velocity, nav.remainingDistance / nav.stoppingDistance);
+            //Velocity = Vector2.Lerp(Vector2.zero, Velocity, nav.remainingDistance / nav.stoppingDistance);
+            Velocity.x = Mathf.Lerp(0, Velocity.x, nav.remainingDistance / nav.stoppingDistance);
+            Velocity.y = Mathf.Lerp(0,  Speed, nav.remainingDistance / nav.stoppingDistance);
         }
 
         bool souldMove = Velocity.magnitude > 0.5f && nav.remainingDistance > nav.stoppingDistance;
@@ -91,6 +95,12 @@ public class EnemyAnimation : MonoBehaviour
     public void Attack()
     {
         Anim.SetBool("Attack", false);
+        Vector3 directionToPlayer = Sight.player.position - transform.position;
+        directionToPlayer.y = 0f; // Keep the rotation only in the horizontal plane
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+        // Smoothly rotate towards the player during attack
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 
     #endregion

@@ -31,8 +31,10 @@ public class EnemyAttack : MonoBehaviour
 
     public void Hit()
     {
-        Player = FindObjectOfType<CharacterStats>();
-        Player.Health -= 50;
+        //Player = FindObjectOfType<CharacterStats>();
+        //Player.Health -= 50;
+
+        //Swing SFX
     }
 
     #endregion

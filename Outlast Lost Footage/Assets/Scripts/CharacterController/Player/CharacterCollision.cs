@@ -75,6 +75,11 @@ public class CharacterCollision : MonoBehaviour
             input.MidAir = false;
             anim.SetBool("MidAir", false);
         }
+
+        if(collision.gameObject.tag == "Weapon")
+        {
+            //Low Health
+        }
     }
 
     #endregion

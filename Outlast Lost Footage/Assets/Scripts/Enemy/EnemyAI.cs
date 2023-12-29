@@ -23,6 +23,10 @@ public class EnemyAI : MonoBehaviour
 
     public CharacterStats Stats;
 
+    public float patrolSpeed;
+    public float chaseSpeed;
+    public float attackSpeed;
+
     [Header("Patrol")]
     public int LocationIndex = 0;
     public float patrolMinWaitTime = 1f;    // The amount of time to wait when the patrol way point is reached.			
@@ -75,13 +79,15 @@ public class EnemyAI : MonoBehaviour
 
     void Attack()
     {
-
+        anim.Speed = attackSpeed;
     }
 
     void Chase()
     {
         IsChasing = true;
         IsInvestigating = false;
+
+        anim.Speed = chaseSpeed;
 
         investigateTimer = investigateDuration;
         nav.SetDestination(Sight.LastPlayerPosition);
@@ -99,6 +105,8 @@ public class EnemyAI : MonoBehaviour
         IsChasing = false;
         IsInvestigating = true;
 
+        anim.Speed = patrolSpeed;
+
         investigateTimer -= Time.deltaTime;
 
         if (SearchPoint == Sight.resetPosition && !isSearching)
@@ -115,7 +123,7 @@ public class EnemyAI : MonoBehaviour
             if (currentCooldown <= 0f)
             {
                 // Investigate the area around the player
-                SearchPoint = GetRandomPosition(Stats.transform.position);
+                SearchPoint = GetRandomPosition(Sight.LastSightPosition);
 
                 NavMeshHit navMeshHit;
                 if (NavMesh.SamplePosition(SearchPoint, out navMeshHit, SearchRadius, NavMesh.AllAreas))
@@ -164,6 +172,9 @@ public class EnemyAI : MonoBehaviour
         }
 
         IsChasing = false;
+        IsInvestigating = false;
+
+        anim.Speed = patrolSpeed;
 
         Sight.LastSightPosition = Sight.resetPosition;
         Sight.LastPlayerPosition = Sight.resetPosition;

@@ -309,7 +309,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2022162150628675297, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022162151036185434, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: RunSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185435, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_RootOrder
@@ -881,8 +885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 983296472}
-  WalkVolume: 0.05
-  RunVolume: 0.1
+  WalkVolume: 0.02
+  RunVolume: 0.05
   WalkFootStepsClips:
   - {fileID: 8300000, guid: 6993bb40c7eb2b64d9bc7965ca010b72, type: 3}
   - {fileID: 8300000, guid: b9a7116f0118b344ba65d6732a9c4c93, type: 3}
@@ -906,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Anim: {fileID: 983296463}
+  Speed: 0
 --- !u!114 &983296467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +939,9 @@ MonoBehaviour:
     - {fileID: 1312259921}
     - {fileID: 459723417}
   Stats: {fileID: 1626934422}
+  patrolSpeed: 2
+  chaseSpeed: 5.5
+  attackSpeed: 1
   LocationIndex: 0
   patrolMinWaitTime: 1
   patrolMaxWaitTime: 5
@@ -1021,7 +1029,7 @@ AudioSource:
   m_GameObject: {fileID: 983296461}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1345,6 +1353,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locations: []
   Stats: {fileID: 1626934422}
+  patrolSpeed: 0
+  chaseSpeed: 0
+  attackSpeed: 0
   LocationIndex: 0
   patrolMinWaitTime: 1
   patrolMaxWaitTime: 5
@@ -1409,6 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Anim: {fileID: 0}
+  Speed: 0
 --- !u!195 &1224180302
 NavMeshAgent:
   m_ObjectHideFlags: 0
