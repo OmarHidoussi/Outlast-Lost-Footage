@@ -28,7 +28,11 @@ public class CharacterStats : MonoBehaviour
     void Update()
     {
         if (input.Reload) UpdateStats();
-        if (Health <= 0) this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
+        if (Health <= 0)
+        {
+            this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
+            input.Mov_Axis = Vector2.zero;
+        }
     }
     #endregion
 

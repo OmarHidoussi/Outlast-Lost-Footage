@@ -64,7 +64,7 @@ public class EnemyAnimation : MonoBehaviour
         float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
         Vector2 deltaPosition = new Vector2(dx, dy);
 
-        float smooth = Mathf.Min(1, Time.deltaTime / 0.005f);
+        float smooth = Mathf.Min(1, Time.deltaTime / 0.1f);
         SmoothDeltaPosition = Vector2.Lerp(SmoothDeltaPosition, deltaPosition, smooth);
 
         Velocity = SmoothDeltaPosition / Time.deltaTime;
