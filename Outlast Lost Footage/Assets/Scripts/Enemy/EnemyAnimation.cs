@@ -24,10 +24,11 @@ public class EnemyAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Anim = GetComponent<Animator>();
-        nav = GetComponent<NavMeshAgent>();
         Behavior = GetComponent<EnemyAI>();
-        Sight = GetComponent<EnemySight>();
+
+        Anim = GetComponentInParent<Animator>();
+        nav = GetComponentInParent<NavMeshAgent>();
+        Sight = GetComponentInParent<EnemySight>();
 
         Anim.applyRootMotion = true;
 

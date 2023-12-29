@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         Sight = GetComponent<EnemySight>();
-        anim = GetComponent<EnemyAnimation>();
+        anim = GetComponentInChildren<EnemyAnimation>();
         nav = GetComponent<NavMeshAgent>();
 
         IsChasing = false;
