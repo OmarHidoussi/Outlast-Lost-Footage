@@ -43,9 +43,8 @@ AudioMixerController:
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
-  - {fileID: 24500006}
   - {fileID: 1709957756887338391}
-  m_StartSnapshot: {fileID: 24500006}
+  m_StartSnapshot: {fileID: 1709957756887338391}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
@@ -56,7 +55,7 @@ AudioMixerController:
     - 289532bd6fb0d37499abafea1073556d
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: 1709957756887338391}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -91,17 +90,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!245 &24500006
-AudioMixerSnapshotController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: OffCamera
-  m_AudioMixer: {fileID: 24100000}
-  m_SnapshotID: 63ed92cd8dab9934389fc7aaf90679e9
-  m_FloatValues: {}
-  m_TransitionOverrides: {}
 --- !u!245 &1709957756887338391
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
