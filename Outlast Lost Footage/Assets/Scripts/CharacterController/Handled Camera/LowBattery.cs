@@ -7,6 +7,8 @@ public class LowBattery : MonoBehaviour
 
     #region Variable
     [Header("LowBattery")]
+    public Animator anim;
+    public bool CameraBlue;
     public float SFXvolume;
     public AudioSource source;
     public AudioClip LowBatteryClip;
@@ -18,7 +20,7 @@ public class LowBattery : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

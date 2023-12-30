@@ -24,6 +24,12 @@ public class CameraProperties : MonoBehaviour
     public Slider ZoomSlider;
     public TextMeshProUGUI ApertureText;
 
+    [Header("Infrared Lights")]
+    public Light spotLight;
+    public float MinRange, MaxRange, CurrentRange;
+    public float MinIntensity,MaxIntensity, CurrentIntensity;
+    public float MinLightField, MaxLightField, CurrentLightField;
+
     [Header("ZoomSFX")]
     public AudioSource source;
     public AudioClip ZoomLoop;
@@ -82,6 +88,10 @@ public class CameraProperties : MonoBehaviour
           //  StopZoomSFX();
         }
 
+        spotLight.range = CurrentRange;
+        spotLight.intensity = CurrentIntensity;
+        spotLight.spotAngle = CurrentLightField;
+
         HandleZoom();
         ApertureAdjustment();
         UIAdjustment();
@@ -113,15 +123,20 @@ public class CameraProperties : MonoBehaviour
 
          if (Mathf.Abs(zoomInput) > 0.01f)
          {
-             float zoomChange = zoomInput * mouseScrollSpeed * Time.deltaTime;
-             float newZoom = Mathf.Clamp(cam.fieldOfView - zoomChange, MinFOV, MaxFOV);
+            float zoomChange = zoomInput * mouseScrollSpeed * Time.deltaTime;
+            float newZoom = Mathf.Clamp(cam.fieldOfView - zoomChange, MinFOV, MaxFOV);
 
-             if (Mathf.Abs(newZoom - cam.fieldOfView) > 0.01f)
-             {
-                 cam.fieldOfView = newZoom;
-                 HandleZoomSFX();
-                 ResetZoomTimer(); // Reset the timer since zooming is happening
-             }
+            if (Mathf.Abs(newZoom - cam.fieldOfView) > 0.01f)
+            {
+                CurrentRange = Mathf.Clamp(CurrentRange + (zoomChange * 0.1f), MinRange, MaxRange);
+                CurrentIntensity = Mathf.Clamp(CurrentIntensity + zoomChange * 0.015f, MinIntensity, MaxIntensity);
+                CurrentLightField = Mathf.Clamp(CurrentLightField - zoomChange * 1.5f, MinLightField, MaxLightField);
+
+                cam.fieldOfView = newZoom;
+
+                HandleZoomSFX();
+                ResetZoomTimer(); // Reset the timer since zooming is happening
+            }
          }
          else
          {

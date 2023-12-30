@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Activation : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Activation : MonoBehaviour
     public GameObject cameraOffObject;
 
     public AudioSource Source;
+    public CameraFunctionalities functionalities;
 
     #endregion
 
@@ -41,7 +43,13 @@ public class Activation : MonoBehaviour
 
     public void Reload()
     {
+        functionalities.LowBatteryAnim.gameObject.GetComponent<Image>().color = functionalities.PureScreenColor;
         Source.Play();
+    }
+
+    public void InfraredLights()
+    {
+        functionalities.NV_Lights.SetActive(functionalities.InfraredOn);
     }
 
     #endregion

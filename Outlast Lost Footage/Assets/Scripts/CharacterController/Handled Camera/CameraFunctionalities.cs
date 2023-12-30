@@ -22,10 +22,13 @@ public class CameraFunctionalities : MonoBehaviour
     public Animator FillAreaanimator;
     public Color NormalColor;
     public Color LowBatteryColor;
+    public Color BlueScreenColor;
+    public Color PureScreenColor;
     public Image Background, FillArea;
     public int LowBatteryDivision = 4;
     public Animator LowBatteryAnim;
     public Light NightVisionlight;
+    public CameraProperties properties;
 
     [Header("CameraState")]
     public GameObject NV_Lights;
@@ -83,6 +86,7 @@ public class CameraFunctionalities : MonoBehaviour
             time = BatterySlider.maxValue;
             previoustime = time;
             BatterySlider.value = time;
+            LowBatteryAnim.SetBool("CameraBlue", false);
             input.Reload = false;
         }
 
@@ -120,6 +124,7 @@ public class CameraFunctionalities : MonoBehaviour
     }
 
     private bool soundPlayed = false;
+    [HideInInspector] public bool InfraredOn = false;
     void HandleNightVision()
     {
         if (input.InfraredOn && !soundPlayed)
@@ -129,6 +134,7 @@ public class CameraFunctionalities : MonoBehaviour
             soundPlayed = true;
             NightVision.sprite = NV_ON;
             NightVisionLights.sprite = NVL_ON;
+            InfraredOn = true;
         }
         else if(!input.InfraredOn && soundPlayed)
         {
@@ -137,18 +143,19 @@ public class CameraFunctionalities : MonoBehaviour
             soundPlayed = false;
             NightVision.sprite = NV_OFF;
             NightVisionLights.sprite = NVL_OFF;
+            InfraredOn = false;
         }
 
 
         if (input.CameraOn)
         {
-            NV_Lights.SetActive(input.InfraredOn);
+            //NV_Lights.SetActive(input.InfraredOn);
             if(input.InfraredOn)
                 NightVisionOn.TransitionTo(TransitionSpeed);
         }
         else
         {
-            NV_Lights.SetActive(false);
+            //NV_Lights.SetActive(false);
             NightVisionOff.TransitionTo(TransitionSpeed);
         }
     }
@@ -173,8 +180,17 @@ public class CameraFunctionalities : MonoBehaviour
 
     void HandleLowBattery()
     {
-        if(BatterySlider.value <= BatterySlider.maxValue / LowBatteryDivision)
+        if (BatterySlider.value <= BatterySlider.minValue)
         {
+            LowBatteryAnim.gameObject.GetComponent<Image>().color = BlueScreenColor;
+            LowBatteryAnim.SetBool("CameraBlue", true);
+        }
+        else if(!LowBatteryAnim.GetBool("LowBattery"))
+            LowBatteryAnim.gameObject.GetComponent<Image>().color = PureScreenColor;
+
+        if (BatterySlider.value <= BatterySlider.maxValue / LowBatteryDivision)
+        {
+            LowBatteryAnim.enabled = true;
             LowBatteryAnim.SetBool("LowBattery", true);
             if(BatterySlider.value <= 2)
             {
@@ -184,7 +200,7 @@ public class CameraFunctionalities : MonoBehaviour
         else
         {
             LowBatteryAnim.SetBool("LowBattery", false);
-            NightVisionlight.intensity = 1;
+            NightVisionlight.intensity = properties.CurrentIntensity;
         }
     }
 

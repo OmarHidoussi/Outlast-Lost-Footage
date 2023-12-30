@@ -82,8 +82,10 @@ public class CharacterMovement : MonoBehaviour
 
         Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
 
-        if (!m_rigidbody.useGravity)
+        if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Running Jump") ||
+            anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
         {
+            input.IsCrouching = false;
             transform.Translate(0, 0, RunSpeed * Time.deltaTime);
             m_rigidbody.drag = 10f;
         }
