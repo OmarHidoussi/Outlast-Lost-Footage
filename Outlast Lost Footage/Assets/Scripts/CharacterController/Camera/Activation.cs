@@ -13,6 +13,7 @@ public class Activation : MonoBehaviour
     public GameObject cameraOffObject;
 
     public AudioSource Source;
+    private Animator anim;
     public CameraFunctionalities functionalities;
 
     #endregion
@@ -22,7 +23,7 @@ public class Activation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,7 +50,8 @@ public class Activation : MonoBehaviour
 
     public void InfraredLights()
     {
-        functionalities.NV_Lights.SetActive(functionalities.InfraredOn);
+        //fix Bug
+        functionalities.NV_Lights.SetActive(anim.GetBool("CameraOn"));
     }
 
     #endregion
