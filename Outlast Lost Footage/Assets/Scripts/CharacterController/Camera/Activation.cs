@@ -40,6 +40,7 @@ public class Activation : MonoBehaviour
     {
         cameraGFX.SetActive(input.CameraOn);
         cameraOffObject.SetActive(!input.CameraOn);
+        functionalities.NV_Lights.SetActive(false);
     }
 
     public void Reload()
@@ -50,8 +51,9 @@ public class Activation : MonoBehaviour
 
     public void InfraredLights()
     {
-        //fix Bug
-        functionalities.NV_Lights.SetActive(anim.GetBool("CameraOn"));
+        functionalities.NV_Lights.SetActive(anim.GetBool("CameraOn") && input.InfraredOn && input.CameraOn);
+        if (!input.CameraOn)
+            functionalities.NV_Lights.SetActive(false);
     }
 
     #endregion

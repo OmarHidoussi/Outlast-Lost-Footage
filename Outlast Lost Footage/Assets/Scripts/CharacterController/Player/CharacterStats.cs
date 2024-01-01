@@ -14,6 +14,7 @@ public class CharacterStats : MonoBehaviour
     public int Health;
 
     InputManager input;
+    CharacterAnimator anim;
 
     #endregion
 
@@ -22,6 +23,7 @@ public class CharacterStats : MonoBehaviour
     void Start()
     {
         input = GetComponent<InputManager>();
+        anim = GetComponent<CharacterAnimator>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,11 @@ public class CharacterStats : MonoBehaviour
         {
             this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
             input.Mov_Axis = Vector2.zero;
+
+            if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Falling Back Death") || anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Crouch Death"))
+            {
+                this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", false);
+            }
         }
     }
     #endregion

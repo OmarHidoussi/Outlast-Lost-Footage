@@ -16,7 +16,7 @@ public class EnemyAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Player = FindObjectOfType<CharacterStats>();
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class EnemyAttack : MonoBehaviour
     public void Hit()
     {
         //Player = FindObjectOfType<CharacterStats>();
-        //Player.Health -= 50;
+        Player.Health -= 50;
 
         //Swing SFX
     }

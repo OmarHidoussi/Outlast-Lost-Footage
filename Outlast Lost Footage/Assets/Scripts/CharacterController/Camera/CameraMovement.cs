@@ -206,9 +206,9 @@ public class CameraMovement : MonoBehaviour
     {
         if(lockPkayer)
         {
+
             Body.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * 100 * Time.deltaTime);
-            //PlayerBody.LookAt(direction.forward);
-            //PlayerBody.rotation = Quaternion.RotateTowards(PlayerBody.rotation, targetRotation, TransitionSpeed * Time.deltaTime);
+
         }
     }
 

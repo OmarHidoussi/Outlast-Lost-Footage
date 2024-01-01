@@ -8,6 +8,7 @@ public class CharacterCollision : MonoBehaviour
     #region Variables
 
     public InputManager input;
+    public CharacterStats stats;
     public Animator anim;
     public float raycastDistance = 0.1f;
     public float DieDistance = 3f;
@@ -18,10 +19,22 @@ public class CharacterCollision : MonoBehaviour
 
     #region BuiltIn Methods
 
+    bool CanDie;
+
     void Update()
     {
         // Perform raycast downward to check if the player is grounded
         bool isGrounded = CheckGrounded();
+
+        if(isGrounded && CanDie)
+        {
+            anim.SetBool("Dead", true);
+
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Falling Back Death") || anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch Death"))
+            {
+                anim.SetBool("Dead", false);
+            }
+        }
 
         // Update the animator parameter based on the grounded state
         anim.SetBool("MidAir", !isGrounded);
@@ -36,10 +49,19 @@ public class CharacterCollision : MonoBehaviour
             {
                 if(hit.distance > DieDistance)
                 {
-                    anim.SetBool("Dead", true);
+                    //anim.SetBool("Dead", true);
+                    CanDie = true;
                 }
             }
         }
+    }
+
+    IEnumerator KillPlayer()
+    {
+        anim.SetBool("Dead", true);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        anim.SetBool("Dead", false);
     }
 
     private void OnDrawGizmos()
@@ -79,6 +101,7 @@ public class CharacterCollision : MonoBehaviour
         if(collision.gameObject.tag == "Weapon")
         {
             //Low Health
+            //stats.Health -= 80;
         }
     }
 
