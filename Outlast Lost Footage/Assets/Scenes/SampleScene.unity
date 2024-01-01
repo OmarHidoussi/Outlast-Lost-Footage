@@ -3533,7 +3533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Build V8.56
+  m_text: Build V11.38
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9349,7 +9349,6 @@ GameObject:
   - component: {fileID: 1937383247}
   - component: {fileID: 1937383246}
   - component: {fileID: 1937383245}
-  - component: {fileID: 1937383249}
   m_Layer: 5
   m_Name: Canvas_BuildVersion
   m_TagString: Untagged
@@ -9439,26 +9438,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1937383249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937383244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e791358dfde84684e88661517affaa4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowSubtitles: 0
-  ShowTutorial: 0
-  ShowCrosshair: 1
-  ReduceHeadMotion: 0
-  InvertUpAxis: 0
-  LookSensitivity: 400
-  volume: 0
-  Fullscreen: 0
 --- !u!1 &1981573434
 GameObject:
   m_ObjectHideFlags: 0
