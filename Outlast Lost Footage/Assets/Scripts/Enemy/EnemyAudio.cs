@@ -43,18 +43,21 @@ public class EnemyAudio : MonoBehaviour
     {
         Behavior = GetComponent<EnemyAI>();
         Sight = GetComponent<EnemySight>();
+
+        DialogueSource.outputAudioMixerGroup = MixerDialogueGroup;
+        DialogueSource.volume = DialogueVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
         //TriggeringDialogueFunctions
-        if (Behavior.isSearching)
+       /* if (Behavior.isSearching)
             Investigate();
-        if (Behavior.IsChasing)
+        else if (Behavior.IsChasing)
             Chase();
-        if (!Behavior.IsChasing && !Behavior.isSearching)
-            Patrol();
+        else
+            Patrol();*/
     }
 
     #endregion
@@ -88,17 +91,29 @@ public class EnemyAudio : MonoBehaviour
     void Patrol()
     {
         //While the enemy is patrolling he say dialogue every 25 seconds
+        if (DialogueSource.isPlaying)
+        {
+            source.PlayOneShot(GetRandomClip(PatrolDialogueClips));
+        }
     }
 
     void Chase()
     {
         //When the enemy sees the player he sometimes starts the chase with a dialogue line
+        if (DialogueSource.isPlaying)
+        {
+            source.PlayOneShot(GetRandomClip(ChasingDialogueClips));
+        }
     }
 
     void Investigate()
     {
         //When the enemy is investigating the player he says a line when the player is too close (5 meters distance)
         //When IsSearching is enabled
+        if (DialogueSource.isPlaying)
+        {
+            source.PlayOneShot(GetRandomClip(InvestigatingClips));
+        }
     }
 
     #endregion
