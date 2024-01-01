@@ -93,7 +93,7 @@ public class EnemyAI : MonoBehaviour
         nav.SetDestination(Sight.LastPlayerPosition);
     }
 
-    private bool isSearching = false;
+    [HideInInspector] public bool isSearching = false;
     public float searchCooldown = 5f; 
     private float currentCooldown = 5f;
     Vector3 SearchPoint = new Vector3(1000,1000,1000);

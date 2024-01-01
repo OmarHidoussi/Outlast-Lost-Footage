@@ -9,12 +9,30 @@ public class EnemyAudio : MonoBehaviour
     #region Variables
 
     public AudioSource source;
+    public AudioSource DialogueSource;
 
     [Header("FootSteps")]
     public float WalkVolume;
     public float RunVolume;
     public AudioClip[] WalkFootStepsClips;
     public AudioClip[] RunFootStepsClips;
+
+
+    [Space]
+    [Header("Dialogues")]
+    EnemyAI Behavior;
+    EnemySight Sight;
+    public float DialogueVolume;
+    public AudioMixerGroup MixerDialogueGroup;
+
+    [Header("Patrolling Audio")]
+    public AudioClip[] PatrolDialogueClips;
+
+    [Header("Chasing Audio")]
+    public AudioClip[] ChasingDialogueClips;
+
+    [Header("Investigating Audio")]
+    public AudioClip[] InvestigatingClips;
 
     #endregion
 
@@ -23,13 +41,20 @@ public class EnemyAudio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Behavior = GetComponent<EnemyAI>();
+        Sight = GetComponent<EnemySight>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //TriggeringDialogueFunctions
+        if (Behavior.isSearching)
+            Investigate();
+        if (Behavior.IsChasing)
+            Chase();
+        if (!Behavior.IsChasing && !Behavior.isSearching)
+            Patrol();
     }
 
     #endregion
@@ -58,6 +83,22 @@ public class EnemyAudio : MonoBehaviour
     private float GetRandomPitch()
     {
         return UnityEngine.Random.Range(0.8f, 1.2f);
+    }
+
+    void Patrol()
+    {
+        //While the enemy is patrolling he say dialogue every 25 seconds
+    }
+
+    void Chase()
+    {
+        //When the enemy sees the player he sometimes starts the chase with a dialogue line
+    }
+
+    void Investigate()
+    {
+        //When the enemy is investigating the player he says a line when the player is too close (5 meters distance)
+        //When IsSearching is enabled
     }
 
     #endregion
