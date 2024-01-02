@@ -13,8 +13,10 @@ public class Activation : MonoBehaviour
     public GameObject cameraOffObject;
 
     public AudioSource Source;
-    private Animator anim;
     public CameraFunctionalities functionalities;
+
+    private Animator anim;
+    private CameraScreenShot screenshot;
 
     #endregion
 
@@ -24,12 +26,15 @@ public class Activation : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        screenshot = GetComponent<CameraScreenShot>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(input.CameraOn)
+            Screenshot();
+
     }
 
     #endregion
@@ -54,6 +59,14 @@ public class Activation : MonoBehaviour
         functionalities.NV_Lights.SetActive(anim.GetBool("CameraOn") && input.InfraredOn && input.CameraOn);
         if (!input.CameraOn)
             functionalities.NV_Lights.SetActive(false);
+    }
+
+    void Screenshot()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            screenshot.GetSetImage_BTM();
+        }
     }
 
     #endregion

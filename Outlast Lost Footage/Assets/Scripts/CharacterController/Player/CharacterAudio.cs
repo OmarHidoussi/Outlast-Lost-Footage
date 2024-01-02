@@ -168,7 +168,7 @@ public class CharacterAudio : MonoBehaviour
     public void Jumped()
     {
         m_rigidbody.useGravity = false;
-        CamMovement.Sensetivity = 0;
+        CamMovement.Sensetivity = 100;
         source.volume = JumpVolume;
         source.outputAudioMixerGroup = Dialogue;
         source.pitch = 1;

@@ -148,7 +148,7 @@ public class EnemyAudio : MonoBehaviour
         dialogueTimer += Time.deltaTime;
 
         // Check if enough time has passed for a new dialogue
-        if (dialogueTimer >= dialogueInterval / 3)
+        if (dialogueTimer >= dialogueInterval)
         {
             // Reset the timer
             dialogueTimer = 0f;
