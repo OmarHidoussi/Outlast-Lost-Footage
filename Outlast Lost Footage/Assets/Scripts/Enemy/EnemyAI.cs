@@ -164,7 +164,7 @@ public class EnemyAI : MonoBehaviour
 
     void Patrol(Transform[] waypoints)
     {
-        Debug.Log("Patrol");
+        //Debug.Log("Patrol");
 
         if (waypoints.Length == 0)
         {
