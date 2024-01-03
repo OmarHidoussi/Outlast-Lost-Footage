@@ -86,6 +86,17 @@ public class CharacterAnimator : MonoBehaviour
 
     }
 
+    public void HandleWallClimb()
+    {
+        if (CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Sprint To Wall Climb"))
+        {
+            CharacterAnim.SetBool("WallClimb", false);
+            return;
+        }
+        else
+            CharacterAnim.SetBool("WallClimb", true);
+    }
+
     public bool lockHand;
     public void HandleInteraction()
     {
@@ -106,6 +117,20 @@ public class CharacterAnimator : MonoBehaviour
     {
         CharacterAnim.SetBool(Type, input.Interact);
     }
+    /*
+    public void MatchTarget(Vector3 matchPosition, Quaternion matchRotation, AvatarTarget target, MatchTargetWeightMask weightMask, float normalisedStartTime, float normalisedEndTime)
+    {
+        if (CharacterAnim.isMatchingTarget || CharacterAnim.IsInTransition(0))
+            return;
+
+        float normalizedTime = Mathf.Repeat(CharacterAnim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f);
+
+        if (normalizedTime > normalisedEndTime)
+            return;
+
+        CharacterAnim.MatchTarget(matchPosition, matchRotation, target, weightMask, normalisedStartTime, normalisedEndTime);
+    }
+*/
 
     #endregion
 

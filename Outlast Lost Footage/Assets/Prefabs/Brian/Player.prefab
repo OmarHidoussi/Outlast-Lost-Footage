@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 076672257c5f87549979ebf0f17b061a, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 5571305caa2c1874e96cb98453f37ffe, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -944,6 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 2022162151036185381}
+  stats: {fileID: 2022162151036185376}
   anim: {fileID: 2022162151421435386}
   raycastDistance: 0.75
   DieDistance: 3
@@ -1065,8 +1066,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
-  m_Range: 5
+  m_Intensity: 1
+  m_Range: 8
   m_SpotAngle: 100
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -1096,7 +1097,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 8caa437b19957a045866b84c6218a0db, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -1180,11 +1181,14 @@ MonoBehaviour:
   FillAreaanimator: {fileID: 2022162151601612649}
   NormalColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   LowBatteryColor: {r: 0.7924528, g: 0.1009256, b: 0.11403531, a: 1}
+  BlueScreenColor: {r: 0, g: 0.17416215, b: 1, a: 1}
+  PureScreenColor: {r: 0, g: 0, b: 0, a: 0}
   Background: {fileID: 2022162152262593730}
   FillArea: {fileID: 2022162151601612655}
   LowBatteryDivision: 4
   LowBatteryAnim: {fileID: 2022162151698318864}
   NightVisionlight: {fileID: 2022162150634857626}
+  properties: {fileID: 3640529656404819886}
   NV_Lights: {fileID: 2022162150254680560}
   m_volume: {fileID: 2127605367}
   CameraOFF: {fileID: 11400000, guid: 5571305caa2c1874e96cb98453f37ffe, type: 2}
@@ -1205,6 +1209,7 @@ MonoBehaviour:
   NightVisionOff: {fileID: 24500006, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
   stats: {fileID: 2022162151036185376}
   BatteryCounter: {fileID: 2022162150869517115}
+  InfraredOn: 0
 --- !u!1 &2022162150869517113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,7 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   WalkSpeed: 2
-  RunSpeed: 6
+  RunSpeed: 7
   CrouchSpeed: 1.7
   CrouchHeight: 0.45
   LerpSpeed: 7.5
@@ -1629,11 +1634,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  Yamplitude: 0.0014
-  Xamplitude: 0.0001
-  BreathAmplitude: 0.0005
-  frequency: 23.5
-  Breathfrequency: 2.25
+  Yamplitude: 0.04
+  Xamplitude: 0.01
+  BreathAmplitude: 0.003
+  frequency: 10
+  Breathfrequency: 10
   cam: {fileID: 2022162151616927505}
   camHolder: {fileID: 2022162150197926571}
 --- !u!114 &2022162151036185377
@@ -3344,7 +3349,7 @@ RectTransform:
   m_GameObject: {fileID: 2022162151698318868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1050049, y: 1.1061, z: 1.1061}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2022162150727126217}
@@ -3425,6 +3430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3c76e9f09fcf64e9758bb0d9df6742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 2022162151698318864}
+  CameraBlue: 0
   SFXvolume: 0.04
   source: {fileID: 2022162151698318867}
   LowBatteryClip: {fileID: 8300000, guid: 19443c97aaf5a7c4db225b62cc2766cc, type: 3}
@@ -5446,6 +5453,7 @@ MonoBehaviour:
   movement: {fileID: 2022162151036185434}
   CamMovement: {fileID: 2022162150394058495}
   m_rigidbody: {fileID: 2022162151036185380}
+  CharacterHead: {fileID: 0}
   IsSliding: 0
   WalkVolume: 0.02
   RunVolume: 0.05
@@ -5479,9 +5487,6 @@ MonoBehaviour:
   Jumping:
   - {fileID: 8300000, guid: 085e93601620e734cb438f00fae5e698, type: 3}
   - {fileID: 8300000, guid: 4031fb23bdd752e408f472bfc20a57e8, type: 3}
-  - {fileID: 8300000, guid: 8ae4865d38d4e464dbf061e6fc4dd2b7, type: 3}
-  - {fileID: 8300000, guid: 01ab1ee45726e2644ad0a8763ba0d7e5, type: 3}
-  - {fileID: 8300000, guid: ca6dc61462f50bb47a81e7f9b21b169b, type: 3}
   CanBreath: 0
   BreathingVolume: 0.02
   NormalBreath: {fileID: 8300000, guid: 567ccdacac1184048b122be4f2f94b59, type: 3}
@@ -5496,6 +5501,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3b62a3102a300e04f859d2cfe43bf752, type: 3}
   - {fileID: 8300000, guid: adef5ec290c484c499a94db8be01154f, type: 3}
   - {fileID: 8300000, guid: ce0ed8e0ba8d90e4c99fccf11fb4810a, type: 3}
+  Location: {fileID: 0}
 --- !u!4 &1249411023922228230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8266667764236219312, guid: 56f32e9983f6fb14a9fc47735286d727, type: 3}
@@ -6103,24 +6109,21 @@ MonoBehaviour:
   LerpSpeed: 0.005
   ZoomSlider: {fileID: 2022162151455090849}
   ApertureText: {fileID: 2022162151875075692}
+  spotLight: {fileID: 2022162150634857626}
+  MinRange: 5
+  MaxRange: 8
+  CurrentRange: 5
+  MinIntensity: 1
+  MaxIntensity: 1.4
+  CurrentIntensity: 1
+  MinLightField: 42
+  MaxLightField: 100
+  CurrentLightField: 100
   source: {fileID: 3640529656404819881}
   ZoomLoop: {fileID: 8300000, guid: 0dc94face1a5b474d905a79b23e6bfdf, type: 3}
   ZoomInPitch: 1.02
   ZoomOutPitch: 1
   zoomDelay: 0.2
---- !u!65 &1012371178
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022162150582490862}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.5}
-  m_Center: {x: 0, y: 0, z: -0.06}
 --- !u!4 &2022162150892027727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3356848221482647788, guid: 1d261e381de5fe843b7a02f9b42ea5c8, type: 3}
@@ -6252,6 +6255,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &604204157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022162152110397251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed4aeaefa4a58a4bb556a73ab67a8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: ImageSample
+  RT: {fileID: 8400000, guid: aa9b260504d5c1f46b3fa02864ad4979, type: 2}
 --- !u!114 &2022162150524547768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6268,6 +6285,7 @@ MonoBehaviour:
   cameraGFX: {fileID: 1211820224530852102}
   cameraOffObject: {fileID: 1211820224060668233}
   Source: {fileID: 2022162150524547771}
+  functionalities: {fileID: 2022162150727126216}
 --- !u!1 &5964955851916728994 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6936112773359920385, guid: 1d261e381de5fe843b7a02f9b42ea5c8, type: 3}

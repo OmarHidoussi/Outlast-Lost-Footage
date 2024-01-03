@@ -102,7 +102,7 @@ public class HeadBob : MonoBehaviour
         }
 
         frequency = (movement.Speed * FrequencyMultiplier * SpeedMultiplier) * 1.4f;
-        frequency = Mathf.Clamp(frequency, 13, 18);
+        frequency = Mathf.Clamp(frequency, 10, 16);
         Yamplitude = (ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x) / 26.5f;
         Xamplitude = (ValueMultiplier * SpeedMultiplier / 2 * input.Mov_Axis.x) / 30;
 

@@ -16,6 +16,7 @@ public class CharacterAudio : MonoBehaviour
     public CharacterMovement movement;
     public CameraMovement CamMovement;
     public Rigidbody m_rigidbody;
+    public Transform CharacterHead;
 
     [HideInInspector] public bool IsSliding = false;
 
@@ -99,6 +100,9 @@ public class CharacterAudio : MonoBehaviour
         {
             DeathSoundOn.TransitionTo(TransitionDelay);
         }
+
+        if (IsSnapping)
+            SnapPlayerToPosition();
     }
     #endregion
 
@@ -180,6 +184,33 @@ public class CharacterAudio : MonoBehaviour
         CamMovement.Sensetivity = RestoreCameraMovement;
         m_rigidbody.useGravity = true;
         movement.GetComponent<InputManager>().Jump = false;
+    }
+
+    bool IsSnapping = false;
+    [HideInInspector] public Transform Location;
+    public void StartSnapping()
+    {
+        movement.GetComponent<InputManager>().CanMove = false;
+        IsSnapping = true;
+        m_rigidbody.useGravity = false;
+        CamMovement.Sensetivity = 0;
+    }
+
+    public void EndSnapping()
+    {
+        movement.GetComponent<InputManager>().CanMove = true;
+        movement.GetComponent<InputManager>().IsCrouching = true;
+        Characteranim.CharacterAnim.SetBool("WallClimb", false);
+        IsSnapping = false;
+        m_rigidbody.transform.position = Location.position;
+        m_rigidbody.useGravity = true;
+        CamMovement.Sensetivity = RestoreCameraMovement;
+    }
+
+    public void SnapPlayerToPosition()
+    {
+        m_rigidbody.transform.position = Vector3.MoveTowards(m_rigidbody.transform.position, Location.position, 1.1f * Time.deltaTime);
+        m_rigidbody.transform.rotation = Quaternion.Slerp(m_rigidbody.transform.rotation, Location.rotation, 15 * Time.deltaTime);
     }
 
     private float GetRandomPitch() 

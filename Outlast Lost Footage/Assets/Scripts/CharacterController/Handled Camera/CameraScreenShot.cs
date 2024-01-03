@@ -5,8 +5,19 @@ using System.IO;
 
 public class CameraScreenShot : MonoBehaviour
 {
+
+    #region Variables
+
     public string fileName;
     public RenderTexture RT;
+
+    #endregion
+
+    #region BuitIn Methods
+
+    #endregion
+
+    #region Custom Methods
 
     void GetImage()
     {
@@ -73,4 +84,7 @@ public class CameraScreenShot : MonoBehaviour
     {
         StartCoroutine(RenderProcess());
     }
+    
+    #endregion
+
 }
