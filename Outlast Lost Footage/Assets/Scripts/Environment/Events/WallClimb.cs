@@ -6,10 +6,12 @@ public class WallClimb : MonoBehaviour
 {
 
     #region Variables
-
     public Transform location;
+    public GameObject SupportingPlatform;
     public AvatarTarget target;
     public MatchTargetWeightMask mask;
+
+
     #endregion
 
     #region BuiltIn Mehthods
@@ -23,17 +25,19 @@ public class WallClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
+
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
+            SupportingPlatform.SetActive(false);
+            SupportingPlatform.SetActive(!FindObjectOfType<CharacterAudio>().IsSnapping);
+
             if (other.GetComponentInParent<InputManager>().Jump)
             {
                 other.GetComponentInChildren<CharacterAudio>().Location = location;
                 other.GetComponentInParent<CharacterAnimator>().HandleWallClimb();
-
             }
         }
     }
@@ -42,7 +46,7 @@ public class WallClimb : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
+            SupportingPlatform.SetActive(false);
         }
     }
 

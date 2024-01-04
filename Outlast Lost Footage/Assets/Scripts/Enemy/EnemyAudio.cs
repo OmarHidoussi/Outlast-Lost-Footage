@@ -17,6 +17,9 @@ public class EnemyAudio : MonoBehaviour
     public AudioClip[] WalkFootStepsClips;
     public AudioClip[] RunFootStepsClips;
 
+    [Header("Attack")]
+    public float AttackVolume;
+    public AudioClip[] AttackClips;
 
     [Space]
     [Header("Dialogues")]
@@ -84,6 +87,12 @@ public class EnemyAudio : MonoBehaviour
         source.pitch = GetRandomPitch();
         source.volume = RunVolume;
         source.PlayOneShot(GetRandomClip(RunFootStepsClips));
+    }
+
+    public void Hit()
+    {
+        source.volume = AttackVolume;
+        source.PlayOneShot(GetRandomClip(AttackClips));
     }
 
     private AudioClip GetRandomClip(AudioClip[] array)

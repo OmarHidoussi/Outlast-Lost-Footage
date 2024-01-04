@@ -152,6 +152,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screenshot"",
+                    ""type"": ""Button"",
+                    ""id"": ""b57cca79-89c2-44be-a952-94477de98947"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -396,6 +405,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""TiltRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9280b43-8022-4a99-9529-11cac329b9af"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screenshot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -446,6 +466,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         m_Player_TiltLeft = m_Player.FindAction("TiltLeft", throwIfNotFound: true);
         m_Player_TiltRight = m_Player.FindAction("TiltRight", throwIfNotFound: true);
+        m_Player_Screenshot = m_Player.FindAction("Screenshot", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_RightStick = m_Camera.FindAction("RightStick", throwIfNotFound: true);
@@ -522,6 +543,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraZoom;
     private readonly InputAction m_Player_TiltLeft;
     private readonly InputAction m_Player_TiltRight;
+    private readonly InputAction m_Player_Screenshot;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -540,6 +562,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputAction @TiltLeft => m_Wrapper.m_Player_TiltLeft;
         public InputAction @TiltRight => m_Wrapper.m_Player_TiltRight;
+        public InputAction @Screenshot => m_Wrapper.m_Player_Screenshot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -591,6 +614,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @TiltRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltRight;
                 @TiltRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltRight;
                 @TiltRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTiltRight;
+                @Screenshot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
+                @Screenshot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
+                @Screenshot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -637,6 +663,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @TiltRight.started += instance.OnTiltRight;
                 @TiltRight.performed += instance.OnTiltRight;
                 @TiltRight.canceled += instance.OnTiltRight;
+                @Screenshot.started += instance.OnScreenshot;
+                @Screenshot.performed += instance.OnScreenshot;
+                @Screenshot.canceled += instance.OnScreenshot;
             }
         }
     }
@@ -690,6 +719,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnTiltLeft(InputAction.CallbackContext context);
         void OnTiltRight(InputAction.CallbackContext context);
+        void OnScreenshot(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

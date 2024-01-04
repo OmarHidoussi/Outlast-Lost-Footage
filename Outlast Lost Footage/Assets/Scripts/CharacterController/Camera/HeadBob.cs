@@ -11,7 +11,7 @@ public class HeadBob : MonoBehaviour
 
     [Header("Walk")]
     [SerializeField, Range(0, 0.1f)] private float Yamplitude, Xamplitude, BreathAmplitude = 0.015f;
-    [SerializeField, Range(0, 30)] private float frequency, Breathfrequency = 10.0f;
+    [SerializeField, Range(0, 60)] private float frequency, Breathfrequency = 10.0f;
 
     /*[Header("Run")]
     [SerializeField, Range(0, 0.1f)] private float RunYamplitude, RunXamplitude, RunBreathAmplitude = 0.015f;
@@ -102,9 +102,9 @@ public class HeadBob : MonoBehaviour
         }
 
         frequency = (movement.Speed * FrequencyMultiplier * SpeedMultiplier) * 1.4f;
-        frequency = Mathf.Clamp(frequency, 10, 16);
-        Yamplitude = (ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x) / 26.5f;
-        Xamplitude = (ValueMultiplier * SpeedMultiplier / 2 * input.Mov_Axis.x) / 30;
+        frequency = Mathf.Clamp(frequency, 8, 18);
+        Yamplitude = (ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x) / 36.5f;
+        Xamplitude = (ValueMultiplier * SpeedMultiplier / 2 * input.Mov_Axis.x) / 40;
 
         pos.y += Mathf.Sin(Time.time * frequency) * Yamplitude;
         pos.x -= Mathf.Cos(Time.time * frequency/ 2) * Xamplitude;

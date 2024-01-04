@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
     public bool IsTitling;
     public bool CameraOn;
     public bool InfraredOn;
+    public bool Screenshot;
 
     [Header("Logic")]
     public TwoBoneIKConstraint constraint;
@@ -110,6 +111,9 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        input.Player.Screenshot.performed += OnScreenshotPerformed;
+        input.Player.Screenshot.canceled += OnScreenshotCanceled;
+
     }
 
     private void OnDisable()
@@ -166,6 +170,10 @@ public class InputManager : MonoBehaviour
             input.Player.InfraredOff.performed -= OnInfraredOffPerformed;
             input.Player.InfraredOff.canceled -= OnInfraredOffCanceled;
         }
+
+        input.Player.Screenshot.performed -= OnScreenshotPerformed;
+        input.Player.Screenshot.canceled -= OnScreenshotCanceled;
+
     }
 
     // Start is called before the first frame update
@@ -423,6 +431,16 @@ public class InputManager : MonoBehaviour
     private void OnInfraredOffCanceled(InputAction.CallbackContext Button) { }
 
     private void OnInfraredOnCanceled(InputAction.CallbackContext Button) { }
+
+    private void OnScreenshotPerformed(InputAction.CallbackContext Button)
+    {
+        Screenshot = Button.ReadValueAsButton();
+    }
+
+    private void OnScreenshotCanceled(InputAction.CallbackContext Button) 
+    {
+        Screenshot = false;
+    }
 
     #endregion
 

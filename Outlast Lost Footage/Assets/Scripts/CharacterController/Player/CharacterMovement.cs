@@ -80,6 +80,9 @@ public class CharacterMovement : MonoBehaviour
         if (input.Mov_Axis.y != 0 && input.Mov_Axis.x != 0)
             targetSpeed *= 0.75f;
 
+        if (input.Mov_Axis.x < 0)
+            targetSpeed = WalkSpeed;
+
         Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
 
         if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Running Jump") ||

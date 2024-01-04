@@ -32,7 +32,7 @@ public class Activation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(input.CameraOn)
+        if(input.CameraOn && !input.InfraredOn)
             Screenshot();
 
     }
@@ -63,7 +63,7 @@ public class Activation : MonoBehaviour
 
     void Screenshot()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) || input.Screenshot)
         {
             screenshot.GetSetImage_BTM();
         }

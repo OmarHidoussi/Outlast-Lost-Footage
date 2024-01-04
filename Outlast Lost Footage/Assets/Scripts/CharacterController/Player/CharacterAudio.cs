@@ -186,7 +186,7 @@ public class CharacterAudio : MonoBehaviour
         movement.GetComponent<InputManager>().Jump = false;
     }
 
-    bool IsSnapping = false;
+    [HideInInspector] public bool IsSnapping = false;
     [HideInInspector] public Transform Location;
     public void StartSnapping()
     {
@@ -209,6 +209,7 @@ public class CharacterAudio : MonoBehaviour
 
     public void SnapPlayerToPosition()
     {
+        movement.GetComponent<InputManager>().Mov_Axis = Vector2.zero;
         m_rigidbody.transform.position = Vector3.MoveTowards(m_rigidbody.transform.position, Location.position, 1.1f * Time.deltaTime);
         m_rigidbody.transform.rotation = Quaternion.Slerp(m_rigidbody.transform.rotation, Location.rotation, 15 * Time.deltaTime);
     }

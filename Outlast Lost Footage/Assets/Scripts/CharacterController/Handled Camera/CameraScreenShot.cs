@@ -11,6 +11,12 @@ public class CameraScreenShot : MonoBehaviour
     public string fileName;
     public RenderTexture RT;
 
+    [Header("Screenshot")]
+    public Animator anim;
+    public AudioSource source;
+    public float volume;
+    public AudioClip clip;
+
     #endregion
 
     #region BuitIn Methods
@@ -77,11 +83,14 @@ public class CameraScreenShot : MonoBehaviour
         GetImage();
         yield return new WaitForSeconds(0.1f);
         SetImage();
+        anim.SetBool("Saved", false);
         Debug.Log("Image Saved");
     }
 
     public void GetSetImage_BTM()
     {
+        anim.SetBool("Saved", true);
+        source.PlayOneShot(clip);
         StartCoroutine(RenderProcess());
     }
     
