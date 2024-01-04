@@ -14,6 +14,6 @@ public class PressButtonTrigger : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Destroy(gameObject);
+
     }
 }

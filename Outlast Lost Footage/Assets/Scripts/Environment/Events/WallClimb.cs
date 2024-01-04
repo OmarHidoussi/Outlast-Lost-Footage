@@ -25,14 +25,14 @@ public class WallClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            //SupportingPlatform.SetActive(!FindObjectOfType<CharacterAudio>().IsSnapping);
+            SupportingPlatform.SetActive(false);
+            SupportingPlatform.SetActive(!FindObjectOfType<CharacterAudio>().IsSnapping);
 
             if (other.GetComponentInParent<InputManager>().Jump)
             {
@@ -46,7 +46,7 @@ public class WallClimb : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //SupportingPlatform.SetActive(false);
+            SupportingPlatform.SetActive(false);
         }
     }
 

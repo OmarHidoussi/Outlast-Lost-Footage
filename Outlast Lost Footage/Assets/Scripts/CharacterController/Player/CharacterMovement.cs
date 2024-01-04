@@ -24,10 +24,10 @@ public class CharacterMovement : MonoBehaviour
 
     [HideInInspector] public float StaminaTimer;
     [HideInInspector] public float RunRestartTimer;
-    [HideInInspector] public CapsuleCollider col;
 
     float NormalHeight;
     InputManager input;
+    CapsuleCollider col;
     CharacterAnimator anim;
 
     #endregion
@@ -81,7 +81,7 @@ public class CharacterMovement : MonoBehaviour
             targetSpeed *= 0.75f;
 
         if (input.Mov_Axis.x < 0)
-            targetSpeed *= 0.63f;
+            targetSpeed = WalkSpeed;
 
         Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
 
@@ -111,17 +111,13 @@ public class CharacterMovement : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(RayDirection.transform.position, RayDirection.transform.forward);
 
-        if (Physics.Raycast(ray, out hit, 1.5f))
+        if (Physics.Raycast(ray, out hit, 1f))
         {
             if (hit.transform.tag == "Wall")
             {
                 if (input.Mov_Axis.x > 0)
                 {
                     Speed = 0;
-                    input.Mov_Axis.x = 0;
-                    anim.CharacterAnim.SetFloat("VelocityY", 0);
-                    anim.CharacterAnim.SetBool("Sprinting", false);
-                    anim.CharacterAnim.SetBool("Jump", false);
                 }
             }
         }
@@ -129,7 +125,7 @@ public class CharacterMovement : MonoBehaviour
 
     void HandleCrouch()
     {
-        if (input.IsCrouching || anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Climbing"))
+        if (input.IsCrouching)
         {
             col.height = Mathf.Lerp(col.height, CrouchHeight, LerpSpeed * Time.deltaTime);
         }

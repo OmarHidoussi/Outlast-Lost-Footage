@@ -103,7 +103,6 @@ public class CharacterAudio : MonoBehaviour
 
         if (IsSnapping)
             SnapPlayerToPosition();
-
     }
     #endregion
 
@@ -211,18 +210,8 @@ public class CharacterAudio : MonoBehaviour
     public void SnapPlayerToPosition()
     {
         movement.GetComponent<InputManager>().Mov_Axis = Vector2.zero;
-        m_rigidbody.transform.position = Vector3.MoveTowards(m_rigidbody.transform.position, Location.position, 3f * Time.deltaTime);
+        m_rigidbody.transform.position = Vector3.MoveTowards(m_rigidbody.transform.position, Location.position, 1.1f * Time.deltaTime);
         m_rigidbody.transform.rotation = Quaternion.Slerp(m_rigidbody.transform.rotation, Location.rotation, 15 * Time.deltaTime);
-        if(Vector3.Distance(m_rigidbody.transform.position, Location.position) < 0.075f)
-        {
-            movement.GetComponent<InputManager>().CanMove = true;
-            movement.GetComponent<InputManager>().IsCrouching = true;
-            Characteranim.CharacterAnim.SetBool("WallClimb", false);
-            m_rigidbody.useGravity = true;
-            CamMovement.Sensetivity = RestoreCameraMovement;
-            m_rigidbody.transform.position = Location.position;
-            IsSnapping = false;
-        }
     }
 
     private float GetRandomPitch() 

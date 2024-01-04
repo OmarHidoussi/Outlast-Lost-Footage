@@ -95,16 +95,11 @@ public class CharacterInteraction : MonoBehaviour
 
     void DisplayInteractText(Sprite Button,string text, bool display)
     {
-        if(interactionButton != null)
-        {
-            interactionText.text = text;
-            interactionButton.sprite = Button;
+        interactionText.text = text;
+        interactionButton.sprite = Button;
 
-            interactionButton.gameObject.GetComponent<Animator>().SetBool("Display", display);
-            interactionText.gameObject.GetComponent<Animator>().SetBool("Display", display);
-        }
-        else
-            interactionButton.sprite = null;
+        interactionButton.gameObject.GetComponent<Animator>().SetBool("Display", display);
+        interactionText.gameObject.GetComponent<Animator>().SetBool("Display", display);
     }
 
     #endregion
