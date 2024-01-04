@@ -31,9 +31,6 @@ public class WallClimb : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            SupportingPlatform.SetActive(false);
-            SupportingPlatform.SetActive(!FindObjectOfType<CharacterAudio>().IsSnapping);
-
             if (other.GetComponentInParent<InputManager>().Jump)
             {
                 other.GetComponentInChildren<CharacterAudio>().Location = location;
@@ -46,7 +43,7 @@ public class WallClimb : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            SupportingPlatform.SetActive(false);
+
         }
     }
 

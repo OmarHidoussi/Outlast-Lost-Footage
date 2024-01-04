@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 27106104}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 98520354}
   m_Layer: 0
   m_Name: Cube (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 329262549}
   m_Layer: 0
   m_Name: Cube (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -1870,7 +1870,7 @@ GameObject:
   - component: {fileID: 439704570}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -4689,7 +4689,7 @@ GameObject:
   - component: {fileID: 1008292444}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -5376,6 +5376,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3640529656404819886, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: CameraSFX_GRP
+      value: 
+      objectReference: {fileID: -1313777002569833091, guid: c188145fc5bc0eb4f9f045c053193a96, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
 --- !u!4 &1069266568 stripped
@@ -6460,6 +6464,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 89507837}
     m_Modifications:
+    - target: {fileID: 6106426058857467193, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 6376828741973518161, guid: 92cf053142e25144bbc5bddd2d3e318e, type: 3}
       propertyPath: HandAim
       value: 
@@ -6575,7 +6583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242839877}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.4766028, z: -0.5210923}
+  m_LocalPosition: {x: 0, y: 0.4766028, z: -0.587}
   m_LocalScale: {x: 1, y: 0.049684502, z: 2.1900048}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7266,7 +7274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9186327960118147334, guid: 53213f63de679424583fd129e80e6026, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.32744238
+      value: 1.95
       objectReference: {fileID: 0}
     - target: {fileID: 9186327960118147334, guid: 53213f63de679424583fd129e80e6026, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7298,19 +7306,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9186327960118147335, guid: 53213f63de679424583fd129e80e6026, type: 3}
       propertyPath: InteractionText
-      value: While spriting to climb
+      value: Jump while spriting to climb
       objectReference: {fileID: 0}
     - target: {fileID: 9186327960118147335, guid: 53213f63de679424583fd129e80e6026, type: 3}
       propertyPath: GamepadInteractionButton
       value: 
-      objectReference: {fileID: 21300000, guid: 1fe81fa3fa896a843949281aac226c8d, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186327960118147335, guid: 53213f63de679424583fd129e80e6026, type: 3}
+      propertyPath: KeyboardInteractionButton
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9186327960118147337, guid: 53213f63de679424583fd129e80e6026, type: 3}
       propertyPath: m_Name
       value: Crouch_ButtonTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 9186327960118147337, guid: 53213f63de679424583fd129e80e6026, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53213f63de679424583fd129e80e6026, type: 3}
@@ -9078,7 +9090,7 @@ GameObject:
   - component: {fileID: 1711055829}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -10309,7 +10321,7 @@ GameObject:
   - component: {fileID: 2002820100}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

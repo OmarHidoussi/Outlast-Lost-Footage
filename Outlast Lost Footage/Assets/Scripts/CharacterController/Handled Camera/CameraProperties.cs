@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -33,6 +34,7 @@ public class CameraProperties : MonoBehaviour
     [Header("ZoomSFX")]
     public AudioSource source;
     public AudioClip ZoomLoop;
+    public AudioMixerGroup CameraSFX_GRP;
     public float ZoomInPitch, ZoomOutPitch;
 
     private Controls input = null;
@@ -179,11 +181,12 @@ public class CameraProperties : MonoBehaviour
      {
          if (!source.isPlaying)
          {
-             source.pitch = zoomInput > 0 ? ZoomInPitch : ZoomOutPitch;
-             source.clip = ZoomLoop;
-             source.loop = true;
-             source.Play();
-         }
+            source.pitch = zoomInput > 0 ? ZoomInPitch : ZoomOutPitch;
+            source.clip = ZoomLoop;
+            source.outputAudioMixerGroup = CameraSFX_GRP;
+            source.loop = true;
+            source.Play();
+        }
      }
 
      void StopZoomSFX()
