@@ -51,6 +51,7 @@ public class Activation : MonoBehaviour
     public void Reload()
     {
         functionalities.LowBatteryAnim.gameObject.GetComponent<Image>().color = functionalities.PureScreenColor;
+        Debug.Log("Reloaded");
         Source.Play();
     }
 

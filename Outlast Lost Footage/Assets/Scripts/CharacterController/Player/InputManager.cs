@@ -225,7 +225,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.R))
+        /*if (Input.GetKeyUp(KeyCode.R))
         {
             if (!CameraOn)
                 return;
@@ -238,7 +238,7 @@ public class InputManager : MonoBehaviour
             {
                 interaction.DisplayHelpText("Battery is full", true);
             }
-        }
+        }*/
 
         Sprint();
     }
