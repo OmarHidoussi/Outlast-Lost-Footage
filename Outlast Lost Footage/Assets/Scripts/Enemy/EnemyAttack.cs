@@ -8,6 +8,8 @@ public class EnemyAttack : MonoBehaviour
     #region Variables
 
     public CharacterStats Player;
+    public int Damage;
+    public Animator anim;
 
     #endregion
 
@@ -17,6 +19,7 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         Player = FindObjectOfType<CharacterStats>();
+        anim = GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,12 +32,15 @@ public class EnemyAttack : MonoBehaviour
 
     #region Custom Methods
 
-    public void Hit()
+    public void OnTriggerEnter(Collider other)
     {
-        //Player = FindObjectOfType<CharacterStats>();
-        Player.Health -= 50;
-
-        //Swing SFX
+        if(other.gameObject.tag == "Player")
+        {
+            if(anim.GetCurrentAnimatorStateInfo(1).IsName("Standing Melee Attack Downward"))
+            {
+                Player.Health -= Damage;
+            }
+        }
     }
 
     #endregion

@@ -89,10 +89,15 @@ public class EnemyAudio : MonoBehaviour
         source.PlayOneShot(GetRandomClip(RunFootStepsClips));
     }
 
-    public void Hit()
+    public void Attack()
     {
         source.volume = AttackVolume;
         source.PlayOneShot(GetRandomClip(AttackClips));
+    }
+
+    public void Hit()
+    {
+        // Play Hit Sound
     }
 
     private AudioClip GetRandomClip(AudioClip[] array)

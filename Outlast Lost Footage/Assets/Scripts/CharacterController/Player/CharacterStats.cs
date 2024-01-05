@@ -11,7 +11,8 @@ public class CharacterStats : MonoBehaviour
     CameraState CamState;
     public int MaxCollectedBatteries;
     public int BatteryCounter;
-    public int Health;
+    public float Health;
+    public bool RegainHealth;
 
     InputManager input;
     CharacterAnimator anim;
@@ -30,6 +31,9 @@ public class CharacterStats : MonoBehaviour
     void Update()
     {
         if (input.Reload) UpdateStats();
+
+        if (RegainHealth) Heal();
+
         if (Health <= 0)
         {
             this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
@@ -49,6 +53,24 @@ public class CharacterStats : MonoBehaviour
         if (BatteryCounter > 0)
         {
             BatteryCounter -= 1;
+        }
+    }
+
+    public float healthIncreaseRate = 10.0f;
+    void Heal()
+    {
+        if(Health >= 100)
+        {
+            Health = 100;
+            RegainHealth = false;
+        }
+
+        if (Health < 100)
+        {
+            Health += healthIncreaseRate * Time.deltaTime;
+
+            // Ensure health doesn't exceed the maximum
+            Health = Mathf.Min(Health, 100f);
         }
     }
 

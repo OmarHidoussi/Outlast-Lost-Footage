@@ -9,8 +9,11 @@ public class CameraEffects : MonoBehaviour
 
     public CharacterMovement movement;
     public CharacterAudio info;
+    public CharacterStats stats;
     public PostProcessVolume Player_Volume;
     public float TransitionSpeed;
+    public float CurrentHealth;
+
 
     [Header("Effects")]
     Vignette vignette;
@@ -28,7 +31,9 @@ public class CameraEffects : MonoBehaviour
     void Start()
     {
         info = GetComponentInChildren<CharacterAudio>();
+        stats = GetComponentInParent<CharacterStats>();
 
+        CurrentHealth = stats.Health;
         if (Player_Volume.profile.TryGetSettings(out vignette))
         {
             vignette.intensity.value = Mathf.Clamp((movement.RunDuration / movement.RunRestartTimer) * 0.3f, 0f, 0.3f);
@@ -73,7 +78,7 @@ public class CameraEffects : MonoBehaviour
     {
         PlayerStamina();
         PlayerSlide();
-        PlayerDead();
+        PlayerHealth();
     }
     #endregion
 
@@ -119,13 +124,18 @@ public class CameraEffects : MonoBehaviour
         }    
     }
 
-    void PlayerDead()
+    void PlayerHealth()
     {
-        if(info.Characteranim.CharacterAnim.GetBool("Dead"))
+        // in this function handles the camera effect
+        if (CurrentHealth > stats.Health)       
         {
             vignette.color.value = RedVignette;
             vignette.intensity.value = 0.45f;
+            stats.RegainHealth = true;
         }
+
+        if (!stats.RegainHealth)
+            CurrentHealth = stats.Health;
     }
 
     #endregion
