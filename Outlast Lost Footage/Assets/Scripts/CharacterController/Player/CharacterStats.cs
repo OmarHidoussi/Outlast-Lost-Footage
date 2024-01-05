@@ -13,8 +13,6 @@ public class CharacterStats : MonoBehaviour
     public int BatteryCounter;
     public int Health;
 
-    public GameObject[] Batteries;
-
     InputManager input;
     CharacterAnimator anim;
 
@@ -26,24 +24,12 @@ public class CharacterStats : MonoBehaviour
     {
         input = GetComponent<InputManager>();
         anim = GetComponent<CharacterAnimator>();
-
-        for (int i = 0; i < Batteries.Length; i++)
-        {
-            if (i < BatteryCounter)
-            {
-                Batteries[i].SetActive(true);
-            }
-            else
-                Batteries[i].SetActive(false);
-
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (input.Reload) UpdateStats();
-
         if (Health <= 0)
         {
             this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
@@ -63,7 +49,6 @@ public class CharacterStats : MonoBehaviour
         if (BatteryCounter > 0)
         {
             BatteryCounter -= 1;
-            Batteries[BatteryCounter].SetActive(false);
         }
     }
 

@@ -111,7 +111,9 @@ public class CharacterMovement : MonoBehaviour
         RaycastHit hit;
 
         Ray ray = new Ray(RayDirection.transform.position, RayDirection.transform.forward);
-        if (Physics.Raycast(ray, out hit, 1.5f))
+
+        // Check if the distance is less than 2.0f
+        if (Physics.Raycast(ray, out hit, 2.0f))
         {
             if (hit.transform.tag == "Wall")
             {
@@ -126,6 +128,7 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
+
 
     void HandleCrouch()
     {

@@ -107,7 +107,6 @@ public class EnemyAudio : MonoBehaviour
 
     void Patrol()
     {
-        Debug.Log("PatrolDialogue");
 
         // Update the dialogue timer
         dialogueTimer += Time.deltaTime;
@@ -156,14 +155,18 @@ public class EnemyAudio : MonoBehaviour
 
         dialogueTimer += Time.deltaTime;
 
+
         // Check if enough time has passed for a new dialogue
-        if (dialogueTimer >= dialogueInterval)
+        if (dialogueTimer >= dialogueInterval / 2.2f)
         {
             // Reset the timer
             dialogueTimer = 0f;
 
             // Stop the audio source before playing a new dialogue
             DialogueSource.Stop();
+
+            Debug.Log("SearchDialogue");
+
 
             // Play the dialogue if not already playing
             if (!DialogueSource.isPlaying)
