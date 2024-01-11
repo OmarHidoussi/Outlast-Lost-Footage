@@ -4,7 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
+
 
 public class CameraFunctionalities : MonoBehaviour
 {
@@ -32,8 +34,8 @@ public class CameraFunctionalities : MonoBehaviour
 
     [Header("CameraState")]
     public GameObject NV_Lights;
-    public PostProcessVolume m_volume;
-    public PostProcessProfile CameraOFF, CameraON, CameraNightVision;
+    public Volume m_volume;
+    public VolumeProfile CameraOFF, CameraON, CameraNightVision;
     public Image NightVision, NightVisionLights;
     public Sprite NV_ON, NV_OFF, NVL_ON, NVL_OFF;
     public InputManager input;
@@ -162,10 +164,10 @@ public class CameraFunctionalities : MonoBehaviour
 
     void HandleCameraState()
     {
-        if (!input.CameraOn)
+        /*if (!input.CameraOn)
         {
             m_volume.profile = CameraOFF;
-        }
+        }*/
         
         if (input.CameraOn)
         {

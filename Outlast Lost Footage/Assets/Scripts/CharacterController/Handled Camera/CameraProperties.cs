@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
 public class CameraProperties : MonoBehaviour
 {
@@ -13,11 +14,12 @@ public class CameraProperties : MonoBehaviour
     #region Variables
     public Camera cam;
     public float MinFOV, MaxFOV;
-    public PostProcessVolume m_Volume;
+    HDAdditionalCameraData hdCameraData;
+    //public PostProcessVolume m_Volume;
 
     [Header("Aperture")]
     public float MaxAperture;
-    DepthOfField depthOfField;
+    //DepthOfField depthOfField;
 
     [Header("Zoom")]
     public float mouseScrollSpeed;
@@ -67,23 +69,24 @@ public class CameraProperties : MonoBehaviour
     {
 
         cam = GetComponent<Camera>();
+        hdCameraData = cam.GetComponent<HDAdditionalCameraData>();
 
-        DepthOfField depth;
+        /*DepthOfField depth;
         if(m_Volume.profile.TryGetSettings(out depth))
         {
             depthOfField = depth;
-        }
+        }*/
 
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        DepthOfField depth;
+        /*DepthOfField depth;
         if (m_Volume.profile.TryGetSettings(out depth))
         {
             depthOfField = depth;
-        }
+        }*/
 
         if (cam.fieldOfView == PreviousFOV)
         {
@@ -98,6 +101,7 @@ public class CameraProperties : MonoBehaviour
         ApertureAdjustment();
         UIAdjustment();
     }
+
     #endregion
 
     #region CustomMethods
@@ -131,7 +135,7 @@ public class CameraProperties : MonoBehaviour
             if (Mathf.Abs(newZoom - cam.fieldOfView) > 0.01f)
             {
                 CurrentRange = Mathf.Clamp(CurrentRange + (zoomChange * 0.1f), MinRange, MaxRange);
-                CurrentIntensity = Mathf.Clamp(CurrentIntensity + zoomChange * 0.015f, MinIntensity, MaxIntensity);
+                CurrentIntensity = Mathf.Clamp(CurrentIntensity + zoomChange * 3f, MinIntensity, MaxIntensity);
                 CurrentLightField = Mathf.Clamp(CurrentLightField - zoomChange * 1.5f, MinLightField, MaxLightField);
 
                 cam.fieldOfView = newZoom;
@@ -197,16 +201,20 @@ public class CameraProperties : MonoBehaviour
      
     void ApertureAdjustment()
     {
-        float Aperture = depthOfField.aperture.value;
+        //float Aperture = depthOfField.aperture.value;
         float CurrentFOV = cam.fieldOfView;
         float ApertureScaler = ((CurrentFOV - MinFOV) + MinFOV) / MinFOV;
-        depthOfField.aperture.value = MaxAperture / ApertureScaler; 
+        //depthOfField.aperture.value = MaxAperture / ApertureScaler; 
+        hdCameraData.physicalParameters.aperture = MaxAperture / ApertureScaler;
     }
 
     void UIAdjustment()
     {
-        ZoomSlider.value = depthOfField.aperture.value;
-        ApertureText.text = "F" + depthOfField.aperture.value.ToString("0.0");
+        //HDAdditionalCameraData hdCameraData = cam.GetComponent<HDAdditionalCameraData>();
+        //ZoomSlider.value = depthOfField.aperture.value;
+        //ApertureText.text = "F" + depthOfField.aperture.value.ToString("0.0");
+        ZoomSlider.value = hdCameraData.physicalParameters.aperture;
+        ApertureText.text = "F" + hdCameraData.physicalParameters.aperture.ToString("0.0");
     }
 
     #endregion

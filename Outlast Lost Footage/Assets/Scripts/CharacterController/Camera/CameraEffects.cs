@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
 public class CameraEffects : MonoBehaviour
 {
@@ -10,10 +11,9 @@ public class CameraEffects : MonoBehaviour
     public CharacterMovement movement;
     public CharacterAudio info;
     public CharacterStats stats;
-    public PostProcessVolume Player_Volume;
+    public VolumeProfile Player_Volume;
     public float TransitionSpeed;
     public float CurrentHealth;
-
 
     [Header("Effects")]
     Vignette vignette;
@@ -34,40 +34,40 @@ public class CameraEffects : MonoBehaviour
         stats = GetComponentInParent<CharacterStats>();
 
         CurrentHealth = stats.Health;
-        if (Player_Volume.profile.TryGetSettings(out vignette))
+        if (Player_Volume.TryGet(out vignette))
         {
             vignette.intensity.value = Mathf.Clamp((movement.RunDuration / movement.RunRestartTimer) * 0.3f, 0f, 0.3f);
         }
         else
         {
-            Debug.LogError("Failed to get Vignette settings from the PostProcessVolume.");
+            Debug.LogError("Failed to get Vignette settings from the Volume Profile.");
         }
 
-        if(Player_Volume.profile.TryGetSettings(out distortion))
+        if (Player_Volume.TryGet(out distortion))
         {
             distortion.intensity.value = 0f;
         }
         else
         {
-            Debug.LogError("Failed to get Lens Distortion settings from the PostProcessVolume.");
+            Debug.LogError("Failed to get Lens Distortion settings from the Volume Profile.");
         }
 
-        if (Player_Volume.profile.TryGetSettings(out aberration))
+        if (Player_Volume.TryGet(out aberration))
         {
             aberration.intensity.value = 0f;
         }
         else
         {
-            Debug.LogError("Failed to get Chromatic Aberration settings from the PostProcessVolume.");
+            Debug.LogError("Failed to get Chromatic Aberration settings from the Volume Profile.");
         }
 
-        if(Player_Volume.profile.TryGetSettings(out motionBlur))
+        if (Player_Volume.TryGet(out motionBlur))
         {
-            motionBlur.shutterAngle.value = 120f;
+            motionBlur.intensity.value = 0.25f;
         }
         else
         {
-            Debug.LogError("Failed to get Motion Blur settings from the PostProcessVolume.");
+            Debug.LogError("Failed to get Motion Blur settings from the Volume Profile.");
         }
 
         vignette.intensity.value = 0f;
@@ -85,49 +85,49 @@ public class CameraEffects : MonoBehaviour
     #region Custom Methods
 
     void PlayerStamina()
-    {   
-        if(movement.isExhausted)
+    {
+        if (movement.isExhausted)
         {
             vignette.intensity.value = (movement.StaminaRegainTimer / movement.StaminaTimer) * vignetteMaxIntensity;
-            distortion.intensity.value = Mathf.Sin(Time.time * movement.StaminaRegainTimer);
+            distortion.intensity.value = (Mathf.Sin(Time.time * movement.StaminaRegainTimer)) / 100f;
 
-            distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.StaminaRegainTimer;
+            distortion.intensity.value = (Mathf.Sin(Time.time * frequency) * movement.StaminaRegainTimer) / 100f;
 
-            aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.StaminaRegainTimer / movement.StaminaTimer);
+            aberration.intensity.value = (Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.StaminaRegainTimer / movement.StaminaTimer)) / 100f;
         }
         else
         {
-            if(movement.RunDuration > movement.StaminaRegainTimer)
+            if (movement.RunDuration > movement.StaminaRegainTimer)
             {
                 float targetIntensity = (movement.RunDuration / movement.RunRestartTimer) * vignetteMaxIntensity;
                 targetIntensity = Mathf.Clamp(targetIntensity, 0f, vignetteMaxIntensity);
                 vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetIntensity, TransitionSpeed * Time.deltaTime);
 
-                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * movement.RunDuration - movement.StaminaRegainTimer * distortionMaxIntensity;
+                distortion.intensity.value = Mathf.Sin(Time.time * frequency) * (movement.RunDuration - movement.StaminaRegainTimer * distortionMaxIntensity) / 100f;
 
-                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * (movement.RunDuration - movement.StaminaRegainTimer / movement.RunRestartTimer - movement.StaminaTimer) * aberrationMaxIntensity;
+                aberration.intensity.value = Mathf.Sin((Time.time * 2 - 1) * frequency) * ((movement.RunDuration - movement.StaminaRegainTimer / movement.RunRestartTimer - movement.StaminaTimer) * aberrationMaxIntensity) / 100f;
             }
         }
     }
-    
+
     void PlayerSlide()
     {
-        if(info.IsSliding)
+        if (info.IsSliding)
         {
-            motionBlur.shutterAngle.value = Mathf.Lerp(motionBlur.shutterAngle.value, 360, TransitionSpeed * 10 * Time.deltaTime);
-            distortion.intensity.value = Mathf.Lerp(distortion.intensity.value, -30, TransitionSpeed * 10 * Time.deltaTime);
+            motionBlur.intensity.value = Mathf.Lerp(motionBlur.intensity.value, 0.5f, TransitionSpeed * 10 * Time.deltaTime);
+            distortion.intensity.value = Mathf.Lerp(distortion.intensity.value, -0.20f, TransitionSpeed * 10 * Time.deltaTime);
         }
         else
         {
-            motionBlur.shutterAngle.value = Mathf.Lerp(motionBlur.shutterAngle.value, 120, TransitionSpeed * Time.deltaTime);
+            motionBlur.intensity.value = Mathf.Lerp(motionBlur.intensity.value, 0.25f, TransitionSpeed * Time.deltaTime);
             distortion.intensity.value = Mathf.Lerp(distortion.intensity.value, 0, TransitionSpeed * Time.deltaTime);
-        }    
+        }
     }
 
     void PlayerHealth()
     {
         // in this function handles the camera effect
-        if (CurrentHealth > stats.Health)       
+        if (CurrentHealth > stats.Health)
         {
             vignette.color.value = RedVignette;
             vignette.intensity.value = 0.45f;
