@@ -11,10 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 1d64af84bdc970c4fae0c1e06dd95b73, type: 3}
   m_ValidKeywords:
   - _COLORMAP
-  - _MASKMAP
   - _MATERIAL_AFFECTS_ALBEDO
   - _MATERIAL_AFFECTS_MASKMAP
-  - _MATERIAL_AFFECTS_NORMAL
   m_InvalidKeywords:
   - _DISABLE_DECALS
   - _DISABLE_SSR_TRANSPARENT
@@ -26,13 +24,13 @@ Material:
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
-  - DecalMeshForwardEmissive
-  - DecalProjectorForwardEmissive
+  - RayTracingPrepass
+  - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
-  - MOTIONVECTORS
-  - RayTracingPrepass
+  - DecalMeshForwardEmissive
+  - DecalProjectorForwardEmissive
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -89,7 +87,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 3c2c832b3dcc6d14a9e6001a116980b2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -101,7 +99,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6838730e03d5bb0458cbe1c60469b396, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OPACITY_MAP:
@@ -157,8 +155,8 @@ Material:
     - _AffectAO: 0
     - _AffectAlbedo: 1
     - _AffectEmission: 0
-    - _AffectMetal: 1
-    - _AffectNormal: 1
+    - _AffectMetal: 0
+    - _AffectNormal: 0
     - _AffectSmoothness: 1
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -178,9 +176,9 @@ Material:
     - _Cutoff: 0
     - _DecalBlend: 1
     - _DecalColorMask0: 15
-    - _DecalColorMask1: 15
-    - _DecalColorMask2: 11
-    - _DecalColorMask3: 8
+    - _DecalColorMask1: 0
+    - _DecalColorMask2: 3
+    - _DecalColorMask3: 0
     - _DecalMaskMapBlueScale: 1
     - _DecalMeshBiasType: 0
     - _DecalMeshDepthBias: 0
@@ -204,7 +202,7 @@ Material:
     - _GlossyReflections: 1
     - _METALNESS: 0
     - _MaskBlendSrc: 0
-    - _Metallic: 1
+    - _Metallic: 0.445
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
     - _Mode: 3
@@ -226,7 +224,7 @@ Material:
     - _SPECULAR_ROUGHNESS: 1
     - _SPECULAR_WEIGHT: 0
     - _Shininess: 0.01
-    - _Smoothness: 0.5
+    - _Smoothness: 0.425
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
@@ -267,7 +265,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BASE_COLOR: {r: 1, g: 1, b: 1, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.3301887, g: 0.07320221, b: 0.07320221, a: 1}
     - _COAT_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
