@@ -211,70 +211,6 @@ MonoBehaviour:
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: -0.08988764}
---- !u!114 &-1447250127051818106
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d877a03bef431a847adca8ab343db3e1, type: 3}
-  m_Name: RayTracingSettings
-  m_EditorClassIdentifier: 
-  active: 1
-  rayBias:
-    m_OverrideState: 0
-    m_Value: 0.001
-  extendShadowCulling:
-    m_OverrideState: 0
-    m_Value: 0
-  extendCameraCulling:
-    m_OverrideState: 0
-    m_Value: 0
-  directionalShadowRayLength:
-    m_OverrideState: 0
-    m_Value: 1000
-  directionalShadowFallbackIntensity:
-    m_OverrideState: 0
-    m_Value: 1
---- !u!114 &-963789027348075085
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31394aa05878563408489d5c1688f3a0, type: 3}
-  m_Name: PathTracing
-  m_EditorClassIdentifier: 
-  active: 1
-  enable:
-    m_OverrideState: 0
-    m_Value: 0
-  layerMask:
-    m_OverrideState: 0
-    m_Value:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  maximumSamples:
-    m_OverrideState: 0
-    m_Value: 256
-  minimumDepth:
-    m_OverrideState: 0
-    m_Value: 1
-  maximumDepth:
-    m_OverrideState: 0
-    m_Value: 4
-  maximumIntensity:
-    m_OverrideState: 0
-    m_Value: 10
-  tilingParameters:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 0, w: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,8 +234,6 @@ MonoBehaviour:
   - {fileID: 5805677262493683545}
   - {fileID: 5567516902644747050}
   - {fileID: -9056324332583421872}
-  - {fileID: -963789027348075085}
-  - {fileID: -1447250127051818106}
 --- !u!114 &497750447552572357
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -392,7 +326,7 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: -10
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
