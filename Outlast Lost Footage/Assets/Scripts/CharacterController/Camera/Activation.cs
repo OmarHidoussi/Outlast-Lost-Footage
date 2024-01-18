@@ -32,7 +32,7 @@ public class Activation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(input.CameraOn && !input.InfraredOn)
+        if(input.CameraOn/* && !input.InfraredOn*/)
             Screenshot();
 
     }
