@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.21924, a: 1}
+  m_IndirectSpecularColor: {r: 0.08870706, g: 0.10578805, b: 0.13528931, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8668,6 +8668,7 @@ GameObject:
   - component: {fileID: 1540692299}
   - component: {fileID: 1540692298}
   - component: {fileID: 1540692297}
+  - component: {fileID: 1540692300}
   m_Layer: 7
   m_Name: Area 02 Volume
   m_TagString: Untagged
@@ -8686,8 +8687,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.6422825, y: 4.705908, z: 30.328756}
-  m_Center: {x: 13.810145, y: 1.9840837, z: 0}
+  m_Size: {x: 4.3204813, y: 4.705908, z: 37.56854}
+  m_Center: {x: 15.971046, y: 1.9840837, z: 3.6198902}
 --- !u!114 &1540692298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8702,7 +8703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsGlobal: 0
   priority: 1
-  blendDistance: 2
+  blendDistance: 0.2
   weight: 1
   sharedProfile: {fileID: 11400000, guid: c9977c84c836797479b1157a473dc74f, type: 2}
 --- !u!4 &1540692299
@@ -8720,6 +8721,19 @@ Transform:
   m_Father: {fileID: 1915987976}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1540692300
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540692296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.710609, y: 4.2490864, z: 5.059993}
+  m_Center: {x: 10.460812, y: 2.1423326, z: 0.48181581}
 --- !u!1001 &1549210062
 PrefabInstance:
   m_ObjectHideFlags: 0
