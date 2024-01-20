@@ -5830,6 +5830,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 294071657279436772, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1468151769924717707, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}
       propertyPath: m_RootOrder
       value: 38
@@ -6491,6 +6495,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5212908666902238008, guid: 5018228a81278f24399265dab6b9f357, type: 3}
   m_PrefabInstance: {fileID: 1181605441}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1186510026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186510027}
+  - component: {fileID: 1186510030}
+  - component: {fileID: 1186510029}
+  - component: {fileID: 1186510028}
+  m_Layer: 6
+  m_Name: Area 02 Volume_Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186510027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186510026}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1915987976}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1186510028
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186510026}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.710609, y: 4.2490864, z: 5.059993}
+  m_Center: {x: 10.460812, y: 2.1423326, z: 0.48181581}
+--- !u!65 &1186510029
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186510026}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.3204813, y: 4.705908, z: 37.56854}
+  m_Center: {x: 15.971046, y: 1.9840837, z: 3.6198902}
+--- !u!114 &1186510030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186510026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 1
+  blendDistance: 0.2
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: c9977c84c836797479b1157a473dc74f, type: 2}
 --- !u!1 &1208006702
 GameObject:
   m_ObjectHideFlags: 0
@@ -7062,6 +7143,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1558244559}
     m_Modifications:
     - target: {fileID: 430622388467722168, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 430622388467722168, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_Intensity
       value: 513.77936
       objectReference: {fileID: 0}
@@ -7084,6 +7169,10 @@ PrefabInstance:
     - target: {fileID: 1108188568076771298, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_InnerSpotPercent
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119017222581494057, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7264288711542531213, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_RootOrder
@@ -8670,7 +8759,7 @@ GameObject:
   - component: {fileID: 1540692297}
   - component: {fileID: 1540692300}
   m_Layer: 7
-  m_Name: Area 02 Volume
+  m_Name: Area 02 Volume_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10969,6 +11058,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1540692299}
+  - {fileID: 1186510027}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
