@@ -14,6 +14,7 @@ public class CameraScreenShot : MonoBehaviour
     [Header("Screenshot")]
     public Animator anim;
     public AudioSource source;
+    public GameObject Flashlight;
     public float volume;
     public AudioClip clip;
 

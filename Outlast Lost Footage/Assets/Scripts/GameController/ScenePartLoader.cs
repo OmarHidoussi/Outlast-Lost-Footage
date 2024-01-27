@@ -3,11 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class ScenePartLoader : MonoBehaviour
 {
+
+    #region Variables
     //Scene State
     public bool isLoaded;
     public bool shouldLoad;
 
     public string SceneName;
+    #endregion
+
+    #region BuiltInMethods
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +26,32 @@ public class ScenePartLoader : MonoBehaviour
         TriggerCheck();
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            shouldLoad = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            shouldLoad = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            shouldLoad = true;
+        }
+    }
+    #endregion
+
+    #region CustomMethods
     void LoadScene()
     {
         if(!isLoaded)
@@ -38,29 +69,6 @@ public class ScenePartLoader : MonoBehaviour
             isLoaded = false;
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            shouldLoad = false;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            shouldLoad = true;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            shouldLoad = true;
-        }
-    }
 
     void TriggerCheck()
     {
@@ -71,4 +79,7 @@ public class ScenePartLoader : MonoBehaviour
         else
             UnloadScene();
     }
+
+    #endregion
+
 }
