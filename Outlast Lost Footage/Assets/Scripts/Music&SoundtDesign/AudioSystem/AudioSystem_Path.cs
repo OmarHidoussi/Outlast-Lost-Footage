@@ -49,8 +49,8 @@ public class AudioSystem_Path : MonoBehaviour
             SplinePoint[i] = transform.GetChild(i).position;
         }
 
-        source.volume = Volume;
-        source.pitch = Pitch;
+        //source.volume = Volume;
+        //source.pitch = Pitch;
 
     }
 

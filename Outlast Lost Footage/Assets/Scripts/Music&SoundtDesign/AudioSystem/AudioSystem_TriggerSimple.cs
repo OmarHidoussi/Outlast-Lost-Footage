@@ -33,10 +33,12 @@ public class AudioSystem_TriggerSimple : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         col = GetComponent<BoxCollider>();
 
         if (MixerGroup != null)
             source.outputAudioMixerGroup = MixerGroup;
+
     }
 
     // Update is called once per frame
