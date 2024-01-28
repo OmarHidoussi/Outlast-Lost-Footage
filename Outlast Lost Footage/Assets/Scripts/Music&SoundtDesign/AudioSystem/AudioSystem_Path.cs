@@ -32,7 +32,7 @@ public class AudioSystem_Path : MonoBehaviour
     void Start()
     {
 
-        AudioSource source = PathObject.GetComponent<AudioSource>();
+        AudioSource source = audioMover.GetComponent<AudioSource>();
 
         if (MixerGroup != null)
         {
