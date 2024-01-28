@@ -21,12 +21,17 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
     public float BlendSpeed;
 
     [Space]
+    public bool PlayOnEnter;
+    public bool PlayOnAwake;
+
+    [Space]
     public bool DestroyOnEnter;
     public bool DestroyOnExit;
     public bool Loop;
 
     private BoxCollider col;
-    private bool HasExited;
+    private bool HasExited, HasEntered;
+
     #endregion
 
     #region BuiltInMethods
@@ -39,6 +44,15 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
         Gizmos.DrawWireCube(col.center + transform.position, (col.size + new Vector3(BlendSpeed, BlendSpeed, BlendSpeed) * 0.2f));
     }
 
+    void Awake()
+    {
+        if (PlayOnAwake)
+        {
+            source.playOnAwake = true;
+            source.volume = Volume;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +61,16 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
         if (MixerGroup != null)
             source.outputAudioMixerGroup = MixerGroup;
 
+
         source.loop = Loop;
         source.clip = audioClip;
+
+        if (!PlayOnAwake)
+        {
+            source.volume = 0;
+        }
+
+        source.pitch = Pitch;
 
         source.PlayOneShot(audioClip);
         HasExited = true;
@@ -66,6 +88,9 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
         {
             HasExited = false;
 
+            if (PlayOnEnter)
+                HasEntered = true;
+            
             if (DestroyOnEnter)
                 StartCoroutine(destroy());
         }
@@ -75,8 +100,8 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FadeIn());
-
+            if (HasEntered)
+                StartCoroutine(FadeIn());
         }
     }
 

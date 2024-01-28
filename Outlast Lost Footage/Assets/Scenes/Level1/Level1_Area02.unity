@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 194524511}
   - component: {fileID: 194524510}
   m_Layer: 0
-  m_Name: Audio InZone 02
+  m_Name: Audio InZone 02.0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,11 +975,11 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194524509}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3435458671761172869, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
   m_audioClip: {fileID: 8300000, guid: eb96da9101f0db64eb8fd3782e1c1fa9, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1082,6 +1082,8 @@ MonoBehaviour:
   Volume: 0.6
   Pitch: 1
   BlendSpeed: 2
+  PlayOnEnter: 0
+  PlayOnAwake: 1
   DestroyOnEnter: 0
   DestroyOnExit: 0
   Loop: 1
@@ -4886,11 +4888,11 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791103744}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3435458671761172869, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
   m_audioClip: {fileID: 8300000, guid: eb96da9101f0db64eb8fd3782e1c1fa9, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4993,6 +4995,8 @@ MonoBehaviour:
   Volume: 0.6
   Pitch: 1
   BlendSpeed: 2
+  PlayOnEnter: 0
+  PlayOnAwake: 1
   DestroyOnEnter: 0
   DestroyOnExit: 0
   Loop: 1
@@ -5007,8 +5011,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.6, y: 3.74, z: 12.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.6, y: 3.74, z: 12.089086}
+  m_Center: {x: -4.8171758e-11, y: 0, z: -0.20546603}
 --- !u!4 &791103748
 Transform:
   m_ObjectHideFlags: 0
