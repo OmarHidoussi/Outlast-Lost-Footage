@@ -893,21 +893,21 @@ AudioSource:
   m_GameObject: {fileID: 64268266}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8662996769219990163, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d6855ad9f2e8d854c9c9b1902ffc465d, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_PlayOnAwake: 0
+  m_Volume: 0.07
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 164
   DopplerLevel: 0.15
-  MinDistance: 0.04
-  MaxDistance: 606.55
+  MinDistance: 0.5
+  MaxDistance: 8
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -994,8 +994,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 64268267}
   audioClip: {fileID: 8300000, guid: d6855ad9f2e8d854c9c9b1902ffc465d, type: 3}
-  MixerGroup: {fileID: -8662996769219990163, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
-  Volume: 0.4
+  MixerGroup: {fileID: -6650014468307370192, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
+  Volume: 0.02
   Pitch: 1
   Randomize: -0
   DestroyOnEnter: 1
@@ -1021,7 +1021,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64268266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.25, y: 1.079, z: 29.18}
+  m_LocalPosition: {x: -13.26, y: 1.079, z: 22.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16108,8 +16108,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6650014468307370192, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
   m_audioClip: {fileID: 8300000, guid: 60bbe596e52d6654099de68aedd65386, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_PlayOnAwake: 1
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -16120,7 +16120,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 3
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
