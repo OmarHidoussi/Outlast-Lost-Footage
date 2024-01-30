@@ -882,9 +882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2127605368}
-  - component: {fileID: 2127605367}
   - component: {fileID: 1467688137}
-  - component: {fileID: 1069266573}
   m_Layer: 6
   m_Name: PostProcessing_HandledCamera
   m_TagString: Untagged
@@ -907,23 +905,6 @@ Transform:
   m_Father: {fileID: 2022162151036185435}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2127605367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127605366}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 076672257c5f87549979ebf0f17b061a, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 1
 --- !u!114 &1467688137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,24 +921,7 @@ MonoBehaviour:
   priority: 1
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 508e993dc97e33a49a273aed5646c4b3, type: 2}
---- !u!114 &1069266573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127605366}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 0}
+  sharedProfile: {fileID: 11400000, guid: ff9888d57d6626e4eb5843059af8a0d0, type: 2}
 --- !u!1 &2022162150197926568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,7 +1943,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 175
-  m_Range: 8
+  m_Range: 5
   m_SpotAngle: 100
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -7570,6 +7534,14 @@ MonoBehaviour:
   ZoomInPitch: 1.02
   ZoomOutPitch: 1
   zoomDelay: 0.2
+--- !u!124 &2120551331
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022162150582490862}
+  m_Enabled: 1
 --- !u!4 &2022162150892027727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3356848221482647788, guid: 1d261e381de5fe843b7a02f9b42ea5c8, type: 3}
@@ -7717,6 +7689,7 @@ MonoBehaviour:
   RT: {fileID: 8400000, guid: aa9b260504d5c1f46b3fa02864ad4979, type: 2}
   anim: {fileID: 1306117273}
   source: {fileID: 2022162150524547771}
+  Flashlight: {fileID: 0}
   volume: 0.15
   clip: {fileID: 8300000, guid: 1718ad7a30d0f874eb971878737c6281, type: 3}
 --- !u!114 &2022162150524547768
