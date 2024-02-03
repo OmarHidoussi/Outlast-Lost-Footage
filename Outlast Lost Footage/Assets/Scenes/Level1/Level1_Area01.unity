@@ -7360,23 +7360,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454380895}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &454416730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 950140568919051108, guid: 71caf66c4ee5f8a4f8d605bc46eb5e15, type: 3}
-  m_PrefabInstance: {fileID: 1439870754}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &454416732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454416730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44142419377a54a888bc02a1d67e01f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &454416733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 460567264499585502, guid: 71caf66c4ee5f8a4f8d605bc46eb5e15, type: 3}
@@ -24504,6 +24487,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1439870759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439870757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e60a0b9b3e1e84ab904c739c38fe70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  Offset: {x: 0, y: 0, z: 0}
+  SetParent: 0
+--- !u!65 &1439870760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439870757}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7311645, y: 3.2873878, z: 2.6984966}
+  m_Center: {x: 0.22928482, y: 1.6887369, z: 0.07650542}
 --- !u!4 &1441549772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1468151769924717707, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}

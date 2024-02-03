@@ -184,6 +184,13 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
+
+    public void ResetAfterCutScene()
+    {
+        input.CanMove = true;
+        this.GetComponentInChildren<CameraMovement>().Sensetivity = 400;
+    }
+
     #endregion
 
 }

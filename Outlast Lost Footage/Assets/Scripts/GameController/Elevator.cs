@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Elevator : MonoBehaviour
+{
+
+    #region Variables
+
+    [HideInInspector] public Transform Player;
+    public Vector3 Offset;
+    public bool SetParent;
+    #endregion
+
+
+    #region BuiltInMethods
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Player = FindObjectOfType<InputManager>().transform;
+        SetParent = false;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        if (SetParent)
+        {
+            Player.GetComponentInParent<InputManager>().MidAir = false;
+            Player.GetComponentInParent<Rigidbody>().useGravity = false;
+            Player.transform.position = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z) + Offset;
+        }
+    }
+
+    #endregion
+
+    #region CustomMethods
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SetParent = true;
+        }   
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SetParent = false;
+            Player.GetComponentInParent<Rigidbody>().useGravity = true;
+        }
+    }
+
+    #endregion
+
+}
