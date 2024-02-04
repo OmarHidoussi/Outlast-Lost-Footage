@@ -12,6 +12,8 @@ public class Elevator : MonoBehaviour
     public bool SetParent;
     public bool Cutscene;
 
+    public AudioSource Elevatorsource;
+
     #endregion
 
 
@@ -27,7 +29,7 @@ public class Elevator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Elevatorsource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,10 +42,6 @@ public class Elevator : MonoBehaviour
             Player.transform.position = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z) + Offset;
         }
     }
-
-    #endregion
-
-    #region CustomMethods
 
     private void OnTriggerStay(Collider other)
     {
@@ -61,6 +59,16 @@ public class Elevator : MonoBehaviour
             Player.GetComponentInParent<Rigidbody>().useGravity = true;
         }
     }
+
+    #endregion
+
+    #region CustomMethods
+
+    public void PlayAudio()
+    {
+        Elevatorsource.Play();
+    }
+
 
     #endregion
 
