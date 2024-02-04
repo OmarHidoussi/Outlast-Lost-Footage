@@ -10,16 +10,24 @@ public class Elevator : MonoBehaviour
     [HideInInspector] public Transform Player;
     public Vector3 Offset;
     public bool SetParent;
+    public bool Cutscene;
+
     #endregion
 
 
     #region BuiltInMethods
 
+    private void Awake()
+    {
+        Player = FindObjectOfType<InputManager>().transform;
+
+        SetParent = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Player = FindObjectOfType<InputManager>().transform;
-        SetParent = false;
+
     }
 
     // Update is called once per frame
@@ -42,7 +50,7 @@ public class Elevator : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SetParent = true;
-        }   
+        }
     }
 
     private void OnTriggerExit(Collider other)

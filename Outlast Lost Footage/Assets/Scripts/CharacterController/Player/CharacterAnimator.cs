@@ -45,7 +45,7 @@ public class CharacterAnimator : MonoBehaviour
         HandleInteraction();
         HandleHealth();
 
-        LeftHandConstraint.weight = LeftHandWeight;
+        //LeftHandConstraint.weight = LeftHandWeight;
         CharacterAnim.SetBool("DeskSlide", input.CanDeskSlide);
         CharacterAnim.SetBool("Reload", input.Reload);
     }

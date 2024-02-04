@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
 
     public Transform RayDirection;
     public Rigidbody m_rigidbody;
+    public Animator CutsceneAnim;
 
     [Header("Fatigue")]
     public bool isExhausted;
@@ -184,11 +185,10 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-
+    
     public void ResetAfterCutScene()
     {
-        input.CanMove = true;
-        this.GetComponentInChildren<CameraMovement>().Sensetivity = 400;
+        CutsceneAnim.enabled = false;
     }
 
     #endregion
