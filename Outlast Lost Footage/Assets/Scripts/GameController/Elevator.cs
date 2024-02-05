@@ -21,14 +21,16 @@ public class Elevator : MonoBehaviour
 
     private void Awake()
     {
-        Player = FindObjectOfType<InputManager>().transform;
 
-        SetParent = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Player = FindObjectOfType<InputManager>().transform;
+
+        SetParent = false;
+
         Elevatorsource = GetComponent<AudioSource>();
     }
 
