@@ -6,7 +6,7 @@ AudioMixerSnapshotController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NightVisionOn
+  m_Name: 'NightVisionOnCameraValume '
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: e43c4e32e3d5b1e438dbffd7bff53669
   m_FloatValues:
@@ -52,22 +52,6 @@ AudioMixerEffectController:
   m_EffectName: Attenuation
   m_MixLevel: 90b9d6ce1f5c78b439221021145b59bc
   m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
---- !u!244 &-5866101325842207152
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: de5d148a2ff8d72428cef75a7c3640c6
-  m_EffectName: Lowpass Simple
-  m_MixLevel: ab92adf38f6bade4482ebb20fd599bb9
-  m_Parameters:
-  - m_ParameterName: Cutoff freq
-    m_GUID: 44fc06f2fe23d544cbd886ce1d30cd59
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -178,22 +162,6 @@ AudioMixerSnapshotController:
     3e1b702f1bdbcfb4cb4070212ee17d01: 678
     edbaaaaf82696e34e9e012c62db4c0bd: 62
   m_TransitionOverrides: {}
---- !u!244 &-4244053312527614736
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: 945dc23db90feb44f937bfab927d879e
-  m_EffectName: Distortion
-  m_MixLevel: 01e9b029370f15e4880c0b4ff77fea4f
-  m_Parameters:
-  - m_ParameterName: Level
-    m_GUID: 351dd1ea06aa3a149acba1497f005988
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &-4192285331099615302
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -389,7 +357,7 @@ AudioMixerController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player
-  m_OutputGroup: {fileID: 0}
+  m_OutputGroup: {fileID: 24300002, guid: 93fba486d1ec5aa46977976ac5607f4f, type: 2}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
   - {fileID: 24500006}
@@ -413,7 +381,7 @@ AudioMixerController:
     - e0198f6163c31664ba548af16476cb49
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: -5968509655898048419}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -435,10 +403,6 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  - {fileID: -4244053312527614736}
-  - {fileID: 879127249313030869}
-  - {fileID: -5866101325842207152}
-  - {fileID: 2030996144692387556}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -463,7 +427,7 @@ AudioMixerSnapshotController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NightVisionOff
+  m_Name: 'NightVisionOffCameraValume '
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 39580207a9b0b1e4d8d24879ba4ea230
   m_FloatValues:
@@ -567,44 +531,6 @@ AudioMixerSnapshotController:
     5e61f73fec2ba5048ab5ea38fe7f41b6: 200
     edbaaaaf82696e34e9e012c62db4c0bd: 62
   m_TransitionOverrides: {}
---- !u!244 &879127249313030869
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: e6864ff73ed07c644b0260607e4957b6
-  m_EffectName: Highpass Simple
-  m_MixLevel: 972ead18d0010b041bf432225ff41d59
-  m_Parameters:
-  - m_ParameterName: Cutoff freq
-    m_GUID: 99d32786264f4674ca9a080add037b8c
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
---- !u!244 &2030996144692387556
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: a6ba9b847d3ac434a87943f1cb5fdb83
-  m_EffectName: Compressor
-  m_MixLevel: 1e1179235ad5ab24ba21ed24bceef0d4
-  m_Parameters:
-  - m_ParameterName: Threshold
-    m_GUID: cbc471ed3914a934995766d4b9a204f3
-  - m_ParameterName: Attack
-    m_GUID: 1db880fb6c3e2b549a46f02d6fd5d3ae
-  - m_ParameterName: Release
-    m_GUID: 4d5783a6584e42c4f8ba407e34f450ad
-  - m_ParameterName: Make up gain
-    m_GUID: e22184021a6de914da912b2bfa69b0fb
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &2477440693002333968
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
