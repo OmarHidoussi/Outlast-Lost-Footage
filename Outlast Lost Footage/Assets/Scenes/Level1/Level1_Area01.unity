@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.08870682, g: 0.10578832, b: 0.13528907, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -31640,7 +31640,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -31739,7 +31739,7 @@ MonoBehaviour:
   MixerGroup: {fileID: 3435458671761172869, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
   Volume: 1
   Pitch: 1
-  BlendSpeed: 2
+  BlendSpeed: 1
   PlayOnEnter: 0
   PlayOnAwake: 1
   DestroyOnEnter: 0
@@ -31756,8 +31756,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.6, y: 3.74, z: 23.65}
-  m_Center: {x: 0, y: 0, z: -6.3}
+  m_Size: {x: 4.6, y: 0, z: 23.65}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1960297991
 Transform:
   m_ObjectHideFlags: 0
@@ -31765,14 +31765,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960297987}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 6.06, y: 2, z: -3.67}
+  m_LocalRotation: {x: -0.06302143, y: 0.99540687, z: 0.0045535485, w: 0.07192213}
+  m_LocalPosition: {x: 0.33999947, y: 2, z: 9.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.039, y: 171.8, z: -7.171}
 --- !u!1 &1967497809
 GameObject:
   m_ObjectHideFlags: 0
