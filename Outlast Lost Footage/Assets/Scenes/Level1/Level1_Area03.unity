@@ -711,6 +711,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 430622388467722168, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430622388467722168, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_Intensity
       value: 513.77936
       objectReference: {fileID: 0}
@@ -729,6 +733,10 @@ PrefabInstance:
     - target: {fileID: 430622388467722168, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_UseViewFrustumForShadowCasterCull
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 593856387031356648, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1108188568076771298, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_Intensity
@@ -757,6 +765,14 @@ PrefabInstance:
     - target: {fileID: 1108188568076771298, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_UseContactShadow.m_UseOverride
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119017222581494057, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437246557354247900, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7264288711542531213, guid: 86dec2acdc874644683ce89cad3e4881, type: 3}
       propertyPath: m_RootOrder
@@ -15684,8 +15700,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.3204803, y: 4.705908, z: 41.83405}
-  m_Center: {x: 15.971046, y: 1.9840837, z: 5.7526455}
+  m_Size: {x: 4.1337547, y: 4.705908, z: 38.261658}
+  m_Center: {x: 16.06441, y: 1.9840837, z: 3.9664497}
 --- !u!114 &1186510030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15700,7 +15716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsGlobal: 0
   priority: 1
-  blendDistance: 0.2
+  blendDistance: 1
   weight: 1
   sharedProfile: {fileID: 11400000, guid: c9977c84c836797479b1157a473dc74f, type: 2}
 --- !u!1001 &1196230492
@@ -19853,8 +19869,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.3204803, y: 4.705908, z: 41.8844}
-  m_Center: {x: 15.971046, y: 1.9840837, z: 5.7778206}
+  m_Size: {x: 4.3204803, y: 4.705908, z: 38.222237}
+  m_Center: {x: 15.971046, y: 1.9840837, z: 3.9467392}
 --- !u!114 &1540692298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19869,7 +19885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsGlobal: 0
   priority: 1
-  blendDistance: 0.2
+  blendDistance: 1
   weight: 1
   sharedProfile: {fileID: 11400000, guid: c9977c84c836797479b1157a473dc74f, type: 2}
 --- !u!4 &1540692299

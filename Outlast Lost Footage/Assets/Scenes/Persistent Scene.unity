@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 1374150234}
   - component: {fileID: 1374150233}
   - component: {fileID: 1374150232}
+  - component: {fileID: 1374150236}
   m_Layer: 0
   m_Name: Load Scene 03
   m_TagString: Untagged
@@ -434,6 +435,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1374150236
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374150231}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 24.94099, y: 9.336521, z: 19.390388}
+  m_Center: {x: -15.727217, y: 1.5999999, z: 24.670696}
 --- !u!1 &1385759202
 GameObject:
   m_ObjectHideFlags: 0
