@@ -821,6 +821,14 @@ PrefabInstance:
       propertyPath: Sensetivity
       value: 400
       objectReference: {fileID: 0}
+    - target: {fileID: 2022162150727126216, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: NightVisionOn
+      value: 
+      objectReference: {fileID: -1440870097819086511, guid: 93fba486d1ec5aa46977976ac5607f4f, type: 2}
+    - target: {fileID: 2022162150727126216, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: NightVisionOff
+      value: 
+      objectReference: {fileID: 24500006, guid: 93fba486d1ec5aa46977976ac5607f4f, type: 2}
     - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: CanMove
       value: 1
@@ -991,13 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 52f252a457996f6429ebef1863f0d9c5, type: 3}
     - target: {fileID: 2022162151421435386, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig12:RightArm'\n\tTransform 'mixamorig12:Neck'\n\tTransform
-        'mixamorig12:RightHand'\n\tTransform 'mixamorig12:Spine2'\n\tTransform 'mixamorig12:RightForeArm'\n\tTransform
-        'mixamorig12:LeftShoulder'\n\tTransform 'mixamorig12:RightArm'\n\tTransform
-        'mixamorig12:Neck'\n\tTransform 'mixamorig12:RightHand'\n\tTransform 'mixamorig12:Spine2'\n\tand
-        more ...\n\tFrom animation clip 'Henry_OpenElevatorGate'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151601612652, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_AnchorMax.x
