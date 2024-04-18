@@ -9,11 +9,14 @@ public class CharacterCollision : MonoBehaviour
 
     public InputManager input;
     public CharacterStats stats;
+    public CharacterMovement movement;
     public Animator anim;
     public float raycastDistance = 0.1f;
     public float DieDistance = 3f;
     public Vector3 Offset;
     public float DeathForce;
+
+    [HideInInspector] public bool isGrounded;
 
     #endregion
 
@@ -24,7 +27,7 @@ public class CharacterCollision : MonoBehaviour
     void Update()
     {
         // Perform raycast downward to check if the player is grounded
-        bool isGrounded = CheckGrounded();
+        isGrounded = CheckGrounded();
 
         if(isGrounded && CanDie)
         {

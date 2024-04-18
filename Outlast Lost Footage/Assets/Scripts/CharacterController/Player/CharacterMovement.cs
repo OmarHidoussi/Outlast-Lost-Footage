@@ -30,6 +30,7 @@ public class CharacterMovement : MonoBehaviour
     InputManager input;
     CapsuleCollider col;
     CharacterAnimator anim;
+    CharacterCollision collision;
 
     #endregion
 
@@ -41,6 +42,7 @@ public class CharacterMovement : MonoBehaviour
         input = GetComponent<InputManager>();
         anim = GetComponent<CharacterAnimator>();
         col = GetComponentInChildren<CapsuleCollider>();
+        collision = GetComponentInChildren<CharacterCollision>();
         m_rigidbody = GetComponent<Rigidbody>();
 
 
@@ -65,9 +67,9 @@ public class CharacterMovement : MonoBehaviour
 
     #region CustomMethods
 
+    float targetSpeed;
     void HandleMove()
     {
-        float targetSpeed;
 
         if (input.IsCrouching)
             targetSpeed = CrouchSpeed;
@@ -83,6 +85,11 @@ public class CharacterMovement : MonoBehaviour
 
         if (input.Mov_Axis.x < 0)
             targetSpeed *= 0.63f;
+
+        if (!collision.isGrounded)
+        {
+            targetSpeed -= 0;
+        }
 
         Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
 
