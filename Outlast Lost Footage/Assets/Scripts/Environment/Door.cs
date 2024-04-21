@@ -22,7 +22,9 @@ public class Door : MonoBehaviour, IInteractable
 
     Interaction interaction;
 
-
+    public bool HasEvent;
+    public AudioSource AudioEvent;
+    public AudioClip clip;
     #endregion
 
     #region BuiltInMethods
@@ -34,6 +36,7 @@ public class Door : MonoBehaviour, IInteractable
         Characteranim = input.gameObject.GetComponent<CharacterAnimator>();
         Ch_interaction = input.gameObject.GetComponentInChildren<CharacterInteraction>();
         interaction = GetComponent<Interaction>();
+        AudioEvent = GetComponent<AudioSource>();
 
         anim = GetComponent<Animator>();
     }
@@ -80,10 +83,19 @@ public class Door : MonoBehaviour, IInteractable
     {
         _audio.DoorState(true);
         anim.SetBool("Open", true);
+        EventTrigger(HasEvent);
         unlocked = false;
         interaction.Helptext = "";
         input.CanInteract = false;
         input.Interact = false;
+    }
+
+    public void EventTrigger(bool Event)
+    {
+        if (!Event)
+            return;
+        else
+            AudioEvent.PlayOneShot(clip);
     }
 
     #endregion
