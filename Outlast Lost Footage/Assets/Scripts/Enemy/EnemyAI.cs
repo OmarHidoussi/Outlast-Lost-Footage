@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour
         IsChasing = false;
     }
 
-    private float investigateTimer = 0f;
+    [HideInInspector] public float investigateTimer = 0f;
     public float investigateDuration = 10f; // Adjust this duration as needed
 
     // Update is called once per frame
