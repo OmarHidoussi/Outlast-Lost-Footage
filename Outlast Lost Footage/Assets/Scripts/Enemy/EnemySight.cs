@@ -118,7 +118,7 @@ public class EnemySight : MonoBehaviour
                 {
                     if (hit.collider.tag == "Player")
                     {
-                        Debug.Log("Player Seen");
+                        //Debug.Log("Player Seen");
 
                         PlayerInSight = true;
 

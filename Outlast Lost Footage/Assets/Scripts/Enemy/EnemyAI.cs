@@ -94,9 +94,9 @@ public class EnemyAI : MonoBehaviour
     }
 
     [HideInInspector] public bool isSearching = false;
+    [HideInInspector] public Vector3 SearchPoint = new Vector3(1000, 1000, 1000);
     public float searchCooldown = 5f; 
     private float currentCooldown = 5f;
-    Vector3 SearchPoint = new Vector3(1000,1000,1000);
     void Investigate()
     {
         if (Sight.PlayerInSight)
@@ -131,8 +131,8 @@ public class EnemyAI : MonoBehaviour
                     // If a valid random point is found, set it as the next waypoint
                     SearchPoint = navMeshHit.position;
 
-                    Debug.Log("IsSearching");
-                    Debug.Log(SearchPoint);
+                    //Debug.Log("IsSearching");
+                    //Debug.Log(SearchPoint);
                     
                     nav.SetDestination(SearchPoint);
 
@@ -148,7 +148,7 @@ public class EnemyAI : MonoBehaviour
             }
             if (investigateTimer <= 0)
             {
-                Debug.Log("Investigation Complete");
+                //Debug.Log("Investigation Complete");
                 Patrol(locations[LocationIndex].waypoints.ToArray());
             }
         }
