@@ -10,21 +10,25 @@ public class AdaptiveMusic : MonoBehaviour
     public EnemyAI agent;
     public EnemySight sight;
 
+    [Space]
     public bool ChaseStart;
     public bool IsChasing;
     public bool Investigating;
     public bool InvestigationEnd;
 
+    [Space]
     public AudioSource AS_Hit;
     public AudioSource AS_ChaseTrack;
     public AudioSource AS_InvestigationTrack;
     public AudioSource AS_Closer;
 
+    [Space]
     public AudioClip Hit_Clip;
     public AudioClip Chase_Clip;
     public AudioClip Investigation_Clip;
     public AudioClip Closer_Clip;
 
+    [Space]
     public AudioMixerSnapshot Snapshot_ChaseStart;
     public AudioMixerSnapshot Snapshot_IsChasing;
     public AudioMixerSnapshot Snapshot_Investigating;
@@ -32,6 +36,7 @@ public class AdaptiveMusic : MonoBehaviour
 
     public AnimationCurve ChaseCurve;
 
+    [Space]
     public float ChseStart_TransitionSpeed, IsChasing_TransitionSpeed, Investigation_TransitionSpeed, Closer_TransitionSpeed;
 
     private bool PreviousSight;
@@ -61,10 +66,8 @@ public class AdaptiveMusic : MonoBehaviour
     void Update()
     {
         currentSight = sight.PlayerInSight;
-        if (currentSight != PreviousSight)
+        if (currentSight != PreviousSight && PreviousSight == false)
             ChaseStart = true;
-        else
-            ChaseStart = false;
 
         PreviousSight = currentSight;
 
@@ -114,6 +117,7 @@ public class AdaptiveMusic : MonoBehaviour
             Snapshot_IsChasing.TransitionTo(ChaseCurve.length * IsChasing_TransitionSpeed);
             AS_ChaseTrack.clip = Chase_Clip;
             AS_ChaseTrack.Play();
+            ChaseStart = false;
         }
 
         if (Investigating && !AS_InvestigationTrack.isPlaying)
@@ -121,6 +125,7 @@ public class AdaptiveMusic : MonoBehaviour
             Snapshot_Investigating.TransitionTo(Investigation_TransitionSpeed);
             AS_InvestigationTrack.clip = Investigation_Clip;
             AS_InvestigationTrack.Play();
+            ChaseStart = false;
         }
 
         if (InvestigationEnd && !AS_Closer.isPlaying)
@@ -129,6 +134,7 @@ public class AdaptiveMusic : MonoBehaviour
             AS_Closer.PlayOneShot(Closer_Clip); 
             AS_InvestigationTrack.Stop();
             AS_ChaseTrack.Stop();
+            ChaseStart = false;
         }
     }
 
