@@ -68,6 +68,8 @@ public class AdaptiveMusic : MonoBehaviour
         currentSight = sight.PlayerInSight;
         if (currentSight != PreviousSight && PreviousSight == false)
             ChaseStart = true;
+        else
+            ChaseStart = false;
 
         PreviousSight = currentSight;
 
@@ -117,15 +119,13 @@ public class AdaptiveMusic : MonoBehaviour
             Snapshot_IsChasing.TransitionTo(ChaseCurve.length * IsChasing_TransitionSpeed);
             AS_ChaseTrack.clip = Chase_Clip;
             AS_ChaseTrack.Play();
-            ChaseStart = false;
         }
 
-        if (Investigating && !AS_InvestigationTrack.isPlaying)
+        if (!IsChasing && Investigating && !AS_InvestigationTrack.isPlaying)
         {
             Snapshot_Investigating.TransitionTo(Investigation_TransitionSpeed);
             AS_InvestigationTrack.clip = Investigation_Clip;
             AS_InvestigationTrack.Play();
-            ChaseStart = false;
         }
 
         if (InvestigationEnd && !AS_Closer.isPlaying)
@@ -134,7 +134,6 @@ public class AdaptiveMusic : MonoBehaviour
             AS_Closer.PlayOneShot(Closer_Clip); 
             AS_InvestigationTrack.Stop();
             AS_ChaseTrack.Stop();
-            ChaseStart = false;
         }
     }
 
