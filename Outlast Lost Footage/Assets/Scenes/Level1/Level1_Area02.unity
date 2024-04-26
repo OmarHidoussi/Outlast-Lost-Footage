@@ -454,11 +454,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37579771}
   m_Mesh: {fileID: 1067012137866091998, guid: 724390d80ed065c418014318e854899e, type: 3}
---- !u!82 &44654018 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
-  m_PrefabInstance: {fileID: 2121060738}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &45093988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6897,6 +6892,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6545018719510188779, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545018719510188779, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: HasEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545018719510188779, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: AudioEvent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6545018719510188783, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
       propertyPath: m_Name
       value: DoorHolder (3)
@@ -12983,18 +12990,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6545018719510188779, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
-      propertyPath: clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 69aaed53246e042429fde02b9df79e09, type: 3}
-    - target: {fileID: 6545018719510188779, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
-      propertyPath: HasEvent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6545018719510188779, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
-      propertyPath: AudioEvent
-      value: 
-      objectReference: {fileID: 44654018}
     - target: {fileID: 6545018719510188783, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
       propertyPath: m_Name
       value: DoorHolder
