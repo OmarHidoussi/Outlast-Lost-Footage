@@ -61,15 +61,16 @@ public class CharacterAnimator : MonoBehaviour
 
     void HandeMovement()
     {
-        if (movement.Speed != 0 && !CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (movement.Speed != 0 && !CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || 
+            !CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Cinematic_1"))
         {
-            CharacterAnim.speed = movement.Speed / movement.targetSpeed;
+            //CharacterAnim.speed = movement.Speed / movement.targetSpeed;
             CharacterAnim.SetFloat("VelocityX", input.Mov_Axis.y);
             CharacterAnim.SetFloat("VelocityY", input.Mov_Axis.x);
             CharacterAnim.SetBool("Sprinting", input.IsSprinting);
         }
-        else
-            CharacterAnim.speed = 1;
+       /* else
+            CharacterAnim.speed = 1;*/
 
         if (input.IsSprinting || !input.CanInteract || !input.IsCrouching)
         {
@@ -134,6 +135,17 @@ public class CharacterAnimator : MonoBehaviour
         CharacterAnim.MatchTarget(matchPosition, matchRotation, target, weightMask, normalisedStartTime, normalisedEndTime);
     }
 */
+
+    #endregion
+
+    #region Cinematics
+    public IEnumerator Cinematic_1()
+    {
+        CharacterAnim.SetBool("Cinematic_1", true);
+        yield return new WaitForSeconds(0.05f);
+        CharacterAnim.SetBool("Cinematic_1", false);
+    }
+
 
     #endregion
 
