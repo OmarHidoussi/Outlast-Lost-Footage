@@ -20,7 +20,7 @@ public class BreathingTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponentInChildren<CharacterAudio>().CanBreath = true;
+            other.GetComponentInChildren<CharacterBehaviour>().CanBreath = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class BreathingTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponentInChildren<CharacterAudio>().CanBreath = true;
+            other.GetComponentInChildren<CharacterBehaviour>().CanBreath = true;
         }
     }
 
@@ -36,7 +36,7 @@ public class BreathingTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponentInChildren<CharacterAudio>().CanBreath = false;
+            other.GetComponentInChildren<CharacterBehaviour>().CanBreath = false;
             Destroy(gameObject);
         }
     }

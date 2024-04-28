@@ -9,7 +9,7 @@ public class CameraEffects : MonoBehaviour
     #region Variables
 
     public CharacterMovement movement;
-    public CharacterAudio info;
+    public CharacterBehaviour info;
     public CharacterStats stats;
     public VolumeProfile Player_Volume;
     public float TransitionSpeed;
@@ -30,7 +30,7 @@ public class CameraEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        info = GetComponentInChildren<CharacterAudio>();
+        info = GetComponentInChildren<CharacterBehaviour>();
         stats = GetComponentInParent<CharacterStats>();
 
         CurrentHealth = stats.Health;

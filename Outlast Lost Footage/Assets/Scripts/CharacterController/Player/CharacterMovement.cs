@@ -12,7 +12,10 @@ public class CharacterMovement : MonoBehaviour
     public float RunSpeed;
     public float CrouchSpeed;
     public float CrouchHeight;
-    public float LerpSpeed;
+    public float WalkLerpSpeed, RunLerpSpeed;
+
+    public AnimationCurve WalkCurve;
+    public AnimationCurve RunCurve;
 
     public Transform RayDirection;
     public Rigidbody m_rigidbody;
@@ -67,7 +70,7 @@ public class CharacterMovement : MonoBehaviour
 
     #region CustomMethods
 
-    float targetSpeed;
+    [HideInInspector] public float targetSpeed;
     void HandleMove()
     {
 
@@ -91,7 +94,12 @@ public class CharacterMovement : MonoBehaviour
             targetSpeed -= 0;
         }
 
-        Speed = Mathf.Lerp(Speed, targetSpeed, 5.0F * Time.deltaTime);
+        if(targetSpeed == RunSpeed)
+        {
+            Speed = Mathf.Lerp(Speed, targetSpeed, RunCurve.Evaluate(RunLerpSpeed * Time.deltaTime));
+        }
+        else
+            Speed = Mathf.Lerp(Speed, targetSpeed, WalkCurve.Evaluate(WalkLerpSpeed * Time.deltaTime));
 
         if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Running Jump") ||
             anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
@@ -142,10 +150,10 @@ public class CharacterMovement : MonoBehaviour
     {
         if (input.IsCrouching || anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Climbing"))
         {
-            col.height = Mathf.Lerp(col.height, CrouchHeight, LerpSpeed * Time.deltaTime);
+            col.height = Mathf.Lerp(col.height, CrouchHeight, WalkLerpSpeed * Time.deltaTime);
         }
         else
-            col.height = Mathf.Lerp(col.height, NormalHeight, LerpSpeed * Time.deltaTime);
+            col.height = Mathf.Lerp(col.height, NormalHeight, WalkLerpSpeed * Time.deltaTime);
 
     }
 

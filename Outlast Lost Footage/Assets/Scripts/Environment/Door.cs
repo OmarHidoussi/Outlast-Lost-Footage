@@ -11,7 +11,7 @@ public class Door : MonoBehaviour, IInteractable
     [HideInInspector] public InputManager input;
     [HideInInspector] public CharacterStats stats;
     [HideInInspector] public CharacterAnimator Characteranim;
-    [HideInInspector] public CharacterAudio _audio;
+    [HideInInspector] public CharacterBehaviour _audio;
     [HideInInspector] public CharacterInteraction Ch_interaction;
 
     public bool unlocked;
@@ -32,7 +32,7 @@ public class Door : MonoBehaviour, IInteractable
     void Start()
     {
         input = FindObjectOfType<InputManager>();
-        _audio = input.gameObject.GetComponentInChildren<CharacterAudio>();
+        _audio = input.gameObject.GetComponentInChildren<CharacterBehaviour>();
         Characteranim = input.gameObject.GetComponent<CharacterAnimator>();
         Ch_interaction = input.gameObject.GetComponentInChildren<CharacterInteraction>();
         interaction = GetComponent<Interaction>();

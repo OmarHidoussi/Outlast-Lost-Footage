@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class CharacterAudio : MonoBehaviour
+public class CharacterBehaviour : MonoBehaviour
 {
 
     #region Variables

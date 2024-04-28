@@ -72,8 +72,11 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
 
         source.pitch = Pitch;
 
-        source.PlayOneShot(audioClip);
-        HasExited = true;
+        if(audioClip != null)
+        {
+            source.PlayOneShot(audioClip);
+            HasExited = true;
+        }
     }
 
     // Update is called once per frame

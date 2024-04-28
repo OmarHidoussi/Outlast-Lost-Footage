@@ -33,7 +33,7 @@ public class WallClimb : MonoBehaviour
         {
             if (other.GetComponentInParent<InputManager>().Jump)
             {
-                other.GetComponentInChildren<CharacterAudio>().Location = location;
+                other.GetComponentInChildren<CharacterBehaviour>().Location = location;
                 other.GetComponentInParent<CharacterAnimator>().HandleWallClimb();
             }
         }
