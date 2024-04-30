@@ -22,6 +22,7 @@ public class AudioSystem_TriggerSimple : MonoBehaviour
     [Space]
     public bool DestroyOnEnter;
     public bool DestroyOnExit;
+    public bool DestroyOnload;
 
     private BoxCollider col;
     private bool HasPlayed = false;
@@ -39,6 +40,8 @@ public class AudioSystem_TriggerSimple : MonoBehaviour
         if (MixerGroup != null)
             source.outputAudioMixerGroup = MixerGroup;
 
+        /*if (!DestroyOnload)
+            DontDestroyOnLoad(gameObject);*/
     }
 
     // Update is called once per frame
