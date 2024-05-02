@@ -12971,9 +12971,29 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: MaxDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 1302724879883953472, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
+    - target: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.45555556
+      objectReference: {fileID: 0}
+    - target: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44654018, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6545018719510188692, guid: f193ad48c603e064b8bb684afd85ba19, type: 3}
       propertyPath: m_RootOrder
       value: 2
