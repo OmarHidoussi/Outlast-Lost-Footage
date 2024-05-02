@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 64268268}
   - component: {fileID: 64268267}
   m_Layer: 0
-  m_Name: SFX_Clock_Trigger
+  m_Name: SFX_Big_Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -789,7 +789,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d6855ad9f2e8d854c9c9b1902ffc465d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -798,9 +798,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 164
-  DopplerLevel: 0
-  MinDistance: 0.5
-  MaxDistance: 8
+  DopplerLevel: 0.83
+  MinDistance: 4.63
+  MaxDistance: 6.38
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -835,7 +835,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.703
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -850,7 +850,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.08055556
+      value: 0.19444445
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -865,7 +865,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.32
+      value: 0.052
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -888,7 +888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 64268267}
-  audioClip: {fileID: 8300000, guid: d6855ad9f2e8d854c9c9b1902ffc465d, type: 3}
+  audioClip: {fileID: 8300000, guid: 99de6fd1f0b1b1f44a390190137e0764, type: 3}
   MixerGroup: {fileID: -6650014468307370192, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
   Volume: 0.1
   Pitch: 1
@@ -907,8 +907,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.66, y: 2.9059029, z: 1}
-  m_Center: {x: -0.014173031, y: 0.04500109, z: 0}
+  m_Size: {x: 1.66, y: 2.9059029, z: 6.766115}
+  m_Center: {x: -0.014173031, y: 0.04500103, z: -2.8830576}
 --- !u!4 &64268270
 Transform:
   m_ObjectHideFlags: 0
@@ -917,7 +917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64268266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.51, y: 1.079, z: 24.31}
+  m_LocalPosition: {x: -8.24, y: 1.079, z: 29.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
