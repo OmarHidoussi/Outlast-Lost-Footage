@@ -40,7 +40,7 @@ public class AudioSystem_SnapshotManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            OnStay?.TransitionTo(TransitionSpeed);
+            OnStay.TransitionTo(TransitionSpeed);
         }
     }
 
@@ -48,7 +48,7 @@ public class AudioSystem_SnapshotManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            OnExit?.TransitionTo(TransitionSpeed);
+            OnExit.TransitionTo(TransitionSpeed);
         }
     }
 
