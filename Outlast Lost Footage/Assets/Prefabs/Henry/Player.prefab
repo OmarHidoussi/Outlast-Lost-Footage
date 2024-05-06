@@ -1887,7 +1887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022162150628675297}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c27e931ddc9efe445aa0fa78e11b2915, type: 3}
   m_Name: 
@@ -2654,7 +2654,56 @@ MonoBehaviour:
   RunSpeed: 7
   CrouchSpeed: 1.7
   CrouchHeight: 0.45
-  LerpSpeed: 7.5
+  WalkLerpSpeed: 1.75
+  RunLerpSpeed: 2.5
+  WalkCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RunCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.5086311
+      outSlope: 0.5086311
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.064917125
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   RayDirection: {fileID: 2022162151550163966}
   m_rigidbody: {fileID: 2022162151036185380}
   CutsceneAnim: {fileID: 912759166}
@@ -2663,6 +2712,7 @@ MonoBehaviour:
   StaminaRegainTimer: 11
   StaminaTimer: 0
   RunRestartTimer: 6
+  targetSpeed: 0
 --- !u!114 &2022162151036185382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,7 +2915,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -5526,7 +5576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 314713626339739346}
     m_Mid: {fileID: 2082862219251458717}
@@ -6973,7 +7023,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 085e93601620e734cb438f00fae5e698, type: 3}
   - {fileID: 8300000, guid: 4031fb23bdd752e408f472bfc20a57e8, type: 3}
   CanBreath: 0
-  BreathingVolume: 0.02
+  BreathingVolume: 0.05
   NormalBreath: {fileID: 8300000, guid: 567ccdacac1184048b122be4f2f94b59, type: 3}
   Died: 0
   TransitionDelay: 0.1
