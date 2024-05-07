@@ -29,6 +29,7 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector] public float StaminaTimer;
     [HideInInspector] public float RunRestartTimer;
 
+    bool WallDetected;
     float NormalHeight;
     InputManager input;
     CapsuleCollider col;
@@ -50,7 +51,8 @@ public class CharacterMovement : MonoBehaviour
 
 
         NormalHeight = col.height;
-
+        WallDetected = false;
+             
         RunRestartTimer = RunDuration;
         RunDuration = 1;
         StaminaTimer = StaminaRegainTimer;
@@ -59,10 +61,10 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleWallDetection();
         HandleMove();
         HandleSideWalk();
         HandleCrouch();
-        HandleWallDetection();
         HandleFatigue();
     }
 
@@ -94,12 +96,16 @@ public class CharacterMovement : MonoBehaviour
             targetSpeed -= 0;
         }
 
-        if(targetSpeed == RunSpeed)
+        if (!WallDetected)
         {
-            Speed = Mathf.Lerp(Speed, targetSpeed, RunCurve.Evaluate(RunLerpSpeed * Time.deltaTime));
+            if (targetSpeed == RunSpeed)
+            {
+                Speed = Mathf.Lerp(Speed, targetSpeed, RunCurve.Evaluate(RunLerpSpeed * Time.deltaTime));
+            }
+            else
+                Speed = Mathf.Lerp(Speed, targetSpeed, WalkCurve.Evaluate(WalkLerpSpeed * Time.deltaTime));
         }
-        else
-            Speed = Mathf.Lerp(Speed, targetSpeed, WalkCurve.Evaluate(WalkLerpSpeed * Time.deltaTime));
+
 
         if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Running Jump") ||
             anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
@@ -126,20 +132,23 @@ public class CharacterMovement : MonoBehaviour
     {
         RaycastHit hit;
 
+        WallDetected = false;
+
         Ray ray = new Ray(RayDirection.transform.position, RayDirection.transform.forward);
 
-        // Check if the distance is less than 2.0f
-        if (Physics.Raycast(ray, out hit, 2.0f))
+        // Check if the distance is less than 0.35f
+        if (Physics.Raycast(ray, out hit, 0.35f))
         {
             if (hit.transform.tag == "Wall")
             {
-                if (input.Mov_Axis.x > 0)
+                if (input.Mov_Axis.x >= 0)
                 {
                     Speed = 0;
                     input.Mov_Axis.x = 0;
                     anim.CharacterAnim.SetFloat("VelocityY", 0);
                     anim.CharacterAnim.SetBool("Sprinting", false);
                     anim.CharacterAnim.SetBool("Jump", false);
+                    WallDetected = true;
                 }
             }
         }
