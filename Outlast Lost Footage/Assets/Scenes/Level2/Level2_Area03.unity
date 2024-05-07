@@ -4006,7 +4006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283501606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4025,18 +4025,18 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.645
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 127
   DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -4069,7 +4069,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4099,7 +4099,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.1
+      value: 0.8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4124,7 +4124,7 @@ MonoBehaviour:
   source: {fileID: 283501608}
   audioClip: {fileID: 8300000, guid: e3c6b0e02ea898c439fd16ee593bb1c3, type: 3}
   MixerGroup: {fileID: 3435458671761172869, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
-  Volume: 6.79
+  Volume: 0.5
   Pitch: 1
   BlendSpeed: 0.36
   PlayOnEnter: 1
@@ -4132,6 +4132,7 @@ MonoBehaviour:
   DestroyOnEnter: 0
   DestroyOnExit: 0
   Loop: 1
+  debug: 0
 --- !u!65 &283501610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4143,8 +4144,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40.880196, y: 9.336606, z: 24.663307}
-  m_Center: {x: -5.4987154, y: 4.168303, z: 0.63962936}
+  m_Size: {x: 41.332176, y: 10.980331, z: 37.663303}
+  m_Center: {x: -17.5, y: 2.5, z: 6.499998}
 --- !u!1 &289069614
 GameObject:
   m_ObjectHideFlags: 0
@@ -13893,8 +13894,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 22.192862, y: 2.3013024, z: 8.866005}
-  m_Center: {x: -2.2539167, y: 0.6506511, z: 0.2919426}
+  m_Size: {x: 23.075123, y: 2.3013024, z: 8.866005}
+  m_Center: {x: -1.8127861, y: 0.6506511, z: 0.2919426}
 --- !u!1001 &990469711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20039,14 +20040,15 @@ MonoBehaviour:
   source: {fileID: 1460087840}
   audioClip: {fileID: 8300000, guid: 85e8657e7bdc7f44885103805d53cc65, type: 3}
   MixerGroup: {fileID: 3435458671761172869, guid: 4587cbae56f419d4e9a7afa6a0816e9a, type: 2}
-  Volume: 0.1
+  Volume: 0.4
   Pitch: 1
-  BlendSpeed: 0
+  BlendSpeed: 2
   PlayOnEnter: 0
   PlayOnAwake: 1
   DestroyOnEnter: 0
   DestroyOnExit: 0
   Loop: 1
+  debug: 0
 --- !u!65 &1460087842
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20058,8 +20060,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 41.482967, y: 13.819666, z: 33.089172}
-  m_Center: {x: -5.6333637, y: 6.409833, z: 0.69918823}
+  m_Size: {x: 41.482967, y: 17.005182, z: 33.089172}
+  m_Center: {x: -5.6333637, y: 4.817075, z: 0.69918823}
 --- !u!1001 &1464320007
 PrefabInstance:
   m_ObjectHideFlags: 0

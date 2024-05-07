@@ -32,6 +32,8 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
     private BoxCollider col;
     private bool HasExited, HasEntered;
 
+    public bool debug;
+
     #endregion
 
     #region BuiltInMethods
@@ -72,10 +74,16 @@ public class AudioSystem_TriggerInZone : MonoBehaviour
 
         source.pitch = Pitch;
 
-        if(audioClip != null)
+        if (audioClip != null && !Loop)
         {
             source.PlayOneShot(audioClip);
             HasExited = true;
+        }
+
+        if(audioClip != null && Loop && !source.isPlaying)
+        {
+            source.clip = audioClip;
+            source.Play();
         }
     }
 
