@@ -53,11 +53,15 @@ public class CharacterInteraction : MonoBehaviour
 
             if (input.Interact)
             {
+                if (!interaction.Interacted)
+                {
+                    DisplayInteractText(interactionType, interaction.InteractionText, false);
+
+                    Interactable.Interact();
+                }
+
                 interaction.Interacted = true;
 
-                DisplayInteractText(interactionType, interaction.InteractionText, false);
-
-                Interactable.Interact();
             }
 
             if (!interaction.Interacted)
