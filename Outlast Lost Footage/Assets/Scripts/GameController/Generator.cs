@@ -11,6 +11,10 @@ public class Generator : MonoBehaviour,IInteractable
     private Interaction interaction;
     public bool Generator_1, Generator_2;
     public float AddedTimer;
+
+    public AudioSource GeneratorAudio;
+    public AudioClip PowerOn_Clip;
+
     #endregion
 
     #region BuiltInMethods
@@ -48,7 +52,8 @@ public class Generator : MonoBehaviour,IInteractable
             controller.Generator_2_Activated = true;
         }
 
-        controller.GlobalTimer += AddedTimer;
+        controller.GlobalTimer = AddedTimer;
+        GeneratorAudio.PlayOneShot(PowerOn_Clip);
     }
 
     #endregion
