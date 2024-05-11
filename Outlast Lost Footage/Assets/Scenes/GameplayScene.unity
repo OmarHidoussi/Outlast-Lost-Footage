@@ -2753,13 +2753,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 991662333, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1069266569}
     - target: {fileID: 2872937646191794845, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
       propertyPath: m_Name
       value: Rusty Crocks
-      objectReference: {fileID: 0}
-    - target: {fileID: 2872937646191794845, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3107431245159456194, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
       propertyPath: player
@@ -2817,22 +2817,6 @@ PrefabInstance:
       propertyPath: locations.Array.data[2].waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1316759537}
-    - target: {fileID: 3107431245159456199, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-      propertyPath: AttackVolume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107431245159456199, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-      propertyPath: AttackClips.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107431245159456199, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-      propertyPath: AttackClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1aabca6d44ed91645b8b751d2adcd792, type: 3}
-    - target: {fileID: 3107431245159456199, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-      propertyPath: AttackClips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 0f3c3fc2b94ab924daa4ee03d5bb1bea, type: 3}
     - target: {fileID: 3212589623363207207, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2877,8 +2861,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3107431245159456198, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
 --- !u!114 &538394701 stripped
 MonoBehaviour:
@@ -4944,39 +4927,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982097998}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &991662330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2872937646190706764, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-  m_PrefabInstance: {fileID: 538394700}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &991662333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991662330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b468d147addf31d43bbe059ce593c7ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1069266569}
-  Damage: 35
-  anim: {fileID: 1481445371}
---- !u!135 &991662334
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991662330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.34
-  m_Center: {x: 0.29, y: 0, z: 0}
 --- !u!1 &1008292442
 GameObject:
   m_ObjectHideFlags: 0
@@ -7560,11 +7510,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475287487}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!95 &1481445371 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8824035913154058845, guid: 3eb70b45e0b87684983a5ed9a72ab471, type: 3}
-  m_PrefabInstance: {fileID: 538394700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1513608091
 GameObject:
   m_ObjectHideFlags: 0
