@@ -30,6 +30,7 @@ public class Elevator : MonoBehaviour
     {
         Player = FindObjectOfType<InputManager>().transform;
         collision = FindObjectOfType<CharacterCollision>();
+
         collision.enabled = false;
 
         SetParent = false;
