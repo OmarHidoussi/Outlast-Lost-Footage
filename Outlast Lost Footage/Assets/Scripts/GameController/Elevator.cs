@@ -8,6 +8,7 @@ public class Elevator : MonoBehaviour
     #region Variables
 
     [HideInInspector] public Transform Player;
+    public CharacterCollision collision;
     public Vector3 Offset;
     public bool SetParent;
     public bool Cutscene;
@@ -28,6 +29,8 @@ public class Elevator : MonoBehaviour
     void Start()
     {
         Player = FindObjectOfType<InputManager>().transform;
+        collision = FindObjectOfType<CharacterCollision>();
+        collision.enabled = false;
 
         SetParent = false;
 
@@ -59,6 +62,7 @@ public class Elevator : MonoBehaviour
         {
             SetParent = false;
             Player.GetComponentInParent<Rigidbody>().useGravity = true;
+            collision.enabled = true;
         }
     }
 
