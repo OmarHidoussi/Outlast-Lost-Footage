@@ -364,6 +364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TopWall_Type1 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 2239481903449708081, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}
 --- !u!4 &20012743 stripped
@@ -3476,6 +3480,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5ad94b51dd178c94c8e613a3a788d1f1, type: 3}
       propertyPath: m_Name
       value: ButtomWall_Vent (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ad94b51dd178c94c8e613a3a788d1f1, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad94b51dd178c94c8e613a3a788d1f1, type: 3}
@@ -18303,6 +18311,7 @@ MonoBehaviour:
   DestroyOnEnter: 0
   DestroyOnExit: 0
   Loop: 1
+  debug: 0
 --- !u!65 &1367484333
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21687,6 +21696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtomWall_Vent
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ad94b51dd178c94c8e613a3a788d1f1, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad94b51dd178c94c8e613a3a788d1f1, type: 3}
 --- !u!1 &1667804525 stripped
@@ -22863,7 +22876,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752839366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.79, y: -0.00050807, z: 27.26}
+  m_LocalPosition: {x: 17.79, y: -0.00050807, z: 12.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22998,8 +23011,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 3.81, z: 1.46}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.8726559, y: 2.5838883, z: 1.46}
+  m_Center: {x: -2.4691057, y: 1.0516585, z: 4.16}
 --- !u!1 &1753922560
 GameObject:
   m_ObjectHideFlags: 0
@@ -24606,6 +24619,10 @@ PrefabInstance:
     - target: {fileID: 2239481903449708081, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}
       propertyPath: m_Name
       value: TopWall_Type1 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239481903449708081, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6ceb41d6b163df44879ed70eb1ed7da, type: 3}

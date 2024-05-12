@@ -136,8 +136,16 @@ public class CharacterMovement : MonoBehaviour
 
         Ray ray = new Ray(RayDirection.transform.position, RayDirection.transform.forward);
 
+        float Raydistance;
+        if (input.IsCrouching)
+            Raydistance = 2f;
+        else
+            Raydistance = 0.35f;
+
+        Debug.Log(Raydistance); 
+
         // Check if the distance is less than 0.35f
-        if (Physics.Raycast(ray, out hit, 0.35f))
+        if (Physics.Raycast(ray, out hit, Raydistance))
         {
             if (hit.transform.tag == "Wall")
             {

@@ -12,11 +12,8 @@ public class HeadBob : MonoBehaviour
     [Header("Walk")]
     [SerializeField, Range(0, 0.1f)] private float Yamplitude, Xamplitude, BreathAmplitude = 0.015f;
     [SerializeField, Range(0, 60)] private float frequency, Breathfrequency = 10.0f;
+    //[SerializeField, Range(0.2f, 12f)] private float ZRotation = 0.2f;
 
-    /*[Header("Run")]
-    [SerializeField, Range(0, 0.1f)] private float RunYamplitude, RunXamplitude, RunBreathAmplitude = 0.015f;
-    [SerializeField, Range(0, 30)] private float Runfrequency, RunBreathfrequency = 10.0f;
-    */
     [SerializeField] private Transform cam = null;
     [SerializeField] private Transform camHolder = null;
 
@@ -65,11 +62,16 @@ public class HeadBob : MonoBehaviour
         cam.localPosition += motion;
     }
 
+    private void PlayRotMotion(Quaternion rotMotion)
+    {
+        cam.localRotation *= rotMotion;
+    }
+
     private void CheckMotion()
     {
 
         PlayMotion(FootStepMotion());
-    
+        //PlayRotMotion(HeadMotion());
     }
 
     private Vector3 FootStepMotion()
@@ -78,23 +80,6 @@ public class HeadBob : MonoBehaviour
         float FrequencyMultiplier = 1.12f;
         float SpeedMultiplier = movement.Speed / 5;
 
-        /*if (movement.Speed > movement.WalkSpeed + 1)
-        {
-            ValueMultiplier = ValueMultiplier + (movement.Speed - movement.WalkSpeed - 1) / 3;
-            FrequencyMultiplier = FrequencyMultiplier + (movement.Speed - movement.WalkSpeed - 1) / 3;
-        }
-        else
-        {
-            ValueMultiplier = Mathf.Lerp(ValueMultiplier, 1, 2f * Time.deltaTime);
-            FrequencyMultiplier = Mathf.Lerp(ValueMultiplier, 1, 2f * Time.deltaTime);
-        }*/
-
-        /*if (!input.CameraOn)
-        {
-            ValueMultiplier = 0.35f;
-            FrequencyMultiplier = 1.12f;
-        }*/
-
         Vector3 pos = Vector3.zero;
         if (input.Mov_Axis.x == 0)
         {
@@ -102,17 +87,28 @@ public class HeadBob : MonoBehaviour
         }
 
         frequency = (movement.Speed * FrequencyMultiplier * SpeedMultiplier) * 1.4f;
-        frequency = Mathf.Clamp(frequency, 8, 18);
+        frequency = Mathf.Clamp(frequency, 11, 18);
         Yamplitude = (ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x) / 36.5f;
         Xamplitude = (ValueMultiplier * SpeedMultiplier / 2 * input.Mov_Axis.x) / 90;
 
+        // Rotation on the z-axis
+        //float zRotation = Mathf.Sin(Time.time * frequency / 2) * ZRotation;
+
         pos.y += Mathf.Sin(Time.time * frequency) * Yamplitude;
-        pos.x -= Mathf.Cos(Time.time * frequency/ 2) * Xamplitude;
+        pos.x -= Mathf.Cos(Time.time * frequency / 2) * Xamplitude;
+
+        // Apply rotation to the position
+        //pos = Quaternion.Euler(0, 0, zRotation) * pos;
 
         return pos;
-
     }
-
+    /*
+    private Quaternion HeadMotion()
+    {
+        ZRotation = Mathf.Clamp(ZRotation, 1f, 3f);
+        cam.localRotation.z += Mathf.Sin(Time.time * frequency) * ZRotation;
+    }
+    */
     private void ResetPosition()
     {
         if (cam.localPosition == startPos) return;
