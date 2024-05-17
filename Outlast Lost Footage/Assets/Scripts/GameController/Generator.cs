@@ -9,8 +9,10 @@ public class Generator : MonoBehaviour,IInteractable
 
     public LevelController controller;
     private Interaction interaction;
-    public bool Generator_1, Generator_2;
+    public bool Generator_1, Generator_2, EngineActivated;
     public float AddedTimer;
+    public float RotationSpeed;
+    public Transform Engine;
 
     public AudioSource GeneratorAudio;
     public AudioClip PowerOn_Clip;
@@ -30,11 +32,18 @@ public class Generator : MonoBehaviour,IInteractable
         if (Generator_1)
         {
             interaction.Interacted = controller.Generator_1_Activated;
+
+            if (EngineActivated)
+                Engine.transform.Rotate(Engine.transform.TransformDirection(transform.forward) * RotationSpeed * Time.deltaTime * (controller.GlobalTimer / 40));
         }
         if (Generator_2)
         {
-            interaction.Interacted = controller.Generator_2_Activated;
+            interaction.Interacted = controller.Generator_2_Activated; 
+
+            if (EngineActivated)
+                Engine.transform.Rotate(Vector3.forward * RotationSpeed * Time.deltaTime * (controller.GlobalTimer / 25), Space.Self);
         }
+
     }
     #endregion
 
@@ -54,6 +63,7 @@ public class Generator : MonoBehaviour,IInteractable
 
         controller.GlobalTimer = AddedTimer;
         GeneratorAudio.PlayOneShot(PowerOn_Clip);
+        EngineActivated = true;
     }
 
     #endregion
