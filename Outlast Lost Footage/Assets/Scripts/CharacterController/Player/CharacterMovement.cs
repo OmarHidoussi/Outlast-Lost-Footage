@@ -138,11 +138,9 @@ public class CharacterMovement : MonoBehaviour
 
         float Raydistance;
         if (input.IsCrouching)
-            Raydistance = 2f;
+            Raydistance = 0.1f;
         else
             Raydistance = 0.35f;
-
-        Debug.Log(Raydistance); 
 
         // Check if the distance is less than 0.35f
         if (Physics.Raycast(ray, out hit, Raydistance))
