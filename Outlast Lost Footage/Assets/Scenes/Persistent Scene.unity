@@ -544,7 +544,7 @@ Transform:
   - {fileID: 815338251}
   - {fileID: 967180702}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &967180701
 GameObject:
@@ -935,7 +935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1281186702
 Transform:
   m_ObjectHideFlags: 0
@@ -2139,13 +2139,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: CanMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: EnableCameraMovement
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185383, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: ZRotation
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2022162151036185434, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185435, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185435, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_LocalPosition.x

@@ -97,84 +97,87 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Lookback)
+        if (input.EnableCameraMovement)
         {
-            
-            MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
-            MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
-
-            if(Mouse_Axis != Vector2.zero)
+            if (!Lookback)
             {
-                MouseX = Mouse_Axis.x * Time.deltaTime * Sensetivity;
-                MouseY = Mouse_Axis.y * Time.deltaTime * Sensetivity * Factor;
-            }
 
-            if (input.IsSprinting)
-                xRotation = Mathf.Clamp(xRotation, SprintX_Min, SprintX_Max);
-            else if (input.IsCrouching)
-                xRotation = Mathf.Clamp(xRotation, CrouchX_Min, CrouchX_Max);
-            else
-            {
-                xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);
-            }
+                MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
+                MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
 
-            xRotation -= MouseY;
+                if (Mouse_Axis != Vector2.zero)
+                {
+                    MouseX = Mouse_Axis.x * Time.deltaTime * Sensetivity;
+                    MouseY = Mouse_Axis.y * Time.deltaTime * Sensetivity * Factor;
+                }
+
+                if (input.IsSprinting)
+                    xRotation = Mathf.Clamp(xRotation, SprintX_Min, SprintX_Max);
+                else if (input.IsCrouching)
+                    xRotation = Mathf.Clamp(xRotation, CrouchX_Min, CrouchX_Max);
+                else
+                {
+                    xRotation = Mathf.Clamp(xRotation, X_Min, X_Max);
+                }
+
+                xRotation -= MouseY;
 
 
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            if (!input.SideWalk)
-                PlayerBody.Rotate(Vector3.up * MouseX);
-
-            if (input.Mov_Axis == Vector2.zero)
-            {
+                transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
                 if (!input.SideWalk)
-                    PlayerGFX.Rotate(Vector3.up * -MouseX);
+                    PlayerBody.Rotate(Vector3.up * MouseX);
 
-                float angleDifference = Quaternion.Angle(PlayerGFX.transform.rotation, PlayerBody.transform.rotation);
-
-                Vector3 cross = Vector3.Cross(PlayerGFX.transform.forward, PlayerBody.transform.forward);
-                
-                if (cross.y < 0)
+                if (input.Mov_Axis == Vector2.zero)
                 {
-                    angleDifference = -angleDifference;
-                }
+                    if (!input.SideWalk)
+                        PlayerGFX.Rotate(Vector3.up * -MouseX);
 
-                if (Mathf.Abs(angleDifference) > RotationThreshold)
-                {
-                    //float t = Mathf.Clamp01(RotationSpeed * Time.deltaTime);
-                    PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation,
-                        RotationSpeed * Time.deltaTime);
-                    //RotateBody(PlayerGFX, true, PlayerBody.rotation);
-                    /*
-                    if (angleDifference < 0)
+                    float angleDifference = Quaternion.Angle(PlayerGFX.transform.rotation, PlayerBody.transform.rotation);
+
+                    Vector3 cross = Vector3.Cross(PlayerGFX.transform.forward, PlayerBody.transform.forward);
+
+                    if (cross.y < 0)
                     {
-                        Characteranim.CharacterAnim.SetBool("TurnLeft", true);
-                        PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
-                    }
-                    else if (angleDifference > 0)
-                    {
-                        Characteranim.CharacterAnim.SetBool("TurnRight", true);
+                        angleDifference = -angleDifference;
                     }
 
-                    else
+                    if (Mathf.Abs(angleDifference) > RotationThreshold)
                     {
-                        Characteranim.CharacterAnim.SetBool("TurnRight", false);
-                        Characteranim.CharacterAnim.SetBool("TurnLeft", false);
-                    }*/
+                        //float t = Mathf.Clamp01(RotationSpeed * Time.deltaTime);
+                        PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation,
+                            RotationSpeed * Time.deltaTime);
+                        //RotateBody(PlayerGFX, true, PlayerBody.rotation);
+                        /*
+                        if (angleDifference < 0)
+                        {
+                            Characteranim.CharacterAnim.SetBool("TurnLeft", true);
+                            PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed / 100);
+                        }
+                        else if (angleDifference > 0)
+                        {
+                            Characteranim.CharacterAnim.SetBool("TurnRight", true);
+                        }
+
+                        else
+                        {
+                            Characteranim.CharacterAnim.SetBool("TurnRight", false);
+                            Characteranim.CharacterAnim.SetBool("TurnLeft", false);
+                        }*/
+                    }
+                }
+                else
+                {
+                    //float t = Mathf.Clamp01(RotationSpeed * 5 * Time.deltaTime);
+                    PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed * Time.deltaTime);
+                    RotateBody(PlayerGFX, false, PlayerBody.rotation);
+                    Characteranim.CharacterAnim.SetBool("TurnRight", false);
+                    Characteranim.CharacterAnim.SetBool("TurnLeft", false);
                 }
             }
-            else
-            {
-                //float t = Mathf.Clamp01(RotationSpeed * 5 * Time.deltaTime);
-                PlayerGFX.transform.rotation = Quaternion.Slerp(PlayerGFX.transform.rotation, PlayerBody.transform.rotation, RotationSpeed * Time.deltaTime);
-                RotateBody(PlayerGFX, false, PlayerBody.rotation);
-                Characteranim.CharacterAnim.SetBool("TurnRight", false);
-                Characteranim.CharacterAnim.SetBool("TurnLeft", false);
-            }
+
+            HandleHeight();
+            //HandleLookback();
         }
-
-        HandleHeight();
-        //HandleLookback();
     }
 
     #endregion

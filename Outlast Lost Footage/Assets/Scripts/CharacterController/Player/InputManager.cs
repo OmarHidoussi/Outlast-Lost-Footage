@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
     public bool SideWalk;
 
     [Header("CameraState")]
+    public bool EnableCameraMovement;
     public bool IsTitling;
     public bool CameraOn;
     public bool InfraredOn;
