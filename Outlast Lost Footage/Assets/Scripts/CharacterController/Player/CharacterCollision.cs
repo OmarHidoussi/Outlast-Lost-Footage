@@ -27,9 +27,14 @@ public class CharacterCollision : MonoBehaviour
     void Update()
     {
         // Perform raycast downward to check if the player is grounded
-        isGrounded = CheckGrounded();
+        if (input.CheckCollision)
+        {
+            isGrounded = CheckGrounded();
+        }
+        else
+            return;
 
-        if(isGrounded && CanDie)
+        if (isGrounded && CanDie)
         {
             anim.SetBool("Dead", true);
 

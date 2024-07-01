@@ -311,6 +311,34 @@ AnimationClip:
     path: 
     classID: 114
     script: {fileID: 11500000, guid: 5351ea3670a6c694eb087e47125b9304, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 8.183333
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: CheckCollision
+    path: 
+    classID: 114
+    script: {fileID: 11500000, guid: 5351ea3670a6c694eb087e47125b9304, type: 3}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -361,13 +389,20 @@ AnimationClip:
       typeID: 114
       customType: 0
       isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 0
+      attribute: 3613787083
+      script: {fileID: 11500000, guid: 5351ea3670a6c694eb087e47125b9304, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 8.216666
+    m_StopTime: 8.233334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1124,6 +1159,34 @@ AnimationClip:
     path: 
     classID: 114
     script: {fileID: 11500000, guid: 5351ea3670a6c694eb087e47125b9304, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 8.183333
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: CheckCollision
+    path: 
+    classID: 114
+    script: {fileID: 11500000, guid: 5351ea3670a6c694eb087e47125b9304, type: 3}
   m_EulerEditorCurves:
   - curve:
       serializedVersion: 2
@@ -1165,7 +1228,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 8.216666
+  - time: 8.233334
     functionName: ResetAfterCutScene
     data: 
     objectReferenceParameter: {fileID: 0}

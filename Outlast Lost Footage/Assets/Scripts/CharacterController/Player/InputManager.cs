@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     public bool Reload;
 
     [Header("Movement")]
+    public bool CheckCollision;
     public bool CanMove;
     public bool CanStand;
     public bool CanCrouch;
