@@ -181,6 +181,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void JumpLand()
     {
+        movement.GetComponentInChildren<CharacterCollision>().LandingPosition = movement.transform.position;
         CamMovement.Sensetivity = RestoreCameraMovement;
         m_rigidbody.useGravity = true;
         movement.GetComponent<InputManager>().Jump = false;

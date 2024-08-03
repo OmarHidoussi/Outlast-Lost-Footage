@@ -1901,6 +1901,9 @@ MonoBehaviour:
   Offset: {x: 0.08, y: 0.2, z: 0}
   DeathForce: 0
   isGrounded: 0
+  MidAirDeathCounter: 0
+  LastGroundPosition: {x: 0, y: 0, z: 0}
+  LandingPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2022162150628675311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2617,6 +2620,7 @@ MonoBehaviour:
   CanInteract: 0
   Interact: 0
   Reload: 0
+  CheckCollision: 0
   CanMove: 1
   CanStand: 1
   CanCrouch: 1
@@ -2627,6 +2631,7 @@ MonoBehaviour:
   IsCrouching: 0
   Jump: 0
   SideWalk: 0
+  EnableCameraMovement: 0
   IsTitling: 0
   CameraOn: 0
   InfraredOn: 0

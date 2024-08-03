@@ -17,6 +17,9 @@ public class CharacterCollision : MonoBehaviour
     public float DeathForce;
 
     [HideInInspector] public bool isGrounded;
+    [HideInInspector] public float MidAirDeathCounter;
+
+    [HideInInspector] public Vector3 LastGroundPosition, LandingPosition;
 
     #endregion
 
@@ -26,6 +29,24 @@ public class CharacterCollision : MonoBehaviour
 
     void Update()
     {
+        //Start the counter while player is in mid air and kill him if he's more than 3 seconds on mid air
+        if (!isGrounded)
+        {
+            MidAirDeathCounter += Time.deltaTime;
+        }
+        else
+        {
+            MidAirDeathCounter = 0;
+            LastGroundPosition = input.transform.position;
+        }
+
+        if (MidAirDeathCounter >= 3f)
+        {
+            CanDie = true;
+            StartCoroutine(KillPlayer());
+            MidAirDeathCounter = 0;
+        }
+
         // Perform raycast downward to check if the player is grounded
         if (input.CheckCollision)
         {
@@ -64,14 +85,6 @@ public class CharacterCollision : MonoBehaviour
         }
     }
 
-    IEnumerator KillPlayer()
-    {
-        anim.SetBool("Dead", true);
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        anim.SetBool("Dead", false);
-    }
-
     private void OnDrawGizmos()
     {
         Ray ray = new Ray(transform.position + Offset, Vector3.down * raycastDistance);
@@ -100,6 +113,12 @@ public class CharacterCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        /*if(Vector3.Distance(LastGroundPosition,LandingPosition) > DieDistance)
+        {
+            CanDie = true;
+            anim.SetBool("Dead", true);
+        }*/
+
         if (collision.gameObject.tag == "Walkable")
         {
             input.MidAir = false;
@@ -111,6 +130,17 @@ public class CharacterCollision : MonoBehaviour
             //Low Health
             //stats.Health -= 80;
         }
+    }
+
+    #endregion
+
+    #region Custom Methods
+    IEnumerator KillPlayer()
+    {
+        anim.SetBool("Dead", true);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        anim.SetBool("Dead", false);
     }
 
     #endregion
