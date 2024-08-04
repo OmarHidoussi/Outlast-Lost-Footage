@@ -56,8 +56,11 @@ public class ScenePartLoader : MonoBehaviour
     {
         if(!isLoaded)
         {
-            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
-            isLoaded = true;
+            if (!SceneManager.GetSceneByName(SceneName).isLoaded)
+            {
+                SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+                isLoaded = true;
+            }
         }
     }
 
