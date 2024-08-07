@@ -13,9 +13,17 @@ public class MainMenuController : MonoBehaviour
     public GameObject General_GRP;
     public GameObject Graphics_GRP;
     public GameObject FadeOutUI, FadeOutEnv;
+
+    public string Env_Scene_1, Env_Scene_2;
     #endregion
 
     #region BuiltInMethods
+
+    private void Awake()
+    {
+        SceneManager.LoadScene(Env_Scene_1, LoadSceneMode.Additive);
+        SceneManager.LoadScene(Env_Scene_2, LoadSceneMode.Additive);
+    }
 
     #endregion
 

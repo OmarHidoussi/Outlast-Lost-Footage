@@ -23,7 +23,10 @@ public class Elevator : MonoBehaviour
 
     private void Awake()
     {
-        SceneManager.LoadSceneAsync("Persistent Scene", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("Main Menu").isLoaded)
+        {
+            SceneManager.LoadSceneAsync("Persistent Scene", LoadSceneMode.Additive);
+        }
     }
 
     // Start is called before the first frame update

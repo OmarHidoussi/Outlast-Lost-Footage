@@ -32,9 +32,12 @@ public class Door : MonoBehaviour, IInteractable
     void Start()
     {
         input = FindObjectOfType<InputManager>();
-        _audio = input.gameObject.GetComponentInChildren<CharacterBehaviour>();
-        Characteranim = input.gameObject.GetComponent<CharacterAnimator>();
-        Ch_interaction = input.gameObject.GetComponentInChildren<CharacterInteraction>();
+        if(input != null)
+        {
+            _audio = input.gameObject.GetComponentInChildren<CharacterBehaviour>();
+            Characteranim = input.gameObject.GetComponent<CharacterAnimator>();
+            Ch_interaction = input.gameObject.GetComponentInChildren<CharacterInteraction>();
+        }
         interaction = GetComponent<Interaction>();
         AudioEvent = GetComponent<AudioSource>();
 
