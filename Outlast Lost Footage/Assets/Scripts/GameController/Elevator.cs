@@ -23,7 +23,7 @@ public class Elevator : MonoBehaviour
 
     private void Awake()
     {
-        if (!SceneManager.GetSceneByName("Main Menu").isLoaded)
+        if (!SceneManager.GetSceneByName("Main Menu").isLoaded && SceneManager.GetAllScenes().Length == 1)
         {
             SceneManager.LoadSceneAsync("Persistent Scene", LoadSceneMode.Additive);
         }
@@ -33,6 +33,7 @@ public class Elevator : MonoBehaviour
     void Start()
     {
         Player = FindObjectOfType<InputManager>().transform;
+
         collision = FindObjectOfType<CharacterCollision>();
 
         collision.enabled = false;
