@@ -32,11 +32,23 @@ public class Elevator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = FindObjectOfType<InputManager>().transform;
+        //Player = FindObjectOfType<InputManager>().transform;
 
-        collision = FindObjectOfType<CharacterCollision>();
+        var inputManager = FindObjectOfType<InputManager>();
+        if (inputManager != null)
+        {
+            Player = inputManager.transform;
+        }
 
-        collision.enabled = false;
+        //collision = FindObjectOfType<CharacterCollision>();
+
+        var collision = FindObjectOfType<CharacterCollision>();
+        if (collision != null)
+        {
+            this.collision = collision;
+            collision.enabled = false;
+        }
+
 
         SetParent = false;
 

@@ -24,9 +24,12 @@ public class Battery : MonoBehaviour, IInteractable
     void Start()
     {
         input = FindObjectOfType<InputManager>();
-        stats = input.gameObject.GetComponent<CharacterStats>();
-        anim = input.gameObject.GetComponent<CharacterAnimator>();
-        //_audio = input.gameObject.GetComponentInChildren<CharacterAudio>();
+        if(input != null)
+        {
+            stats = input.gameObject.GetComponent<CharacterStats>();
+            anim = input.gameObject.GetComponent<CharacterAnimator>();
+            //_audio = input.gameObject.GetComponentInChildren<CharacterAudio>();
+        }
         interaction = GetComponent<Interaction>();
         Ch_interaction = input.gameObject.GetComponentInChildren<CharacterInteraction>();
     }

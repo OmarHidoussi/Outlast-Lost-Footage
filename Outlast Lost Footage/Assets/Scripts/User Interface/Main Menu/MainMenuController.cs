@@ -8,11 +8,13 @@ public class MainMenuController : MonoBehaviour
 
     #region Variables
     public AudioSource source;
+    public AudioSource Music_source;
     public GameObject MainMenu;
     public GameObject Options;
     public GameObject General_GRP;
     public GameObject Graphics_GRP;
     public GameObject FadeOutUI, FadeOutEnv;
+    public GameObject loadingScreen;
 
     public string Env_Scene_1, Env_Scene_2;
     #endregion
@@ -34,7 +36,9 @@ public class MainMenuController : MonoBehaviour
     }
     public void NewGame(string Level)
     {
-        SceneManager.LoadScene(Level, LoadSceneMode.Single);
+        loadingScreen.SetActive(true);
+        Music_source.Pause();
+        StartCoroutine(LoadingScreen(Level));
     }
 
     public void options()
@@ -68,6 +72,14 @@ public class MainMenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    IEnumerator LoadingScreen(string Level)
+    {
+        loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(Random.Range(8f, 15f));
+        SceneManager.LoadScene(Level, LoadSceneMode.Single);
+    }
+
     #endregion
 
 }
