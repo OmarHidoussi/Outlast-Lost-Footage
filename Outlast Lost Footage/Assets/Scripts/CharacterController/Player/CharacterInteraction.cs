@@ -22,7 +22,7 @@ public class CharacterInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var Interactable = other.gameObject.GetComponent<IInteractable>();
+        /*var Interactable = other.gameObject.GetComponent<IInteractable>();
         if (Interactable == null)
             return;
         else
@@ -39,7 +39,31 @@ public class CharacterInteraction : MonoBehaviour
             {
                 interactionType = interaction.GamepadInteractionButton;
             }
+        }*/
+        var interactable = other.gameObject.GetComponent<IInteractable>();
+        if (interactable == null)
+            return;
+
+        Interaction interaction = other.gameObject.GetComponent<Interaction>();
+        if (interaction == null)
+            return;
+
+        // Check if any joystick (gamepad) is connected
+        bool isGamepadConnected = Input.GetJoystickNames().Length > 0;
+
+        // Check if the keyboard/mouse is being used
+        bool isKeyboardOrMouseUsed = Input.anyKey;
+
+        if (isKeyboardOrMouseUsed && !isGamepadConnected)
+        {
+            interactionType = interaction.KeyboardInteractionButton;
         }
+        else
+        {
+            // Fallback or default interaction type
+            interactionType = interaction.GamepadInteractionButton;
+        }
+
     }
     void OnTriggerStay(Collider other)
     {

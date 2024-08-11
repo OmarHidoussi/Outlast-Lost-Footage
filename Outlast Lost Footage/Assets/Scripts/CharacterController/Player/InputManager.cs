@@ -275,10 +275,14 @@ public class InputManager : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
-        if (!SideWalk)
-            Mov_Axis.x = value.ReadValue<Vector2>().y;
+        if (CanMove)
+        {
+            if (!SideWalk)
+                Mov_Axis.x = value.ReadValue<Vector2>().y;
 
-        Mov_Axis.y = value.ReadValue<Vector2>().x;
+            Mov_Axis.y = value.ReadValue<Vector2>().x;
+        }
+
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext value)
@@ -400,9 +404,12 @@ public class InputManager : MonoBehaviour
 
     private void OnCameraOnPerformed(InputAction.CallbackContext Button)
     {
-        if (Button.ReadValueAsButton())
-            CameraOn = !CameraOn;
-        CameraOff = false;
+        if (CanMove)
+        {
+            if (Button.ReadValueAsButton())
+                CameraOn = !CameraOn;
+            CameraOff = false;
+        }
     }
 
     bool CameraOff = true;

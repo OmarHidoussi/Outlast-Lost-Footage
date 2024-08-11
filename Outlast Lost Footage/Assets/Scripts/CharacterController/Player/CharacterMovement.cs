@@ -40,6 +40,11 @@ public class CharacterMovement : MonoBehaviour
 
     #region BuiltInMethods
 
+    void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
