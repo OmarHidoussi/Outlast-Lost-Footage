@@ -169,7 +169,7 @@ MonoBehaviour:
   stats: {fileID: 0}
   anim: {fileID: 0}
   Ch_interaction: {fileID: 0}
-  HandAim: {fileID: 2108882645}
+  HandAim: {fileID: 0}
 --- !u!114 &480993814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,10 +185,11 @@ MonoBehaviour:
   Text: {fileID: 5599743363336741766}
   InteractionKey: 323
   KeyboardInteractionButton: {fileID: 21300000, guid: 27c51a49f3fc87149b83695711316812, type: 3}
-  GamepadInteractionButton: {fileID: 21300000, guid: 970d79b570bf884409d793017c157723, type: 3}
+  GamepadInteractionButton: {fileID: 21300000, guid: 1fe81fa3fa896a843949281aac226c8d, type: 3}
   InteractionText: Pick up Battery
   Helptext: Can't carry more Batteries
   Interacted: 0
+  InteractionLocation: {fileID: 0}
 --- !u!1 &5599743363180100089
 GameObject:
   m_ObjectHideFlags: 0

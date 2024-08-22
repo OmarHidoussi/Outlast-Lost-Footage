@@ -11,6 +11,7 @@ public class Interaction : MonoBehaviour
     public string InteractionText;
     public string Helptext;
     public bool Interacted;
+    public Transform InteractionLocation;
     #endregion
 
 }

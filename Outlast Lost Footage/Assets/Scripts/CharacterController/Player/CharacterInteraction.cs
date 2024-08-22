@@ -14,32 +14,25 @@ public class CharacterInteraction : MonoBehaviour
     public TextMeshProUGUI Helptext;
     public TextMeshProUGUI interactionText;
     public Image interactionButton;
+    public Rigidbody m_rigidbody;
 
     private Sprite interactionType;
+    private Transform TargetInteractionLocation;
     #endregion
 
     #region BuiltInMethods
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        /*var Interactable = other.gameObject.GetComponent<IInteractable>();
-        if (Interactable == null)
-            return;
-        else
+        if (TargetInteractionLocation != null)
         {
-            Interaction interaction = other.gameObject.GetComponent<Interaction>();
+            StartCoroutine(SnapPlayerToInteractionPosition());
+        }
+    }
 
-            if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || 
-                Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || 
-                Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-            {
-                interactionType = interaction.KeyboardInteractionButton;
-            }
-            else
-            {
-                interactionType = interaction.GamepadInteractionButton;
-            }
-        }*/
+    private void OnTriggerEnter(Collider other) //Checking wether the player is using a Gamepad or a keyboard
+    {
+
         var interactable = other.gameObject.GetComponent<IInteractable>();
         if (interactable == null)
             return;
@@ -60,11 +53,11 @@ public class CharacterInteraction : MonoBehaviour
         }
         else
         {
-            // Fallback or default interaction type
             interactionType = interaction.GamepadInteractionButton;
         }
 
     }
+
     void OnTriggerStay(Collider other)
     {
         var Interactable = other.gameObject.GetComponent<IInteractable>();
@@ -80,7 +73,7 @@ public class CharacterInteraction : MonoBehaviour
                 if (!interaction.Interacted)
                 {
                     DisplayInteractText(interactionType, interaction.InteractionText, false);
-
+                    TargetInteractionLocation = interaction.InteractionLocation;
                     Interactable.Interact();
                 }
 
@@ -93,6 +86,21 @@ public class CharacterInteraction : MonoBehaviour
                 DisplayInteractText(interactionType, interaction.InteractionText,true);
             }
         }
+    }
+
+    IEnumerator SnapPlayerToInteractionPosition()
+    {
+        input.CanMove = false;
+        input.EnableCameraMovement = false;
+        m_rigidbody.useGravity = false;
+        input.Mov_Axis = Vector2.zero;
+        m_rigidbody.transform.position = Vector3.MoveTowards(m_rigidbody.transform.position, TargetInteractionLocation.position, 2.2f * Time.deltaTime);
+        m_rigidbody.transform.rotation = Quaternion.Slerp(m_rigidbody.transform.rotation, TargetInteractionLocation.rotation, 15f * Time.deltaTime);
+        yield return new WaitForSeconds(1f);
+        input.CanMove = true;
+        input.EnableCameraMovement = true;
+        m_rigidbody.useGravity = true;
+        TargetInteractionLocation = null;
     }
 
     void OnTriggerExit(Collider other)
