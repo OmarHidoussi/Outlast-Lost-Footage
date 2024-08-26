@@ -56,7 +56,9 @@ public class Battery : MonoBehaviour, IInteractable
     void Collect()
     {
         anim.InteractionType("PickUp");
-        HandAim.position = transform.position;
+        if(HandAim != null)
+            HandAim.position = transform.position;
+
         input.CanInteract = false;
         input.Interact = false;
         stats.BatteryCounter += 1;

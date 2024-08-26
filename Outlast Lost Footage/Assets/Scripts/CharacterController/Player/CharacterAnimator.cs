@@ -45,7 +45,7 @@ public class CharacterAnimator : MonoBehaviour
         HandleInteraction();
         HandleHealth();
 
-        //LeftHandConstraint.weight = LeftHandWeight;
+        LeftHandConstraint.weight = LeftHandWeight;
         CharacterAnim.SetBool("DeskSlide", input.CanDeskSlide);
         CharacterAnim.SetBool("Reload", input.Reload);
     }
@@ -111,8 +111,11 @@ public class CharacterAnimator : MonoBehaviour
         }
         else
         {
-            LeftHandWeight = 0;
-            SpineConstraint.weight = 0;
+            if(CharacterAnim.GetCurrentAnimatorStateInfo(2).normalizedTime > 1 && !CharacterAnim.IsInTransition(2))
+            {
+                LeftHandWeight = 0;
+                SpineConstraint.weight = 0;
+            }
         }
 
     }
@@ -121,7 +124,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         CharacterAnim.SetBool(Type, input.Interact);
     }
-    /*
+    
     public void MatchTarget(Vector3 matchPosition, Quaternion matchRotation, AvatarTarget target, MatchTargetWeightMask weightMask, float normalisedStartTime, float normalisedEndTime)
     {
         if (CharacterAnim.isMatchingTarget || CharacterAnim.IsInTransition(0))
@@ -134,7 +137,7 @@ public class CharacterAnimator : MonoBehaviour
 
         CharacterAnim.MatchTarget(matchPosition, matchRotation, target, weightMask, normalisedStartTime, normalisedEndTime);
     }
-*/
+
 
     #endregion
 

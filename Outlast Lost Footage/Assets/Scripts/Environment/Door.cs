@@ -60,12 +60,12 @@ public class Door : MonoBehaviour, IInteractable
             {
                 OpenDoor();
                 Characteranim.InteractionType("OpenDoor");
-                //Characteranim.CharacterAnim.SetBool("OpenDoor", true);
+                Characteranim.CharacterAnim.SetBool("OpenDoor", true);
             }
             else
             {
                 Characteranim.InteractionType("OpenDoor");
-                //Characteranim.CharacterAnim.SetBool("OpenDoor", true);
+                Characteranim.CharacterAnim.SetBool("OpenDoor", true);
                 Ch_interaction.DisplayHelpText(interaction.Helptext, true);
                 _audio.DoorState(false);
             }
@@ -78,7 +78,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         canInteract = false;
         yield return new WaitForSeconds(interactCooldown);
-        //Characteranim.CharacterAnim.SetBool("OpenDoor", false);
+        Characteranim.CharacterAnim.SetBool("OpenDoor", false);
         canInteract = true;
     }
 
