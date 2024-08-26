@@ -9486,6 +9486,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2022162150727126216, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: CamCorder
+      value: 
+      objectReference: {fileID: 877699137}
     - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: CheckCollision
       value: 1
@@ -10110,6 +10114,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1591248619918788277, guid: afcd703a0ef89c34f9ab8ad826e53f68, type: 3}
+--- !u!95 &877699137 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2022162150524547769, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+  m_PrefabInstance: {fileID: 833822326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &883519028
 PrefabInstance:
   m_ObjectHideFlags: 0
