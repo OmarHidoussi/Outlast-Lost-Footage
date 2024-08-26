@@ -33,6 +33,7 @@ public class CameraFunctionalities : MonoBehaviour
     public CameraProperties properties;
 
     [Header("CameraState")]
+    public Animator CamCorder;
     public GameObject NV_Lights;
     public Volume m_volume;
     public VolumeProfile CameraOFF, CameraON, CameraNightVision;
@@ -149,25 +150,26 @@ public class CameraFunctionalities : MonoBehaviour
         }
 
 
-        if (input.CameraOn)
+        if (!input.CameraOn)
         {
-            NV_Lights.SetActive(input.InfraredOn);
-            if(input.InfraredOn)
-                NightVisionOn.TransitionTo(TransitionSpeed);
+            //NV_Lights.SetActive(false);
+            NightVisionOff.TransitionTo(TransitionSpeed);
         }
         else
         {
-            NV_Lights.SetActive(false);
-            NightVisionOff.TransitionTo(TransitionSpeed);
+            if (input.InfraredOn && CamCorder.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !CamCorder.IsInTransition(0))
+            {
+                NV_Lights.SetActive(input.InfraredOn);
+                NightVisionOn.TransitionTo(TransitionSpeed);
+            }
+            else
+                NV_Lights.SetActive(false);
+
         }
     }
 
     void HandleCameraState()
     {
-        /*if (!input.CameraOn)
-        {
-            m_volume.profile = CameraOFF;
-        }*/
         
         if (input.CameraOn)
         {

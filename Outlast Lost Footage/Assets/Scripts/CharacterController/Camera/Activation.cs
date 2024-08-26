@@ -41,13 +41,6 @@ public class Activation : MonoBehaviour
 
     #region Custom Methods
 
-    public void ActivationState()
-    {
-        cameraGFX.SetActive(input.CameraOn);
-        cameraOffObject.SetActive(!input.CameraOn);
-        functionalities.NV_Lights.SetActive(false);
-    }
-
     public void Reload()
     {
         functionalities.LowBatteryAnim.gameObject.GetComponent<Image>().color = functionalities.PureScreenColor;
@@ -59,6 +52,13 @@ public class Activation : MonoBehaviour
         functionalities.NV_Lights.SetActive(anim.GetBool("CameraOn") && input.InfraredOn && input.CameraOn);
         if (!input.CameraOn)
             functionalities.NV_Lights.SetActive(false);
+    }
+
+    public void ActivationState()
+    {
+        cameraGFX.SetActive(input.CameraOn);
+        cameraOffObject.SetActive(!input.CameraOn);
+        functionalities.NV_Lights.SetActive(false);
     }
 
     void Screenshot()
