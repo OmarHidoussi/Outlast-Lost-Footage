@@ -3187,17 +3187,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2022162151601612652, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2022162151036185439, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151601612652, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022162151601612652, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151736234346, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
@@ -17887,6 +17891,7 @@ MonoBehaviour:
   InteractionText: To Activate Genetor
   Helptext: 
   Interacted: 0
+  InteractionLocation: {fileID: 0}
 --- !u!114 &1412471473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25492,6 +25497,7 @@ MonoBehaviour:
   InteractionText: To Activate Genetor
   Helptext: 
   Interacted: 0
+  InteractionLocation: {fileID: 0}
 --- !u!82 &2041141647
 AudioSource:
   m_ObjectHideFlags: 0
