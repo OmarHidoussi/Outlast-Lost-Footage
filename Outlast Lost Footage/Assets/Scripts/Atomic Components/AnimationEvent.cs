@@ -30,7 +30,9 @@ public class AnimationEvent : MonoBehaviour
         {
             if (!HasPlayed)
             {
-                anim.SetBool(animationName, true);
+                if(anim != null)
+                    anim.SetBool(animationName, true);
+
                 if (source != null)
                 {
                     source.clip = clip;
