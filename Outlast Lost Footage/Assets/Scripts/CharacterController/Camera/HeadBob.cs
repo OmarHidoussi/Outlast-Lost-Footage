@@ -85,8 +85,15 @@ public class HeadBob : MonoBehaviour
             pos.y += Mathf.Sin(Time.time * Breathfrequency * ValueMultiplier * SpeedMultiplier) * BreathAmplitude * ValueMultiplier * SpeedMultiplier;
         }
 
-        frequency = (movement.Speed * FrequencyMultiplier * SpeedMultiplier) * 1.4f;
-        frequency = Mathf.Clamp(frequency, 11, 18);
+        /*frequency = (movement.Speed * FrequencyMultiplier * SpeedMultiplier) * 1.4f;
+        frequency = Mathf.Clamp(frequency, 11, 18);*/
+        //Adding dynamic frequency turns out a bad idea as the camera start making an wanted transition effect when interpolating the value
+
+        if (input.IsSprinting)
+            frequency = 15f;
+        else
+            frequency = 11f;
+
         Yamplitude = (ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x) / 36.5f;
         Xamplitude = (ValueMultiplier * SpeedMultiplier / 2 * input.Mov_Axis.x) / 90;
 
