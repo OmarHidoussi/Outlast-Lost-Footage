@@ -105,66 +105,6 @@ public class CameraMovement : MonoBehaviour
     {
         Mouse_Axis = Vector2.zero;
     }
-
-    private void Update()
-    {
-
-        Lookback = Input.GetKey(KeyCode.E) && !HeadInTransition;
-
-        if (Lookback)
-        {
-            if (!hasLookedBack)
-            {
-                StartCoroutine(HandleLookBack());
-            }
-        }
-        else if (hasLookedBack && !coroutineRunning)
-        {
-            StartCoroutine(ResetLookBackMechanic());
-        }
-    }
-
-    IEnumerator HandleLookBack()
-    {
-        Debug.Log("LookingBack");
-
-        coroutineRunning = true;
-
-        Quaternion targetRotation = Quaternion.Euler(PreviousLookingDirection.x, 160f, PreviousLookingDirection.z);
-
-        while (Lookback)
-        {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, 0.025f);  // Adjust 0.1f to control the speed
-
-            // Wait for the next frame before continuing
-            yield return null;
-        }
-
-        hasLookedBack = true;
-        coroutineRunning = false;
-    }
-
-    IEnumerator ResetLookBackMechanic()
-    {
-        Debug.Log("forward");
-
-        coroutineRunning = true;
-        HeadInTransition = true;
-
-        while (Quaternion.Angle(transform.localRotation, PreviousLookingDirection) > 0.03f)
-        {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, PreviousLookingDirection, 0.1f);
-
-            yield return null;
-        }
-
-        Lookback = false;
-        hasLookedBack = false;
-        HeadInTransition = false;
-        coroutineRunning = false;
-    }
-
-
     
     float MouseX;
     float MouseY;
@@ -173,6 +113,8 @@ public class CameraMovement : MonoBehaviour
     {
         if (input.EnableCameraMovement)
         {
+            HandleLookBack();
+
             if (!Lookback && !coroutineRunning && !HeadInTransition && !hasLookedBack)
             {
                 PreviousLookingDirection = transform.localRotation;
@@ -254,8 +196,6 @@ public class CameraMovement : MonoBehaviour
                     ApplyHeadTilt();
                 }
             }
-            /*else
-                HandleLookBack();*/
 
             HandleHeight();
         }
@@ -264,6 +204,65 @@ public class CameraMovement : MonoBehaviour
     #endregion
 
     #region CustomMethods
+
+    void HandleLookBack()
+    {
+        Lookback = input.LookBack && !HeadInTransition;
+
+        if (Lookback)
+        {
+            if (!hasLookedBack)
+            {
+                StartCoroutine(LookBack());
+            }
+        }
+        else if (hasLookedBack && !coroutineRunning)
+        {
+            StartCoroutine(ResetLookBackMechanic());
+        }
+    }
+
+    IEnumerator LookBack()
+    {
+        Debug.Log("LookingBack");
+
+        coroutineRunning = true;
+
+        Quaternion targetRotation = Quaternion.Euler(PreviousLookingDirection.x, 160f, PreviousLookingDirection.z);
+
+        while (Lookback)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, 0.025f);  // Adjust 0.1f to control the speed
+
+            // Wait for the next frame before continuing
+            yield return null;
+        }
+
+        hasLookedBack = true;
+        coroutineRunning = false;
+    }
+
+    IEnumerator ResetLookBackMechanic()
+    {
+        Debug.Log("forward");
+
+        coroutineRunning = true;
+        HeadInTransition = true;
+
+        while (Quaternion.Angle(transform.localRotation, PreviousLookingDirection) > 0.03f)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, PreviousLookingDirection, 0.1f);
+
+            yield return null;
+        }
+
+        Lookback = false;
+        hasLookedBack = false;
+        HeadInTransition = false;
+        coroutineRunning = false;
+    }
+
+
 
     float X_tiltAmount;
     float Z_tiltAmount;

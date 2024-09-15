@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     public bool IsCrouching;
     public bool Jump;
     public bool SideWalk;
+    public bool LookBack;
 
     [Header("CameraState")]
     public bool EnableCameraMovement;
@@ -116,6 +117,9 @@ public class InputManager : MonoBehaviour
         input.Player.Screenshot.performed += OnScreenshotPerformed;
         input.Player.Screenshot.canceled += OnScreenshotCanceled;
 
+        input.Player.LookBack.performed += OnLookBackPerformed;
+        input.Player.LookBack.canceled += OnLookBackCanceled;
+
     }
 
     private void OnDisable()
@@ -175,6 +179,9 @@ public class InputManager : MonoBehaviour
 
         input.Player.Screenshot.performed -= OnScreenshotPerformed;
         input.Player.Screenshot.canceled -= OnScreenshotCanceled;
+
+        input.Player.LookBack.performed -= OnLookBackPerformed;
+        input.Player.LookBack.canceled -= OnLookBackCanceled;
 
     }
 
@@ -449,6 +456,16 @@ public class InputManager : MonoBehaviour
     private void OnScreenshotCanceled(InputAction.CallbackContext Button) 
     {
         Screenshot = false;
+    }
+
+    private void OnLookBackPerformed(InputAction.CallbackContext Button)
+    {
+        LookBack = Button.ReadValueAsButton();
+    }
+
+    private void OnLookBackCanceled(InputAction.CallbackContext Button)
+    {
+        LookBack = false;
     }
 
     #endregion

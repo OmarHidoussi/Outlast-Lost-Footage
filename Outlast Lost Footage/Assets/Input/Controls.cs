@@ -161,6 +161,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""55a09806-bcf6-49fe-8d6c-73f7bf960cb9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.15,pressPoint=0.23)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -427,6 +436,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Screenshot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3985f40-5cf0-4c7e-b608-14b3927bb8eb"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -478,6 +498,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_TiltLeft = m_Player.FindAction("TiltLeft", throwIfNotFound: true);
         m_Player_TiltRight = m_Player.FindAction("TiltRight", throwIfNotFound: true);
         m_Player_Screenshot = m_Player.FindAction("Screenshot", throwIfNotFound: true);
+        m_Player_LookBack = m_Player.FindAction("LookBack", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_RightStick = m_Camera.FindAction("RightStick", throwIfNotFound: true);
@@ -555,6 +576,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_TiltLeft;
     private readonly InputAction m_Player_TiltRight;
     private readonly InputAction m_Player_Screenshot;
+    private readonly InputAction m_Player_LookBack;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -574,6 +596,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @TiltLeft => m_Wrapper.m_Player_TiltLeft;
         public InputAction @TiltRight => m_Wrapper.m_Player_TiltRight;
         public InputAction @Screenshot => m_Wrapper.m_Player_Screenshot;
+        public InputAction @LookBack => m_Wrapper.m_Player_LookBack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +651,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Screenshot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
                 @Screenshot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
                 @Screenshot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreenshot;
+                @LookBack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookBack;
+                @LookBack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookBack;
+                @LookBack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookBack;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -677,6 +703,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Screenshot.started += instance.OnScreenshot;
                 @Screenshot.performed += instance.OnScreenshot;
                 @Screenshot.canceled += instance.OnScreenshot;
+                @LookBack.started += instance.OnLookBack;
+                @LookBack.performed += instance.OnLookBack;
+                @LookBack.canceled += instance.OnLookBack;
             }
         }
     }
@@ -731,6 +760,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnTiltLeft(InputAction.CallbackContext context);
         void OnTiltRight(InputAction.CallbackContext context);
         void OnScreenshot(InputAction.CallbackContext context);
+        void OnLookBack(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
