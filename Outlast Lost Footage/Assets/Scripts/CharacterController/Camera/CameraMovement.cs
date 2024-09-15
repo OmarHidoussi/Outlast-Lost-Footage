@@ -224,8 +224,6 @@ public class CameraMovement : MonoBehaviour
 
     IEnumerator LookBack()
     {
-        Debug.Log("LookingBack");
-
         coroutineRunning = true;
 
         Quaternion targetRotation = Quaternion.Euler(PreviousLookingDirection.x, 160f, PreviousLookingDirection.z);
@@ -244,8 +242,6 @@ public class CameraMovement : MonoBehaviour
 
     IEnumerator ResetLookBackMechanic()
     {
-        Debug.Log("forward");
-
         coroutineRunning = true;
         HeadInTransition = true;
 
