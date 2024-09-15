@@ -40,9 +40,15 @@ public class CameraMovement : MonoBehaviour
 
     [Space]
     [Header("Head Tilting")]
-    [SerializeField, Range(0f, 20f)] private float Frequency = 10f;
-    [SerializeField, Range(0f, 30f)] private float XAmplitude, ZAmplitude = 0.03f;
+    [SerializeField, Range(0f, 0.1f)] private float Frequency = 10f;
+    [SerializeField, Range(0f, 0.1f)] private float XAmplitude, ZAmplitude = 0.03f;
     public CharacterMovement movement;
+
+    private Quaternion PreviousLookingDirection;
+    bool HeadInTransition;
+
+    public bool coroutineRunning = false;
+    public bool hasLookedBack = false;
 
     #endregion
 
@@ -51,6 +57,8 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        HeadInTransition = false;
+
         MouseControls = new Controls();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -98,6 +106,66 @@ public class CameraMovement : MonoBehaviour
         Mouse_Axis = Vector2.zero;
     }
 
+    private void Update()
+    {
+
+        Lookback = Input.GetKey(KeyCode.E) && !HeadInTransition;
+
+        if (Lookback)
+        {
+            if (!hasLookedBack)
+            {
+                StartCoroutine(HandleLookBack());
+            }
+        }
+        else if (hasLookedBack && !coroutineRunning)
+        {
+            StartCoroutine(ResetLookBackMechanic());
+        }
+    }
+
+    IEnumerator HandleLookBack()
+    {
+        Debug.Log("LookingBack");
+
+        coroutineRunning = true;
+
+        Quaternion targetRotation = Quaternion.Euler(PreviousLookingDirection.x, 160f, PreviousLookingDirection.z);
+
+        while (Lookback)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, 0.025f);  // Adjust 0.1f to control the speed
+
+            // Wait for the next frame before continuing
+            yield return null;
+        }
+
+        hasLookedBack = true;
+        coroutineRunning = false;
+    }
+
+    IEnumerator ResetLookBackMechanic()
+    {
+        Debug.Log("forward");
+
+        coroutineRunning = true;
+        HeadInTransition = true;
+
+        while (Quaternion.Angle(transform.localRotation, PreviousLookingDirection) > 0.03f)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, PreviousLookingDirection, 0.1f);
+
+            yield return null;
+        }
+
+        Lookback = false;
+        hasLookedBack = false;
+        HeadInTransition = false;
+        coroutineRunning = false;
+    }
+
+
+    
     float MouseX;
     float MouseY;
     // Update is called once per frame
@@ -105,8 +173,9 @@ public class CameraMovement : MonoBehaviour
     {
         if (input.EnableCameraMovement)
         {
-            if (!Lookback)
+            if (!Lookback && !coroutineRunning && !HeadInTransition && !hasLookedBack)
             {
+                PreviousLookingDirection = transform.localRotation;
 
                 MouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Sensetivity;
                 MouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Sensetivity * Factor;
@@ -185,15 +254,17 @@ public class CameraMovement : MonoBehaviour
                     ApplyHeadTilt();
                 }
             }
+            /*else
+                HandleLookBack();*/
 
             HandleHeight();
-            //HandleLookback();
         }
     }
 
     #endregion
 
     #region CustomMethods
+
     float X_tiltAmount;
     float Z_tiltAmount;
     void ApplyHeadTilt()

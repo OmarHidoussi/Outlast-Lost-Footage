@@ -2791,6 +2791,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2022162150394058492, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022162150394058492, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -2864,7 +2868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185435, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185435, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2904,13 +2908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151421435386, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig12:RightArm'\n\tTransform 'mixamorig12:Neck'\n\tTransform
-        'mixamorig12:RightHand'\n\tTransform 'mixamorig12:Spine2'\n\tTransform 'mixamorig12:RightForeArm'\n\tTransform
-        'mixamorig12:RightArm'\n\tTransform 'mixamorig12:Neck'\n\tTransform 'mixamorig12:RightHand'\n\tTransform
-        'mixamorig12:Spine2'\n\tTransform 'mixamorig12:RightForeArm'\n\tand more
-        ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151601612652, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_AnchorMax.x
