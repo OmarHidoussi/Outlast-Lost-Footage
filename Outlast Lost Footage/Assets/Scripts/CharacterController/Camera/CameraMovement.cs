@@ -180,8 +180,10 @@ public class CameraMovement : MonoBehaviour
                     Characteranim.CharacterAnim.SetBool("TurnLeft", false);
                 }
 
-                ApplyHeadTilt();
-
+                if(xRotation > X_Min/2 && xRotation < X_Max / 2)
+                {
+                    ApplyHeadTilt();
+                }
             }
 
             HandleHeight();
