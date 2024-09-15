@@ -28,7 +28,7 @@ public class CameraMovement : MonoBehaviour
     public Vector3 Jumpoffset;
 
     public Transform CameraHolder;
-    public Animator CamHolderAnim;
+    //public Animator CamHolderAnim;
     public Vector3 LeftTilt;
     public Vector3 RightTilt;
 
@@ -37,6 +37,12 @@ public class CameraMovement : MonoBehaviour
 
     float xRotation;
     int Factor;
+
+    [Space]
+    [Header("Head Tilting")]
+    [SerializeField, Range(0f, 20f)] private float Frequency = 10f;
+    [SerializeField, Range(0f, 30f)] private float XAmplitude, ZAmplitude = 0.03f;
+    public CharacterMovement movement;
 
     #endregion
 
@@ -95,7 +101,7 @@ public class CameraMovement : MonoBehaviour
     float MouseX;
     float MouseY;
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (input.EnableCameraMovement)
         {
@@ -173,6 +179,9 @@ public class CameraMovement : MonoBehaviour
                     Characteranim.CharacterAnim.SetBool("TurnRight", false);
                     Characteranim.CharacterAnim.SetBool("TurnLeft", false);
                 }
+
+                ApplyHeadTilt();
+
             }
 
             HandleHeight();
@@ -183,6 +192,24 @@ public class CameraMovement : MonoBehaviour
     #endregion
 
     #region CustomMethods
+    float X_tiltAmount;
+    float Z_tiltAmount;
+    void ApplyHeadTilt()
+    {
+
+        if (!input.IsSprinting)
+        {
+            X_tiltAmount = Mathf.Sin(Time.time * Frequency) * XAmplitude * input.Mov_Axis.x;
+            Z_tiltAmount = Mathf.Sin(Time.time * Frequency / 2) * ZAmplitude * input.Mov_Axis.x;
+        }
+        else
+        {
+            X_tiltAmount = Mathf.Sin(1.3f * Time.time * Frequency) * (XAmplitude * 2)* input.Mov_Axis.x;
+            Z_tiltAmount = Mathf.Sin(1.3f * Time.time * Frequency / 2) * (ZAmplitude * 2)* input.Mov_Axis.x;
+        }
+
+        transform.localRotation = new Quaternion(CameraHolder.localRotation.x + X_tiltAmount, CameraHolder.localRotation.y, Z_tiltAmount, CameraHolder.localRotation.w);
+    }
 
     void HandleHeight()
     {

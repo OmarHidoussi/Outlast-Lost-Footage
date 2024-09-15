@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HeadBob : MonoBehaviour
 {
-
     #region Variables
 
     [SerializeField] private bool enable = true;
@@ -12,13 +11,13 @@ public class HeadBob : MonoBehaviour
     [Header("Walk")]
     [SerializeField, Range(0, 0.1f)] private float Yamplitude, Xamplitude, BreathAmplitude = 0.015f;
     [SerializeField, Range(0, 60)] private float frequency, Breathfrequency = 10.0f;
-    //[SerializeField, Range(0.2f, 12f)] private float ZRotation = 0.2f;
+    [SerializeField, Range(0, 1000f)] private float ZAmplitude = 0.02f; // Amplitude for Z-axis bobbing
 
     [SerializeField] private Transform cam = null;
     [SerializeField] private Transform camHolder = null;
 
-    //private float toggleSpeed = 3.0f;
     private Vector3 startPos;
+    private Quaternion startRot;
     private InputManager input;
     private CharacterMovement movement;
 
@@ -29,12 +28,13 @@ public class HeadBob : MonoBehaviour
     void Awake()
     {
         startPos = cam.localPosition;
+        startRot = cam.localRotation;
 
         input = GetComponent<InputManager>();
         movement = GetComponent<CharacterMovement>();
 
         GameSettings GameData = FindObjectOfType<GameSettings>();
-        if(GameData != null)
+        if (GameData != null)
         {
             enable = !GameData.ReduceHeadMotion;
         }
@@ -44,8 +44,7 @@ public class HeadBob : MonoBehaviour
         }
     }
 
-
-    void Update()
+    void LateUpdate()
     {
         if (!enable) return;
 
@@ -53,7 +52,7 @@ public class HeadBob : MonoBehaviour
         ResetPosition();
         cam.LookAt(FocusTarget());
     }
-    
+
     #endregion
 
     #region CustomMethods
@@ -62,16 +61,16 @@ public class HeadBob : MonoBehaviour
         cam.localPosition += motion;
     }
 
-    private void PlayRotMotion(Quaternion rotMotion)
-    {
-        cam.localRotation *= rotMotion;
-    }
-
     private void CheckMotion()
     {
-
         PlayMotion(FootStepMotion());
-        //PlayRotMotion(HeadMotion());
+        ApplyHeadTilt(); // Apply simplified head tilt
+    }
+
+    // New method for head tilt when moving left or right
+    private void ApplyHeadTilt()
+    {
+
     }
 
     private Vector3 FootStepMotion()
@@ -91,29 +90,19 @@ public class HeadBob : MonoBehaviour
         Yamplitude = (ValueMultiplier * SpeedMultiplier * input.Mov_Axis.x) / 36.5f;
         Xamplitude = (ValueMultiplier * SpeedMultiplier / 2 * input.Mov_Axis.x) / 90;
 
-        // Rotation on the z-axis
-        //float zRotation = Mathf.Sin(Time.time * frequency / 2) * ZRotation;
-
         pos.y += Mathf.Sin(Time.time * frequency) * Yamplitude;
         pos.x -= Mathf.Cos(Time.time * frequency / 2) * Xamplitude;
 
-        // Apply rotation to the position
-        //pos = Quaternion.Euler(0, 0, zRotation) * pos;
-
         return pos;
     }
-    /*
-    private Quaternion HeadMotion()
-    {
-        ZRotation = Mathf.Clamp(ZRotation, 1f, 3f);
-        cam.localRotation.z += Mathf.Sin(Time.time * frequency) * ZRotation;
-    }
-    */
+
     private void ResetPosition()
     {
         if (cam.localPosition == startPos) return;
         cam.localPosition = Vector3.Lerp(cam.localPosition, startPos, 1 * Time.deltaTime);
 
+        if (cam.localRotation == startRot) return;
+        cam.localRotation = Quaternion.Lerp(cam.localRotation, startRot, 1 * Time.deltaTime);
     }
 
     private Vector3 FocusTarget()
@@ -124,5 +113,4 @@ public class HeadBob : MonoBehaviour
     }
 
     #endregion
-
 }
