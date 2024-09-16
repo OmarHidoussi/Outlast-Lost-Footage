@@ -226,7 +226,7 @@ public class CameraMovement : MonoBehaviour
     {
         coroutineRunning = true;
 
-        Quaternion targetRotation = Quaternion.Euler(PreviousLookingDirection.x, 160f, PreviousLookingDirection.z);
+        Quaternion targetRotation = Quaternion.Euler(PreviousLookingDirection.x, 160f, PreviousLookingDirection.z + 25);
 
         while (Lookback)
         {
