@@ -19,7 +19,7 @@ public class AnimationEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
     }
 
     // Update is called once per frame
