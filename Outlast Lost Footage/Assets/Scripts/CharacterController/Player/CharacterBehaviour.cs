@@ -171,8 +171,9 @@ public class CharacterBehaviour : MonoBehaviour
     private float RestoreCameraMovement;
     public void Jumped()
     {
-        m_rigidbody.useGravity = false;
+        //m_rigidbody.useGravity = false;
         CamMovement.Sensetivity = 100;
+        movement.GetComponent<Rigidbody>().AddForce(Vector3.up * 135f, ForceMode.Impulse);
         source.volume = JumpVolume;
         source.outputAudioMixerGroup = Dialogue;
         source.pitch = 1;
@@ -183,7 +184,7 @@ public class CharacterBehaviour : MonoBehaviour
     {
         movement.GetComponentInChildren<CharacterCollision>().LandingPosition = movement.transform.position;
         CamMovement.Sensetivity = RestoreCameraMovement;
-        m_rigidbody.useGravity = true;
+        //m_rigidbody.useGravity = true;
         movement.GetComponent<InputManager>().Jump = false;
     }
 
