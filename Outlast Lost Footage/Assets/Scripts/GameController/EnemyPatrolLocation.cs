@@ -26,7 +26,8 @@ public class EnemyPatrolLocation : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Behavior.LocationIndex = LocationIndex;
+            if(Behavior != null)
+                Behavior.LocationIndex = LocationIndex;
         }
     }
 

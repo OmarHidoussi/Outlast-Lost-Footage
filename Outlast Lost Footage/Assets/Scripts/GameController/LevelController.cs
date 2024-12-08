@@ -18,6 +18,8 @@ public class LevelController : MonoBehaviour
     public float GlobalTimer;
     private float ResetTimer;
 
+    public GameObject[] LightsOff;
+
     #endregion
 
     #region BuiltInMethods
@@ -51,6 +53,10 @@ public class LevelController : MonoBehaviour
             ElectricDoor.SetBool("HalfOpened", false);
             ElectricDoor.SetBool("Opened", true);
 
+            foreach (GameObject lightoff in LightsOff)
+            {
+                lightoff.SetActive(true);
+            }
         }
         else if (Generator_1_Activated || Generator_2_Activated)
         {
@@ -75,6 +81,7 @@ public class LevelController : MonoBehaviour
                 Generator_2_Activated = false;
             }
         }
+
     }
 
     #endregion

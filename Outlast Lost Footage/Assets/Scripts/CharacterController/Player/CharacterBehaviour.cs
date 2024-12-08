@@ -175,7 +175,7 @@ public class CharacterBehaviour : MonoBehaviour
         CamMovement.Sensetivity = 100;
         movement.GetComponent<Rigidbody>().AddForce(Vector3.up * 135f, ForceMode.Impulse);
         source.volume = JumpVolume;
-        source.outputAudioMixerGroup = Dialogue;
+        //source.outputAudioMixerGroup = Dialogue;
         source.pitch = 1;
         source.PlayOneShot(GetRandomClip(Jumping));
     }
