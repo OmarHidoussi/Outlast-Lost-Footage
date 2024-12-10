@@ -13,6 +13,7 @@ public class BarredLight : MonoBehaviour
 
     public GameObject[] LightSource_OBJ;
     public bool HasSource;
+    public bool Usable;
 
     private float lastTime = 0;
 
@@ -23,13 +24,33 @@ public class BarredLight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!Usable)
+        {
+            m_light.enabled = false;
 
+            foreach (GameObject light in LightSource_OBJ)
+            {
+                light.SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if((Time.time - lastTime) > MinTime)
+        if (!Usable)
+        {
+            m_light.enabled = false;
+
+            foreach (GameObject light in LightSource_OBJ)
+            {
+                light.SetActive(false);
+            }
+
+            return;
+        }
+
+        if ((Time.time - lastTime) > MinTime)
         {
             if(Random.value > Threshold)
             {
