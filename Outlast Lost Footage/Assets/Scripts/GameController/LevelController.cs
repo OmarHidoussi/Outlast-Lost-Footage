@@ -18,7 +18,9 @@ public class LevelController : MonoBehaviour
     public float GlobalTimer;
     private float ResetTimer;
 
-    public BarredLight[] LightsOff;
+    public BarredLight[] LightsOff_Section1;
+    public BarredLight[] LightsOff_Section2;
+    public BarredLight[] AllLightOff;
 
     #endregion
 
@@ -53,16 +55,32 @@ public class LevelController : MonoBehaviour
             ElectricDoor.SetBool("HalfOpened", false);
             ElectricDoor.SetBool("Opened", true);
 
-            foreach (BarredLight lightoff in LightsOff)
+            foreach (BarredLight lightoff in AllLightOff)
             {
                 lightoff.Usable = true;
             }
         }
+
         else if (Generator_1_Activated || Generator_2_Activated)
         {
             ActiveGenerators = 1;
             ElectricDoor.SetBool("Opened", false);
             ElectricDoor.SetBool("HalfOpened", true);
+
+            if (Generator_1_Activated)
+            {
+                foreach (BarredLight lightoff in LightsOff_Section1)
+                {
+                    lightoff.Usable = true;
+                }
+            }
+            else
+            {
+                foreach (BarredLight lightoff in LightsOff_Section2)
+                {
+                    lightoff.Usable = true;
+                }
+            }
         }
         else
         {
@@ -71,7 +89,7 @@ public class LevelController : MonoBehaviour
             ElectricDoor.SetBool("Opened", false);
             ElectricDoor.SetBool("HalfOpened", false);
 
-            foreach (BarredLight lightoff in LightsOff)
+            foreach (BarredLight lightoff in AllLightOff)
             {
                 lightoff.Usable = false;
             }

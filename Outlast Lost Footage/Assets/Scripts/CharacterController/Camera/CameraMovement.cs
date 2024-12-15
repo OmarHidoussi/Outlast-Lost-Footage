@@ -267,8 +267,8 @@ public class CameraMovement : MonoBehaviour
 
         if (!input.IsSprinting)
         {
-            X_tiltAmount = Mathf.Sin(Time.time * Frequency) * XAmplitude * input.Mov_Axis.x;
-            Z_tiltAmount = Mathf.Sin(Time.time * Frequency / 2) * ZAmplitude * input.Mov_Axis.x;
+            X_tiltAmount = Mathf.Sin(Time.time * Frequency) * (XAmplitude/4) * input.Mov_Axis.x;
+            Z_tiltAmount = Mathf.Sin(Time.time * Frequency / 2) * (ZAmplitude/4) * input.Mov_Axis.x;
         }
         else
         {
@@ -294,7 +294,7 @@ public class CameraMovement : MonoBehaviour
                 HeightDifference = Jumpoffset.y;
             }
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, HeightDifference, 0) + offset, TransitionSpeed * Time.deltaTime);
-            xRotation = Mathf.Lerp(xRotation, 0, TransitionSpeed * 5 * Time.deltaTime);
+            xRotation = Mathf.Lerp(xRotation, 0, TransitionSpeed * 2 * Time.deltaTime);
         }
         else
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, col.center.y, 0) + offset, 15 * Time.deltaTime);

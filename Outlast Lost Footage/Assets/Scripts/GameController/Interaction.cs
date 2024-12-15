@@ -14,4 +14,13 @@ public class Interaction : MonoBehaviour
     public Transform InteractionLocation;
     #endregion
 
+    //Destroying The interaction text after the player exists the trigger
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
