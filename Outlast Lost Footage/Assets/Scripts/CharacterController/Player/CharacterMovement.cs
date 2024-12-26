@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
 
     public AnimationCurve WalkCurve;
     public AnimationCurve RunCurve;
+    public AnimationCurve JumpCurve;
 
     public Transform RayDirection;
     public Rigidbody m_rigidbody;
@@ -80,7 +81,6 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector] public float targetSpeed;
     void HandleMove()
     {
-
         if (input.IsCrouching)
             targetSpeed = CrouchSpeed;
         else if (input.IsSprinting && !isExhausted)
@@ -104,20 +104,20 @@ public class CharacterMovement : MonoBehaviour
         if (!WallDetected)
         {
             if (targetSpeed == RunSpeed)
-            {
                 Speed = Mathf.Lerp(Speed, targetSpeed, RunCurve.Evaluate(RunLerpSpeed * Time.deltaTime));
-            }
+            else if (targetSpeed == WalkSpeed && Speed > WalkSpeed)
+                Speed = Mathf.Lerp(Speed, WalkSpeed, 5f * Time.deltaTime);
             else
                 Speed = Mathf.Lerp(Speed, targetSpeed, WalkCurve.Evaluate(WalkLerpSpeed * Time.deltaTime));
         }
 
-
         if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Running Jump") ||
-            anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
+    anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("DeskSlideJumping_02"))
         {
             input.IsCrouching = false;
-            transform.Translate(0, 0, RunSpeed * Time.deltaTime);
+            transform.Translate(0, 0, JumpCurve.Evaluate(Speed * Time.deltaTime) * 8f);
             m_rigidbody.drag = 10f;
+            //return;
         }
         else
         {

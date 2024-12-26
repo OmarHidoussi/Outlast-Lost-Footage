@@ -250,6 +250,34 @@ MonoBehaviour:
   texture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+--- !u!114 &-1680124616583438058
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f034cba68ab55e046ae1445a42f18c0e, type: 3}
+  m_Name: IndirectLightingController
+  m_EditorClassIdentifier: 
+  active: 0
+  indirectDiffuseLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 0
+  indirectDiffuseLightingLayers:
+    m_OverrideState: 1
+    m_Value: 255
+  reflectionLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 1
+  reflectionLightingLayers:
+    m_OverrideState: 1
+    m_Value: 255
+  reflectionProbeIntensityMultiplier:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-1011494769556545927
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -262,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7593b3a9277ac4696b20006c21dde2, type: 3}
   m_Name: VisualEnvironment
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   skyType:
     m_OverrideState: 1
     m_Value: 1
@@ -305,6 +333,7 @@ MonoBehaviour:
   - {fileID: -1738254955733103332}
   - {fileID: -1011494769556545927}
   - {fileID: 8924859008493145802}
+  - {fileID: -1680124616583438058}
 --- !u!114 &55769167902530393
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -378,13 +407,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.07579434, y: 1, z: 0, w: 0}
+    m_Value: {x: 0.083333254, y: 1, z: 0, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 1, z: 0.13010836, w: 0.101112224}
+    m_Value: {x: 0, y: 1, z: 0.13333344, w: 0.101112224}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 1, z: 0.044463634, w: 0.13144587}
+    m_Value: {x: 0, y: 1, z: 0.049999952, w: 0.13144587}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0

@@ -19,6 +19,9 @@ public class Interaction : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            InteractionText = "";
+            KeyboardInteractionButton = null;
+            GamepadInteractionButton = null;
             Destroy(gameObject);
         }
     }
