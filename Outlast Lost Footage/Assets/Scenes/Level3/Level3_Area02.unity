@@ -2588,15 +2588,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1378445390984108312, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1378445391188189042, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1378445391259624514, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1378445391485099293, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: Usable
@@ -17755,6 +17755,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1378445391188189044, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_IESSpot
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378445391188189044, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_IESPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378445391188189044, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_VolumetricDimmer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378445391188189044, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_SpotIESCutoffPercent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378445391188189044, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_VolumetricShadowDimmer
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378445391188189044, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_ShadowResolution.m_Level
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1378445391259624514, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -17766,6 +17790,10 @@ PrefabInstance:
     - target: {fileID: 1378445391485099293, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: HasSource
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378445391485099293, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1489426740911749885, guid: b0b782d1020f10d4c907377d26f862a4, type: 3}
       propertyPath: m_RootOrder
