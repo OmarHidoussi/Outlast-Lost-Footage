@@ -50,6 +50,7 @@ public class EnemyAI : MonoBehaviour
         Sight = GetComponent<EnemySight>();
         anim = GetComponentInChildren<EnemyAnimation>();
         nav = GetComponent<NavMeshAgent>();
+        Stats = Sight.player.GetComponent<CharacterStats>();
 
         IsChasing = false;
     }
