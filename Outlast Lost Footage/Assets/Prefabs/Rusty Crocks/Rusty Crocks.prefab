@@ -1227,9 +1227,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 8
+  MaxDistance: 15
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1248,11 +1248,11 @@ AudioSource:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.3483472
+      outSlope: -3.3483472
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.049327374
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1262,7 +1262,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Anim: {fileID: 8824035913154058845}
-  Speed: 0
+  Speed: 2
 --- !u!114 &3107431245159456197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,19 +1376,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locations:
-  - locationName: 01
+  - locationName: 0
     waypoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-  - locationName: 02
+  - locationName: 1
     waypoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-  - locationName: 03
+    - {fileID: 0}
+  - locationName: 2
     waypoints:
     - {fileID: 0}
     - {fileID: 0}
@@ -2806,6 +2807,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ef666f12e90154c40ad4a45b4ec73845, type: 3}
   m_PrefabInstance: {fileID: 3107431244208962845}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &991662334
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872937646190706764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0.29, y: 0, z: 0}
 --- !u!65 &3107431245062366348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2819,19 +2833,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4918146, y: 0.22861497, z: 0.08439041}
   m_Center: {x: 0.32370389, y: -0.04327036, z: 0.0000000050954734}
---- !u!135 &991662334
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2872937646190706764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.34
-  m_Center: {x: 0.29, y: 0, z: 0}
 --- !u!114 &991662333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2845,7 +2846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  Damage: 35
+  Damage: 50
   anim: {fileID: 8824035913154058845}
 --- !u!4 &3212589623364229878 stripped
 Transform:

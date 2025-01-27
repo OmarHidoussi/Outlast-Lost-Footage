@@ -230,7 +230,7 @@ public class CameraMovement : MonoBehaviour
 
         while (Lookback)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, 0.025f);  // Adjust 0.1f to control the speed
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, 0.05f);  // Adjust 0.1f to control the speed
 
             // Wait for the next frame before continuing
             yield return null;
@@ -247,7 +247,7 @@ public class CameraMovement : MonoBehaviour
 
         while (Quaternion.Angle(transform.localRotation, PreviousLookingDirection) > 0.03f)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, PreviousLookingDirection, 0.1f);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, PreviousLookingDirection, 0.2f);
 
             yield return null;
         }

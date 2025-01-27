@@ -9,6 +9,7 @@ public class AdaptiveMusic : MonoBehaviour
     #region Variables
     public EnemyAI agent;
     public EnemySight sight;
+    public LevelController controller;
 
     [Space]
     public bool ChaseStart;
@@ -50,12 +51,14 @@ public class AdaptiveMusic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controller = GetComponentInParent<LevelController>();
+
         ChaseStart = false;
         IsChasing = false;
         Investigating = false;
         InvestigationEnd = false;
 
-        currentSight = sight.PlayerInSight;
+        currentSight = controller.G_PlayerInSight;
         PreviousSight = currentSight;
 
         CurrentAI_InvestigationState = agent.IsInvestigating;
@@ -65,7 +68,7 @@ public class AdaptiveMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentSight = sight.PlayerInSight;
+        currentSight = controller.G_PlayerInSight;
         if (currentSight != PreviousSight && PreviousSight == false)
             ChaseStart = true;
         else

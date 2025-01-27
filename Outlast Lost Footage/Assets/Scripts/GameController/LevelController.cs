@@ -22,6 +22,8 @@ public class LevelController : MonoBehaviour
     public BarredLight[] LightsOff_Section2;
     public BarredLight[] AllLightOff;
 
+    [Space]
+    public bool G_PlayerInSight; //Global player sighting, this variable can be modified by other scripts
     #endregion
 
     #region BuiltInMethods
@@ -29,6 +31,7 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        G_PlayerInSight = false;
         Level4Start();
     }
 

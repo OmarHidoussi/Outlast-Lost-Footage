@@ -27,7 +27,13 @@ public class EnemyPatrolLocation : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             if(Behavior != null)
-                Behavior.LocationIndex = LocationIndex;
+            {
+                //Behavior.LocationIndex = LocationIndex;
+                Behavior.GetComponent<EnemyPatrol>().waypoints = Behavior.locations[LocationIndex].waypoints;
+                //Debug.Log("Location is set to:" + LocationIndex);
+            }
+
+
         }
     }
 

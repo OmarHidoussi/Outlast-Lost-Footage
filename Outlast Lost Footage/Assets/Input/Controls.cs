@@ -451,7 +451,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""211c0814-a925-41d5-9fb7-47d71d98dc1e"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": ""Hold(duration=0.15,pressPoint=0.23)"",
                     ""processors"": """",
                     ""groups"": """",
