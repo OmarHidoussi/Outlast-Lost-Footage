@@ -14,34 +14,11 @@ public class EnemyAnimation : MonoBehaviour
     private EnemySight Sight;
 
     public float Speed;
+    public float TransitionSpeed = 1.5f;
 
     private Vector2 Velocity;
     private Vector2 SmoothDeltaPosition;
     #endregion
-
-    #region BuiltInMethods
-    /*
-    void Awake()
-    {
-        Behavior = GetComponent<EnemyAI>();
-
-        Anim = GetComponentInParent<Animator>();
-        nav = GetComponentInParent<NavMeshAgent>();
-        Sight = GetComponentInParent<EnemySight>();
-    }
-
-    private void Update()
-    {
-        bool shouldMove = Anim.velocity.magnitude > 0.1f && nav.remainingDistance > nav.stoppingDistance;
-        Anim.SetBool("Move", shouldMove);
-
-        if (!Sight.PlayerInAttackRange)
-            Anim.SetBool("Chase", Behavior.IsChasing);
-    }
-*/
-    #endregion
-
-
     
     #region BuiltIn Methods
 
@@ -63,7 +40,7 @@ public class EnemyAnimation : MonoBehaviour
     private void OnAnimatorMove()
     {
         Vector3 rootPosition = Anim.rootPosition;
-        rootPosition.y = nav.nextPosition.y;
+        rootPosition.y = nav.nextPosition.y + 0.05f;
         transform.position = rootPosition;
         transform.rotation = Anim.rootRotation;
         nav.nextPosition = rootPosition;
@@ -74,6 +51,12 @@ public class EnemyAnimation : MonoBehaviour
     {
         SynchronizeAnimatoraAndAgent();
 
+        // Check if the enemy is using an off-mesh link
+        if (nav.isOnOffMeshLink)
+        {
+            StartCoroutine(TraverseOffMeshLink());
+        }
+
         if (Sight.PlayerInAttackRange)
             Anim.SetBool("Attack", true);
     }
@@ -81,6 +64,26 @@ public class EnemyAnimation : MonoBehaviour
     #endregion
 
     #region Custom Methods
+
+    IEnumerator TraverseOffMeshLink()
+    {
+        Anim.SetTrigger("Jump");
+        yield return new WaitForSeconds(0.2f);
+        Anim.ResetTrigger("Jump");
+    }
+
+    IEnumerator AdjustAnimatorSpeedToGameState(float TargetSpeed)
+    {
+        while(Anim.speed != TargetSpeed)
+        {
+            Anim.speed = Mathf.Lerp(Anim.speed, TargetSpeed, TransitionSpeed * Time.deltaTime);
+            if(Mathf.Abs(Anim.speed - TargetSpeed) <= 0.05f)
+            {
+                Anim.speed = TargetSpeed;
+            }
+        }
+        yield return Anim.speed = TargetSpeed;
+    }
 
     void SynchronizeAnimatoraAndAgent()
     {

@@ -41,6 +41,7 @@ public class EnemySight : MonoBehaviour
         col.radius = ViewDistance;
         col.enabled = true;
 
+        controller = FindObjectOfType<LevelController>();
         player = FindObjectOfType<InputManager>().transform;
         LastPlayerPosition = resetPosition;
 

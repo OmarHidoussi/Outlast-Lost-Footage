@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour
 
     public List<PatrolLocation> locations = new List<PatrolLocation>();
 
+    [SerializeField] private LevelController controller;
+
     private EnemySight Sight;
     private EnemyAnimation anim;
     private NavMeshAgent nav;
@@ -49,7 +51,10 @@ public class EnemyAI : MonoBehaviour
         Stats = Sight.player.GetComponent<CharacterStats>();
 
         // Initialize patrol script
-        patrol = gameObject.AddComponent<EnemyPatrol>();
+        if (patrol == null)
+        {
+            patrol = gameObject.AddComponent<EnemyPatrol>();
+        }
         patrol.Initialize(nav, anim, locations[LocationIndex].waypoints, patrolSpeed);
 
         IsChasing = false;

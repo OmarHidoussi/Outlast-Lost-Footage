@@ -32,26 +32,23 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         G_PlayerInSight = false;
-        Level4Start();
+        ActiveGenerators = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Level4Update();
+        UpdateGeneratorsState();
+        UpdateGameState();
     }
 
     #endregion
 
     #region CustomMethods
 
-    void Level4Start()
+    void UpdateGeneratorsState()
     {
-        ActiveGenerators = 0;
-    }
 
-    void Level4Update()
-    {
         if (Generator_1_Activated && Generator_2_Activated)
         {
             ActiveGenerators = 2;
@@ -101,12 +98,16 @@ public class LevelController : MonoBehaviour
         if (ActiveGenerators > 0)
         {
             GlobalTimer -= Time.deltaTime;
-            if(GlobalTimer <= 0)
+            if (GlobalTimer <= 0)
             {
                 Generator_1_Activated = false;
                 Generator_2_Activated = false;
             }
         }
+    }
+
+    void UpdateGameState()
+    {
 
     }
 
