@@ -170,6 +170,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.15,pressPoint=0.23)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""77233fe4-f945-4b99-af17-74d05cd374a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -458,6 +467,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""LookBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2697c35-1d0d-4515-a32d-2cd8f04f03ec"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f4f8f00-3216-4457-95ca-68c01f09a2ec"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -510,6 +541,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_TiltRight = m_Player.FindAction("TiltRight", throwIfNotFound: true);
         m_Player_Screenshot = m_Player.FindAction("Screenshot", throwIfNotFound: true);
         m_Player_LookBack = m_Player.FindAction("LookBack", throwIfNotFound: true);
+        m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_RightStick = m_Camera.FindAction("RightStick", throwIfNotFound: true);
@@ -588,6 +620,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_TiltRight;
     private readonly InputAction m_Player_Screenshot;
     private readonly InputAction m_Player_LookBack;
+    private readonly InputAction m_Player_PauseMenu;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -608,6 +641,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @TiltRight => m_Wrapper.m_Player_TiltRight;
         public InputAction @Screenshot => m_Wrapper.m_Player_Screenshot;
         public InputAction @LookBack => m_Wrapper.m_Player_LookBack;
+        public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -665,6 +699,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @LookBack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookBack;
                 @LookBack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookBack;
                 @LookBack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookBack;
+                @PauseMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -717,6 +754,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @LookBack.started += instance.OnLookBack;
                 @LookBack.performed += instance.OnLookBack;
                 @LookBack.canceled += instance.OnLookBack;
+                @PauseMenu.started += instance.OnPauseMenu;
+                @PauseMenu.performed += instance.OnPauseMenu;
+                @PauseMenu.canceled += instance.OnPauseMenu;
             }
         }
     }
@@ -772,6 +812,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnTiltRight(InputAction.CallbackContext context);
         void OnScreenshot(InputAction.CallbackContext context);
         void OnLookBack(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

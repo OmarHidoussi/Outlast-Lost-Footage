@@ -37,6 +37,9 @@ public class InputManager : MonoBehaviour
     public bool InfraredOn;
     public bool Screenshot;
 
+    [Header("GameState")]
+    public bool GamePaused;
+
     [Header("Logic")]
     public TwoBoneIKConstraint constraint;
     public CameraFunctionalities cameraFunc;
@@ -120,6 +123,9 @@ public class InputManager : MonoBehaviour
         input.Player.LookBack.performed += OnLookBackPerformed;
         input.Player.LookBack.canceled += OnLookBackCanceled;
 
+        input.Player.PauseMenu.performed += OnPauseMenuPerformed;
+        input.Player.PauseMenu.performed += OnPauseMenuCanceled;
+
     }
 
     private void OnDisable()
@@ -183,6 +189,9 @@ public class InputManager : MonoBehaviour
         input.Player.LookBack.performed -= OnLookBackPerformed;
         input.Player.LookBack.canceled -= OnLookBackCanceled;
 
+        input.Player.PauseMenu.performed -= OnPauseMenuPerformed;
+        input.Player.PauseMenu.performed -= OnPauseMenuCanceled;
+
     }
 
     // Start is called before the first frame update
@@ -195,6 +204,12 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape) || (Gamepad.current?.startButton.wasPressedThisFrame ?? false))
+        {
+            GamePaused = !GamePaused;
+        }
+
         if (!MidAir)
         {
             HandleInputs();
@@ -357,6 +372,7 @@ public class InputManager : MonoBehaviour
         {
             if (Button.ReadValueAsButton())
                 IsCrouching = !IsCrouching;
+            
             CrouchOff = false;
             StartCoroutine(CrouchCountdown());
         }
@@ -415,6 +431,7 @@ public class InputManager : MonoBehaviour
         {
             if (Button.ReadValueAsButton())
                 CameraOn = !CameraOn;
+            
             CameraOff = false;
         }
     }
@@ -435,6 +452,7 @@ public class InputManager : MonoBehaviour
     {
         if (Button.ReadValueAsButton())
             InfraredOn = !InfraredOn;
+        
         InfraredOff = false;
     }
 
@@ -468,6 +486,18 @@ public class InputManager : MonoBehaviour
         LookBack = false;
     }
 
+    
+    private void OnPauseMenuPerformed(InputAction.CallbackContext Button)
+    {
+     /*   if(Button.ReadValueAsButton())
+            GamePaused = true;
+    */}
+
+    private void OnPauseMenuCanceled(InputAction.CallbackContext Button)
+    {/*
+        GamePaused = false;
+    */}
+    
     #endregion
 
 }
