@@ -29,6 +29,7 @@ public class CameraProperties : MonoBehaviour
 
     [Header("Infrared Lights")]
     public Light spotLight;
+    public NightVisionLight IntensityWeight;
     public float MinRange, MaxRange, CurrentRange;
     public float MinIntensity,MaxIntensity, CurrentIntensity;
     public float MinLightField, MaxLightField, CurrentLightField;
@@ -93,13 +94,13 @@ public class CameraProperties : MonoBehaviour
           //  StopZoomSFX();
         }
 
-        spotLight.range = CurrentRange;
-        spotLight.intensity = CurrentIntensity;
-        spotLight.spotAngle = CurrentLightField;
-
         HandleZoom();
         ApertureAdjustment();
         UIAdjustment();
+
+        spotLight.range = CurrentRange;
+        spotLight.intensity = CurrentIntensity * IntensityWeight.IntensityFactor;
+        spotLight.spotAngle = CurrentLightField;
     }
 
     #endregion

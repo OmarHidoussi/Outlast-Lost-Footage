@@ -64,7 +64,9 @@ public class LevelController : MonoBehaviour
             {
                 lightoff.Usable = true;
             }
-            CutsceneTrigger.GetComponent<SphereCollider>().enabled = true;
+            if(CutsceneTrigger != null)
+                CutsceneTrigger.GetComponent<SphereCollider>().enabled = true;
+
             return;
         }
 

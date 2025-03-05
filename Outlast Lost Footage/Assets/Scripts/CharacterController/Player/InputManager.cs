@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
 
     [Header("GameState")]
     public bool GamePaused;
+    [HideInInspector] public bool InOptionsMenu;
 
     [Header("Logic")]
     public TwoBoneIKConstraint constraint;
@@ -204,11 +205,14 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape) || (Gamepad.current?.startButton.wasPressedThisFrame ?? false))
+        if (!InOptionsMenu)
         {
-            GamePaused = !GamePaused;
+            if (Input.GetKeyDown(KeyCode.Escape) || (Gamepad.current?.startButton.wasPressedThisFrame ?? false))
+            {
+                GamePaused = !GamePaused;
+            }
         }
+
 
         if (!MidAir)
         {

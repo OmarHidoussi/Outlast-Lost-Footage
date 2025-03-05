@@ -219,7 +219,7 @@ public class CharacterBehaviour : MonoBehaviour
         {
             movement.GetComponent<InputManager>().CanMove = true;
             movement.GetComponent<InputManager>().IsSprinting = false;
-            movement.GetComponent<InputManager>().IsCrouching = true;
+            //movement.GetComponent<InputManager>().IsCrouching = true;
             Characteranim.CharacterAnim.SetBool("WallClimb", false);
             m_rigidbody.useGravity = true;
             CamMovement.Sensetivity = RestoreCameraMovement;

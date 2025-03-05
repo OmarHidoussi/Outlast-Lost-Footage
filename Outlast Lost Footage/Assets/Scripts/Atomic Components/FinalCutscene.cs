@@ -9,6 +9,8 @@ public class FinalCutscene : MonoBehaviour
     LevelController Controller;
     public bool SnapPlayerToCutsceneLocation;
 
+    public Animator Elevator_Anim;
+
     public Transform Location;
 
     #endregion
@@ -37,10 +39,25 @@ public class FinalCutscene : MonoBehaviour
         {
             CharacterBehaviour Behaviour = other.gameObject.GetComponentInChildren<CharacterBehaviour>();
             Behaviour.Location = Location;
+
+            other.GetComponentInParent<InputManager>().GetComponent<CharacterMovement>().enabled = false;
+            other.GetComponentInParent<InputManager>().GetComponent<Animator>().applyRootMotion = false;
+
             //Keep Snapping Player To Cutscene Location
-            if(SnapPlayerToCutsceneLocation)
+            if (SnapPlayerToCutsceneLocation)
             {
                 Behaviour.SnapPlayerToPosition();
+            }
+
+            if(Vector3.Distance(other.transform.position, Location.position) <= 0.15f)
+            {
+                other.transform.position = Location.position;
+
+                other.GetComponentInParent<InputManager>().GetComponent<Animator>().enabled = true;
+                other.GetComponentInParent<InputManager>().GetComponent<Animator>().SetBool("FinalCutscene", true);
+                Elevator_Anim.SetBool("FinalCutscene", true);
+
+                Destroy(this.gameObject);
             }
         }
     }

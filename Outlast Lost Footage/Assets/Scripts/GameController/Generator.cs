@@ -34,7 +34,7 @@ public class Generator : MonoBehaviour,IInteractable
             interaction.Interacted = controller.Generator_1_Activated;
 
             if (EngineActivated)
-                Engine.transform.Rotate(Engine.transform.TransformDirection(transform.forward) * RotationSpeed * Time.deltaTime * (controller.GlobalTimer / 40));
+                Engine.transform.Rotate(Engine.transform.TransformDirection(transform.forward) * RotationSpeed * Time.deltaTime * (controller.GlobalTimer / 25));
         }
         if (Generator_2)
         {
