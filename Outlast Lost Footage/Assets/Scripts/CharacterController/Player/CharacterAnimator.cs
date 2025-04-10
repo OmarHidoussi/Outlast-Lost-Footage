@@ -149,6 +149,11 @@ public class CharacterAnimator : MonoBehaviour
         CharacterAnim.SetBool("Cinematic_1", false);
     }
 
+    public void FinalCutscene()
+    {
+        CharacterAnim.SetBool("Epilogue", true);
+        input.enabled = false;
+    }
 
     #endregion
 
