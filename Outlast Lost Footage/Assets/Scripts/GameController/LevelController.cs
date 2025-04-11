@@ -12,6 +12,9 @@ public class LevelController : MonoBehaviour
     public bool Generator_1_Activated;
     public bool Generator_2_Activated;
     public Animator Elevator;
+    public AudioSource Elevator_Audio;
+    public AudioClip Elevator_ArrivalClip;
+    public AudioClip Elevator_GatesOpenClip;
 
     private int PreviousActiveGeneratorCounter;
     public int ActiveGenerators;
@@ -133,6 +136,17 @@ public class LevelController : MonoBehaviour
     void UpdateElevatorState(int Index)
     {
         Elevator.SetInteger("GeneratorActivations", Index);
+
+        if(!Elevator_Audio.isPlaying && Index == 1)
+        {
+            Elevator_Audio.clip = Elevator_ArrivalClip;
+            Elevator_Audio.PlayOneShot(Elevator_ArrivalClip);
+        }
+        else if (!Elevator_Audio.isPlaying && Index == 2)
+        {
+            Elevator_Audio.clip = Elevator_GatesOpenClip;
+            Elevator_Audio.PlayOneShot(Elevator_GatesOpenClip);
+        }
     }
 
     void UpdateGameState()
