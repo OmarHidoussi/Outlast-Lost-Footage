@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.SceneManagement;
 
 public class CharacterAnimator : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CharacterAnimator : MonoBehaviour
     private InputManager input;
     private CharacterMovement movement;
     private CharacterStats stats;
+
+    public GameObject CameraObject;
 
     [Header("Camera Animation")]
     [SerializeField] private Animator anim;
@@ -153,6 +156,16 @@ public class CharacterAnimator : MonoBehaviour
     {
         CharacterAnim.SetBool("Epilogue", true);
         input.enabled = false;
+    }
+
+    public void DestroyCameraGFX()
+    {
+        Destroy(CameraObject);
+    }
+
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 
     #endregion
