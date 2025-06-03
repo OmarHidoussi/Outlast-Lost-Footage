@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FinalCutscene : MonoBehaviour
 {
@@ -12,8 +13,12 @@ public class FinalCutscene : MonoBehaviour
 
     public Animator Elevator_Anim;
     public Animator Broken_Glass;
+    public Animator PlayerAnimator;
     public GameObject Rusty_Crocks_FinalCutscene;
+    public GameObject Rusty_Crocks_AI;
     public Transform Location;
+
+    public AudioSource Cinematic_SFX;
 
     //public Image Cursor;
 
@@ -25,7 +30,7 @@ public class FinalCutscene : MonoBehaviour
     {
         Controller = FindObjectOfType<LevelController>();
         SnapPlayerToCutsceneLocation = false;
-        
+        PlayerAnimator = FindObjectOfType<CharacterBehaviour>().GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,10 +53,6 @@ public class FinalCutscene : MonoBehaviour
             other.GetComponentInParent<InputManager>().GetComponent<CharacterMovement>().enabled = false;
             other.GetComponentInParent<InputManager>().GetComponent<Animator>().applyRootMotion = false;
 
-            /*Color cursorColor = Cursor.color;
-            cursorColor.a = Mathf.Lerp(cursorColor.a, 0f, 3f * Time.deltaTime);
-            Cursor.color = cursorColor;*/
-
             //Keep Snapping Player To Cutscene Location
             if (SnapPlayerToCutsceneLocation)
             {
@@ -60,14 +61,19 @@ public class FinalCutscene : MonoBehaviour
 
             if (Vector3.Distance(other.transform.position, Location.position) <= 0.15f)
             {
+                //PlayerAnimator.SetFloat("VelocityX", 0);
+                //PlayerAnimator.SetFloat("VelocityY", 0);
                 other.transform.position = Location.position;
 
                 other.GetComponentInParent<InputManager>().GetComponent<Animator>().enabled = true;
                 other.GetComponentInParent<InputManager>().GetComponent<Animator>().SetBool("FinalCutscene", true);
+
                 Elevator_Anim.SetBool("FinalCutscene", true);
                 Broken_Glass.SetBool("FinalCutscene", true);
                 Rusty_Crocks_FinalCutscene.SetActive(true);
-                
+                Rusty_Crocks_AI.SetActive(false);
+                SceneManager.LoadScene("Level5_Area01", LoadSceneMode.Additive);
+
                 Destroy(this.gameObject);
             }
         }

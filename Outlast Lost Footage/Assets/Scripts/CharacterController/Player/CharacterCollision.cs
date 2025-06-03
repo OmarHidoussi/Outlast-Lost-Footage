@@ -27,6 +27,11 @@ public class CharacterCollision : MonoBehaviour
 
     bool CanDie;
 
+    private void Awake()
+    {
+        anim.SetBool("MidAir", false);
+    }
+
     void Update()
     {
         //Start the counter while player is in mid air and kill him if he's more than 3 seconds on mid air

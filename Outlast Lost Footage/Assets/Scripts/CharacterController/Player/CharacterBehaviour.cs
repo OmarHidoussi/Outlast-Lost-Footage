@@ -212,6 +212,8 @@ public class CharacterBehaviour : MonoBehaviour
     public void SnapPlayerToPosition()
     {
         movement.GetComponent<InputManager>().Mov_Axis = Vector2.zero;
+        Characteranim.CharacterAnim.SetFloat("VelocityX", 0);
+        Characteranim.CharacterAnim.SetFloat("VelocityY", 0);
         m_rigidbody.transform.position = Vector3.MoveTowards(m_rigidbody.transform.position, Location.position, 2.2f * Time.deltaTime);
         m_rigidbody.transform.rotation = Quaternion.Slerp(m_rigidbody.transform.rotation, Location.rotation, 15 * Time.deltaTime);
 
@@ -292,20 +294,23 @@ public class CharacterBehaviour : MonoBehaviour
         Died = true;
         Characteranim.CharacterAnim.SetBool("Dead", false);
         movement.GetComponent<InputManager>().CanMove = false;
+        m_rigidbody.drag = 1000;
         CamMovement.Sensetivity = 0;
         DialogueSource.volume = PlayerDieVolume;
         DialogueSource.outputAudioMixerGroup = DeathSound;
         DialogueSource.PlayOneShot(GetRandomClip(PlayerDieClip));
         source.volume = ScoreVolume;
         source.PlayOneShot(DieScore_SFX);
-        StartCoroutine(BackToMainMenu());
+        StartCoroutine(BackToCheckpoint());
     }
 
-    IEnumerator BackToMainMenu()
+    IEnumerator BackToCheckpoint()
     {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("MainMenu");
+        GameSettings.Instance.RestartFromPreviousCheckPoint = true;
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Persistent_Scene");
     }
+
 
     public void DieScore()
     {

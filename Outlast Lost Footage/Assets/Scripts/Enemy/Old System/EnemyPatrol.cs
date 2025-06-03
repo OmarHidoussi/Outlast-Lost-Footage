@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyPatrol : MonoBehaviour
 {
     private NavMeshAgent nav;
-    private EnemyAnimation anim;
+    private Enemy_Animation anim;
     public List<Transform> waypoints;
 
     private float patrolTimer;
@@ -17,20 +17,18 @@ public class EnemyPatrol : MonoBehaviour
     public float patrolMinWaitTime = 1f;
     public float patrolMaxWaitTime = 5f;
 
-    public void Initialize(NavMeshAgent agent, EnemyAnimation animation, List<Transform> patrolWaypoints, float speed)
+    public void Initialize(NavMeshAgent agent, List<Transform> patrolWaypoints)
     {
         //waypoints.Clear();
         nav = agent;
-        anim = animation;
         waypoints = patrolWaypoints;
-        patrolSpeed = speed;
     }
 
     public void ExecutePatrol()
     {
         if (waypoints == null || waypoints.Count == 0) return;
 
-        anim.Speed = patrolSpeed;
+        //anim.Speed = patrolSpeed;
         nav.isStopped = false;
 
         // If near the next waypoint or there is no destination...
@@ -38,7 +36,6 @@ public class EnemyPatrol : MonoBehaviour
         {
             if (patrolTimer == 0)
             {
-                anim.Anim.SetFloat("Speed", 0);
                 patrolWaitTime = Random.Range(patrolMinWaitTime, patrolMaxWaitTime);
             }
 

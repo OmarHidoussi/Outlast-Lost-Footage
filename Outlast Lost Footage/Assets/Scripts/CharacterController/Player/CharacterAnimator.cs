@@ -145,12 +145,11 @@ public class CharacterAnimator : MonoBehaviour
     #endregion
 
     #region Cinematics
-    public IEnumerator Cinematic_1()
+    public void PlayCinematic_1()
     {
-        CharacterAnim.SetBool("Cinematic_1", true);
-        yield return new WaitForSeconds(0.05f);
-        CharacterAnim.SetBool("Cinematic_1", false);
+        CharacterAnim.SetTrigger("Cinematic_01");
     }
+
 
     public void FinalCutscene()
     {
@@ -166,6 +165,11 @@ public class CharacterAnimator : MonoBehaviour
     public void LoadCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void MuteAudio()
+    {
+        this.GetComponentInChildren<AudioListener>().enabled = false;
     }
 
     #endregion

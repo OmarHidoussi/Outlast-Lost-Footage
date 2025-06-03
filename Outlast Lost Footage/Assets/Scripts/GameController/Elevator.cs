@@ -38,6 +38,10 @@ public class Elevator : MonoBehaviour
         if (inputManager != null)
         {
             Player = inputManager.transform;
+            if (Cutscene)
+                Player.GetComponent<Animator>().SetInteger("DynamicCutscene", 1);
+            else
+                Player.GetComponent<CharacterMovement>().ResetAfterCutScene();
         }
 
         //collision = FindObjectOfType<CharacterCollision>();

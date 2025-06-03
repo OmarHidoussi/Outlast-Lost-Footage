@@ -58,6 +58,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         input = new Controls();
+        MidAir = false;
     }
 
     private void OnEnable()
@@ -198,6 +199,12 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(GameSettings.Instance.RestartFromPreviousCheckPoint)
+        {
+            transform.position = GameSettings.Instance.RestartLocation.position;
+            GameSettings.Instance.RestartFromPreviousCheckPoint = false; 
+        }
+
         MidAir = false;
         m_rigidbody = GetComponent<Rigidbody>();
     }
@@ -205,6 +212,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (!InOptionsMenu)
         {
             if (Input.GetKeyDown(KeyCode.Escape) || (Gamepad.current?.startButton.wasPressedThisFrame ?? false))
@@ -212,7 +220,6 @@ public class InputManager : MonoBehaviour
                 GamePaused = !GamePaused;
             }
         }
-
 
         if (!MidAir)
         {

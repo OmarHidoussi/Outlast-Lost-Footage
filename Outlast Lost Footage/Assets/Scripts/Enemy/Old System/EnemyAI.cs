@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
 [System.Serializable]
 public class PatrolLocation
 {
     public string locationName; 
     public List<Transform> waypoints = new List<Transform>();
-}
+}*/
 
 public class EnemyAI : MonoBehaviour
 {
     #region Variables
 
-    public List<PatrolLocation> locations = new List<PatrolLocation>();
+    //public List<PatrolLocation> locations = new List<PatrolLocation>();
 
     [SerializeField] private LevelController controller;
 
@@ -27,13 +28,13 @@ public class EnemyAI : MonoBehaviour
     public float chaseSpeed;
     public float attackSpeed;
 
-    private EnemyPatrol patrol;
+    //private EnemyPatrol patrol;
     private EnemyChase chase;
 
-    [Header("Patrol")]
+    /*[Header("Patrol")]
     public int LocationIndex = 0;
     private int previousLocationIndex;
-
+    */
     [Header("Chase & Investigation")]
     public float SearchRadius;
     public bool IsChasing, IsInvestigating;
@@ -51,11 +52,11 @@ public class EnemyAI : MonoBehaviour
         Stats = Sight.player.GetComponent<CharacterStats>();
 
         // Initialize patrol script
-        if (patrol == null)
+       /* if (patrol == null)
         {
             patrol = gameObject.AddComponent<EnemyPatrol>();
-        }
-        patrol.Initialize(nav, anim, locations[LocationIndex].waypoints, patrolSpeed);
+        }*/
+        //patrol.Initialize(nav, anim, locations[LocationIndex].waypoints, patrolSpeed);
 
         IsChasing = false;
     }
@@ -72,7 +73,8 @@ public class EnemyAI : MonoBehaviour
             Investigate();
         else
         {
-            patrol.ExecutePatrol(); // Call the patrol logic from the new script
+            controller.G_PlayerInSight = false;
+            //patrol.ExecutePatrol(); // Call the patrol logic from the new script
         }
     }
 
@@ -89,6 +91,7 @@ public class EnemyAI : MonoBehaviour
     {
         IsChasing = true;
         IsInvestigating = false;
+        controller.G_PlayerInSight = true;
 
         anim.Speed = Mathf.Lerp(anim.Speed, chaseSpeed, 0.5f * Time.deltaTime);
         nav.SetDestination(Sight.LastPlayerPosition);
@@ -106,6 +109,7 @@ public class EnemyAI : MonoBehaviour
 
         IsChasing = false;
         IsInvestigating = true;
+        controller.G_PlayerInSight = false;
 
         anim.Speed = patrolSpeed;
 
@@ -151,7 +155,7 @@ public class EnemyAI : MonoBehaviour
             if (investigateTimer <= 0)
             {
                 //Debug.Log("Investigation Complete");
-                patrol.Initialize(nav, anim, locations[LocationIndex].waypoints, patrolSpeed);
+                //patrol.Initialize(nav, anim, locations[LocationIndex].waypoints, patrolSpeed);
             }
         }
     }

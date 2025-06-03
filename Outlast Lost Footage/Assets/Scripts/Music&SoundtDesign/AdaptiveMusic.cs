@@ -7,8 +7,8 @@ public class AdaptiveMusic : MonoBehaviour
 {
 
     #region Variables
-    public EnemyAI agent;
-    public EnemySight sight;
+    public Enemy_AI agent;
+    public Enemy_Sighting sight;
     public LevelController controller;
 
     [Space]
@@ -43,8 +43,8 @@ public class AdaptiveMusic : MonoBehaviour
     private bool PreviousSight;
     private bool currentSight;
 
-    private bool PreviousAI_InvestigationState;
-    private bool CurrentAI_InvestigationState;
+    [SerializeField] private bool PreviousAI_InvestigationState;
+    [SerializeField] private bool CurrentAI_InvestigationState;
     #endregion
 
     #region BuildInMethods
@@ -61,7 +61,7 @@ public class AdaptiveMusic : MonoBehaviour
         currentSight = controller.G_PlayerInSight;
         PreviousSight = currentSight;
 
-        CurrentAI_InvestigationState = agent.IsInvestigating;
+        CurrentAI_InvestigationState = agent.currentState == Enemy_AI.EnemyState.Investigate;
         PreviousAI_InvestigationState = CurrentAI_InvestigationState;
     }
 
@@ -76,7 +76,7 @@ public class AdaptiveMusic : MonoBehaviour
 
         PreviousSight = currentSight;
 
-        CurrentAI_InvestigationState = agent.IsInvestigating;
+        CurrentAI_InvestigationState = agent.currentState == Enemy_AI.EnemyState.Investigate;
         if (CurrentAI_InvestigationState != PreviousAI_InvestigationState && PreviousAI_InvestigationState == true)
             InvestigationEnd = true;
         else
@@ -84,8 +84,8 @@ public class AdaptiveMusic : MonoBehaviour
 
         PreviousAI_InvestigationState = CurrentAI_InvestigationState;
 
-        IsChasing = agent.IsChasing;
-        Investigating = agent.IsInvestigating;
+        IsChasing = agent.currentState == Enemy_AI.EnemyState.Chase;
+        Investigating = agent.currentState == Enemy_AI.EnemyState.Investigate;
 
 
         GameState();
@@ -117,14 +117,14 @@ public class AdaptiveMusic : MonoBehaviour
             AS_ChaseTrack.Stop();
         }
 
-        if (IsChasing && !AS_ChaseTrack.isPlaying)
+        if (agent.currentState == Enemy_AI.EnemyState.Chase && !AS_ChaseTrack.isPlaying)
         {
             Snapshot_IsChasing.TransitionTo(ChaseCurve.length * IsChasing_TransitionSpeed);
             AS_ChaseTrack.clip = Chase_Clip;
             AS_ChaseTrack.Play();
         }
 
-        if (!IsChasing && Investigating && !AS_InvestigationTrack.isPlaying)
+        if (agent.currentState == Enemy_AI.EnemyState.Investigate && !AS_InvestigationTrack.isPlaying)
         {
             Snapshot_Investigating.TransitionTo(Investigation_TransitionSpeed);
             AS_InvestigationTrack.clip = Investigation_Clip;

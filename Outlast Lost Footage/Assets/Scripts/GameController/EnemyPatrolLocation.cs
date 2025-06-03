@@ -8,7 +8,7 @@ public class EnemyPatrolLocation : MonoBehaviour
     #region Variables
 
     public int LocationIndex;
-    public EnemyAI Behavior;
+    public Enemy_AI Behavior;
 
     #endregion
 
@@ -16,7 +16,7 @@ public class EnemyPatrolLocation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Behavior = FindObjectOfType<EnemyAI>();
+        Behavior = FindObjectOfType<Enemy_AI>();
     }
     #endregion
 

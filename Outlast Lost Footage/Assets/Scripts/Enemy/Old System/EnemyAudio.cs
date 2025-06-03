@@ -23,7 +23,7 @@ public class EnemyAudio : MonoBehaviour
 
     [Space]
     [Header("Dialogues")]
-    EnemyAI Behavior;
+    Enemy_AI Behavior;
     EnemySight Sight;
     public float DialogueVolume;
     public AudioMixerGroup MixerDialogueGroup;
@@ -46,7 +46,7 @@ public class EnemyAudio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Behavior = GetComponent<EnemyAI>();
+        Behavior = GetComponent<Enemy_AI>();
         Sight = GetComponent<EnemySight>();
 
         DialogueSource.outputAudioMixerGroup = MixerDialogueGroup;
@@ -59,14 +59,16 @@ public class EnemyAudio : MonoBehaviour
     void Update()
     {
         //TriggeringDialogueFunctions
-        /*if (Behavior.isSearching)
+        if (Behavior.currentState == Enemy_AI.EnemyState.Investigate)
         {
             Investigate();
-        }*/
-        /*else*/if (Behavior.IsChasing)
+        }
+        else if (Behavior.currentState == Enemy_AI.EnemyState.Chase)
         {
             Chase();
         }
+        else if (Behavior.currentState == Enemy_AI.EnemyState.Patrol)
+            Patrol();
         else
             Patrol();
     }
@@ -112,7 +114,7 @@ public class EnemyAudio : MonoBehaviour
 
     void Patrol()
     {
-
+        Debug.Log("Patrol Line Function");
         // Update the dialogue timer
         dialogueTimer += Time.deltaTime;
 
@@ -128,6 +130,7 @@ public class EnemyAudio : MonoBehaviour
             // Play the dialogue if not already playing
             if (!DialogueSource.isPlaying)
             {
+                Debug.Log("Patrol Line Played!");
                 DialogueSource.PlayOneShot(GetRandomClip(PatrolDialogueClips));
             }
         }
@@ -136,7 +139,7 @@ public class EnemyAudio : MonoBehaviour
     void Chase()
     {
         // Check if the player is in the line of sight and the dialogue hasn't been played in this chase
-        if (Behavior.IsChasing && !hasPlayedChasingDialogue)
+        if (Behavior.currentState == Enemy_AI.EnemyState.Chase && !hasPlayedChasingDialogue)
         {
             // Stop the audio source before playing a new dialogue
             DialogueSource.Stop();
@@ -147,7 +150,7 @@ public class EnemyAudio : MonoBehaviour
             // Set the flag to true to indicate that the dialogue has been played in this chase
             hasPlayedChasingDialogue = true;
         }
-        else if (!Behavior.IsChasing)
+        else if (Behavior.currentState != Enemy_AI.EnemyState.Chase)
         {
             // Reset the flag when not in the chasing state
             hasPlayedChasingDialogue = false;

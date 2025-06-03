@@ -3,35 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class ScenePartLoader : MonoBehaviour
 {
-
-    #region Variables
-    //Scene State
+    public string SceneName;
     public bool isLoaded;
+    public bool isLoading;
     public bool shouldLoad;
 
-    public string SceneName;
-    #endregion
-
-    #region BuiltInMethods
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         TriggerCheck();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            shouldLoad = false;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,27 +28,12 @@ public class ScenePartLoader : MonoBehaviour
             shouldLoad = true;
         }
     }
-    #endregion
 
-    #region CustomMethods
-    void LoadScene()
+    private void OnTriggerExit(Collider other)
     {
-        if(!isLoaded)
+        if (other.CompareTag("Player"))
         {
-            if (!SceneManager.GetSceneByName(SceneName).isLoaded)
-            {
-                SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
-                isLoaded = true;
-            }
-        }
-    }
-
-    void UnloadScene()
-    {
-        if(isLoaded)
-        {
-            SceneManager.UnloadSceneAsync(SceneName);
-            isLoaded = false;
+            shouldLoad = false;
         }
     }
 
@@ -80,9 +44,33 @@ public class ScenePartLoader : MonoBehaviour
             LoadScene();
         }
         else
+        {
             UnloadScene();
+        }
     }
 
-    #endregion
+    void LoadScene()
+    {
+        if (!isLoaded && !isLoading)
+        {
+            if (!SceneManager.GetSceneByName(SceneName).isLoaded)
+            {
+                isLoading = true;
+                SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive).completed += (op) =>
+                {
+                    isLoaded = true;
+                    isLoading = false;
+                };
+            }
+        }
+    }
 
+    void UnloadScene()
+    {
+        if (isLoaded)
+        {
+            SceneManager.UnloadSceneAsync(SceneName);
+            isLoaded = false;
+        }
+    }
 }

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameSettings : MonoBehaviour
 {
-
-    #region Variables
+    public static GameSettings Instance { get; private set; }
 
     [Header("General")]
     public bool ShowSubtitles;
@@ -20,20 +18,20 @@ public class GameSettings : MonoBehaviour
     [Header("Graphics")]
     public bool Fullscreen;
 
-    #endregion
+    [Header("GameSystem")]
+    public bool RestartFromPreviousCheckPoint = false;
+    public Transform RestartLocation;
 
-    #region BuiltInMethods
-
-    void Start()
+    private void Awake()
     {
-        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
-        DontDestroyOnLoad(this.gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(RestartLocation.gameObject);
     }
-
-    #endregion
-
-    #region CustomMethods
-
-    #endregion
-
 }

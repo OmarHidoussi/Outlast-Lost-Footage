@@ -55,6 +55,7 @@ public class CharacterMovement : MonoBehaviour
         collision = GetComponentInChildren<CharacterCollision>();
         m_rigidbody = GetComponent<Rigidbody>();
 
+        //anim.enabled = false;
 
         NormalHeight = col.height;
         WallDetected = false;
@@ -224,6 +225,7 @@ public class CharacterMovement : MonoBehaviour
     public void ResetAfterCutScene()
     {
         CutsceneAnim.enabled = false;
+        this.GetComponentInChildren<CharacterCollision>().enabled = true;
     }
 
     #endregion
