@@ -12,6 +12,7 @@ public class NightVisionLight : MonoBehaviour
 
     public float IntensityFactor;
     public Transform rayOrigin;
+    public LayerMask mask;
 
     #endregion
 
@@ -24,12 +25,24 @@ public class NightVisionLight : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Set the color of the Gizmo line
         Gizmos.color = Color.green;
 
-        // Draw the ray in the Scene view
-        Gizmos.DrawRay(rayOrigin.position, rayOrigin.forward * 100);
+        RaycastHit hit;
+        Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
+
+        // Check if the ray hits something
+        if (Physics.Raycast(ray, out hit, maxDistance, mask, QueryTriggerInteraction.Ignore))
+        {
+            // Draw ray up to the hit point
+            Gizmos.DrawRay(rayOrigin.position, rayOrigin.forward * hit.distance);
+        }
+        else
+        {
+            // Draw a default-length ray if nothing is hit
+            Gizmos.DrawRay(rayOrigin.position, rayOrigin.forward * 100f);
+        }
     }
+
 
     #endregion
 
@@ -41,21 +54,21 @@ public class NightVisionLight : MonoBehaviour
         Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
         float targetIntensity = 1f;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, maxDistance, mask, QueryTriggerInteraction.Ignore))
         {
+            Debug.Log(hit.collider.name);
             if (hit.distance <= maxDistance)
             {
                 float distance = hit.distance;
                 //Debug.Log("Object Distance: " + distance);
 
-                // Normalize distance (0 = close, 1 = maxDistance)
                 float normalizedDistance = Mathf.Clamp01(distance / maxDistance);
 
                 // Apply AnimationCurve to modify intensity
                 float curveMultiplier = IntensityCurve.Evaluate(normalizedDistance);
 
                 // Lerp intensity and apply curve
-                targetIntensity = Mathf.Lerp(minIntensity, maxIntensity, normalizedDistance)/* * curveMultiplier*/;
+                targetIntensity = Mathf.Lerp(minIntensity, maxIntensity, normalizedDistance);
             }
             else
             {

@@ -23,8 +23,7 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
-        //SceneManager.LoadScene(Env_Scene_1, LoadSceneMode.Additive);
-        //SceneManager.LoadScene(Env_Scene_2, LoadSceneMode.Additive);
+
     }
 
     #endregion

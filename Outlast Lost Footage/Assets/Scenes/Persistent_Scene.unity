@@ -9,7 +9,7 @@ OcclusionCullingSettings:
     smallestHole: 0.025
     backfaceThreshold: 100
   m_SceneGUID: 2ff2be125c2089942abb844f389b5b50
-  m_OcclusionCullingData: {fileID: 36300000, guid: 74788c0b505b11f48af2a65554d2170f, type: 2}
+  m_OcclusionCullingData: {fileID: 36300000, guid: 7cfbb9155662f8848b53e897b0a32647, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 199fa60dff583154c95accc27254d52a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 97c3a793cea63e84e8d14316dce78af5, type: 2}
 --- !u!1 &35351125
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,8 +845,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 43.446568, y: 13.482231, z: 20.623089}
-  m_Center: {x: -30.364195, y: 4.8378696, z: 13.02511}
+  m_Size: {x: 43.446568, y: 13.482231, z: 25.580898}
+  m_Center: {x: -30.364195, y: 4.8378696, z: 10.5462055}
 --- !u!114 &349466687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,9 +2170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804e8a4240cfc0f478c19f1806732d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minIntensity: 0.1
+  minIntensity: 0.01
   maxIntensity: 1
-  maxDistance: 1
+  maxDistance: 40
   AdjustmentSpeed: 5
   IntensityCurve:
     serializedVersion: 2
@@ -2189,8 +2189,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -2200,6 +2200,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   IntensityFactor: 1
   rayOrigin: {fileID: 734615554}
+  mask:
+    serializedVersion: 2
+    m_Bits: 2147483647
 --- !u!1 &1183652504
 GameObject:
   m_ObjectHideFlags: 0
@@ -5233,7 +5236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: EnableCameraMovement
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185382, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: m_Enabled
