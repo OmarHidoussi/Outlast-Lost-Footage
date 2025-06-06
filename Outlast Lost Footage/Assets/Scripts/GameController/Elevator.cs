@@ -39,7 +39,7 @@ public class Elevator : MonoBehaviour
         {
             Player = inputManager.transform;
             if (Cutscene)
-                Player.GetComponent<Animator>().SetInteger("DynamicCutscene", 1);
+                Player.GetComponent<Animator>().SetTrigger("PrologueCutscene");
             else
                 Player.GetComponent<CharacterMovement>().ResetAfterCutScene();
         }

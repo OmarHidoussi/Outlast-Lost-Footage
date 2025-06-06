@@ -56,7 +56,7 @@ public class NightVisionLight : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance, mask, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             if (hit.distance <= maxDistance)
             {
                 float distance = hit.distance;
