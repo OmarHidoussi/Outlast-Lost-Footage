@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
@@ -16,6 +16,8 @@ public class PreventHDRPFromFailing : MonoBehaviour
         {
             Debug.LogError("HDRPFailSafe: No HDAdditionalCameraData on the camera.");
         }
+
+        StartCoroutine(ForcePipelineRefresh());
     }
 
     public void TriggerPipelineRefresh()
@@ -29,32 +31,21 @@ public class PreventHDRPFromFailing : MonoBehaviour
     public IEnumerator ForcePipelineRefresh()
     {
         FunctionIsPlaying = true;
-        // Step 1: Disable anti-aliasing to reset pipeline
+
         hdCam.antialiasing = HDAdditionalCameraData.AntialiasingMode.FastApproximateAntialiasing;
 
-        // Step 2: Wait for one frame to let HDRP flush the change
-        //yield return null;
-        yield return new WaitForSeconds(5f);
+        yield return null; // Wait one frame (flush)
 
-        // Step 3: Re-enable FXAA to rebuild the pipeline
+        // Step 2: Wait 10 seconds before the reset
+        yield return new WaitForSeconds(10f);
+
         hdCam.antialiasing = HDAdditionalCameraData.AntialiasingMode.None;
-        FunctionIsPlaying = false;
+
         Debug.Log("HDRP pipeline refreshed via coroutine.");
-    }
+        FunctionIsPlaying = false;
 
-    void Update()
-    {
-        
-        float frameTime = Time.deltaTime * 1000f;
-
-        float resolutionFactor = Mathf.InverseLerp(1080f, 2160f, Screen.width); // 0 at 1080p, 1 at 2160p
-        float frameTimeThreshold = Mathf.Lerp(30f, 40f, resolutionFactor);      // interpolates between 25 and 40
-
-        if (frameTime > frameTimeThreshold && !FunctionIsPlaying)
-        {
-            TriggerPipelineRefresh();
-        }
-        // Optional: add RenderTexture anomaly detection (black screen, nan color, etc.)
-
+        // 🔁 Restart the coroutine after 10 seconds
+        yield return new WaitForSeconds(10f);
+        StartCoroutine(ForcePipelineRefresh());
     }
 }
