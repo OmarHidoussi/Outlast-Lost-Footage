@@ -88,7 +88,7 @@ public class AdaptiveMusic : MonoBehaviour
         Investigating = agent.currentState == Enemy_AI.EnemyState.Investigate;
 
 
-        GameState();
+        //GameState();
         Adaptive();
     }
     #endregion

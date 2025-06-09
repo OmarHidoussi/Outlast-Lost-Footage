@@ -32,9 +32,12 @@ public class Enemy_AI : MonoBehaviour
     public enum EnemyState { Patrol, Chase, Investigate, Attack, Kill }
     public EnemyState currentState;
 
+    public bool FirstPhaseEnded;
+
     public float PatrolSpeed;
     public float InvestigationSpeed;
     public float ChaseSpeed;
+    public float TransitionSpeed = 2f;
 
     public bool PlayerInSight;
     public bool PlayerInRange;
@@ -51,6 +54,7 @@ public class Enemy_AI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //FirstPhaseEnded = false;
         nav = GetComponent<NavMeshAgent>();
         sight = GetComponent<Enemy_Sighting>();
         Player = FindObjectOfType<InputManager>().gameObject;
@@ -71,6 +75,8 @@ public class Enemy_AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!FirstPhaseEnded)
+            return;
         if (DebugMode)
             AgentStateDebugger();
         else
@@ -108,46 +114,68 @@ public class Enemy_AI : MonoBehaviour
     }
     void UpdateAgentState()
     {
+        // Define local flags
         bool lostSightWhileChasing = !PlayerInSight && currentState == EnemyState.Chase;
+        bool hesitantSight = PlayerInSight && !sight.PlayerChasingNPCRange;
+
         if (lostSightWhileChasing)
             TriggerInvestigationState = true;
 
-        bool hesitantSight = PlayerInSight && !sight.PlayerChasingNPCRange;
-
-        
-
+        // Decide next state based on conditions
         if (PlayerInAttackRange)
+        {
             currentState = EnemyState.Attack;
-        else if (hesitantSight || TriggerInvestigationState)
+        }
+        else if (PlayerInSight)
+        {
+            currentState = EnemyState.Chase;
+        }
+        else if (TriggerInvestigationState || hesitantSight)
         {
             currentState = EnemyState.Investigate;
         }
-        else if (PlayerInSight)
-            currentState = EnemyState.Chase;
         else
+        {
             currentState = EnemyState.Patrol;
+        }
 
+        // Handle state logic
         switch (currentState)
         {
             case EnemyState.Patrol:
                 Patrol();
                 break;
+            case EnemyState.Investigate:
+                Investigate();
+                break;
             case EnemyState.Chase:
                 Chase();
                 break;
-            case EnemyState.Investigate:
-                Investigate();
+            case EnemyState.Attack:
+                Attack();
                 break;
             case EnemyState.Kill:
                 Kill();
                 break;
         }
+
     }
 
     void Chase()
     {
+
+        if (!CheckifDestinationIsOnNavMesh(Player.transform.position))
+        {
+            currentState = EnemyState.Patrol;
+            PlayerInSight = false;
+            FindObjectOfType<AdaptiveMusic>().AS_ChaseTrack.Stop();
+            return;
+        }
+
+        Debug.Log("Chasing");
         controller.G_PlayerInSight = true;
-        nav.speed = ChaseSpeed;
+        nav.speed = Mathf.Lerp(nav.speed, ChaseSpeed, TransitionSpeed * Time.deltaTime);
+        nav.stoppingDistance = 1.1f;
         if (Player != null)
             nav.SetDestination(Player.transform.position);
 
@@ -159,8 +187,10 @@ public class Enemy_AI : MonoBehaviour
 
     void Patrol()
     {
+        Debug.Log("Patroling");
         /*nav.ResetPath();*/
-        nav.speed = PatrolSpeed;
+        nav.speed = Mathf.Lerp(nav.speed, PatrolSpeed, TransitionSpeed * Time.deltaTime);
+        nav.stoppingDistance = 2f;
         //nav.SetDestination(Player.transform.position);
         controller.G_PlayerInSight = false;
         patrol.ExecutePatrol();
@@ -172,12 +202,22 @@ public class Enemy_AI : MonoBehaviour
 
     void Investigate()
     {
+        Debug.Log("Investigating");
+
         controller.G_PlayerInSight = false;
-        nav.speed = InvestigationSpeed;
+        nav.speed = Mathf.Lerp(nav.speed, InvestigationSpeed,TransitionSpeed * Time.deltaTime);
 
         if (!waitingAtLastSightPosition)
         {
-            nav.SetDestination(LastSightPosition);
+            if(CheckifDestinationIsOnNavMesh(LastSightPosition))
+                nav.SetDestination(LastSightPosition);
+            else
+            {
+                currentState = EnemyState.Patrol;
+                FindObjectOfType<AdaptiveMusic>().AS_InvestigationTrack.Stop();
+                return;
+            }
+
             if (!nav.pathPending && nav.remainingDistance <= nav.stoppingDistance)
             {
                 waitingAtLastSightPosition = true;
@@ -198,6 +238,21 @@ public class Enemy_AI : MonoBehaviour
                 //currentState = EnemyState.Patrol;
             }
         }
+    }
+
+    bool CheckifDestinationIsOnNavMesh(Vector3 target)
+    {
+        NavMeshHit hit;
+        float maxDistance = 1.0f; // How far to search for a nearby NavMesh point
+
+        if (NavMesh.SamplePosition(target, out hit, maxDistance, NavMesh.AllAreas))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }   
     }
 
     void Attack()

@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.35
+    agentRadius: 0.2
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.11666667
+    cellSize: 0.06666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 97c3a793cea63e84e8d14316dce78af5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 199fa60dff583154c95accc27254d52a, type: 2}
 --- !u!1 &35351125
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +658,8 @@ GameObject:
   - component: {fileID: 320718204}
   - component: {fileID: 320718203}
   - component: {fileID: 320718202}
+  - component: {fileID: 320718206}
+  - component: {fileID: 320718205}
   m_Layer: 0
   m_Name: Rusty Crocks _ Intro
   m_TagString: Untagged
@@ -810,6 +812,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.6007614, y: 4.8191543, z: 4.3622108}
   m_Center: {x: -42.83, y: 1.9095776, z: -0.9429004}
+--- !u!169 &320718205
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320718200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.27239653
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!165 &320718206
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320718200}
+  m_Enabled: 1
+  m_CutoffFrequency: 2000
+  m_HighpassResonanceQ: 3
 --- !u!1 &349466684
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +859,8 @@ GameObject:
   - component: {fileID: 349466687}
   - component: {fileID: 349466686}
   - component: {fileID: 349466689}
+  - component: {fileID: 349466690}
+  - component: {fileID: 349466691}
   m_Layer: 0
   m_Name: Load Scene 2-03
   m_TagString: Untagged
@@ -886,6 +925,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15.838306, y: 4.0534, z: 4.1333504}
   m_Center: {x: -0.7089634, y: 6.314131, z: 10.8098545}
+--- !u!65 &349466690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349466684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.469757, y: 4.302107, z: 7.7835655}
+  m_Center: {x: -17.5, y: 1.6510537, z: 26.85108}
+--- !u!65 &349466691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349466684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.315765, y: 3.8657494, z: 5.580902}
+  m_Center: {x: -41.929596, y: 6.0296288, z: 26.599998}
 --- !u!1 &370824005
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,8 +2780,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.543261, y: 16.915577, z: 31.263252}
-  m_Center: {x: 0, y: 6.610436, z: -0.9101944}
+  m_Size: {x: 21.014036, y: 16.915577, z: 39.263252}
+  m_Center: {x: -4.7646112, y: 6.6104355, z: 3.0898056}
 --- !u!4 &1284505494
 Transform:
   m_ObjectHideFlags: 0
@@ -4842,6 +4907,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2022162151036185381, guid: 66f1f84348c8481429217c43e0dfcb37, type: 3}
       propertyPath: EnableCameraMovement
       value: 1

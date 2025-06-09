@@ -25,6 +25,7 @@ public class StartEnemyVision : MonoBehaviour
         {
             sight.enabled = true;
             sight.GetComponent<SphereCollider>().radius = Raduis;
+            FindObjectOfType<Enemy_AI>().FirstPhaseEnded = true;
         }
     }
 }

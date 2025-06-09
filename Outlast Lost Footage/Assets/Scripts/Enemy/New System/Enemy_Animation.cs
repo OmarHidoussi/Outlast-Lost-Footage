@@ -29,7 +29,7 @@ public class Enemy_Animation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ShouldMove = enemyAI.nav.remainingDistance > enemyAI.nav.stoppingDistance;
+        ShouldMove = enemyAI.nav.remainingDistance >= enemyAI.nav.stoppingDistance;
         animator.SetBool("Move", ShouldMove);
 
         animator.SetBool("Chase", enemyAI.currentState == Enemy_AI.EnemyState.Chase);
