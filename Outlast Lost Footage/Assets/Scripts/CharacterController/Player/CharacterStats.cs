@@ -14,8 +14,11 @@ public class CharacterStats : MonoBehaviour
     public float Health;
     public bool RegainHealth;
 
+
+    bool PlayerIsDead;
     InputManager input;
     CharacterAnimator anim;
+    public Animator FadePanelAnimator;
 
     #endregion
 
@@ -25,6 +28,7 @@ public class CharacterStats : MonoBehaviour
     {
         input = GetComponent<InputManager>();
         anim = GetComponent<CharacterAnimator>();
+        PlayerIsDead = false;
     }
 
     // Update is called once per frame
@@ -36,10 +40,21 @@ public class CharacterStats : MonoBehaviour
 
         if (Health <= 0)
         {
+            Debug.Log("Dying...");
             this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", true);
+            if(!FadePanelAnimator.GetBool("DeadHandled") && !PlayerIsDead)
+            {
+                PlayerIsDead = true;
+                FadePanelAnimator.SetTrigger("Die");
+                FadePanelAnimator.SetBool("DeadHandled", true);
+                //StartCoroutine(FadeOutaPanel());
+            }
             input.Mov_Axis = Vector2.zero;
-
-            if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Falling Back Death") || anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Crouch Death"))
+            input.IsDead = true;
+            input.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezeRotationX;
+            input.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezeRotationZ;
+            if (anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Falling Back Death") || anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Crouch Death") || 
+                anim.CharacterAnim.GetCurrentAnimatorStateInfo(0).IsName("Death"))
             {
                 this.GetComponent<CharacterAnimator>().CharacterAnim.SetBool("Dead", false);
             }
@@ -48,6 +63,14 @@ public class CharacterStats : MonoBehaviour
     #endregion
 
     #region CustomMethods
+
+    IEnumerator FadeOutaPanel()
+    {
+        Debug.Log("FadeOut");
+
+        yield return null;
+        FadePanelAnimator.SetBool("DeadHandled", false);
+    }
     void UpdateStats()
     {
         if (BatteryCounter > 0)

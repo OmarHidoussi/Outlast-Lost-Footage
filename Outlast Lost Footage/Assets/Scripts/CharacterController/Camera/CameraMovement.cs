@@ -111,6 +111,9 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (input.IsDead)
+            return;
+
         if (input.EnableCameraMovement)
         {
             HandleLookBack();

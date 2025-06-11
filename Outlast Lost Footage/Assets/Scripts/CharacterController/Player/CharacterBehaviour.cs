@@ -291,9 +291,14 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void Die()
     {
+        Debug.Log("Player Died");
         Died = true;
         Characteranim.CharacterAnim.SetBool("Dead", false);
-        movement.GetComponent<InputManager>().CanMove = false;
+        //m_rigidbody.constraints = RigidbodyConstraints.None;
+        //Characteranim.GetComponentInParent<InputManager>().GetComponent<Animator>().enabled = true;
+        //Characteranim.GetComponentInParent<InputManager>().GetComponent<Animator>().SetTrigger("Dead");
+        //movement.GetComponent<InputManager>().CanMove = false;
+        movement.GetComponent<InputManager>().IsDead = true;
         m_rigidbody.drag = 1000;
         CamMovement.Sensetivity = 0;
         DialogueSource.volume = PlayerDieVolume;
@@ -306,8 +311,9 @@ public class CharacterBehaviour : MonoBehaviour
 
     IEnumerator BackToCheckpoint()
     {
+        Debug.Log("Restart Game");
         GameSettings.Instance.RestartFromPreviousCheckPoint = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Persistent_Scene");
     }
 

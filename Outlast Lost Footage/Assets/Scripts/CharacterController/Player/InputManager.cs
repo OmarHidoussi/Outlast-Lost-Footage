@@ -38,6 +38,7 @@ public class InputManager : MonoBehaviour
     public bool Screenshot;
 
     [Header("GameState")]
+    public bool IsDead;
     public bool GamePaused;
     [HideInInspector] public bool InOptionsMenu;
 
@@ -59,6 +60,7 @@ public class InputManager : MonoBehaviour
     {
         input = new Controls();
         MidAir = false;
+        IsDead = false;
     }
 
     private void OnEnable()
@@ -212,6 +214,8 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsDead)
+            return;
 
         if (!InOptionsMenu)
         {
